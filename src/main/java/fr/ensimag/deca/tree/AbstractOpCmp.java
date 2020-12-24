@@ -8,8 +8,8 @@ import fr.ensimag.deca.context.EnvironmentExp;
 
 /**
  *
- * @author @AUTHOR@
- * @date @DATE@
+ * @author gl10
+ * @date 01/01/2021
  */
 public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 
