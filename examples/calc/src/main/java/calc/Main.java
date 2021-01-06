@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
  * manages integer values, +, - and * operators (with correct
  * management of operators precedence).
  */
-class Main {
+public class Main {
 
     public static void main(String[] args) throws Exception {
 
@@ -28,7 +28,7 @@ class Main {
             // Display the result (e.g. Result: 1 + 2 * 3 = 7)
             System.out.println("Result : "
                     + expression.toString() + " = "
-                    + expression.value());            
+                    + expression.value());
         }
     }
 }
