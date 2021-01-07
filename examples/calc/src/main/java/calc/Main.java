@@ -28,7 +28,7 @@ public class Main {
             // Display the result (e.g. Result: 1 + 2 * 3 = 7)
             System.out.println("Result : "
                     + expression.toString() + " = "
-                    + expression.value());            
+                    + expression.value());
         }
     }
 }

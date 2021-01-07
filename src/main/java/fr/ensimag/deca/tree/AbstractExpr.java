@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -82,7 +83,44 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+    	Type typeReel;
+    	try {
+    		typeReel=this.verifyExpr(compiler, localEnv , currentClass);
+    	} catch(ContextualError ce) { throw ce;}
+    	//on vérifie d'abord s'il s'agit d'une classe
+    	if(typeReel.isClass())
+    	{
+    		if(expectedType.isClass())
+        	{
+        		ClassType classRelle= (ClassType) typeReel;
+        		ClassType classAttendue= (ClassType) expectedType;
+        		if(!classRelle.isSubClassOf(classAttendue))
+        			throw new ContextualError("les deux classes sont incompatibles",this.getLocation());
+        	}
+    		else
+    		{
+    			throw new ContextualError("un type class était attendu!",this.getLocation());
+    		}
+    	}
+    	//sinon, pour deux types différents , une seul possibilité: float=int
+    	else if(!typeReel.sameType(expectedType))
+    	{
+    		if(typeReel.isInt() && expectedType.isFloat())
+    		{
+    			ConvFloat entierEnReel= new ConvFloat(typeReel);
+    			entierEnReel.verifyExpr(compiler, localEnv, currentClass);
+    			return entierEnReel;
+    		}
+    		else
+    		{
+    			throw new ContextualError("type incompatible",this.getLocation());
+    		}
+    	}
+    	return this;
+    	
+        
+    	
     }
     
     
@@ -90,7 +128,10 @@ public abstract class AbstractExpr extends AbstractInst {
     protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+    	try {
+    		this.verifyExpr(compiler, localEnv, currentClass);
+    	} catch (ContextualError ce) {throw ce;}
     }
 
     /**
@@ -105,7 +146,16 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+    	Type type;
+    	try {
+    		type=this.verifyExpr(compiler, localEnv, currentClass);
+    	} catch (ContextualError ce) {throw ce;}
+    	//il faut juste alors vérifier si type est bien un booléen
+    	if(!type.isBoolean())
+    	{
+    		throw new ContextualError("la condition doit étre de type boolean",this.getLocation());
+    	}
     }
 
     /**
