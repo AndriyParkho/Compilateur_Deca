@@ -1,0 +1,11 @@
+// Description:
+//    tests de programme lexicalement faux pour un include  
+//
+// Resultats:
+//    Ligne 11 : Erreur de syntaxe.
+//    test_lex donne une erreur
+//
+// Historique:
+//    cree le 07/01/2021
+
+#include "java.util.*"
