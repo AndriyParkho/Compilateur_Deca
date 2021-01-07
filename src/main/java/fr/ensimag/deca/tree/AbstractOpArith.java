@@ -21,6 +21,40 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+    	//d'abord on récupère les deux opérateurs droite et gauche
+    	Type typeGauche;
+    	Type typeDroite;
+    	try {
+    		typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
+    		typeDroite=this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+    	} catch (ContextualError ce) {throw ce;}
+    	//il faut ensuite s'assurer que les deux opérateurs sont numériques(int or float)
+    	if(((!typeGauche.isInt())&&(!typeGauche.isFloat()))||((!typeDroite.isInt())&&(!typeDroite.isFloat())))
+    	{
+    		throw new ContextualError("les opérateurs doivent ètre de type numérique (int ou float)",this.getLocation());
+    	}
+    	//reste à vérifier s'il y a des conversions int/float à faire
+    	else if(!typeGauche.sameType(typeDroite))
+    	{
+    		if(typeGauche.isInt()) //implique que typeDroite est un float
+    		{
+    			ConvFloat gaucheConv= new ConvFloat(this.getLeftOperand());
+    			typeGauche= gaucheConv.verifyExpr(compiler, localEnv, currentClass);
+    			gaucheConv.setType(typeGauche);
+    			this.setLeftOperand(gaucheConv);
+    			return typeGauche;
+    		}
+    		else
+    		{
+    			ConvFloat droiteConv= new ConvFloat(this.getRightOperand());
+    			typeDroite= droiteConv.verifyExpr(compiler, localEnv, currentClass);
+    			droiteConv.setType(typeDroite);
+    			this.setLeftOperand(droiteConv);
+    			return typeDroite;
+    		}
+    	}
+    	else //c à d on a le mème type pour les deux opérateurs.
+    		return typeDroite;
     }
 }
