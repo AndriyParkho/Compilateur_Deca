@@ -50,7 +50,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			ConvFloat droiteConv= new ConvFloat(this.getRightOperand());
     			typeDroite= droiteConv.verifyExpr(compiler, localEnv, currentClass);
     			droiteConv.setType(typeDroite);
-    			this.setLeftOperand(droiteConv);
+    			this.setRightOperand(droiteConv);
     			return typeDroite;
     		}
     	}
