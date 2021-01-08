@@ -126,8 +126,9 @@ public class DecacCompiler {
     public boolean compile() {
         String sourceFile = source.getAbsolutePath();
         String destFile = null;
-        // A FAIRE: calculer le nom du fichier .ass à partir du nom du
-        // A FAIRE: fichier .deca.
+        //FAIT : génération du nom du fichier .ass à partir du .deca
+        destFile = sourceFile.substring(0, sourceFile.lastIndexOf('/')) + sourceFile.substring(sourceFile.lastIndexOf('/'), sourceFile.lastIndexOf('.')) + ".ass";
+        
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
