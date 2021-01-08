@@ -147,6 +147,7 @@ inst returns[AbstractInst tree]
         }
     | if_then_else {
             assert($if_then_else.tree != null);
+            $tree = $if_then_else.tree;
         }
     | WHILE OPARENT condition=expr CPARENT OBRACE body=list_inst CBRACE {
             assert($condition.tree != null);
@@ -157,9 +158,6 @@ inst returns[AbstractInst tree]
     | RETURN expr SEMI {
             assert($expr.tree != null);
         }
-        //juste au dessus j'ai pas trouvé de classe return c'est trop chelou
-        //sachant que je pense que c'est le meme modele que les autres
-        //Du coup faut que je vois pour ça (essentiel apres Hello World)
         // A Faire
     ;
 
@@ -304,7 +302,9 @@ inequality_expr returns[AbstractExpr tree]
     | e1=inequality_expr INSTANCEOF type {
             assert($e1.tree != null);
             assert($type.tree != null);
+            
         }
+        // a finir juste au dessus, manque classe INSTANCEOF
     ;
 
 
@@ -373,6 +373,7 @@ unary_expr returns[AbstractExpr tree]
 select_expr returns[AbstractExpr tree]
     : e=primary_expr {
             assert($e.tree != null);
+            $tree = $e.tree;
         }
     | e1=select_expr DOT i=ident {
             assert($e1.tree != null);
@@ -463,6 +464,9 @@ ident returns[AbstractIdentifier tree]
 /****     Class related rules     ****/
 
 list_classes returns[ListDeclClass tree]
+    @init {
+        $tree=new ListDeclClass();
+    }
     :
       (c1=class_decl {
         }
