@@ -11,6 +11,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Expression, i.e. anything that has a value.
@@ -165,7 +166,11 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+    	if(this instanceof StringLiteral) {
+    	StringLiteral newThis= (StringLiteral) this;
+    	
+        compiler.addInstruction(new WSTR(newThis.getValue()));
+    	}
     }
 
     @Override
