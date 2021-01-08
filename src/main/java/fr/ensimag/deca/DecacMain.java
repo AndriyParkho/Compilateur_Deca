@@ -26,7 +26,17 @@ public class DecacMain {
             System.exit(1);
         }
         if (options.getPrintBanner()) {
-            throw new UnsupportedOperationException("decac -b not yet implemented");
+            System.out.println("-----------< Projet GL >-----------");
+            System.out.println("             Groupe  2");
+            System.out.println("             Equipe 10");
+            System.out.println("        Louis Jézéquel-Royer");
+            System.out.println("         Andriy Parkhomenko");
+            System.out.println("          Mohamed Ali Lagha");
+            System.out.println("            Etienne Gacel");
+            System.out.println("            Bastien Fabre");
+            System.out.println("------------------------------------");
+            System.exit(1);
+            
         }
         if (options.getSourceFiles().isEmpty()) {
             throw new UnsupportedOperationException("decac without argument not yet implemented");
