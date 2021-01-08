@@ -73,7 +73,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	}
     	//le type de retour est boolean 
     	//la méthode n'est pas encore défini !!! il dans passer par DecacCompiler.java le rep deca!!
-    	Type typeRetour= new BooleanType(compiler.getSymbolTable().create("boolean"));
+    	Type typeRetour = new BooleanType(compiler.getSymbolTable().create("boolean"));
         this.setType(typeRetour);
         return typeRetour;
     	
