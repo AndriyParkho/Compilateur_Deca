@@ -1,6 +1,8 @@
 package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import org.apache.log4j.Logger;
+import java.util.Hashtable;
 
 /**
  * Dictionary associating identifier's ExpDefinition to their names.
@@ -25,6 +27,7 @@ public class EnvironmentExp {
     // d'empilement).
 
     EnvironmentExp parentEnvironment;
+    Hashtable<Symbol,ExpDefinition> donnees = new Hashtable<Symbol,ExpDefinition>();
     
     public EnvironmentExp(EnvironmentExp parentEnvironment) {
         this.parentEnvironment = parentEnvironment;
@@ -39,7 +42,9 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+    	//A modifier quand on aura plusieurs environnements.
+    	return this.donnees.get(key);
     }
 
     /**
@@ -58,7 +63,15 @@ public class EnvironmentExp {
      *
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-        throw new UnsupportedOperationException("not yet implemented");
+        //throw new UnsupportedOperationException("not yet implemented");
+    	//A modifier quand on aura plusieurs environnements
+		Logger LOG = Logger.getLogger("log");
+    	if (this.get(name) == null) { 
+    		this.donnees.put(name, def);
+    	}
+    	else {
+    		throw new DoubleDefException();
+    	}
     }
 
 }
