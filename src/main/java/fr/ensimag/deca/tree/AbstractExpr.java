@@ -166,6 +166,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) {
+    	//A FAIRE : traiter codeGenPrint pour les autres types que des chaînes de caractère
     	if(this instanceof StringLiteral) {
     	StringLiteral newThis= (StringLiteral) this;
     	

@@ -46,26 +46,26 @@ public class CompilerOptions {
     public void parseArgs(String[] args) throws CLIException {
         // A FAIRE : parcourir args pour positionner les options correctement.
     	
-    	
-    	for(String param : args) { //pour chaque paramètre
-    		//System.out.println ("PARAMETRES : " + param);
-    		switch(param){
-    		case "-b" : printBanner = true;
-    					if(args.length > 1) {
-    						throw new UnsupportedOperationException("L'option -b ne peut s'utiliser que seule");
-    					}
-    					break;	
-    		
-    		case "-P" : parallel = true;
-    					break;
-    					
-    		case "-d" : debug ++;
-    					break;
-    					
-    		default : sourceFiles.add(new File(param));
-    				  break;
-    		}
-    		
+    	if(args[0].equals("-b")) {
+    		printBanner = true;
+			if(args.length > 1) {
+				throw new UnsupportedOperationException("L'option -b ne peut s'utiliser que seule");
+			}
+    	}else {
+	    	for(String param : args) { //pour chaque paramètre
+	    		//System.out.println ("PARAMETRES : " + param);
+	    		switch(param){    		
+	    		case "-P" : parallel = true;
+	    					break;
+	    					
+	    		case "-d" : debug ++;
+	    					break;
+	    					
+	    		default : sourceFiles.add(new File(param));
+	    				  break;
+	    		}
+	    		
+	    	}
     	}
     	
     	
