@@ -2,6 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import java.io.PrintStream;
@@ -68,5 +69,20 @@ public class Program extends AbstractProgram {
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         classes.prettyPrint(s, prefix, false);
         main.prettyPrint(s, prefix, true);
+    }
+    
+    public void passe1(EnvironmentExp localEnv) {}
+    
+    public void passe2(EnvironmentExp localEnv) {}
+    
+    public void passe3(EnvironmentExp localEnv) {
+    	this.iter(new TreeFunction() {
+            @Override
+            public void apply(Tree t) {
+                if (t instanceof Identifier) {
+                	((Identifier) t).setDefinition(localEnv.get(((Identifier) t).getName()));
+                }
+            }
+        });
     }
 }
