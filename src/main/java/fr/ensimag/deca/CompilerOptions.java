@@ -62,8 +62,8 @@ public class CompilerOptions {
     		case "-d" : debug ++;
     					break;
     					
-    		default : sourceFiles.add(param);
-    				  break;	
+    		default : sourceFiles.add(new File(param));
+    				  break;
     		}
     		
     	}

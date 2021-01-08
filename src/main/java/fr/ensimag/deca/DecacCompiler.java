@@ -135,7 +135,7 @@ public class DecacCompiler {
         String destFile = null;
         //FAIT : génération du nom du fichier .ass à partir du .deca
         destFile = sourceFile.substring(0, sourceFile.lastIndexOf('/')) + sourceFile.substring(sourceFile.lastIndexOf('/'), sourceFile.lastIndexOf('.')) + ".ass";
-        
+        System.out.println(destFile);
         PrintStream err = System.err;
         PrintStream out = System.out;
         LOG.debug("Compiling file " + sourceFile + " to assembly file " + destFile);
