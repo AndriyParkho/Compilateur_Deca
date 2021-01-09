@@ -21,7 +21,6 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        //throw new UnsupportedOperationException("not yet implemented");
     	//d'abord on récupère les deux opérateurs droite et gauche
     	Type typeGauche;
     	Type typeDroite;

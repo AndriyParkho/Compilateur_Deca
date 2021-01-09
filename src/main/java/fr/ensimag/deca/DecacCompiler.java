@@ -188,7 +188,7 @@ public class DecacCompiler {
 
 
         prog.verifyProgram(this);
-        //Ajouter l'enrichissement de l'arbre ici
+        System.out.println(prog.prettyPrint());
         assert(prog.checkAllDecorations());
 
         addComment("start main program");

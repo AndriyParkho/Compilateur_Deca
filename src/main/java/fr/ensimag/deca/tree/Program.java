@@ -40,10 +40,10 @@ public class Program extends AbstractProgram {
         LOG.debug("verify program: start");
         //throw new UnsupportedOperationException("not yet implemented");
         try {
-        	main.verifyMain(compiler);
-        	//classes.verifyListClass(compiler);
-        	//classes.verifyListClassMembers(compiler);
-        	//classes.verifyListClassBody(compiler);
+        	EnvironmentExp localEnvExp = new EnvironmentExp(null);
+        	this.passe1(compiler, localEnvExp);
+        	this.passe2(compiler, localEnvExp);
+        	this.passe3(compiler, localEnvExp);
         }catch (ContextualError ce) {throw ce;}
         LOG.debug("verify program: end");
     }
@@ -73,12 +73,15 @@ public class Program extends AbstractProgram {
         main.prettyPrint(s, prefix, true);
     }
     
-    public void passe1(DecacCompiler compiler, EnvironmentExp localEnvExp, EnvironmentType localEnvType, ClassDefinition currentClass) {}
+    public void passe1(DecacCompiler compiler, EnvironmentExp localEnvExp) throws ContextualError{}
     
-    public void passe2(DecacCompiler compiler, EnvironmentExp localEnvExp, EnvironmentType localEnvType, ClassDefinition currentClass) {}
+    public void passe2(DecacCompiler compiler, EnvironmentExp localEnvExp) throws ContextualError{}
     
-    public void passe3(DecacCompiler compiler, EnvironmentExp localEnvExp, EnvironmentType localEnvType, ClassDefinition currentClass) {
-    	this.iter(new TreeFunction() {
+    public void passe3(DecacCompiler compiler, EnvironmentExp localEnvExp) throws ContextualError{
+    	try {
+    		main.verifyMain(compiler, localEnvExp);
+    	}catch(ContextualError ce) {throw ce;}
+    	/*this.iter(new TreeFunction() {
             @Override
             public void apply(Tree t) {
                 if (t instanceof Identifier) {
@@ -91,6 +94,6 @@ public class Program extends AbstractProgram {
                 	catch (ContextualError e) {}
                 }
             }
-        });
+        });*/
     }
 }
