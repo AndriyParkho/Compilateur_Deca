@@ -38,7 +38,6 @@ public class StringLiteral extends AbstractStringLiteral {
         //Fait
 
     	StringType type = new StringType(compiler.getSymbolTable().create("String"));
-    	FloatType type1 = new FloatType(compiler.getSymbolTable().create("Float"));
     	this.setType(type);
     	return type;
     }
