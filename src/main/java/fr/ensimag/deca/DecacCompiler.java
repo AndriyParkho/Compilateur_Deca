@@ -52,6 +52,7 @@ public class DecacCompiler {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
+        this.symbolTable = new SymbolTable();
     }
 
     /**
@@ -185,7 +186,6 @@ public class DecacCompiler {
             return true;
         }
         assert(prog.checkAllLocations());
-
 
         prog.verifyProgram(this);
         System.out.println(prog.prettyPrint());

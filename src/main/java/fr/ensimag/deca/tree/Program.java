@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.EnvironmentType;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.ima.pseudocode.instructions.*;
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -41,6 +42,8 @@ public class Program extends AbstractProgram {
         //throw new UnsupportedOperationException("not yet implemented");
         try {
         	EnvironmentExp localEnvExp = new EnvironmentExp(null);
+    		SymbolTable table = new SymbolTable();
+    		
         	this.passe1(compiler, localEnvExp);
         	this.passe2(compiler, localEnvExp);
         	this.passe3(compiler, localEnvExp);
