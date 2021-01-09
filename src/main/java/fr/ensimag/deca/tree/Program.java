@@ -39,10 +39,8 @@ public class Program extends AbstractProgram {
     @Override
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
-        //throw new UnsupportedOperationException("not yet implemented");
         try {
         	EnvironmentExp localEnvExp = new EnvironmentExp(null);
-    		SymbolTable table = new SymbolTable();
     		
         	this.passe1(compiler, localEnvExp);
         	this.passe2(compiler, localEnvExp);

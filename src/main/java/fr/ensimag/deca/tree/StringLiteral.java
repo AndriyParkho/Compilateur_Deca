@@ -1,6 +1,6 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -36,7 +36,9 @@ public class StringLiteral extends AbstractStringLiteral {
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
         //Fait
-    	Type type = new StringType(compiler.getSymbolTable().create("String"));
+
+    	StringType type = new StringType(compiler.getSymbolTable().create("String"));
+    	FloatType type1 = new FloatType(compiler.getSymbolTable().create("Float"));
     	this.setType(type);
     	return type;
     }
@@ -65,5 +67,4 @@ public class StringLiteral extends AbstractStringLiteral {
     String prettyPrintNode() {
         return "StringLiteral (" + value + ")";
     }
-
 }
