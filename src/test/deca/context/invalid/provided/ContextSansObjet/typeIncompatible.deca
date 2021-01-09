@@ -1,0 +1,11 @@
+//Description:
+//  deux types non compatible comme int et boolean
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 10 :  "type incompatible"
+{
+int a=4;
+boolean b;
+b=a;
+}

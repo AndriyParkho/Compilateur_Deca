@@ -1,0 +1,9 @@
+//Description:
+//  variable sans définition / déclaration
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 8 :
+{
+indefini=10;
+}

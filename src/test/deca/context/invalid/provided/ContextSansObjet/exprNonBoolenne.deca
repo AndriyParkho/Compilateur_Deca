@@ -1,0 +1,11 @@
+//Description:
+//  et logique entre un réel et un booléen et résultat affecté à un booléen
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 10 :
+{
+boolean bool=false;
+float reel=3.0;
+boolean bb=bool&&reel;
+}

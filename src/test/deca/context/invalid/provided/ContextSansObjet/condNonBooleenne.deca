@@ -1,0 +1,13 @@
+//Description:
+//  condition non booléenne
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 9 :
+{
+int a=2;
+if(a)
+{
+  print("bizarre!!");
+}
+}
