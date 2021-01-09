@@ -1,0 +1,10 @@
+//Description:
+//  sommation impossible d'un entier et d'un booléen
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 9 : "les opérateurs doivent ètre de type numérique (int ou float)"
+{
+int i=5;
+print(i+true);
+}

@@ -1,0 +1,9 @@
+//Description:
+//  type non reconnu
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 8 : 
+{
+itn i=4;
+}
