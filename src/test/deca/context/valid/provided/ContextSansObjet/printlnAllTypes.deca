@@ -1,0 +1,9 @@
+{
+	println(3);
+	println(0.0);
+	println(5.9800);
+	println("a");
+	println("Hello");
+	println("false");
+	println("1");
+}
