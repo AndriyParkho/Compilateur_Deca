@@ -1,0 +1,12 @@
+//Description :
+//	affectation d'un float à une variable définie comme boolean
+//
+//Résultats :
+//	Erreur contextuelle
+//	Ligne 10 : type incompatible <10, 6>
+
+{
+	boolean x;
+	x = 1.0;
+	println(x);
+}

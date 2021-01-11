@@ -1,3 +1,10 @@
+//Description :
+//	affichage de tous les types affichables
+//
+//Résultats :
+//	ok 
+
+
 {
 	println(3);
 	println(0.0);

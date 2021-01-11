@@ -4,6 +4,7 @@ import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
@@ -18,6 +19,8 @@ import java.io.PrintStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
+import fr.ensimag.deca.context.Definition;
+import java.util.*;
 
 /**
  * Decac compiler instance.
@@ -48,11 +51,22 @@ public class DecacCompiler {
    {
 	   return symbolTable;
    }
+   //envTypes contient les types predefinis
+   //il faut l'initialiser avec les types prédéfinis
+   private Map<Symbol , Definition> envTypes;
+   public Map<Symbol , Definition> getEnvTypes()
+   {
+	   return this.envTypes;
+   }
+   
+   
+   
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
+        this.envTypes= new HashMap<>();
     }
 
     /**
