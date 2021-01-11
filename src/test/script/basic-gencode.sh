@@ -17,7 +17,7 @@ PATH=./src/test/script/launchers:./src/main/bin:"$PATH"
 rm -f ./src/test/deca/codegen/valid/provided/cond0.ass 2>/dev/null
 decac ./src/test/deca/codegen/valid/provided/cond0.deca || exit 1
 if [ ! -f ./src/test/deca/codegen/valid/provided/cond0.ass ]; then
-    echo "Fichier cond0.ass non généré."
+    echo "\e[31mFichier cond0.ass non généré."
     exit 1
 fi
 
@@ -28,9 +28,9 @@ rm -f ./src/test/deca/codegen/valid/provided/cond0.ass
 attendu=ok
 
 if [ "$resultat" = "$attendu" ]; then
-    echo "Tout va bien"
+    echo "\e[32mTout va bien"
 else
-    echo "Résultat inattendu de ima:"
+    echo "\e[31mRésultat inattendu de ima:"
     echo "$resultat"
     exit 1
 fi
