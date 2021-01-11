@@ -1,9 +1,0 @@
-//Description:
-//  une variable ne peut pas etre de type void
-//
-//Résultat:
-// Erreur Contextuelle
-//  ligne 8 : "une variable ne peut pas ètre de type void"
-{
-void v;
-}

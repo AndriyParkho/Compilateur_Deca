@@ -1,3 +1,10 @@
+//Description :
+//	identification de variables string et affectations de valeurs
+//
+//Résultats :
+//	ok 
+
+
 {
 	String x;
 	String y = "";

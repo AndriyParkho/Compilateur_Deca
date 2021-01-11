@@ -1,3 +1,9 @@
+//Description :
+//	identification de variables booléennes et affectations de valeurs
+//
+//Résultats :
+//	ok 
+
 {
 	boolean x;
 	boolean y = true;
