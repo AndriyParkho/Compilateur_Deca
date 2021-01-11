@@ -78,4 +78,10 @@ public class DeclVar extends AbstractDeclVar {
         varName.prettyPrint(s, prefix, false);
         initialization.prettyPrint(s, prefix, true);
     }
+    
+    @Override
+    protected void codeGenDeclVar(DecacCompiler compiler) {
+    	//incrementation du nombre de variables globales
+    	
+    }
 }

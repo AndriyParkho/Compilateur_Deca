@@ -1,0 +1,14 @@
+{
+	String x;
+	String y = "";
+	String z = "Hello";
+	String t = "Hello, world!"
+	println(z);
+	println(t);
+	x = t
+	println(x);
+	println(y);
+	println(t);
+	z = x;
+	println(z);
+}

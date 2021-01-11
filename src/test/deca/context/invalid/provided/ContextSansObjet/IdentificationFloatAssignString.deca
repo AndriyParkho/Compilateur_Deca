@@ -1,0 +1,5 @@
+{
+	float x;
+	x = "Hello";
+	println(x);
+}

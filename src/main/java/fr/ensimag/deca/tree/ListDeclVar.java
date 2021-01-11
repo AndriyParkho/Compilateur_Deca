@@ -48,6 +48,11 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     		}catch (ContextualError ce) {throw ce;}
     	}
     }//Fait
-
+    
+    public void codeGenListDeclVar(DecacCompiler compiler) {
+    	for (AbstractDeclVar var : getList()) {
+            var.codeGenDeclVar(compiler);
+        }
+    }
 
 }
