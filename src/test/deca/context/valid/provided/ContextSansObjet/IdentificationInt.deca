@@ -1,0 +1,9 @@
+{
+	int x;
+	int y = 3;
+	println(y);
+	x = 0;
+	y = x;
+	println(x);
+	println(y);
+}
