@@ -37,6 +37,8 @@ import org.apache.log4j.Logger;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
+    private int countVar = 0;
+    
     /**
      * Portable newline character.
      */
@@ -237,6 +239,17 @@ public class DecacCompiler {
         DecaParser parser = new DecaParser(tokens);
         parser.setDecacCompiler(this);
         return parser.parseProgramAndManageErrors(err);
+    }
+    
+	public int getCountVar() {
+		return countVar;
+	}
+	public void setCountVar(int countVar) {
+		this.countVar = countVar;
+	}
+    
+    public void incrCountVar() {
+    	countVar++;
     }
 
 }
