@@ -3,7 +3,7 @@
 //
 //Résultats :
 //	Erreur contextuelle
-//	Ligne 9 : 
+//	Ligne 9 : une variable ne peut pas être de type void <9, 3>
 
 {
 	void x;

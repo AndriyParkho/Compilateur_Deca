@@ -3,7 +3,7 @@
 //
 //Résultats :
 //	Erreur contextuelle
-//	Ligne 10 : 
+//	Ligne 10 : type incompatible <10, 6>
 
 {
 	int x;
