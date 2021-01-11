@@ -1,16 +1,23 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.ima.pseudocode.Label;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
@@ -167,11 +174,31 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     protected void codeGenPrint(DecacCompiler compiler) {
     	//A FAIRE : traiter codeGenPrint pour les autres types que des chaînes de caractère
-    	if(this instanceof StringLiteral) {
-    	StringLiteral newThis= (StringLiteral) this;
+    	if(type.isString()) {
+    		StringLiteral newThis= (StringLiteral) this;
     	
-        compiler.addInstruction(new WSTR(newThis.getValue()));
+    		compiler.addInstruction(new WSTR(newThis.getValue()));
     	}
+    	else if(type.isFloat()) {
+    		
+    		FloatLiteral newThis = (FloatLiteral) this;
+    		compiler.addInstruction(new LOAD(new ImmediateFloat(newThis.getValue()), Register.R1));
+    		compiler.addInstruction(new WFLOAT());
+    	}
+    	
+    	else if(type.isInt()) {
+    		IntLiteral newThis = (IntLiteral) this;
+    		compiler.addInstruction(new LOAD(new ImmediateInteger(newThis.getValue()), Register.R1));
+    		compiler.addInstruction(new WINT());
+    	}
+    	
+    	else if(type.isBoolean()) {
+    		BooleanLiteral newThis = (BooleanLiteral) this;
+    		String valeur = newThis.getValue() ? "true" : "false"; 
+    		compiler.addInstruction(new WSTR(valeur));
+    	}
+    	
+
     }
 
     @Override
