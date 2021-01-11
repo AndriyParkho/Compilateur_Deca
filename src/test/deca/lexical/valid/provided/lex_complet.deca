@@ -1,0 +1,38 @@
+// Description:
+//    Programme utilisant (presque) tous les token reconnu par l'analyseur
+//
+// Resultats:
+//    Renvoie une chaîne de caractère
+//
+// Historique:
+//    cree le 07/01/2021
+
+#include "Math.decah"
+
+class A extends B {
+	int a = 1234;
+	float b = 12.02;
+	protected float c = 0xFFF
+	
+	String testMethod(){
+		if(a >= 1000){
+			println("Yes");
+		} else if (a == "Contextuellement faux"){
+			return "ERROR";
+		} else{
+			print("No");
+		}
+		
+		boolean test = false;
+		while(a < 20000 && test){
+			a = a*2;
+			test = !test || b != c;
+		}
+		
+		b = this.c - b + ((float) a);
+		
+		return "Test passe";
+	}
+	
+	
+}

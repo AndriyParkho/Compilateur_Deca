@@ -1,0 +1,15 @@
+// Description: 
+//    tests de programme lexicalement correct. 
+// 
+// Resultats: 
+//    ok 
+// 
+// Historique: 
+//    cree le 01/01/2021 
+idf _autre_idf 
+{ 
+} 
+(
+) 
+// un commentaire.
+
