@@ -15,7 +15,8 @@ import java.io.PrintStream;
 public class EmptyMain extends AbstractMain {
     @Override
     protected void verifyMain(DecacCompiler compiler,EnvironmentExp localEnvExp) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //Fait
+    	//un main vide est contextuellement valid , donc rien à vérifier
     }
 
     @Override
