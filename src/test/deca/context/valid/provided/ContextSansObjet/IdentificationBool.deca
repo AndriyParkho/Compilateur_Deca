@@ -2,4 +2,10 @@
 	boolean x;
 	boolean y = true;
 	boolean z = false;
+	println(z);
+	x = true;
+	z = x;
+	println(x);
+	println(y);
+	println(z);
 }
