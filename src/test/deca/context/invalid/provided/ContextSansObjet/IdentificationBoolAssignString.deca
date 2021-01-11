@@ -1,3 +1,10 @@
+//Description :
+//	affectation d'un string à une variable définie comme boolean
+//
+//Résultats :
+//	Erreur contextuelle
+//	Ligne 10 : 
+
 {
 	boolean x;
 	x = "Hello";

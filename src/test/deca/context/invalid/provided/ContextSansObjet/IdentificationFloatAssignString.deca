@@ -1,3 +1,10 @@
+//Description :
+//	affectation d'un string à une variable définie comme float
+//
+//Résultats :
+//	Erreur contextuelle
+//	Ligne 10 : 
+
 {
 	float x;
 	x = "Hello";

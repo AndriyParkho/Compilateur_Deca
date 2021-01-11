@@ -1,3 +1,10 @@
+//Description :
+//	affectation d'un int à une variable définie comme string
+//
+//Résultats :
+//	Erreur contextuelle
+//	Ligne 10 : 
+
 {
 	String x;
 	x = 3;

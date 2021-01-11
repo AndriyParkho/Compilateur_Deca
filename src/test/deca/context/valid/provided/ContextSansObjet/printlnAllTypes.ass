@@ -1,0 +1,16 @@
+; start main program
+; Main program
+; Beginning of main instructions:
+	WNL
+	WNL
+	WNL
+	WSTR "a"
+	WNL
+	WSTR "Hello"
+	WNL
+	WSTR "false"
+	WNL
+	WSTR "1"
+	WNL
+	HALT
+; end main program

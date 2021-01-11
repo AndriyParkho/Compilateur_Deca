@@ -1,3 +1,10 @@
+//Description :
+//	identification de variables int et affectations de valeurs
+//
+//Résultats :
+//	ok 
+
+
 {
 	int x;
 	int y = 3;
