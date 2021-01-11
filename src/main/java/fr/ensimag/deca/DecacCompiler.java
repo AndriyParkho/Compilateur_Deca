@@ -6,6 +6,7 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.IMAProgram;
@@ -20,6 +21,11 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 import fr.ensimag.deca.context.Definition;
+import fr.ensimag.deca.context.TypeDefinition;
+import fr.ensimag.deca.context.FloatType;
+import fr.ensimag.deca.context.BooleanType;
+import fr.ensimag.deca.context.IntType;
+import fr.ensimag.deca.context.StringType;
 import java.util.*;
 
 /**
@@ -59,6 +65,26 @@ public class DecacCompiler {
 	   return this.envTypes;
    }
    
+   /**
+    * méthode qui initialise l'environnement des types en y insérant 
+    * tous les types prédéfinis
+    */
+   public void envTypesInit()
+   {
+	   Symbol intSymbol=this.symbolTable.create("int");
+	   Symbol floatSymbol=this.symbolTable.create("float");
+	   Symbol boolSymbol=this.symbolTable.create("boolean");
+	   Symbol stringSymbol=this.symbolTable.create("string");
+	   //Symbol objectSymbol=this.symbolTable.create("Object");
+	   TypeDefinition intTypeDef= new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
+	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
+	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
+	   TypeDefinition stringTypeDef= new TypeDefinition(new StringType(stringSymbol),Location.BUILTIN);
+	   this.envTypes.put(intSymbol, intTypeDef);
+	   this.envTypes.put(floatSymbol, floatTypeDef);
+	   this.envTypes.put(boolSymbol, boolTypeDef);
+	   this.envTypes.put(stringSymbol, stringTypeDef);
+   }
    
    
     public DecacCompiler(CompilerOptions compilerOptions, File source) {
@@ -67,6 +93,7 @@ public class DecacCompiler {
         this.source = source;
         this.symbolTable = new SymbolTable();
         this.envTypes= new HashMap<>();
+        this.envTypesInit();
     }
 
     /**
