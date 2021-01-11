@@ -1,0 +1,5 @@
+{
+	String x;
+	x = 3;
+	println(x);
+}

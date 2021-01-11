@@ -3,7 +3,7 @@
 	float y = 3.0;
 	float z = 1.01;
 	println(z);
-	x = 0.0;
+	x = 0;
 	z = x;
 	println(x);
 	println(y);
