@@ -1,0 +1,5 @@
+{
+	boolean x;
+	boolean y = true;
+	boolean z = false;
+}

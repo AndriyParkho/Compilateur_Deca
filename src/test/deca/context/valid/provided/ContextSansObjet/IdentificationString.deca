@@ -1,0 +1,5 @@
+{
+	String x;
+	String y = "";
+	String z = "Hello";
+}
