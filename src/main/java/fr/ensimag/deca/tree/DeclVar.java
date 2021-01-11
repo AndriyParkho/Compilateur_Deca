@@ -1,14 +1,20 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * @author gl10
@@ -81,7 +87,14 @@ public class DeclVar extends AbstractDeclVar {
     
     @Override
     protected void codeGenDeclVar(DecacCompiler compiler) {
-    	//incrementation du nombre de variables globales
-    	
+    	compiler.incrCountVar();
+    	DAddr varOperand = new RegisterOffset(compiler.getCountVar(), Register.GB);
+    	VariableDefinition varDef = (VariableDefinition) varName.getDefinition();
+    	varDef.setOperand(varOperand);
+    	if(initialization.isInitialization()) {
+    		Initialization init = (Initialization) initialization;
+    		init.getExpression().codeGenInst(compiler);
+    		compiler.addInstruction(new STORE(Register.getR(2), varOperand));
+    	}
     }
 }
