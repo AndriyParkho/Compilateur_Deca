@@ -1,0 +1,12 @@
+/Description:
+//  Déclaration de variables de tout type sans affectation
+//
+//Résultat:
+// ok
+
+{
+    int x;
+    float y;
+    string s;
+    boolean a;
+}
