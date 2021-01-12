@@ -6,7 +6,5 @@
 //	Ligne 10 : type incompatible <10, 6>
 
 {
-	int x;
-	x = "Hello";
-	println(x);
+	int x="Hello";
 }

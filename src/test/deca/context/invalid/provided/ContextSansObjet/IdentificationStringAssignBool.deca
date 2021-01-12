@@ -6,7 +6,5 @@
 //	Ligne 10 : type incompatible <10, 6>
 
 {
-	String x;
-	x = true;
-	println(x);
+	string x=true;
 }

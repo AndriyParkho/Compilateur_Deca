@@ -45,7 +45,7 @@ public class DeclVar extends AbstractDeclVar {
     	typeVar=this.type.verifyType(compiler);
     	if(typeVar.isVoid())
     	{
-    		throw new ContextualError("une variable ne peut pas ètre de type void",this.getLocation());
+    		throw new ContextualError("une variable ne peut pas être de type void",this.getLocation());
     	}
     	//on peut alors définir cette variable, la déclarer et l'initialiser dans l'envoronnement local
     	try {

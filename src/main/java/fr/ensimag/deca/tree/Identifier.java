@@ -195,6 +195,7 @@ public class Identifier extends AbstractIdentifier {
         //Fait
     	//si le type existe dans l'enveloppe des types, on met à jour l'enrichissement 
     	//sinon, on lève une erreur contextuelle
+        this.name = compiler.getSymbolTable().create(this.name.getName());
     	if(compiler.getEnvTypes().get(this.name)!=null)
     	{
     		//enrichissement def & type

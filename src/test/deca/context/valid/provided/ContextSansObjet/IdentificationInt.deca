@@ -6,11 +6,7 @@
 
 
 {
-	int x;
-	int y = 3;
-	println(y);
-	x = 0;
-	y = x;
-	println(x);
-	println(y);
+	int x = 5;
+	int y = 0;
+	int z = -5;
 }
