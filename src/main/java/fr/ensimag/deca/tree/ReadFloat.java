@@ -5,7 +5,10 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.FloatType;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+
 import java.io.PrintStream;
 
 /**
@@ -18,7 +21,10 @@ public class ReadFloat extends AbstractReadExpr {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+    	//Fait
+        Type type= new FloatType(compiler.getSymbolTable().create("float"));
+        this.setType(type);
+        return type;
     }
 
 
@@ -37,4 +43,25 @@ public class ReadFloat extends AbstractReadExpr {
         // leaf node => nothing to do
     }
 
+
+	@Override
+	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		// A FAIRE
+		throw new UnsupportedOperationException("not yet implemented");
+		
+	}
+
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}
+
+	
 }

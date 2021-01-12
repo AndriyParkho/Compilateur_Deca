@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.StringType;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateString;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 import java.io.PrintStream;
@@ -66,4 +67,23 @@ public class StringLiteral extends AbstractStringLiteral {
     String prettyPrintNode() {
         return "StringLiteral (" + value + ")";
     }
+
+	@Override
+	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		// A FAIRE
+		throw new UnsupportedOperationException("not yet implemented");
+		
+	}
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}
+	
+	
 }

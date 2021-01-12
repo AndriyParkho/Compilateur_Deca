@@ -12,6 +12,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
@@ -205,6 +206,8 @@ public abstract class AbstractExpr extends AbstractInst {
         throw new UnsupportedOperationException("not yet implemented");
     }
     
+    protected abstract void codeGenExpr(DecacCompiler compiler, GPRegister op);
+    
 
     @Override
     protected void decompileInst(IndentPrintStream s) {
@@ -222,4 +225,8 @@ public abstract class AbstractExpr extends AbstractInst {
             s.println();
         }
     }
+    
+    public abstract boolean isIntLiteral();
+    
+    public abstract boolean isIdentifier();
 }

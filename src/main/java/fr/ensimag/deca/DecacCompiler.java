@@ -222,20 +222,25 @@ public class DecacCompiler {
     private boolean doCompile(String sourceName, String destName,
             PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException {
-        AbstractProgram prog = doLexingAndParsing(sourceName, err);
+        AbstractProgram prog = doLexingAndParsing(sourceName, err); //etape A
 
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
         }
         assert(prog.checkAllLocations());
-
-        prog.verifyProgram(this);
+        if(getCompilerOptions().isParse()) {
+        	//A FAIRE : decompilation de l'arbre et affichage de cette décompilation
+        	System.exit(1);
+        }
+        prog.verifyProgram(this); //etape B
         System.out.println(prog.prettyPrint());
         assert(prog.checkAllDecorations());
-
+        if(getCompilerOptions().isVerification()) {
+        	System.exit(1);
+        }
         addComment("start main program");
-        prog.codeGenProgram(this);
+        prog.codeGenProgram(this); //etape C
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
