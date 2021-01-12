@@ -34,18 +34,5 @@ public class Minus extends AbstractOpArith {
 		throw new UnsupportedOperationException("not yet implemented");
 		
 	}
-
-
-	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
 	
 }

@@ -44,14 +44,4 @@ public class UnaryMinus extends AbstractUnaryExpr {
 		// A FAIRE
 		throw new UnsupportedOperationException("not yet implemented");
 	}
-
-    @Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
 }

@@ -14,4 +14,30 @@ public abstract class AbstractReadExpr extends AbstractExpr {
     }
 
 
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isFloatLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isBooleanLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}
+
+	
+
 }

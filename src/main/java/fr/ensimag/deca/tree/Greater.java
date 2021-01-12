@@ -28,17 +28,4 @@ public class Greater extends AbstractOpIneq {
 		
 	}
 
-
-	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
-	
 }

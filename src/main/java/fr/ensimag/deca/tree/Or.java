@@ -26,15 +26,4 @@ public class Or extends AbstractOpBool {
 		
 	}
 
-	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
-
 }

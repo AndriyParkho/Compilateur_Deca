@@ -2,12 +2,14 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.FloatType;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
@@ -66,13 +68,22 @@ public class FloatLiteral extends AbstractExpr {
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
 		
 	}
 
 	@Override
 	public boolean isIntLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isFloatLiteral() {
+		return true;
+	}
+
+	@Override
+	public boolean isBooleanLiteral() {
 		return false;
 	}
 

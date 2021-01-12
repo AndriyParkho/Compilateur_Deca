@@ -2,7 +2,10 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.FLOAT;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.FloatType;
@@ -35,20 +38,7 @@ public class ConvFloat extends AbstractUnaryExpr {
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
+		// A FAIRE : ne fonctionne pas
+		compiler.addInstruction(new FLOAT(DValGetter.getDVal(this), op));
 	}
-
-	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
-	
 }
