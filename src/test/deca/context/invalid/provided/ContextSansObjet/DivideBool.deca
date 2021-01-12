@@ -1,0 +1,9 @@
+//Description :
+//	Vérification contextuelle de l'opérateur / avec des variables boolean
+//
+//Résultats :
+//	ligne 8 : les opérateurs doivent ètre de type numérique (int ou float)
+{
+    boolean x = true;
+    boolean y = false/ 3;
+}
