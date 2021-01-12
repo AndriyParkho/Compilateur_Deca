@@ -73,6 +73,7 @@ public class CompilerOptions {
 	    		}
 	    		
 	    	}
+	    	
 	    	if(verification && parse) {
 	    		throw new UnsupportedOperationException("Les options -p et -v ne peuvent être utilisées que séparément");
 	    	}
