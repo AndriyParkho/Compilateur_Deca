@@ -20,7 +20,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
  * @author gl10
  * @date 01/01/2021
  */
-public abstract class AbstractOpArith extends AbstractBinaryExpr {
+public abstract class 	AbstractOpArith extends AbstractBinaryExpr {
 
     public AbstractOpArith(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
@@ -36,6 +36,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
     		typeDroite=this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
     	} catch (ContextualError ce) {throw ce;}
+    	System.out.println(typeDroite.toString() + " " +typeGauche.toString());
     	//il faut ensuite s'assurer que les deux opérateurs sont numériques(int or float)
     	if(((!typeGauche.isInt())&&(!typeGauche.isFloat()))||((!typeDroite.isInt())&&(!typeDroite.isFloat())))
     	{
@@ -50,6 +51,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			typeGauche= gaucheConv.verifyExpr(compiler, localEnv, currentClass);
     			gaucheConv.setType(typeGauche);
     			this.setLeftOperand(gaucheConv);
+				this.setType(typeGauche);
     			return typeGauche;
     		}
     		else
@@ -58,11 +60,13 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			typeDroite= droiteConv.verifyExpr(compiler, localEnv, currentClass);
     			droiteConv.setType(typeDroite);
     			this.setRightOperand(droiteConv);
+				this.setType(typeDroite);
     			return typeDroite;
     		}
     	}
     	else //c à d on a le mème type pour les deux opérateurs.
-    		return typeDroite;
+    		this.setType(typeDroite);
+			return typeDroite;
     }
     
     @Override
