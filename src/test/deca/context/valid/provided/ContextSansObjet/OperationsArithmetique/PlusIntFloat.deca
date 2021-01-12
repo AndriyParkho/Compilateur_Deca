@@ -1,9 +1,0 @@
-//Description :
-//	Vérification contextuelle de l'opérateur + avec des variables int et float
-//
-//Résultats :
-//	ok
-{
-    float x = 1.0;
-    float y = 1 + 2.3;
-}

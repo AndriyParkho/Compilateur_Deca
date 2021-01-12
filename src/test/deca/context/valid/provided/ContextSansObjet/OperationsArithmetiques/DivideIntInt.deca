@@ -1,0 +1,11 @@
+//Description :
+//	Vérification contextuelle de l'opérateur / avec des variables int
+//
+//Résultats :
+//	ok
+
+{
+    int x = 2/1;
+    int y = 3;
+    int z = x/y;
+}
