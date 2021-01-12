@@ -51,7 +51,7 @@ public class CompilerOptions {
     	if(args[0].equals("-b")) {
     		printBanner = true;
 			if(args.length > 1) {
-				throw new UnsupportedOperationException("L'option -b ne peut s'utiliser que seule");
+				throw new CLIException("L'option -b ne peut s'utiliser que seule");
 			}
     	}else {
 	    	for(String param : args) { //pour chaque paramètre
@@ -75,7 +75,8 @@ public class CompilerOptions {
 	    	}
 	    	
 	    	if(verification && parse) {
-	    		throw new UnsupportedOperationException("Les options -p et -v ne peuvent être utilisées que séparément");
+	    		throw new CLIException("Les options -p et -v ne peuvent être utilisées que séparément");
+
 	    	}
     	}
     	
