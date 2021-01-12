@@ -15,7 +15,7 @@ read mode
 
 if [ $mode = "V" ]
 then
-	for test_courant in ./src/test/deca/context/valid/provided/ContextSansObjet/*.deca; do
+	for test_courant in ./src/test/deca/context/valid/provided/ContextSansObjet/*/*.deca; do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
 			echo "\e[31mEchec inattendu de $test_courant"
@@ -26,7 +26,7 @@ then
 	done
 elif [ $mode = "I" ]
 then
-	for test_courant in ./src/test/deca/context/invalid/provided/ContextSansObjet/*.deca; do
+	for test_courant in ./src/test/deca/context/invalid/provided/ContextSansObjet/*/*.deca; do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
 			echo "\e[32mEchec attendu de $test_courant"
@@ -38,7 +38,7 @@ then
 elif [ $mode = "2" ]
 then
 	echo "\e[37mvalid"
-	for test_courant in ./src/test/deca/context/valid/provided/ContextSansObjet/*.deca; do
+	for test_courant in ./src/test/deca/context/valid/provided/ContextSansObjet/*/*.deca; do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
 			echo "\e[31mEchec inattendu de $test_courant"
@@ -48,7 +48,7 @@ then
 		fi
 	done
 	echo "\e[37minvalid"
-	for test_courant in ./src/test/deca/context/invalid/provided/ContextSansObjet/*.deca; do
+	for test_courant in ./src/test/deca/context/invalid/provided/ContextSansObjet/*/*.deca; do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
 			echo "\e[32mEchec attendu de $test_courant"
