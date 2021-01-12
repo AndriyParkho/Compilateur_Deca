@@ -42,16 +42,19 @@ public class CompilerOptions {
     private boolean printBanner = false;
     private boolean verification = false;
     private boolean parse = false;
+    private int nombreRegistreMax = 16;
     private List<File> sourceFiles = new ArrayList<File>();
 
     
     public void parseArgs(String[] args) throws CLIException {
-        // A FAIRE : parcourir args pour positionner les options correctement.
+        // A FAIRE : -R, -n
+    	//FAIT : -b, -d, -p, -v
     	
     	
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
         switch (getDebug()) {
+        
         case QUIET: break; // keep default
         case INFO:
             logger.setLevel(Level.INFO); break;
@@ -78,8 +81,19 @@ public class CompilerOptions {
 				throw new CLIException("L'option -b ne peut s'utiliser que seule");
 			}
     	}else {
+    		
+    		boolean isRegister = false;
+    		
 	    	for(String param : args) { //pour chaque paramètre
-	    		//System.out.println ("PARAMETRES : " + param);
+	    		if(isRegister) {
+	    			try {
+	    				nombreRegistreMax = Integer.parseInt(param);
+	    			}catch(NumberFormatException e){
+	    				throw new CLIException("L'option -r doit être suivi d'un entier valide compris entre 4<=X<=16");
+	    			}
+	    			isRegister = false;
+	    			continue;
+	    		}
 	    		switch(param){    		
 	    		case "-P" : parallel = true;
 	    					break;
@@ -91,7 +105,10 @@ public class CompilerOptions {
 	    					break;
 	    		case "-p" : parse = true;
 	    					break;
-	    					
+	    		
+	    		case "-r" : isRegister = true;
+	    					break; 
+	    				
 	    		default : sourceFiles.add(new File(param));
 	    				  break;
 	    		}
@@ -102,10 +119,17 @@ public class CompilerOptions {
 	    		throw new CLIException("Les options -p et -v ne peuvent être utilisées que séparément");
 
 	    	}
+	    	if(nombreRegistreMax > 16 || nombreRegistreMax < 4) {
+	    		throw new CLIException("Les nomnbre de registres disponibles doit être compris entre 4 et 16");
+	    	}
     	}
     }
 
-    public boolean isVerification() {
+    public int getNombreRegistreMax() {
+		return nombreRegistreMax;
+	}
+
+	public boolean isVerification() {
 		return verification;
 	}
 
@@ -114,6 +138,7 @@ public class CompilerOptions {
 	}
 
 	protected void displayUsage() {
-        throw new UnsupportedOperationException("not yet implemented");
+        System.out.println("decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-W] <fichier deca>...] | [-b]");
+        System.out.println("La commande decac sans argument affiche les options disponibles.");
     }
 }
