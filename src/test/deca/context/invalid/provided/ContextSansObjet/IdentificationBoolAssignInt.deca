@@ -6,7 +6,5 @@
 //	Ligne 10 : type incompatible <10, 6>
 
 {
-	boolean x;
-	x = 1;
-	println(x);
+	boolean x = 1;
 }

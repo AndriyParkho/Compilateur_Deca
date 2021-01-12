@@ -3,7 +3,7 @@
 //
 //Résultat:
 // Erreur Contextuelle
-//  ligne 8 :
+//  ligne 8 : type non défini
 {
 indefini=10;
 }
