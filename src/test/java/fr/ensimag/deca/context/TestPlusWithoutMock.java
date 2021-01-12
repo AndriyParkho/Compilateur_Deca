@@ -67,6 +67,16 @@ public class TestPlusWithoutMock {
 			// TODO Auto-generated method stub
 			
 		}
+
+		@Override
+		public boolean isIntLiteral() {
+			return false;
+		}
+
+		@Override
+		public boolean isIdentifier() {
+			return false;
+		}
     }
 
     @Test
