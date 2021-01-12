@@ -1,9 +1,24 @@
+//Description:
+//  variable sans définition / déclaration
+//
+//Résultat:
+//8
+//15
+//a<b
+//faux
+
+
 {
-	println(3);
-	println(0.0);
-	println(5.9800);
-	println("a");
-	println("Hello");
-	println("false");
-	println("1");
+	int a=3;
+	int b=5;
+	println(a+b);
+	println(a*b);
+	float b=2.0;
+	if(a<b){println("a<b");}
+	boolean b1=false;
+	boolean b2=true;
+	if(b1&&b2)
+  		{println("vrai");}
+	else
+  		{println("faux");}
 }

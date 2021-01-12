@@ -24,19 +24,19 @@ PATH=./src/test/script/launchers:"$PATH"
 if test_lex src/test/deca/syntax/invalid/provided/simple_lex.deca 2>&1 \
     | head -n 1 | grep -q 'simple_lex.deca:[0-9]'
 then
-    echo "Echec inattendu de test_lex"
+    echo "\e[31mEchec inattendu de test_lex"
     exit 1
 else
-    echo "OK"
+    echo "\e[32mOK"
 fi
 
 # Ligne 10 codée en dur. Il faudrait stocker ça quelque part ...
 if test_lex src/test/deca/syntax/invalid/provided/chaine_incomplete.deca 2>&1 \
     | grep -q -e 'chaine_incomplete.deca:10:'
 then
-    echo "Echec attendu pour test_lex"
+    echo "\e[32mEchec attendu pour test_lex"
 else
-    echo "Erreur non detectee par test_lex pour chaine_incomplete.deca"
+    echo "\e[31mErreur non detectee par test_lex pour chaine_incomplete.deca"
     exit 1
 fi
 

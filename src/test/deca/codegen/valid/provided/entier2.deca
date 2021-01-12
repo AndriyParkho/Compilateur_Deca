@@ -1,0 +1,11 @@
+// Description:
+//    tests de déclaration d'entier
+//
+// Resultats:
+//    rien
+
+{
+   int i = 1; 
+   int y = 3;
+}
+

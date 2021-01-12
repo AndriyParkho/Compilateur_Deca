@@ -7,6 +7,9 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.IntType;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+
 import java.io.PrintStream;
 
 /**
@@ -33,6 +36,11 @@ public class IntLiteral extends AbstractExpr {
     	Type type= new IntType(compiler.getSymbolTable().create("int"));
     	this.setType(type);
     	return type;
+    }
+    
+    @Override
+    public void codeGenInst(DecacCompiler compiler) {
+    	compiler.addInstruction(new LOAD(value, Register.getR(2))); //R2 POUR L'INSTANT
     }
 
 

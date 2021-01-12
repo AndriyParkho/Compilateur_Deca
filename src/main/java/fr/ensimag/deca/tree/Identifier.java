@@ -167,7 +167,19 @@ public class Identifier extends AbstractIdentifier {
     @Override
     public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
             ClassDefinition currentClass) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //Fait 
+    	//si l'identificateur existe dans l'environnement local, on fait l'enrichissement
+    	//sinon on lève une erreur contextuelle
+    	if(localEnv.get(this.name)!=null)
+    	{
+    		this.setDefinition(localEnv.get(this.name));
+    		this.setType(localEnv.get(this.name).getType());
+    		return localEnv.get(this.name).getType();
+    	}
+    	else
+    	{
+    		throw new ContextualError("identificateur non défini",this.getLocation());
+    	}
     }
 
     /**
@@ -176,7 +188,21 @@ public class Identifier extends AbstractIdentifier {
      */
     @Override
     public Type verifyType(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //Fait
+    	//si le type existe dans l'enveloppe des types, on met à jour l'enrichissement 
+    	//sinon, on lève une erreur contextuelle
+    	if(compiler.getEnvTypes().get(this.name)!=null)
+    	{
+    		//enrichissement def & type
+    		this.setDefinition(compiler.getEnvTypes().get(this.name));
+    		Type type= compiler.getEnvTypes().get(this.name).getType();
+    		this.setType(type);
+    		return type;
+    	}
+    	else
+    	{
+    		throw new ContextualError("type non défini",this.getLocation());
+    	}
     }
     
     

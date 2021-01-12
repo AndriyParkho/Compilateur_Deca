@@ -1,3 +1,10 @@
+//Description :
+//	affectation d'un string à une variable définie comme int
+//
+//Résultats :
+//	Erreur contextuelle
+//	Ligne 10 : type incompatible <10, 6>
+
 {
 	int x;
 	x = "Hello";
