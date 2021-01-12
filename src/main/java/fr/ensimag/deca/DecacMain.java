@@ -1,4 +1,4 @@
-package fr.ensimag.deca;
+	package fr.ensimag.deca;
 
 import java.io.File;
 import org.apache.log4j.Logger;
@@ -35,11 +35,20 @@ public class DecacMain {
             System.out.println("            Etienne Gacel");
             System.out.println("            Bastien Fabre");
             System.out.println("------------------------------------");
-            System.exit(1);
+            System.exit(0);
             
         }
         if (options.getSourceFiles().isEmpty()) {
-            throw new UnsupportedOperationException("decac without argument not yet implemented");
+            System.out.println("---------------------------< Options disponibles >--------------------------------");
+            System.out.println("-b       (banner)       : affiche une bannière indiquant le nom de l’équipe. ");
+            System.out.println("-p       (parse)        : arrête decac après l’étape de construction de l’arbre, et\n			  affiche la décompilation de ce dernier (i.e. s’il n’y a\n			  qu’un fichier source à compiler, la sortie doit être un\n			  programme deca syntaxiquement correct).");
+            System.out.println("-v       (verification) : arrête decac après l’étape de vérifications (ne produit\n			  aucune sortie en l’absence d’erreur).");
+            System.out.println("-n       (no check)     : supprime les tests à l’exécution spécifiés dans les points\n			  11.1 et 11.3 de la sémantique de Deca.");
+            System.out.println("-r X     (registers)    : limite les registres banalisés disponibles à R0 ... R{X-1},\n			  avec 4 <= X <= 16.");
+            System.out.println("-d       (debug)        : active les traces de debug. Répéter l’option plusieurs fois\n			  pour avoir plus de traces. ");
+            System.out.println("-P       (parallel)     : s’il y a plusieurs fichiers sources, lance la compilation\n			  des fichiers enparallèle (pour accélérer la compilation)");
+            System.out.println("----------------------------------------------------------------------------------");
+            System.exit(0);
         }
         if (options.getParallel()) {
             // A FAIRE : instancier DecacCompiler pour chaque fichier à
