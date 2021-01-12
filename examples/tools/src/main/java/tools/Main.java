@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
  * Example program, just to experiment. Greets the user, in english by default
  * and in French in case a parameter is given.
  *
- * A FAIRE : Alice et Bob rajoutent leurs noms sur la ligne suivante
+ *  : Alice et Bob rajoutent leurs noms sur la ligne suivante
  *
  * @author Alice and Bob
  * @date 01/01/2021
@@ -16,8 +16,8 @@ public class Main {
     private static final Logger LOG = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        // A FAIRE : lire et modifier le fichier src/main/resources/log4j.properties
-        // A FAIRE : pour controler le comportement de ces affichages.
+        // lire et modifier le fichier src/main/resources/log4j.properties
+        // pour controler le comportement de ces affichages.
         LOG.info("Entering main method in App");
         SayHello sayHello;
         String name = null;
@@ -36,24 +36,24 @@ public class Main {
 
         LOG.trace("name = " + name);
 
-        // A FAIRE : cette méthode vérifie comme précondition que "name"
-        // A FAIRE : n'est pas null. Dans la version anglaise, la précondition
-        // A FAIRE : est vérifiée, mais pas dans la version française. Vérifiez
-        // A FAIRE : que l'exception est bien levée dans ce cas :
+        //  : cette méthode vérifie comme précondition que "name"
+        //  : n'est pas null. Dans la version anglaise, la précondition
+        //  : est vérifiée, mais pas dans la version française. Vérifiez
+        //  : que l'exception est bien levée dans ce cas :
         sayHello.sayItTo(name);
 
         computeAnswer();
     }
 
     private static void computeAnswer() {
-        // A FAIRE : Alice remplace "print" par "println"
+        //  : Alice remplace "print" par "println"
         System.out.print("I'm computing the answer");
 
         System.out.println("I'm thinking");
 
         System.out.println("I'm thinking again ...");
 
-        // A FAIRE : Bob remplace 43 par 42
+        //  : Bob remplace 43 par 42
         System.out.println("The answer is 43");
     }
 }
