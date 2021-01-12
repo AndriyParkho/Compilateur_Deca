@@ -154,6 +154,19 @@ public class DecacCompiler {
     }
     
     /**
+     * Rajoutte une instruction au début du fichier
+     */
+    public void addInstructionBegin(Instruction instruction) {
+    	program.addFirst(instruction);
+    }
+    
+    public void addInstructionBegin(Instruction instruction, String comment) {
+    	program.addFirst(instruction, comment);
+    }
+    
+
+    
+    /**
      * @see 
      * fr.ensimag.ima.pseudocode.IMAProgram#display()
      */
