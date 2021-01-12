@@ -40,6 +40,8 @@ public class CompilerOptions {
     private int debug = 0;
     private boolean parallel = false;
     private boolean printBanner = false;
+    private boolean verification = false;
+    private boolean parse = false;
     private List<File> sourceFiles = new ArrayList<File>();
 
     
@@ -61,10 +63,18 @@ public class CompilerOptions {
 	    		case "-d" : debug ++;
 	    					break;
 	    					
+	    		case "-v" : verification = true;
+	    					break;
+	    		case "-p" : parse = true;
+	    					break;
+	    					
 	    		default : sourceFiles.add(new File(param));
 	    				  break;
 	    		}
 	    		
+	    	}
+	    	if(verification && parse) {
+	    		throw new UnsupportedOperationException("Les options -p et -v ne peuvent être utilisées que séparément");
 	    	}
     	}
     	
@@ -95,7 +105,15 @@ public class CompilerOptions {
       //  throw new UnsupportedOperationException("not yet implemented");
     }
 
-    protected void displayUsage() {
+    public boolean isVerification() {
+		return verification;
+	}
+
+	public boolean isParse() {
+		return parse;
+	}
+
+	protected void displayUsage() {
         throw new UnsupportedOperationException("not yet implemented");
     }
 }

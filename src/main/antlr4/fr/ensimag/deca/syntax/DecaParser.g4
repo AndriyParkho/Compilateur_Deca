@@ -26,13 +26,17 @@ options {
 @header {
     import fr.ensimag.deca.tree.*;
     import java.io.PrintStream;
+    import fr.ensimag.deca.tools.*;
 }
+
 
 @members {
     @Override
     protected AbstractProgram parseProgram() {
         return prog().tree;
     }
+
+    SymbolTable tableSymboles = new SymbolTable();
 }
 
 prog returns[AbstractProgram tree]
@@ -101,7 +105,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
             $tree = new DeclVar(t, $i.tree, initialisation);
             estInitialise = true;
         }
-      )? {if (!(estInitialise=true)) {
+      )? {if (!estInitialise) {
           $tree = new DeclVar(t, $i.tree, noInit);
       }
         setLocation($tree, $i.start);
@@ -122,6 +126,7 @@ list_inst returns[ListInst tree]
 inst returns[AbstractInst tree]
     : e1=expr SEMI {
             assert($e1.tree != null);
+            $tree=$e1.tree;
         }
     | SEMI {
         }
@@ -426,6 +431,7 @@ primary_expr returns[AbstractExpr tree]
 type returns[AbstractIdentifier tree]
     : ident {
             assert($ident.tree != null);
+            $tree = $ident.tree;
         }
     ;
 
@@ -458,6 +464,8 @@ literal returns[AbstractExpr tree]
 
 ident returns[AbstractIdentifier tree]
     : IDENT {
+        $tree=new Identifier(tableSymboles.create($IDENT.text));
+        setLocation($tree, $IDENT);
         }
     ;
 
