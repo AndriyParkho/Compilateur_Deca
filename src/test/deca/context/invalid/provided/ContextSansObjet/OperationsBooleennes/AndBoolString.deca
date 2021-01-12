@@ -1,0 +1,11 @@
+//Description :
+//	Vérification contextuelle de l'opérateur && avec pour entree <boolean, string>
+//
+//Résultats :
+//	Erreur Contextuelle
+//  Ligne 10 : les deux opérateurs doivent être de type boolean
+
+{
+    boolean x = true;
+    boolean y = x && "Hello"";
+}
