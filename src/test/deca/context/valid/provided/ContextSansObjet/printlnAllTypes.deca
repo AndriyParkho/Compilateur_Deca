@@ -11,8 +11,6 @@
 
 {
 	println(3);
-	println(true);
-	println(false);
 	println(3.5);
 	println("Hello, world!");
 }
