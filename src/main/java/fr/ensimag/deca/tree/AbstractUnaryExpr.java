@@ -39,5 +39,33 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         operand.prettyPrint(s, prefix, true);
     }
+    
+
+
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isFloatLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isBooleanLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}
+
+	
 
 }

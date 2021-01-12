@@ -77,6 +77,18 @@ public class TestPlusWithoutMock {
 		public boolean isIdentifier() {
 			return false;
 		}
+
+		@Override
+		public boolean isFloatLiteral() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isBooleanLiteral() {
+			// TODO Auto-generated method stub
+			return false;
+		}
     }
 
     @Test

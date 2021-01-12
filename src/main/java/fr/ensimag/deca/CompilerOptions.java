@@ -48,36 +48,6 @@ public class CompilerOptions {
     public void parseArgs(String[] args) throws CLIException {
         // A FAIRE : parcourir args pour positionner les options correctement.
     	
-    	if(args[0].equals("-b")) {
-    		printBanner = true;
-			if(args.length > 1) {
-				throw new UnsupportedOperationException("L'option -b ne peut s'utiliser que seule");
-			}
-    	}else {
-	    	for(String param : args) { //pour chaque paramètre
-	    		//System.out.println ("PARAMETRES : " + param);
-	    		switch(param){    		
-	    		case "-P" : parallel = true;
-	    					break;
-	    					
-	    		case "-d" : debug ++;
-	    					break;
-	    					
-	    		case "-v" : verification = true;
-	    					break;
-	    		case "-p" : parse = true;
-	    					break;
-	    					
-	    		default : sourceFiles.add(new File(param));
-	    				  break;
-	    		}
-	    		
-	    	}
-	    	if(verification && parse) {
-	    		throw new UnsupportedOperationException("Les options -p et -v ne peuvent être utilisées que séparément");
-	    	}
-    	}
-    	
     	
         Logger logger = Logger.getRootLogger();
         // map command-line debug option to log4j's level.
@@ -101,8 +71,38 @@ public class CompilerOptions {
         } else {
             logger.info("Java assertions disabled");
         }
+        
+        if(args.length != 0 && args[0].equals("-b")) {
+    		printBanner = true;
+			if(args.length > 1) {
+				throw new CLIException("L'option -b ne peut s'utiliser que seule");
+			}
+    	}else {
+	    	for(String param : args) { //pour chaque paramètre
+	    		//System.out.println ("PARAMETRES : " + param);
+	    		switch(param){    		
+	    		case "-P" : parallel = true;
+	    					break;
+	    					
+	    		case "-d" : debug ++;
+	    					break;
+	    					
+	    		case "-v" : verification = true;
+	    					break;
+	    		case "-p" : parse = true;
+	    					break;
+	    					
+	    		default : sourceFiles.add(new File(param));
+	    				  break;
+	    		}
+	    		
+	    	}
+	    	
+	    	if(verification && parse) {
+	    		throw new CLIException("Les options -p et -v ne peuvent être utilisées que séparément");
 
-      //  throw new UnsupportedOperationException("not yet implemented");
+	    	}
+    	}
     }
 
     public boolean isVerification() {
