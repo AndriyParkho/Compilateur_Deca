@@ -3,6 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -14,6 +15,9 @@ import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
@@ -191,6 +195,7 @@ public class Identifier extends AbstractIdentifier {
         //Fait
     	//si le type existe dans l'enveloppe des types, on met à jour l'enrichissement 
     	//sinon, on lève une erreur contextuelle
+        this.name = compiler.getSymbolTable().create(this.name.getName());
     	if(compiler.getEnvTypes().get(this.name)!=null)
     	{
     		//enrichissement def & type
@@ -240,4 +245,20 @@ public class Identifier extends AbstractIdentifier {
         }
     }
 
+	@Override
+	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
+	}
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isIdentifier() {
+		return true;
+	}
+
+	
 }

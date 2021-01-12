@@ -7,6 +7,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.FloatType;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -62,4 +64,22 @@ public class FloatLiteral extends AbstractExpr {
         // leaf node => nothing to do
     }
 
+	@Override
+	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		// A FAIRE
+		throw new UnsupportedOperationException("not yet implemented");
+		
+	}
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}
+
+	
 }

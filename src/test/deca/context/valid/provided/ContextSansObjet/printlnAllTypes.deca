@@ -2,23 +2,15 @@
 //  variable sans définition / déclaration
 //
 //Résultat:
-//8
-//15
-//a<b
-//faux
+//  3
+//  true
+//  false
+//  3.5
+//  Hello, world!
 
 
 {
-	int a=3;
-	int b=5;
-	println(a+b);
-	println(a*b);
-	float b=2.0;
-	if(a<b){println("a<b");}
-	boolean b1=false;
-	boolean b2=true;
-	if(b1&&b2)
-  		{println("vrai");}
-	else
-  		{println("faux");}
+	println(3);
+	println(3.5);
+	println("Hello, world!");
 }

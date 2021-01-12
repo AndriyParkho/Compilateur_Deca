@@ -1,5 +1,7 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.GPRegister;
 
 /**
  *
@@ -16,6 +18,27 @@ public class Equals extends AbstractOpExactCmp {
     @Override
     protected String getOperatorName() {
         return "==";
-    }    
-    
+    }
+
+
+	@Override
+	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		// A FAIRE
+		throw new UnsupportedOperationException("not yet implemented");
+		
+	}
+
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}    
+
+	
 }

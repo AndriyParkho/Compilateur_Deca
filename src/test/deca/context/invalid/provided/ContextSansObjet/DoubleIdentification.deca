@@ -6,6 +6,6 @@
 // 	Ligne 10 : throws DoubleDefException
 
 {
-	int x;
-	int x;
+	int x = 3;
+	int x = 0;
 }
