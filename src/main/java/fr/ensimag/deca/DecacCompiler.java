@@ -96,6 +96,7 @@ public class DecacCompiler {
         this.symbolTable = new SymbolTable();
         this.envTypes= new HashMap<>();
         this.envTypesInit();
+        this.nombreRegistres = compilerOptions.getNombreRegistreMax();
     }
 
     /**
@@ -176,7 +177,17 @@ public class DecacCompiler {
     
     private final CompilerOptions compilerOptions;
     private final File source;
-    /**
+    
+    /*
+     * Nombre de registres disponibles
+     */
+    private int nombreRegistres;
+    
+    
+    public int getNombreRegistres() {
+		return nombreRegistres;
+	}
+	/**
      * The main program. Every instruction generated will eventually end up here.
      */
     private final IMAProgram program = new IMAProgram();
@@ -235,6 +246,7 @@ public class DecacCompiler {
     private boolean doCompile(String sourceName, String destName,
             PrintStream out, PrintStream err)
             throws DecacFatalError, LocationException {
+    	LOG.info("Nombre de registres : " + nombreRegistres);
         AbstractProgram prog = doLexingAndParsing(sourceName, err); //etape A
 
         if (prog == null) {

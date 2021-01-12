@@ -172,7 +172,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      */
     protected void codeGenPrint(DecacCompiler compiler) {
-    	//A FAIRE : traiter codeGenPrint pour les autres types que des chaînes de caractère
+    	//FAIT : traiter codeGenPrint pour les autres types que des chaînes de caractère
     	if(type.isString()) {
     		StringLiteral newThis= (StringLiteral) this;
     	
