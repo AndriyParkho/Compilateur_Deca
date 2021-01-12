@@ -23,7 +23,7 @@ public class StringType extends Type {
     @Override
     public boolean sameType(Type otherType) {
         //Fait
-    	return this.isString();
+    	return otherType.isString();
     }
 
 

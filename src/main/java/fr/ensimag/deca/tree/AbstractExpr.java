@@ -92,15 +92,14 @@ public abstract class AbstractExpr extends AbstractInst {
             EnvironmentExp localEnv, ClassDefinition currentClass, 
             Type expectedType)
             throws ContextualError {
-        //throw new UnsupportedOperationException("not yet implemented");
     	Type typeReel;
     	try {
     		typeReel=this.verifyExpr(compiler, localEnv , currentClass);
     	} catch(ContextualError ce) { throw ce;}
     	//on vérifie d'abord s'il s'agit d'une classe
-    	if(typeReel.isClass())
+		if(typeReel.isClass())
     	{
-    		if(expectedType.isClass())
+			if(expectedType.isClass())
         	{
         		ClassType classRelle= (ClassType) typeReel;
         		ClassType classAttendue= (ClassType) expectedType;
@@ -113,7 +112,7 @@ public abstract class AbstractExpr extends AbstractInst {
     		}
     	}
     	//sinon, pour deux types différents , une seul possibilité: float=int
-    	else if(!typeReel.sameType(expectedType))
+		else if(!typeReel.sameType(expectedType))
     	{
     		if(typeReel.isInt() && expectedType.isFloat())
     		{
