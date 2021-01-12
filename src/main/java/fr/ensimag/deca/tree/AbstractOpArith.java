@@ -20,7 +20,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
  * @author gl10
  * @date 01/01/2021
  */
-public abstract class 	AbstractOpArith extends AbstractBinaryExpr {
+public abstract class AbstractOpArith extends AbstractBinaryExpr {
 
     public AbstractOpArith(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
@@ -36,11 +36,10 @@ public abstract class 	AbstractOpArith extends AbstractBinaryExpr {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
     		typeDroite=this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
     	} catch (ContextualError ce) {throw ce;}
-    	System.out.println(typeDroite.toString() + " " +typeGauche.toString());
     	//il faut ensuite s'assurer que les deux opérateurs sont numériques(int or float)
     	if(((!typeGauche.isInt())&&(!typeGauche.isFloat()))||((!typeDroite.isInt())&&(!typeDroite.isFloat())))
     	{
-    		throw new ContextualError("les opérateurs doivent ètre de type numérique (int ou float)",this.getLocation());
+    		throw new ContextualError("les opérateurs doivent être de type numérique (int ou float)",this.getLocation());
     	}
     	//reste à vérifier s'il y a des conversions int/float à faire
     	else if(!typeGauche.sameType(typeDroite))
