@@ -105,7 +105,7 @@ decl_var[AbstractIdentifier t] returns[AbstractDeclVar tree]
             $tree = new DeclVar(t, $i.tree, initialisation);
             estInitialise = true;
         }
-      )? {if (!(estInitialise=true)) {
+      )? {if (!estInitialise) {
           $tree = new DeclVar(t, $i.tree, noInit);
       }
         setLocation($tree, $i.start);
@@ -126,6 +126,7 @@ list_inst returns[ListInst tree]
 inst returns[AbstractInst tree]
     : e1=expr SEMI {
             assert($e1.tree != null);
+            $tree=$e1.tree;
         }
     | SEMI {
         }

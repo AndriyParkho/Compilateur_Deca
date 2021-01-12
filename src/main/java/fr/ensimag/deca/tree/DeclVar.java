@@ -89,7 +89,7 @@ public class DeclVar extends AbstractDeclVar {
     protected void codeGenDeclVar(DecacCompiler compiler) {
     	compiler.incrCountVar();
     	DAddr varOperand = new RegisterOffset(compiler.getCountVar(), Register.GB);
-    	VariableDefinition varDef = (VariableDefinition) varName.getDefinition();
+    	VariableDefinition varDef = varName.getVariableDefinition();
     	varDef.setOperand(varOperand);
     	if(initialization.isInitialization()) {
     		Initialization init = (Initialization) initialization;
