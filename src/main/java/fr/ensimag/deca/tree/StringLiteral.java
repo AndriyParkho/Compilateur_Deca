@@ -81,6 +81,16 @@ public class StringLiteral extends AbstractStringLiteral {
 	}
 
 	@Override
+	public boolean isFloatLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isBooleanLiteral() {
+		return false;
+	}
+
+	@Override
 	public boolean isIdentifier() {
 		return false;
 	}

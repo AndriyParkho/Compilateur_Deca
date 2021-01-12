@@ -202,9 +202,14 @@ public abstract class AbstractExpr extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        this.codeGenExpr(compiler, Register.getR(2));
     }
     
+    /**
+     * Fonction ajouté par nous pour pouvoir générer le code des expressions
+     * @param compiler
+     * @param op
+     */
     protected abstract void codeGenExpr(DecacCompiler compiler, GPRegister op);
     
 
@@ -225,7 +230,23 @@ public abstract class AbstractExpr extends AbstractInst {
         }
     }
     
+    /*
+     * Fonction pour savoir si l'expression est un IntLiteral afin d'éviter les instanceOf
+     */
     public abstract boolean isIntLiteral();
     
+    /*
+     * Fonction pour savoir si l'expression est un FloatLiteral afin d'éviter les instanceOf
+     */
+    public abstract boolean isFloatLiteral();
+    
+    /*
+     * Fonction pour savoir si l'expression est un FloatLiteral afin d'éviter les instanceOf
+     */
+    public abstract boolean isBooleanLiteral();
+    
+    /*
+     * Fonction pour savoir si l'expression est un Identifier afin d'éviter les instanceOf
+     */
     public abstract boolean isIdentifier();
 }

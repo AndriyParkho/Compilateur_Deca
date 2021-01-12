@@ -39,12 +39,6 @@ public class IntLiteral extends AbstractExpr {
     	this.setType(type);
     	return type;
     }
-    
-    @Override
-    public void codeGenInst(DecacCompiler compiler) {
-    	compiler.addInstruction(new LOAD(value, Register.getR(2))); //R2 POUR L'INSTANT
-    }
-
 
     @Override
     String prettyPrintNode() {
@@ -74,6 +68,16 @@ public class IntLiteral extends AbstractExpr {
 	@Override
 	public boolean isIntLiteral() {
 		return true;
+	}
+
+	@Override
+	public boolean isFloatLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isBooleanLiteral() {
+		return false;
 	}
 
 	@Override

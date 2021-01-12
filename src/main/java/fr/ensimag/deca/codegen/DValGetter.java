@@ -1,9 +1,11 @@
 package fr.ensimag.deca.codegen;
 
 import fr.ensimag.deca.tree.AbstractExpr;
+import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.Identifier;
 import fr.ensimag.deca.tree.IntLiteral;
 import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 
 public class DValGetter {
@@ -16,6 +18,9 @@ public class DValGetter {
 		} else if(e.isIdentifier()) {
 			Identifier identifierExpr = (Identifier) e;
 			return identifierExpr.getVariableDefinition().getOperand();
+		} else if(e.isFloatLiteral()){
+			FloatLiteral floatExpr = (FloatLiteral) e;
+			return new ImmediateFloat(floatExpr.getValue());
 		} else {
 			return null;
 		}

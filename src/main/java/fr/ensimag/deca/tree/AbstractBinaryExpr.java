@@ -71,4 +71,24 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
         rightOperand.prettyPrint(s, prefix, true);
     }
     
+    @Override
+	public boolean isFloatLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isBooleanLiteral() {
+		return false;
+	}
+
+	@Override
+	public boolean isIntLiteral() {
+		return false;
+	}
+
+
+	@Override
+	public boolean isIdentifier() {
+		return false;
+	}
 }
