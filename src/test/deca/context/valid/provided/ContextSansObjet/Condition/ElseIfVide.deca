@@ -1,0 +1,13 @@
+//Description:
+//  corps else if sans instruction
+//
+//Résultat:
+// ok
+{
+if(false)
+{
+    print("bizarre!!");
+}
+else if (true){
+}
+}

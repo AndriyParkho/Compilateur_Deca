@@ -1,0 +1,12 @@
+//Description:
+//  Déclaration d'une variable dans un if atteint
+//
+//Résultat:
+//  ok
+{
+if(true)
+{
+    int x;
+}
+x=3;
+}

@@ -1,0 +1,15 @@
+//Description:
+//  Déclaration d'une variable dans un if et un else atteints
+//
+//Résultat:
+//  ok
+{
+if(true)
+{
+    int x;
+}
+else{
+    int x;
+}
+x=3;
+}

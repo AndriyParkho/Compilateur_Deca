@@ -1,0 +1,13 @@
+//Description:
+//  Déclaration d'une variable non atteinte
+//
+//Résultat:
+//  Erreur syntaxique
+//  ligne
+{
+if(false)
+{
+    int x;
+}
+x=3;
+}
