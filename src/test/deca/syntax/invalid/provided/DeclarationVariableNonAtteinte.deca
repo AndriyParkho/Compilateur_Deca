@@ -3,7 +3,7 @@
 //
 //Résultat:
 //  Erreur syntaxique
-//  ligne
+//  ligne 12
 {
 if(false)
 {
