@@ -1,0 +1,11 @@
+// Description:
+//    tests de déclaration de float
+//
+// Resultats:
+//    rien
+
+{
+   float x = 1; 
+   float y = 3;
+}
+

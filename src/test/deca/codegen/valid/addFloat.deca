@@ -1,0 +1,12 @@
+// Description:
+//    test de déclaration de variable en additionant 2 float, 1 float et 1 Var, et 2 Var
+//
+// Resultats:
+//    rien
+
+{
+   float x = 1.5 + 3.2;
+   float y = x + 2.4;
+   float z = x + y;
+}
+
