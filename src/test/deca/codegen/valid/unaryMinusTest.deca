@@ -1,0 +1,12 @@
+// Description:
+//    tests de déclaration d'une variable par la négation d'une autre
+//
+// Resultats:
+//    -1
+
+{
+   int x = 1;
+   int y = -x;
+   println(y);
+}
+
