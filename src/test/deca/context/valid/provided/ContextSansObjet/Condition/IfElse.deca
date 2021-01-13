@@ -4,6 +4,7 @@
 //Résultat:
 //la condition est fausse
 //
+{
 boolean bool=false;
 if(bool)
 {
@@ -12,4 +13,5 @@ println("la condition est bonne");
 else
 {
 println("la condition est fausse");
+}
 }
