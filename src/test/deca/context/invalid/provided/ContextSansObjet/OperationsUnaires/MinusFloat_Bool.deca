@@ -1,0 +1,9 @@
+//Description:
+//  Vérification contextuelle du type de sortie non float de l'opérateur unaire -
+//Résultat:
+//  Erreur contextuelle
+//  ligne 8 : type incompatible
+
+{
+   boolean x = -3.0;
+}
