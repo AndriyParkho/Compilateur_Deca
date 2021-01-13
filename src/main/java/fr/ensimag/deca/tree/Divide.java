@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.instructions.DIV;
 import fr.ensimag.ima.pseudocode.instructions.QUO;
 
 /**
@@ -25,8 +26,14 @@ public class Divide extends AbstractOpArith {
 
 	@Override
 	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		// A FAIRE : Pour l'instant que les int sont Séparer les Float et Int
-		return new QUO(op1, op2);
+		// FAIT
+		if(super.getType().isInt()) {
+			return new QUO(op1, op2);
+		} else if(super.getType().isFloat()) {
+			return new DIV(op1, op2);
+		} else {
+			throw new UnsupportedOperationException("Not supposed to be called");
+		}
 	}
 
 }

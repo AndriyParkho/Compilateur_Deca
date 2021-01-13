@@ -1,10 +1,13 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -51,8 +54,7 @@ public class Assign extends AbstractBinaryExpr {
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
+		getRightOperand().codeGenExpr(compiler, op);
+		compiler.addInstruction(new STORE(op, (DAddr) DValGetter.getDVal(getLeftOperand())));
 	}
 }

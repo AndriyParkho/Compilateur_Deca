@@ -9,9 +9,12 @@ import fr.ensimag.deca.tree.AbstractProgram;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -182,11 +185,19 @@ public class DecacCompiler {
      * Nombre de registres disponibles
      */
     private int nombreRegistres;
-    
-    
+    /*
+     * Premier registre où on stock le résultat des instructions 
+     */
+    private GPRegister registerStart = Register.getR(2);
+        
     public int getNombreRegistres() {
 		return nombreRegistres;
 	}
+    
+    public GPRegister getRegisterStart() {
+    	return registerStart;
+    }
+    
 	/**
      * The main program. Every instruction generated will eventually end up here.
      */

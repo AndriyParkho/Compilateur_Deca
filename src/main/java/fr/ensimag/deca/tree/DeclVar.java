@@ -95,7 +95,7 @@ public class DeclVar extends AbstractDeclVar {
     	if(initialization.isInitialization()) {
     		Initialization init = (Initialization) initialization;
     		init.getExpression().codeGenInst(compiler);
-    		compiler.addInstruction(new STORE(Register.getR(2), varOperand));
+    		compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     	}
     }
 }

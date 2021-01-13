@@ -76,14 +76,14 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     		getLeftOperand().codeGenExpr(compiler, op);
     		compiler.addInstruction(this.getMnemo(rightDVal, op));
     	} else {
-    		if(n == 15) {
+    		if(n == compiler.getNombreRegistres()) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
     			getRightOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
     			compiler.addInstruction(this.getMnemo(Register.R0, op));
-    		} else if(n < 15) {
+    		} else if(n < compiler.getNombreRegistres()) {
     			GPRegister nextOp = Register.getR(op.getNumber() + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
