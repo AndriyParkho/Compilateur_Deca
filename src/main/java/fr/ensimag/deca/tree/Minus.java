@@ -27,12 +27,5 @@ public class Minus extends AbstractOpArith {
 		return new SUB(op1, op2);
 	}
 
-
-	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
-	}
 	
 }

@@ -1,0 +1,10 @@
+// Description:
+//    tests de déclaration d'un entier par addition de deux entiers
+//
+// Resultats:
+//    rien
+
+{
+   int x = 1 + 1;
+}
+

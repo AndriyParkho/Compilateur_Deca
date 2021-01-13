@@ -1,0 +1,11 @@
+// Description:
+//    tests de déclaration de booléen
+//
+// Resultats:
+//    rien
+
+{
+   boolean x = true;
+   boolean y = false;
+}
+
