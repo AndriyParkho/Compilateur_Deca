@@ -1,0 +1,14 @@
+//description:
+// test de la structure ifThenElse
+//
+//Résultat:
+//1
+//2
+//3
+//
+int i=0;
+while(i<3)
+{
+i=i+1;
+println(i);
+}
