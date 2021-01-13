@@ -1,6 +1,10 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -36,5 +40,13 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     	this.setType(typeDroite);
     	return typeDroite;
     }
+    
+    protected void codeGenExpr(DecacCompiler compiler, GPRegister R) {
+    	//A FAIRE : generation de code pour un opérateur booléen
+    	throw new UnsupportedOperationException("not yet implemented");
+    }
+    
+    protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
+    
 
 }

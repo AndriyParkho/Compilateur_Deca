@@ -1,10 +1,14 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Instruction;
 
 import java.util.Objects;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -78,5 +82,14 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	
     }
     
-
+    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+    	DVal rightDval = DValGetter.getDVal(getLeftOperand());
+    	int numeroRegistre = op.getNumber();
+    	if(rightDval != null) {
+    		getLeftOperand().codeGenExpr(compiler, op);
+    		compiler.addInstruction(this.getMnemo(rightDval, op));
+    	}
+    }
+    
+    protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
 }
