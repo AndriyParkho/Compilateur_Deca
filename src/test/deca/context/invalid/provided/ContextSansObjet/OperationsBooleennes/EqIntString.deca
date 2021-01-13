@@ -3,9 +3,8 @@
 //
 //Résultat:
 //  Erreur contextuelle
-//  ligne 10 : types non compatibles pour faire la comparaison
+//  ligne 9 : types non compatibles pour faire la comparaison
 {
     int x = 1;
-    string y = "1";
-    x == y ;
+    x == "1" ;
 }

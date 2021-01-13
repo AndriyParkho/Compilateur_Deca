@@ -1,11 +1,11 @@
 //Description :
-//	Vérification contextuelle de la sortie de l'opérateur && (différente de string)
+//	Vérification contextuelle de la sortie de l'opérateur && (différente de string). Si le résultat générait un string il serait affichable.
 //
 //Résultats :
 //	Erreur Contextuelle
-//  Ligne 10 : type incompatible
+//  Ligne 10 : type non affichable(les types qu'on peut afficher sont int,float et string)
 
 {
     boolean x = true;
-    string y = x && false;
+    println(x && false);
 }

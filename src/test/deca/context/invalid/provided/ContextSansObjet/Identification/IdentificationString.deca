@@ -2,10 +2,10 @@
 //	identification de variables string et affectations de valeurs
 //
 //Résultats :
-//	ok 
+//	Erreur contextuelle
+//  Ligne 10 : une variable ne peut pas être du type string
 
 
 {
-	string y = "";
-	string z = "Hello";
+	string y = "Hello";
 }

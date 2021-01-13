@@ -2,8 +2,7 @@
 //	Vérification contextuelle de l'opérateur - avec des variables string
 //
 //Résultats :
-//	ligne 8 : les opérateurs doivent ètre de type numérique (int ou float)
+//	ligne 7 : les opérateurs doivent ètre de type numérique (int ou float)
 {
-    string x = "Hello, ";
-    string y = "world" - 3;
+    "world" - 3;
 }

@@ -7,6 +7,5 @@
 {
     int x;
     float y;
-    string s;
     boolean a;
 }

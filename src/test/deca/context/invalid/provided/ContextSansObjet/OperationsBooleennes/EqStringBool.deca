@@ -6,6 +6,5 @@
 //  ligne 10 : types non compatibles pour faire la comparaison
 {
     boolean x = true;
-    string y = "true";
-    x == y ;
+    x == "true" ;
 }

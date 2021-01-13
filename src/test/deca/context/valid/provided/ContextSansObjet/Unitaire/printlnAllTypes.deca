@@ -1,10 +1,8 @@
 //Description:
-//  variable sans définition / déclaration
+//  affichage de tous les types affichables
 //
 //Résultat:
 //  3
-//  true
-//  false
 //  3.5
 //  Hello, world!
 
