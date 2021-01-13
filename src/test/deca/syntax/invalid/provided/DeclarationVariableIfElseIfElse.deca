@@ -2,7 +2,8 @@
 //  Déclaration d'une variable dans un if et un else atteints
 //
 //Résultat:
-//  ok
+//  Erreur syntaxique
+//  ligne 13
 {
 if(true)
 {
