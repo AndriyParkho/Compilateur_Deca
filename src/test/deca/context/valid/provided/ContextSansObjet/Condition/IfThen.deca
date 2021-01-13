@@ -1,0 +1,17 @@
+//description:
+// test de la structure ifThenElse
+//
+//Résultat:
+//la condition est bonne
+//
+{
+boolean bool=true;
+if(bool)
+{
+println("la condition est bonne");
+}
+else
+{
+println("la condition est fausse");
+}
+}
