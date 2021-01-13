@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.instructions.SEQ;
 
 /**
  *
@@ -24,9 +25,8 @@ public class Equals extends AbstractOpExactCmp {
 
 
 	@Override
-	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-	//A FAIRE
-	throw new UnsupportedOperationException("not yet implemented");
+	protected Instruction getMnemo(GPRegister op) {
+		return new SEQ(op);
 	}
 
 

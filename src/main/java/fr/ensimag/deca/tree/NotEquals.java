@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.instructions.SNE;
 
 /**
  *
@@ -24,16 +25,9 @@ public class NotEquals extends AbstractOpExactCmp {
 
 
 	@Override
-	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		// A FAIRE
-		return null;
+	protected Instruction getMnemo(GPRegister op) {
+		return new SNE(op);
 	}
 
-    /*
-	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		//throw new UnsupportedOperationException("not yet implemented");
-		
-	}*/
+
 }

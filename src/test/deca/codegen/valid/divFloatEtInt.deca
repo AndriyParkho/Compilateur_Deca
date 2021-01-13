@@ -2,11 +2,12 @@
 //    tests de déclaration de variable par des divisions entière ou flotante
 //
 // Resultats:
-//    rien
+//    0.0
 
 {
    int x = 5 / 6;
    float y = 1 / 2;
    float z = y / x;
+   println(z);
 }
 

@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.instructions.SLE;
 
 /**
  *
@@ -21,18 +22,8 @@ public class LowerOrEqual extends AbstractOpIneq {
         return "<=";
     }
 
-
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
-	}
-
-
-	@Override
-	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		// A FAIRE
-		return null;
+	protected Instruction getMnemo(GPRegister op) {
+		return new SLE(op);
 	}
 }
