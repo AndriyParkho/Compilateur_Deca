@@ -179,15 +179,12 @@ public abstract class AbstractExpr extends AbstractInst {
     		compiler.addInstruction(new WSTR(newThis.getValue()));
     	}
     	else if(type.isFloat()) {
-    		
-    		FloatLiteral newThis = (FloatLiteral) this;
-    		compiler.addInstruction(new LOAD(new ImmediateFloat(newThis.getValue()), Register.R1));
+    		this.codeGenExpr(compiler, Register.R1);
     		compiler.addInstruction(new WFLOAT());
     	}
     	
     	else if(type.isInt()) {
-    		IntLiteral newThis = (IntLiteral) this;
-    		compiler.addInstruction(new LOAD(new ImmediateInteger(newThis.getValue()), Register.R1));
+    		this.codeGenExpr(compiler, Register.R1);
     		compiler.addInstruction(new WINT());
     	}
     	
