@@ -1,7 +1,9 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Instruction;
 
 /**
  *
@@ -20,9 +22,10 @@ public class And extends AbstractOpBool {
     }
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
+	protected Instruction getMnemo(DVal op1, GPRegister op2) {
+		//A FAIRE : générer code pour ADD
 		throw new UnsupportedOperationException("not yet implemented");
-		
 	}
+
+
 }

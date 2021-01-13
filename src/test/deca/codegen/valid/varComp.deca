@@ -1,0 +1,12 @@
+// Description:
+//    tests de déclaration de booléen
+//
+// Resultats:
+//    rien
+
+{
+   int x = 2;
+   int y = 4;
+   (x!=x) == (y!=y);
+}
+
