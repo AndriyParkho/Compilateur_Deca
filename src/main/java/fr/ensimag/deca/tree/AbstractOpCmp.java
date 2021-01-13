@@ -4,6 +4,8 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 
 import java.util.Objects;
 
@@ -87,7 +89,14 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	int numeroRegistre = op.getNumber();
     	if(rightDval != null) {
     		getLeftOperand().codeGenExpr(compiler, op);
-    		compiler.addInstruction(this.getMnemo(rightDval, op));
+    		compiler.addInstruction(new CMP(rightDval, op), getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
+    	}else {
+    		if(numeroRegistre < 15) {
+    			GPRegister nextOp = Register.getR(op.getNumber() + 1);
+    			getLeftOperand().codeGenExpr(compiler, op);
+    			getRightOperand().codeGenExpr(compiler, nextOp);
+    			compiler.addInstruction(new CMP(nextOp, op));
+    		}
     	}
     }
     
