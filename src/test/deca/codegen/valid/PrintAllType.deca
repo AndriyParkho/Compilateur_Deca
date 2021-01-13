@@ -1,0 +1,16 @@
+// Description:
+//    tests d'affichage de variable et différente cst
+//
+// Resultats:
+//    rien
+
+{
+   int x = 5;
+   float y = 10.6;
+   println(3.2);
+   println(1);
+   println("Chaine de caractère");
+   println(x);
+   println(x*y);
+}
+
