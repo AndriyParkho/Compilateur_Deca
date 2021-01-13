@@ -1,0 +1,10 @@
+//Description:
+//  corps if sans instruction
+//
+//Résultat:
+// ok
+{
+if(true)
+{
+}
+}

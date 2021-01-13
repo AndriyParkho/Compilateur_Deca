@@ -1,0 +1,15 @@
+//Description:
+//  condition booléenne dans else if
+//
+//Résultat:
+// ok
+{
+if(false)
+{
+    print("bizarre!!");
+}
+else if (true)
+{
+    print("ok");
+}
+}
