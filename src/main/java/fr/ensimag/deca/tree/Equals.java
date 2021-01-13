@@ -26,6 +26,7 @@ public class Equals extends AbstractOpExactCmp {
 	@Override
 	protected Instruction getMnemo(DVal op1, GPRegister op2) {
 	//A FAIRE
+	throw new UnsupportedOperationException("not yet implemented");
 	}
 
 
