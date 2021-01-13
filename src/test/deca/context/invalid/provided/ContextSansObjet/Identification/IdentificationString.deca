@@ -3,7 +3,7 @@
 //
 //Résultats :
 //	Erreur contextuelle
-//  Ligne 10 : une variable ne peut pas être du type string
+//  Ligne 10 : type non défini
 
 
 {
