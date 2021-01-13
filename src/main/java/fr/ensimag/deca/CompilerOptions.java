@@ -47,35 +47,10 @@ public class CompilerOptions {
 
     
     public void parseArgs(String[] args) throws CLIException {
-        // A FAIRE : -R, -n
-    	//FAIT : -b, -d, -p, -v
+        // A FAIRE :-n
+    	//FAIT : -b, -d, -p, -v, -r
     	
-    	
-        Logger logger = Logger.getRootLogger();
-        // map command-line debug option to log4j's level.
-        switch (getDebug()) {
-        
-        case QUIET: break; // keep default
-        case INFO:
-            logger.setLevel(Level.INFO); break;
-        case DEBUG:
-            logger.setLevel(Level.DEBUG); break;
-        case TRACE:
-            logger.setLevel(Level.TRACE); break;
-        default:
-            logger.setLevel(Level.ALL); break;
-        }
-        logger.info("Application-wide trace level set to " + logger.getLevel());
-
-        boolean assertsEnabled = false;
-        assert assertsEnabled = true; // Intentional side effect!!!
-        if (assertsEnabled) {
-            logger.info("Java assertions enabled");
-        } else {
-            logger.info("Java assertions disabled");
-        }
-        
-        if(args.length != 0 && args[0].equals("-b")) {
+    	if(args.length != 0 && args[0].equals("-b")) {
     		printBanner = true;
 			if(args.length > 1) {
 				throw new CLIException("L'option -b ne peut s'utiliser que seule");
@@ -123,6 +98,33 @@ public class CompilerOptions {
 	    		throw new CLIException("Les nomnbre de registres disponibles doit être compris entre 4 et 16");
 	    	}
     	}
+    	
+    	
+        Logger logger = Logger.getRootLogger();
+        // map command-line debug option to log4j's level.
+        switch (getDebug()) {
+        
+        case QUIET: break; // keep default
+        case INFO:
+            logger.setLevel(Level.INFO); break;
+        case DEBUG:
+            logger.setLevel(Level.DEBUG); break;
+        case TRACE:
+            logger.setLevel(Level.TRACE); break;
+        default:
+            logger.setLevel(Level.ALL); break;
+        }
+        logger.info("Application-wide trace level set to " + logger.getLevel());
+
+        boolean assertsEnabled = false;
+        assert assertsEnabled = true; // Intentional side effect!!!
+        if (assertsEnabled) {
+            logger.info("Java assertions enabled");
+        } else {
+            logger.info("Java assertions disabled");
+        }
+        
+        
     }
 
     public int getNombreRegistreMax() {
