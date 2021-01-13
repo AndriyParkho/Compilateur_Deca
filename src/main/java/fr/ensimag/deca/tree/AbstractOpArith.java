@@ -39,7 +39,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     	//il faut ensuite s'assurer que les deux opérateurs sont numériques(int or float)
     	if(((!typeGauche.isInt())&&(!typeGauche.isFloat()))||((!typeDroite.isInt())&&(!typeDroite.isFloat())))
     	{
-    		throw new ContextualError("les opérateurs doivent ètre de type numérique (int ou float)",this.getLocation());
+    		throw new ContextualError("les opérateurs doivent être de type numérique (int ou float)",this.getLocation());
     	}
     	//reste à vérifier s'il y a des conversions int/float à faire
     	else if(!typeGauche.sameType(typeDroite))
@@ -50,6 +50,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			typeGauche= gaucheConv.verifyExpr(compiler, localEnv, currentClass);
     			gaucheConv.setType(typeGauche);
     			this.setLeftOperand(gaucheConv);
+				this.setType(typeGauche);
     			return typeGauche;
     		}
     		else
@@ -58,11 +59,13 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			typeDroite= droiteConv.verifyExpr(compiler, localEnv, currentClass);
     			droiteConv.setType(typeDroite);
     			this.setRightOperand(droiteConv);
+				this.setType(typeDroite);
     			return typeDroite;
     		}
     	}
     	else //c à d on a le mème type pour les deux opérateurs.
-    		return typeDroite;
+    		this.setType(typeDroite);
+			return typeDroite;
     }
     
     @Override

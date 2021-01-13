@@ -27,11 +27,4 @@ public class Plus extends AbstractOpArith {
 		return new ADD(op1, op2); 
 	}
 
-
-	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
-	}
 }

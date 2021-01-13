@@ -1,0 +1,11 @@
+// Description:
+//    tests de déclaration d'un entier par addition d'un entier et d'une variable
+//
+// Resultats:
+//    rien
+
+{
+   int x = 1;
+   int y = 1 + x;
+}
+

@@ -1,0 +1,12 @@
+// Description:
+//    tests de déclaration d'un entier par addition de deux variables
+//
+// Resultats:
+//    rien
+
+{
+   int x = 1;
+   int y = 3;
+   int z = x + y;
+}
+

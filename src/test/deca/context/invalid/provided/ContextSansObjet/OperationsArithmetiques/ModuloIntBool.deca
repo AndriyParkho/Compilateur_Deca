@@ -1,0 +1,10 @@
+//Description :
+//	Vérification contextuelle de l'opérateur % avec pour entrée <int, boolean>
+//
+//Résultats :
+//  Erreur contextuelle
+//	ligne 9 : type incompatible
+
+{
+    int x = 1%true;
+}
