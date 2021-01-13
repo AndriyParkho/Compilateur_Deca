@@ -6,6 +6,9 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 
 import java.util.Objects;
 
@@ -89,16 +92,27 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	int numeroRegistre = op.getNumber();
     	if(rightDval != null) {
     		getLeftOperand().codeGenExpr(compiler, op);
-    		compiler.addInstruction(new CMP(rightDval, op), getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
+    		compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
+    		compiler.addInstruction(this.getMnemo(op));
     	}else {
-    		if(numeroRegistre < 15) {
+    		if(numeroRegistre == compiler.getNombreRegistres()) {
+    			getLeftOperand().codeGenExpr(compiler, op);
+    			compiler.addInstruction(new PUSH(op));
+    			getRightOperand().codeGenExpr(compiler, op);
+    			compiler.addInstruction(new LOAD(op, Register.R0));
+    			compiler.addInstruction(new POP(op));
+    			compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName());
+    			compiler.addInstruction(this.getMnemo(op));
+    			
+    		} else if(numeroRegistre < compiler.getNombreRegistres()) {
     			GPRegister nextOp = Register.getR(op.getNumber() + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
-    			getRightOperand().codeGenExpr(compiler, nextOp);
-    			compiler.addInstruction(new CMP(nextOp, op));
+        		getRightOperand().codeGenExpr(compiler, nextOp);
+        		compiler.addInstruction(new CMP(nextOp, op), "Afin de tester "+getOperatorName());
+        		compiler.addInstruction(this.getMnemo(op));
     		}
     	}
     }
     
-    protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
+    protected abstract Instruction getMnemo(GPRegister op);
 }

@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.instructions.SGE;
 
 /**
  * Operator "x >= y"
@@ -25,16 +26,7 @@ public class GreaterOrEqual extends AbstractOpIneq {
 
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
-	}
-
-
-	@Override
-	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Instruction getMnemo(GPRegister op) {
+		return new SGE(op);
 	}
 }
