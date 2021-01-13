@@ -47,10 +47,6 @@ public class DeclVar extends AbstractDeclVar {
     	{
     		throw new ContextualError("une variable ne peut pas être de type void",this.getLocation());
     	}
-        else if(typeVar.isString())
-        {
-            throw new ContextualError("une variable ne peut pas être de type string",this.getLocation());
-        }
     	//on peut alors définir cette variable, la déclarer et l'initialiser dans l'envoronnement local
     	try {
     		VariableDefinition defVar= new VariableDefinition(typeVar,this.varName.getLocation());

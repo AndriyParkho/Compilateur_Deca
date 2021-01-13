@@ -28,7 +28,6 @@ import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.FloatType;
 import fr.ensimag.deca.context.BooleanType;
 import fr.ensimag.deca.context.IntType;
-import fr.ensimag.deca.context.StringType;
 import fr.ensimag.deca.context.VoidType;
 import java.util.*;
 
@@ -81,18 +80,15 @@ public class DecacCompiler {
 	   Symbol floatSymbol=this.symbolTable.create("float");
 	   Symbol boolSymbol=this.symbolTable.create("boolean");
 	   Symbol voidSymbol=this.symbolTable.create("void");
-       Symbol stringSymbol=this.symbolTable.create("string");
 	   //Symbol objectSymbol=this.symbolTable.create("Object");
 	   TypeDefinition intTypeDef= new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
 	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
 	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
 	   TypeDefinition voidTypeDef= new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
-       TypeDefinition stringTypeDef= new TypeDefinition(new StringType(stringSymbol),Location.BUILTIN);
 	   this.envTypes.put(intSymbol, intTypeDef);
 	   this.envTypes.put(floatSymbol, floatTypeDef);
 	   this.envTypes.put(boolSymbol, boolTypeDef);
 	   this.envTypes.put(voidSymbol, voidTypeDef);
-       this.envTypes.put(stringSymbol, stringTypeDef);
    }
    
    
