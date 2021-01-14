@@ -179,6 +179,7 @@ public class Identifier extends AbstractIdentifier {
     	if(localEnv.get(this.name)!=null)
     	{
     		this.setDefinition(localEnv.get(this.name));
+    		this.setLocation(this.definition.getLocation());
     		this.setType(localEnv.get(this.name).getType());
     		return localEnv.get(this.name).getType();
     	}
