@@ -245,7 +245,7 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     public abstract boolean isIdentifier();
     
-    protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+    protected Label codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label labelCible) {
     	throw new jumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());
     }
 
