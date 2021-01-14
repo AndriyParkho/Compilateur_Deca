@@ -69,8 +69,8 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	}
     	else   //les deux types sont identiques
     	{
-    		//si type=booleen, la comparaison n'est possible que pour "="ou"!="
-    		if((typeGauche.isBoolean()&&typeDroite.isBoolean()))
+    		//si type=booleen,class ou null , la comparaison n'est possible que pour "="ou"!="
+    		if((typeGauche.isBoolean()&&typeDroite.isBoolean())||((typeGauche.isClassOrNull()&&typeDroite.isClassOrNull())))
     		{
     			if(!((Objects.equals(this.getOperatorName(),"==")||(Objects.equals(this.getOperatorName(),"!=")))))
     			{
