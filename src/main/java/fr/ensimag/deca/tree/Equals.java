@@ -4,6 +4,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.SEQ;
 
 /**
@@ -28,7 +30,13 @@ public class Equals extends AbstractOpExactCmp {
 	protected Instruction getMnemo(GPRegister op) {
 		return new SEQ(op);
 	}
-
+	
+	@Override
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+		Label labelSaut = new Label(nom);
+		compiler.addInstruction(new BEQ(labelSaut));
+		return labelSaut;
+	}
 
 
 	

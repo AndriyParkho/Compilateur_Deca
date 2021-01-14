@@ -4,6 +4,8 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.SNE;
 
 /**
@@ -28,6 +30,15 @@ public class NotEquals extends AbstractOpExactCmp {
 	protected Instruction getMnemo(GPRegister op) {
 		return new SNE(op);
 	}
+
+	@Override
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+		Label labelSaut = new Label(nom);
+		compiler.addInstruction(new BNE(labelSaut));
+		return labelSaut;
+	}
+	
+	
 
 
 }

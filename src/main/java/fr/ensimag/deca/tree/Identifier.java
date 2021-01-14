@@ -16,6 +16,9 @@ import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 import java.io.PrintStream;
@@ -249,6 +252,15 @@ public class Identifier extends AbstractIdentifier {
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
 	}
+	
+	@Override
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+    	codeGenExpr(compiler, compiler.getRegisterStart());
+    	compiler.addInstruction(new CMP(1, compiler.getRegisterStart()));
+    	Label labelSaut = new Label(nom);
+    	compiler.addInstruction(new BEQ(labelSaut));
+    	return labelSaut;
+    }
 
 	@Override
 	public boolean isIntLiteral() {

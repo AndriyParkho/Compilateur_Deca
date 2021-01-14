@@ -1,9 +1,10 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BGE;
 import fr.ensimag.ima.pseudocode.instructions.SGE;
 
 /**
@@ -29,4 +30,12 @@ public class GreaterOrEqual extends AbstractOpIneq {
 	protected Instruction getMnemo(GPRegister op) {
 		return new SGE(op);
 	}
+	
+	@Override
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+		Label labelSaut = new Label(nom);
+		compiler.addInstruction(new BGE(labelSaut));
+		return labelSaut;
+	}
+	
 }

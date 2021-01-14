@@ -51,4 +51,11 @@ public class compilerInstruction {
 		compiler.addComment(ligne);
 	}
 	
+	public static Label labeSaut(DecacCompiler compiler, String nom) {
+		Label labelSaut = new Label(nom);
+		compiler.addLabel(labelSaut);
+		return labelSaut;
+	}
+	
+	
 }

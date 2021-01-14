@@ -10,6 +10,7 @@
    boolean bool;
    bool = (x==x) == (y==y);
    bool = ((x < y) != (x <= y) == (x > x) == (y>=y)) != ((x>=y) == (y <x) != (x<= x));
-	!bool;
+	bool = !bool;
+	x == 0;
 }
 

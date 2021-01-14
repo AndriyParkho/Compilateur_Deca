@@ -1,14 +1,17 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.ima.pseudocode.GPRegister;
-import fr.ensimag.ima.pseudocode.instructions.CMP;
-import fr.ensimag.ima.pseudocode.instructions.SEQ;
-import fr.ensimag.ima.pseudocode.instructions.SNE;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.ima.pseudocode.DVal;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.SNE;
 
 /**
  *
@@ -51,6 +54,15 @@ public class Not extends AbstractUnaryExpr {
 		compiler.addInstruction(new SNE(op));;
 		
 	}
+	
+	@Override
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+		//A FAIRE : gestion des ! dans les structure de controle
+		Label labelSaut = new Label(nom);
+		compiler.addInstruction(new BNE(labelSaut));
+		return labelSaut;
+	}
+	
 	
 	
 }

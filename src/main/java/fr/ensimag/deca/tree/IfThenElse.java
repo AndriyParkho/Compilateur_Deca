@@ -2,10 +2,15 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.compilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+
 import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
@@ -41,8 +46,17 @@ public class IfThenElse extends AbstractInst {
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+    protected void codeGenInst(DecacCompiler compiler)  {
+        // A FAIRE : gestion du branchement conditionnel
+    	condition.codeGenExpr(compiler, compiler.getRegisterStart());
+    	Label labelSaut = condition.codeGenSaut(compiler, "sinonIfLine"+condition.getLocation().getLine());
+    	elseBranch.codeGenListInst(compiler);
+    	Label finIf = new Label("finIfLine"+condition.getLocation().getLine());
+    	compiler.addInstruction(new BRA(finIf));
+    	compiler.addLabel(labelSaut);
+    	thenBranch.codeGenListInst(compiler);
+    	compiler.addLabel(finIf);
+    	
     }
 
     @Override

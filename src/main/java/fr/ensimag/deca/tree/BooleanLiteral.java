@@ -1,17 +1,19 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.BooleanType;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
-
-import java.io.PrintStream;
 
 /**
  *
@@ -85,5 +87,14 @@ public class BooleanLiteral extends AbstractExpr {
 	public boolean isIdentifier() {
 		return false;
 	}
+	
+	@Override
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+    	codeGenExpr(compiler, compiler.getRegisterStart());
+    	compiler.addInstruction(new CMP(1, compiler.getRegisterStart()));
+    	Label labelSaut = new Label(nom);
+    	compiler.addInstruction(new BEQ(labelSaut));
+    	return labelSaut;
+    }
 
 }

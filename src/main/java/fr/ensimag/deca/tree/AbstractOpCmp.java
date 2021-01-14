@@ -4,6 +4,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -88,7 +89,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     }
     
     protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-    	DVal rightDval = DValGetter.getDVal(getLeftOperand());
+    	DVal rightDval = DValGetter.getDVal(getRightOperand());
     	int numeroRegistre = op.getNumber();
     	if(rightDval != null) {
     		getLeftOperand().codeGenExpr(compiler, op);
@@ -115,4 +116,5 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     }
     
     protected abstract Instruction getMnemo(GPRegister op);
+    
 }

@@ -15,6 +15,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
@@ -246,4 +247,9 @@ public abstract class AbstractExpr extends AbstractInst {
      * Fonction pour savoir si l'expression est un Identifier afin d'éviter les instanceOf
      */
     public abstract boolean isIdentifier();
+    
+    protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+    	throw new jumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());
+    }
+
 }
