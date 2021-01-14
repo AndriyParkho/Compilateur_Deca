@@ -1,13 +1,17 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.context.Type;
+import java.io.PrintStream;
+
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
-import java.io.PrintStream;
-import org.apache.commons.lang.Validate;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 
 /**
  *
@@ -35,7 +39,13 @@ public class While extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        throw new UnsupportedOperationException("not yet implemented");
+        Label finWhile = new Label("finWhileLigne"+condition.getLocation().getLine()+"Pos"+condition.getLocation().getPositionInLine());
+    	Label debutWhile = new Label ("finWhileLigne"+condition.getLocation().getLine()+"Pos"+condition.getLocation().getPositionInLine());
+        compiler.addInstruction(new BRA(finWhile));
+    	compiler.addLabel(debutWhile);
+        body.codeGenListInst(compiler);
+    	
+    	
     }
 
     @Override
