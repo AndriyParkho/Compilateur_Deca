@@ -3,7 +3,6 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
-import fr.ensimag.ima.pseudocode.instructions.SEQ;
 import fr.ensimag.ima.pseudocode.instructions.SNE;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
