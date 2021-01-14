@@ -1,8 +1,11 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.compilerInstruction;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
 
 /**
@@ -24,6 +27,14 @@ public class Plus extends AbstractOpArith {
 	@Override
 	protected Instruction getMnemo(DVal op1, GPRegister op2) {
 		return new ADD(op1, op2); 
+	}
+
+
+	@Override
+	protected void printErrLabel(DecacCompiler compiler) {
+		String nom = "add_overflow_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
+		String msgError = "Erreur: Overflow pendant une addition ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
+		compilerInstruction.createErreurLabel(compiler, nom, msgError, false);
 	}
 
 }

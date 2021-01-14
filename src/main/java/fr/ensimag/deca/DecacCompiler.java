@@ -1,5 +1,24 @@
 package fr.ensimag.deca;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.context.BooleanType;
+import fr.ensimag.deca.context.Definition;
+import fr.ensimag.deca.context.FloatType;
+import fr.ensimag.deca.context.IntType;
+import fr.ensimag.deca.context.TypeDefinition;
+import fr.ensimag.deca.context.VoidType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -14,22 +33,6 @@ import fr.ensimag.ima.pseudocode.IMAProgram;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.apache.log4j.Logger;
-import fr.ensimag.deca.context.Definition;
-import fr.ensimag.deca.context.TypeDefinition;
-import fr.ensimag.deca.context.FloatType;
-import fr.ensimag.deca.context.BooleanType;
-import fr.ensimag.deca.context.IntType;
-import fr.ensimag.deca.context.VoidType;
-import java.util.*;
 
 /**
  * Decac compiler instance.
@@ -49,8 +52,13 @@ import java.util.*;
 public class DecacCompiler {
     private static final Logger LOG = Logger.getLogger(DecacCompiler.class);
     
+    /*
+     * Compteur de variable global utilisé
+     */
     private int countVar = 0;
     
+    
+    private Map<Label, String> errLblList = new HashMap<Label, String>();
     /**
      * Portable newline character.
      */
@@ -332,6 +340,20 @@ public class DecacCompiler {
     
     public void incrCountVar() {
     	countVar++;
+    }
+
+	public Map<Label, String> getErrLblList() {
+		return errLblList;
+	}
+    
+    public void addErrLblList(Label newLbl, String err_message) {
+    	errLblList.put(newLbl, err_message);
+    }
+    
+    public void codeGenErrLbl() {
+    	for (Map.Entry<Label, String> lbl : errLblList.entrySet()) {
+    		compilerInstruction.labelErreurGeneration(this, lbl.getKey(), lbl.getValue());
+    	}
     }
 
 }
