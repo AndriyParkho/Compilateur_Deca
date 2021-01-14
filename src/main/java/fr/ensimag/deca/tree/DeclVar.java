@@ -12,8 +12,11 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -96,6 +99,19 @@ public class DeclVar extends AbstractDeclVar {
     		Initialization init = (Initialization) initialization;
     		init.getExpression().codeGenInst(compiler);
     		compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+    	} else {
+    		if(varName.getType().isInt()) {
+    			compiler.addInstruction(new LOAD(new ImmediateInteger(0), compiler.getRegisterStart()));
+    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+    		} else if(varName.getType().isFloat()) {
+    			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), compiler.getRegisterStart()));
+    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+    		} else if(varName.getType().isBoolean()) {
+    			compiler.addInstruction(new LOAD(0, compiler.getRegisterStart()));
+    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+    		} else {
+    			throw new UnsupportedOperationException("not yet implemented");
+    		}
     	}
     }
 }
