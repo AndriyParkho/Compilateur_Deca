@@ -42,9 +42,16 @@ public class EnvironmentType {
      * symbol is undefined.
      */
     public TypeDefinition get(Symbol key) {
-        //throw new UnsupportedOperationException("not yet implemented");
-    	//A modifier quand on aura plusieurs environnements.
-    	return this.donnees.get(key);
+        EnvironmentType env_courant = this;
+        while (env_courant != null){
+            if (env_courant.donnees.get(key) != null){
+                return env_courant.donnees.get(key);
+            }
+            else{
+                env_courant = env_courant.parentEnvironment;
+            }
+        }
+        return null;
     }
 
     /**
@@ -62,16 +69,38 @@ public class EnvironmentType {
      *             if the symbol is already defined at the "current" dictionary
      *
      */
-    public void declare(Symbol key, TypeDefinition def) throws DoubleDefException {
-        //throw new UnsupportedOperationException("not yet implemented");
-    	//A modifier quand on aura plusieurs environnements
-		Logger LOG = Logger.getLogger("log");
-    	if (this.get(key) == null) { 
-    		this.donnees.put(key, def);
+    public void declare(Symbol name, TypeDefinition def) throws DoubleDefException {
+    	if (this.donnees.get(name) == null) {
+    		this.donnees.put(name, def);
     	}
     	else {
     		throw new DoubleDefException();
     	}
     }
-
+    public EnvironmentType union(EnvironmentType env) throws EnvironmentType.DoubleDefException {
+        //Calcul de l'union de deux environnements. Renvoie une erreur contextuelle si indéfinie
+        for (Symbol symbol_this : this.donnees.keySet()){
+            for (Symbol symbol_env : env.donnees.keySet()){
+                if (symbol_this.getName().equals(symbol_env.getName())){
+                    throw new EnvironmentType.DoubleDefException();
+                }
+            }
+        }
+        EnvironmentType Union;
+        if (this.parentEnvironment== null && env.parentEnvironment == null) {
+            Union = new EnvironmentType(null);
+        }
+        else if (this.parentEnvironment == null){
+            Union = new EnvironmentType(env.parentEnvironment);
+        }
+        else if (env.parentEnvironment == null){
+            Union = new EnvironmentType(this.parentEnvironment);
+        }
+        else {
+            Union = new EnvironmentType(this.parentEnvironment.union(env.parentEnvironment));
+        }
+        Union.donnees.putAll(this.donnees);
+        Union.donnees.putAll(env.donnees);
+        return Union;
+    }
 }
