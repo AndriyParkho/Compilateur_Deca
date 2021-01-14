@@ -179,7 +179,6 @@ public class Identifier extends AbstractIdentifier {
     	if(localEnv.get(this.name)!=null)
     	{
     		this.setDefinition(localEnv.get(this.name));
-    		this.setLocation(this.definition.getLocation());
     		this.setType(localEnv.get(this.name).getType());
     		return localEnv.get(this.name).getType();
     	}
@@ -254,13 +253,12 @@ public class Identifier extends AbstractIdentifier {
 	}
 	
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label labelCible) {
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
     	codeGenExpr(compiler, compiler.getRegisterStart());
     	compiler.addInstruction(new CMP(1, compiler.getRegisterStart()));
-    	if(evaluation) {
-    		//compiler.addInstruction(new BEQ);
-    	}
-    	return labelCible;
+    	Label labelSaut = new Label(nom);
+    	compiler.addInstruction(new BEQ(labelSaut));
+    	return labelSaut;
     }
 
 	@Override

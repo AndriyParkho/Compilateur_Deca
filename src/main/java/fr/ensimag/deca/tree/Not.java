@@ -54,11 +54,11 @@ public class Not extends AbstractUnaryExpr {
 		
 	}
 	
-
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label labelCible) {
-		getOperand().codeGenSaut(compiler, !evaluation, labelCible);
-		return labelCible;
+	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+		Label labelSaut = new Label(nom);
+		compiler.addInstruction(new BNE(labelSaut));
+		return labelSaut;
 	}
 	
 	

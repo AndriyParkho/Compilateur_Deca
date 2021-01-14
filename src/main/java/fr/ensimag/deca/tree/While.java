@@ -39,12 +39,15 @@ public class While extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        Label finWhile = new Label("finWhileLigne"+condition.getLocation().getLine()+"Pos"+condition.getLocation().getPositionInLine());
+        /*
+    	Label finWhile = new Label("finWhileLigne"+condition.getLocation().getLine()+"Pos"+condition.getLocation().getPositionInLine());
     	Label debutWhile = new Label ("finWhileLigne"+condition.getLocation().getLine()+"Pos"+condition.getLocation().getPositionInLine());
         compiler.addInstruction(new BRA(finWhile));
     	compiler.addLabel(debutWhile);
         body.codeGenListInst(compiler);
-    	
+        compiler.addLabel(finWhile);
+        condition.codeGenSaut(compiler, null);
+    	*/
     	
     }
 
