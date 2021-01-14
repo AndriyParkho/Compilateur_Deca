@@ -15,24 +15,27 @@ public class compilerInstruction {
 	
 	private static int decorationLigne = 50;
 	
-	public static void gestionPileVariablesGlobales(DecacCompiler compiler) {
-		Label stack_overflow_error = labelErreurGeneration(compiler, "stack_overflow_error", "Erreur : débordement de pile dans la génération de variables globales");
-		
+	public static void gestionPileVariablesGlobales(DecacCompiler compiler) {		
 		compiler.addInstructionBegin(new ADDSP(compiler.getCountVar()));
-        compiler.addInstructionBegin(new BOV(stack_overflow_error));
+		createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile dans la génération de variables globales", true);
         compiler.addInstructionBegin(new TSTO(compiler.getCountVar()));
 	}
 	
-	public static Label labelErreurGeneration(DecacCompiler compiler, String nom, String error_message) {
-        Label newLabelError = new Label(nom);
+	public static Label createErreurLabel(DecacCompiler compiler, String nom, String errorMessage, boolean addFirst) {
+		Label newLabelError = new Label(nom);
+		compiler.addErrLblList(newLabelError, errorMessage);
+		if(addFirst) compiler.addInstructionBegin(new BOV(newLabelError));
+		else compiler.addInstruction(new BOV(newLabelError));
+		return newLabelError;
+	}
+	
+	public static void labelErreurGeneration(DecacCompiler compiler, Label newLabelError, String errorMessage) {
         
-        decorationAssembleur(compiler, error_message);
+        decorationAssembleur(compiler, errorMessage);
         compiler.addLabel(newLabelError);
-        compiler.addInstruction(new WSTR(error_message));
+        compiler.addInstruction(new WSTR(errorMessage));
         compiler.addInstruction(new WNL());
         compiler.addInstruction(new ERROR());
-        
-        return newLabelError;
 	}
 	
 	public static void decorationAssembleur(DecacCompiler compiler, String message) {

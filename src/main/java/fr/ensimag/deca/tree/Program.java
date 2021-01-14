@@ -1,18 +1,16 @@
 package fr.ensimag.deca.tree;
 
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.compilerInstruction;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.EnvironmentType;
-import fr.ensimag.deca.tools.IndentPrintStream;
-import fr.ensimag.deca.tools.SymbolTable;
-import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.instructions.*;
 import java.io.PrintStream;
+
 import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.instructions.HALT;
 
 /**
  * Deca complete program (class definition plus main block)
@@ -58,8 +56,8 @@ public class Program extends AbstractProgram {
         compiler.addInstruction(new HALT());
         //A FAIRE : piles + avancées
         compiler.addComment("end main program");
-
-       compilerInstruction.gestionPileVariablesGlobales(compiler);
+        compilerInstruction.gestionPileVariablesGlobales(compiler);
+        compiler.codeGenErrLbl();
     }
 
     @Override

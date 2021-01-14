@@ -1,6 +1,5 @@
 package fr.ensimag.deca.tree;
 
-import java.util.Collection;
 import java.util.Iterator;
 
 import fr.ensimag.deca.DecacCompiler;

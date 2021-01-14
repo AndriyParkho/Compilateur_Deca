@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.compilerInstruction;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
@@ -34,6 +35,14 @@ public class Divide extends AbstractOpArith {
 		} else {
 			throw new UnsupportedOperationException("Not supposed to be called");
 		}
+	}
+
+
+	@Override
+	protected void printErrLabel(DecacCompiler compiler) {
+		String nom = "zero_divide_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
+		String msgError = "Erreur: Division par 0 non autorisée ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
+		compilerInstruction.createErreurLabel(compiler, nom, msgError, false);
 	}
 
 }
