@@ -71,9 +71,8 @@ public class EnvironmentExp {
      *
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-    	//A modifier quand on aura plusieurs environnements
 		Logger LOG = Logger.getLogger("log");
-    	if (this.get(name) == null) { 
+    	if (this.donnees.get(name) == null) {
     		this.donnees.put(name, def);
     	}
     	else {
