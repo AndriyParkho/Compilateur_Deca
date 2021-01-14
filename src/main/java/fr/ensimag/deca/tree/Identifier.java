@@ -254,12 +254,13 @@ public class Identifier extends AbstractIdentifier {
 	}
 	
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+	protected Label codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label labelCible) {
     	codeGenExpr(compiler, compiler.getRegisterStart());
     	compiler.addInstruction(new CMP(1, compiler.getRegisterStart()));
-    	Label labelSaut = new Label(nom);
-    	compiler.addInstruction(new BEQ(labelSaut));
-    	return labelSaut;
+    	if(evaluation) {
+    		//compiler.addInstruction(new BEQ);
+    	}
+    	return labelCible;
     }
 
 	@Override

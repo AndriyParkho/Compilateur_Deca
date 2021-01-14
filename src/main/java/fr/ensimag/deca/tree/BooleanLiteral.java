@@ -11,8 +11,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
-import fr.ensimag.ima.pseudocode.instructions.BEQ;
-import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
@@ -89,12 +88,13 @@ public class BooleanLiteral extends AbstractExpr {
 	}
 	
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
+	protected Label codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label labelCible) {
     	codeGenExpr(compiler, compiler.getRegisterStart());
-    	compiler.addInstruction(new CMP(1, compiler.getRegisterStart()));
-    	Label labelSaut = new Label(nom);
-    	compiler.addInstruction(new BEQ(labelSaut));
-    	return labelSaut;
+    	if((evaluation && value) || (!evaluation && !value)) {
+    		compiler.addInstruction(new BRA(labelCible)); //si 
+    	}
+    	return labelCible;
+    	
     }
 
 }

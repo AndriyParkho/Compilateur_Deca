@@ -54,12 +54,11 @@ public class Not extends AbstractUnaryExpr {
 		
 	}
 	
+
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
-		//A FAIRE : gestion des ! dans les structure de controle
-		Label labelSaut = new Label(nom);
-		compiler.addInstruction(new BNE(labelSaut));
-		return labelSaut;
+	protected Label codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label labelCible) {
+		getOperand().codeGenSaut(compiler, !evaluation, labelCible);
+		return labelCible;
 	}
 	
 	
