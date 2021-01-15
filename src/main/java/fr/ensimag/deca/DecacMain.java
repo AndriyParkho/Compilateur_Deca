@@ -66,15 +66,12 @@ public class DecacMain {
 //        		System.out.println("Fichier source : "+source);
         		
         	}
-            //throw new UnsupportedOperationException("Parallel build not yet implemented");
         } else {
             for (File source : options.getSourceFiles()) {
-                try {
-                    DecacCompiler compiler = new DecacCompiler(options, source);
-                    if (compiler.compile()) {
-                        error = true;
-                    }
-                }catch(EnvironmentType.DoubleDefException | EnvironmentExp.DoubleDefException de){throw de;}
+                DecacCompiler compiler = new DecacCompiler(options, source);
+                if (compiler.compile()) {
+                    error = true;
+                }
             }
         }
         System.exit(error ? 1 : 0);

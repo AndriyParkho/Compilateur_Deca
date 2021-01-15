@@ -92,16 +92,16 @@ public class DecacCompiler {
 	   Symbol boolSymbol=this.symbolTable.create("boolean");
 	   Symbol voidSymbol=this.symbolTable.create("void");
 	   //Symbol objectSymbol=this.symbolTable.create("Object");
+
 	   TypeDefinition intTypeDef= new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
 	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
 	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
 	   TypeDefinition voidTypeDef= new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
-       try{
-           this.envTypes.declare(floatSymbol, floatTypeDef);
-           this.envTypes.declare(boolSymbol, boolTypeDef);
-           this.envTypes.declare(voidSymbol, voidTypeDef);
-           this.envTypes.declare(intSymbol, intTypeDef);
-       } catch(EnvironmentType.DoubleDefException de){throw de;}
+
+       this.envTypes.declare(floatSymbol, floatTypeDef);
+       this.envTypes.declare(boolSymbol, boolTypeDef);
+       this.envTypes.declare(voidSymbol, voidTypeDef);
+       this.envTypes.declare(intSymbol, intTypeDef);
    }
 
    public void envExpInit() throws EnvironmentExp.DoubleDefException{
@@ -116,10 +116,8 @@ public class DecacCompiler {
         this.source = source;
         this.symbolTable = new SymbolTable();
         this.envTypes= new EnvironmentType(null);
-        try {
-            this.envTypesInit();
-            this.envExpInit();
-        }catch(EnvironmentType.DoubleDefException | EnvironmentExp.DoubleDefException de){throw de;}
+        this.envTypesInit();
+        this.envExpInit();
         this.nombreRegistres = compilerOptions.getNombreRegistreMax();
     }
 
