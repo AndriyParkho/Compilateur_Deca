@@ -1,0 +1,16 @@
+// Description:
+//    Programme minimaliste utilisant println.
+//
+// Resultats:
+//    Hello
+//
+// Historique:
+//    cree le 01/01/2021
+
+{
+       int x = 2;
+       int y;
+       string chaine;
+       float a = 1.5;
+       float b;
+}

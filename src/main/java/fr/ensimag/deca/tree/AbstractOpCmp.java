@@ -120,14 +120,14 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	int numeroRegistre = op.getNumber();
     	Instruction sautInstr = eval ? this.getSaut(etiquette) : this.getNotSaut(etiquette);
     	if(rightDval != null) {
-    		getLeftOperand().codeGenSaut(compiler, eval, etiquette, op);
+    		getLeftOperand().codeGenExpr(compiler, op);
     		compiler.addInstruction(new CMP(rightDval, op));
     		compiler.addInstruction(sautInstr);
     	}else {
     		if(numeroRegistre == compiler.getNombreRegistres()) {
-    			getLeftOperand().codeGenSaut(compiler, eval, etiquette, op);;
+    			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
-    			getRightOperand().codeGenSaut(compiler, eval, etiquette, op);;
+    			getRightOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
     			compiler.addInstruction(new CMP(rightDval, op));
@@ -135,8 +135,8 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres()) {
     			GPRegister nextOp = Register.getR(op.getNumber() + 1);
-    			getLeftOperand().codeGenSaut(compiler, eval, etiquette, nextOp);;
-        		getRightOperand().codeGenSaut(compiler, eval, etiquette, nextOp);;
+    			getLeftOperand().codeGenExpr(compiler, op);
+        		getRightOperand().codeGenExpr(compiler, op);
         		compiler.addInstruction(new CMP(nextOp, op));
         		compiler.addInstruction(sautInstr);
     		}
