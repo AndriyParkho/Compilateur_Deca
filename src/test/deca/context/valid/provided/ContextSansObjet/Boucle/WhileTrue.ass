@@ -1,0 +1,18 @@
+	TSTO #1
+	BOV stack_overflow_error
+	ADDSP #1
+; start main program
+; Main program
+	LOAD #0, R2
+	STORE R2, 1(GB)
+; Beginning of main instructions:
+	HALT
+; end main program
+; --------------------------------------------------
+; Erreur : débordement de pile dans la génération de variables globales
+; --------------------------------------------------
+stack_overflow_error:
+	WSTR "Erreur : débordement de pile dans la génération de variables globales"
+	WNL
+	ERROR
+; end main program

@@ -1,6 +1,9 @@
 	package fr.ensimag.deca;
 
 import java.io.File;
+
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.EnvironmentType;
 import org.apache.log4j.Logger;
 
 /**
@@ -12,7 +15,7 @@ import org.apache.log4j.Logger;
 public class DecacMain {
     private static Logger LOG = Logger.getLogger(DecacMain.class);
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EnvironmentType.DoubleDefException, EnvironmentExp.DoubleDefException{
         // example log4j message.
         LOG.info("Decac compiler started");
         boolean error = false;
@@ -58,10 +61,12 @@ public class DecacMain {
             throw new UnsupportedOperationException("Parallel build not yet implemented");
         } else {
             for (File source : options.getSourceFiles()) {
-                DecacCompiler compiler = new DecacCompiler(options, source);
-                if (compiler.compile()) {
-                    error = true;
-                }
+                try {
+                    DecacCompiler compiler = new DecacCompiler(options, source);
+                    if (compiler.compile()) {
+                        error = true;
+                    }
+                }catch(EnvironmentType.DoubleDefException | EnvironmentExp.DoubleDefException de){throw de;}
             }
         }
         System.exit(error ? 1 : 0);

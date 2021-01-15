@@ -171,16 +171,16 @@ public class Identifier extends AbstractIdentifier {
     }
 
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Type verifyExpr(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
         //Fait 
     	//si l'identificateur existe dans l'environnement local, on fait l'enrichissement
     	//sinon on lève une erreur contextuelle
-    	if(localEnv.get(this.name)!=null)
+    	if(compiler.getEnvExp().get(this.name)!=null)
     	{
-    		this.setDefinition(localEnv.get(this.name));
-    		this.setType(localEnv.get(this.name).getType());
-    		return localEnv.get(this.name).getType();
+    		this.setDefinition(compiler.getEnvExp().get(this.name));
+    		this.setType(compiler.getEnvExp().get(this.name).getType());
+    		return compiler.getEnvExp().get(this.name).getType();
     	}
     	else
     	{

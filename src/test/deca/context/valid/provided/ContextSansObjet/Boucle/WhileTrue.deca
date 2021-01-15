@@ -1,0 +1,12 @@
+//Description
+//	while true basique avec instance
+//Résultats
+//	ok
+
+{
+int i = 0;
+while (true){
+i = i + 1;
+println(i);
+}
+}

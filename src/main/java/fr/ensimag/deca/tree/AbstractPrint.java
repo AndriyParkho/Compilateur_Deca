@@ -35,13 +35,13 @@ public abstract class AbstractPrint extends AbstractInst {
     }
 
     @Override
-    protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
+    protected void verifyInst(DecacCompiler compiler,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
     	//on va parcourir la liste des arguments
     	for(AbstractExpr absExpr : getArguments().getList())
     	{
-    		Type typeExpr=absExpr.verifyExpr(compiler, localEnv, currentClass);
+    		Type typeExpr=absExpr.verifyExpr(compiler, currentClass);
     		//les types qu'on peut afficher sont int,float et string
     		if(!(typeExpr.isFloat()||typeExpr.isInt()||typeExpr.isString()))
     		{

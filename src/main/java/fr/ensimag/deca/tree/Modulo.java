@@ -23,12 +23,12 @@ public class Modulo extends AbstractOpArith {
     }
 
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Type verifyExpr(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
         //Fait
     	//on récupère les types des deux opérateurs et on vérifie s'ils sont des int
-    	Type typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-    	Type typeDroite=this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+    	Type typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
+    	Type typeDroite=this.getRightOperand().verifyExpr(compiler, currentClass);
     	if(typeGauche.isInt()&&typeDroite.isInt())
     	{
     		this.setType(typeGauche);

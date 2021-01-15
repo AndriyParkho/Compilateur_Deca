@@ -18,7 +18,7 @@ public abstract class AbstractMethodBody extends Tree {
 	public Type getReturnType() {return returnType;}
 	public void setType(Type type) {returnType=type;}
 	
-	public abstract void verifyMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass, Type returnType)
+	public abstract void verifyMethodBody(DecacCompiler compiler, ClassDefinition currentClass, Type returnType)
 	    throws ContextualError;
 	
   

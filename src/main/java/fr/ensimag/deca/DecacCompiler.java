@@ -8,17 +8,12 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.ensimag.deca.context.*;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.codegen.compilerInstruction;
-import fr.ensimag.deca.context.BooleanType;
-import fr.ensimag.deca.context.Definition;
-import fr.ensimag.deca.context.FloatType;
-import fr.ensimag.deca.context.IntType;
-import fr.ensimag.deca.context.TypeDefinition;
-import fr.ensimag.deca.context.VoidType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -72,17 +67,25 @@ public class DecacCompiler {
    }
    //envTypes contient les types predefinis
    //il faut l'initialiser avec les types prédéfinis
-   private Map<Symbol , Definition> envTypes;
-   public Map<Symbol , Definition> getEnvTypes()
+   private EnvironmentType envTypes;
+    //envExp contient les exp predefinis
+    //il faut l'initialiser avec les exp prédéfinis
+    private EnvironmentExp envExp;
+
+   public EnvironmentType getEnvTypes()
    {
 	   return this.envTypes;
    }
+    public EnvironmentExp getEnvExp()
+    {
+        return this.envExp;
+    }
    
    /**
     * méthode qui initialise l'environnement des types en y insérant 
     * tous les types prédéfinis
     */
-   public void envTypesInit()
+   public void envTypesInit () throws EnvironmentType.DoubleDefException
    {
 	   Symbol intSymbol=this.symbolTable.create("int");
 	   Symbol floatSymbol=this.symbolTable.create("float");
@@ -93,20 +96,30 @@ public class DecacCompiler {
 	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
 	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
 	   TypeDefinition voidTypeDef= new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
-	   this.envTypes.put(intSymbol, intTypeDef);
-	   this.envTypes.put(floatSymbol, floatTypeDef);
-	   this.envTypes.put(boolSymbol, boolTypeDef);
-	   this.envTypes.put(voidSymbol, voidTypeDef);
+       try{
+           this.envTypes.declare(floatSymbol, floatTypeDef);
+           this.envTypes.declare(boolSymbol, boolTypeDef);
+           this.envTypes.declare(voidSymbol, voidTypeDef);
+           this.envTypes.declare(intSymbol, intTypeDef);
+       } catch(EnvironmentType.DoubleDefException de){throw de;}
+   }
+
+   public void envExpInit() throws EnvironmentExp.DoubleDefException{
+       // Acompléter avec la méthode equals d'objets
+       this.envExp = new EnvironmentExp(null);
    }
    
    
-    public DecacCompiler(CompilerOptions compilerOptions, File source) {
+    public DecacCompiler(CompilerOptions compilerOptions, File source) throws EnvironmentType.DoubleDefException, EnvironmentExp.DoubleDefException{
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
-        this.envTypes= new HashMap<>();
-        this.envTypesInit();
+        this.envTypes= new EnvironmentType(null);
+        try {
+            this.envTypesInit();
+            this.envExpInit();
+        }catch(EnvironmentType.DoubleDefException | EnvironmentExp.DoubleDefException de){throw de;}
         this.nombreRegistres = compilerOptions.getNombreRegistreMax();
     }
 

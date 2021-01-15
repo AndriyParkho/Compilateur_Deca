@@ -28,7 +28,7 @@ public class MethodAsmBody extends AbstractMethodBody {
 	
 	
 	@Override
-	public void verifyMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass, Type returnType)
+	public void verifyMethodBody(DecacCompiler compiler, ClassDefinition currentClass, Type returnType)
 		    throws ContextualError{
 		//A FAIRE
 	}

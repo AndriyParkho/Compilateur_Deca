@@ -32,14 +32,14 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     }
 
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Type verifyExpr(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
     	//d'abord on récupère les deux opérateurs droite et gauche
     	Type typeGauche;
     	Type typeDroite;
     	try {
-    		typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-    		typeDroite=this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+    		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
+    		typeDroite=this.getRightOperand().verifyExpr(compiler, currentClass);
     	} catch (ContextualError ce) {throw ce;}
     	//il faut ensuite s'assurer que les deux opérateurs sont comparables!!
     	//si les deux deux opérateurs ont deux types différents, la seule comparaison
@@ -49,7 +49,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		if((typeGauche.isInt()&&typeDroite.isFloat()))
     		{
     			ConvFloat gaucheConv= new ConvFloat(this.getLeftOperand());
-    			typeGauche= gaucheConv.verifyExpr(compiler, localEnv, currentClass);
+    			typeGauche= gaucheConv.verifyExpr(compiler, currentClass);
     			gaucheConv.setType(typeGauche);
     			this.setLeftOperand(gaucheConv);
     			
@@ -57,7 +57,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		else if((typeGauche.isFloat()&&typeDroite.isInt()))
     		{
     			ConvFloat droiteConv= new ConvFloat(this.getRightOperand());
-    			typeDroite= droiteConv.verifyExpr(compiler, localEnv, currentClass);
+    			typeDroite= droiteConv.verifyExpr(compiler, currentClass);
     			droiteConv.setType(typeDroite);
     			this.setRightOperand(droiteConv);
     			

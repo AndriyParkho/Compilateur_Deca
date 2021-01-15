@@ -19,11 +19,11 @@ public class UnaryMinus extends AbstractUnaryExpr {
     }
 
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Type verifyExpr(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
         //Fait
     	//il faut que le type soit int ou float
-    	Type type=this.getOperand().verifyExpr(compiler, localEnv, currentClass);
+    	Type type=this.getOperand().verifyExpr(compiler, currentClass);
     	if(type.isInt()||type.isFloat())
     	{
     		this.setType(type);
