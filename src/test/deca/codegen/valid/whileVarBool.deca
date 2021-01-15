@@ -1,0 +1,16 @@
+// Description:
+//    tests du while avec une variable booléenne dans la condition
+//
+// Resultats:
+//    On rentre 1 fois dans le while
+//	  On sort du while parce que test : false
+
+{
+   boolean test = true;
+   while(test){
+   		println("On rentre 1 fois dans le while");
+   		test = false;
+   }
+   println("On sort du while parce que test : ", test);
+}
+
