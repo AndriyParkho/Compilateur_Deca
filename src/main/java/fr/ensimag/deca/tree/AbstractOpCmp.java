@@ -118,10 +118,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
     	DVal rightDval = DValGetter.getDVal(getRightOperand());
     	int numeroRegistre = op.getNumber();
+    	Instruction sautInstr = eval ? this.getSaut(etiquette) : this.getNotSaut(etiquette);
     	if(rightDval != null) {
-    		getLeftOperand().codeGenSaut(compiler, eval, etiquette, op);
-    		compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
-    		compiler.addInstruction(this.getMnemo(op));
+    		getLeftOperand().codeGenExpr(compiler, op);
+    		compiler.addInstruction(new CMP(rightDval, op));
+    		compiler.addInstruction(sautInstr);
     	}else {
     		if(numeroRegistre == compiler.getNombreRegistres()) {
     			getLeftOperand().codeGenExpr(compiler, op);
@@ -129,15 +130,15 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			getRightOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
-    			compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName());
-    			compiler.addInstruction(this.getMnemo(op));
+    			compiler.addInstruction(new CMP(rightDval, op));
+    			compiler.addInstruction(sautInstr);
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres()) {
     			GPRegister nextOp = Register.getR(op.getNumber() + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
-        		getRightOperand().codeGenExpr(compiler, nextOp);
-        		compiler.addInstruction(new CMP(nextOp, op), "Afin de tester "+getOperatorName());
-        		compiler.addInstruction(this.getMnemo(op));
+        		getRightOperand().codeGenExpr(compiler, op);
+        		compiler.addInstruction(new CMP(nextOp, op));
+        		compiler.addInstruction(sautInstr);
     		}
     	}
 	}

@@ -1,8 +1,10 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
 
 /**
  *
@@ -19,6 +21,21 @@ public class And extends AbstractOpBool {
     protected String getOperatorName() {
         return "&&";
     }
+
+	
+	@Override
+	protected void codeGenSaut(DecacCompiler compiler, boolean evaluation, Label etiquette, GPRegister op) {
+		if(evaluation) {
+			Label finAnd = new Label("finAnd." + getLocation().getLine() + "."+getLocation().getPositionInLine());
+			getLeftOperand().codeGenSaut(compiler, false, finAnd, op);
+			getRightOperand().codeGenSaut(compiler, true, etiquette, op);
+			compiler.addLabel(finAnd);
+		}
+		else {
+			getLeftOperand().codeGenSaut(compiler, false, etiquette, op);
+			getRightOperand().codeGenSaut(compiler, false, etiquette, op);
+		}
+	}
 
 
 }

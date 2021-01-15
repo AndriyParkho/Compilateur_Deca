@@ -21,6 +21,7 @@ import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
@@ -254,7 +255,10 @@ public class Identifier extends AbstractIdentifier {
 	
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-		// A FAIRE
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
+		compiler.addInstruction(new CMP(0, op));
+		if(eval) compiler.addInstruction(new BNE(etiquette));
+		else compiler.addInstruction(new BEQ(etiquette));
     }
 
 	@Override

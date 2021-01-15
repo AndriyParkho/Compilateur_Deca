@@ -1,0 +1,16 @@
+// Description:
+//    tests de déclaration de booléen
+//
+// Resultats:
+//    rien
+
+{
+	boolean bool = true;
+ 	if(!bool){
+ 		println("bool est évalué à true");
+ 	}else{
+ 		println("bool est évalué à false");
+   }
+   
+}
+
