@@ -1,6 +1,7 @@
 	package fr.ensimag.deca;
 
 import java.io.File;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -46,7 +47,7 @@ public class DecacMain {
             System.out.println("-n       (no check)     : supprime les tests à l’exécution spécifiés dans les points\n			  11.1 et 11.3 de la sémantique de Deca.");
             System.out.println("-r X     (registers)    : limite les registres banalisés disponibles à R0 ... R{X-1},\n			  avec 4 <= X <= 16.");
             System.out.println("-d       (debug)        : active les traces de debug. Répéter l’option plusieurs fois\n			  pour avoir plus de traces. ");
-            System.out.println("-P       (parallel)     : s’il y a plusieurs fichiers sources, lance la compilation\n			  des fichiers enparallèle (pour accélérer la compilation)");
+            System.out.println("-P       (parallel)     : s’il y a plusieurs fichiers sources, lance la compilation\n			  des fichiers en parallèle (pour accélérer la compilation)");
             System.out.println("----------------------------------------------------------------------------------");
             System.exit(0);
         }
@@ -55,7 +56,14 @@ public class DecacMain {
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
-            throw new UnsupportedOperationException("Parallel build not yet implemented");
+        	for(File source : options.getSourceFiles()) {
+        		DecacCompiler compiler = new DecacCompiler(options, source);
+        		Runnable myRunnable = () -> {compiler.compile();};
+        		(new Thread(myRunnable)).start();
+//        		System.out.println("Fichier source : "+source);
+        		
+        	}
+            //throw new UnsupportedOperationException("Parallel build not yet implemented");
         } else {
             for (File source : options.getSourceFiles()) {
                 DecacCompiler compiler = new DecacCompiler(options, source);
@@ -66,4 +74,6 @@ public class DecacMain {
         }
         System.exit(error ? 1 : 0);
     }
+    
+  
 }

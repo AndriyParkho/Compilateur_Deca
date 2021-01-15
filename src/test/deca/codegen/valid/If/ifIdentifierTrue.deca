@@ -2,14 +2,15 @@
 //    tests de déclaration de booléen
 //
 // Resultats:
-//    rien
+//    true
 
 {
 	boolean bool = true;
+	
  	if(bool){
- 		println("bool est évalué à true");
+ 		println("true");
  	}else{
- 		println("bool est évalué à false");
+ 		println("false");
    }
    
 }

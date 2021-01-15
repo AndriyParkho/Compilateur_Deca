@@ -218,6 +218,7 @@ public class DecacCompiler {
      * @return true on error
      */
     public boolean compile() {
+
         String sourceFile = source.getAbsolutePath();
         String destFile = null;
         //FAIT : génération du nom du fichier .ass à partir du .deca
@@ -275,6 +276,7 @@ public class DecacCompiler {
         assert(prog.checkAllLocations());
         if(getCompilerOptions().isParse()) {
         	//A FAIRE : decompilation de l'arbre et affichage de cette décompilation
+        	prog.decompile();
         	System.exit(0);
         }
         prog.verifyProgram(this); //etape B
