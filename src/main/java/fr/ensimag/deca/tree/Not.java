@@ -56,7 +56,7 @@ public class Not extends AbstractUnaryExpr {
 	
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler,  boolean eval, Label etiquette, GPRegister op){
-		// A FAIRE
+		getOperand().codeGenSaut(compiler, !eval, etiquette, op);
 	}
 	
 	
