@@ -85,41 +85,39 @@ public class DecacCompiler {
     * méthode qui initialise l'environnement des types en y insérant 
     * tous les types prédéfinis
     */
-   public void envTypesInit () throws EnvironmentType.DoubleDefException
+   public void envTypesInit () /*throws EnvironmentType.DoubleDefException**/
    {
 	   Symbol intSymbol=this.symbolTable.create("int");
 	   Symbol floatSymbol=this.symbolTable.create("float");
 	   Symbol boolSymbol=this.symbolTable.create("boolean");
 	   Symbol voidSymbol=this.symbolTable.create("void");
 	   //Symbol objectSymbol=this.symbolTable.create("Object");
+
 	   TypeDefinition intTypeDef= new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
 	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
 	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
 	   TypeDefinition voidTypeDef= new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
-       try{
-           this.envTypes.declare(floatSymbol, floatTypeDef);
-           this.envTypes.declare(boolSymbol, boolTypeDef);
-           this.envTypes.declare(voidSymbol, voidTypeDef);
-           this.envTypes.declare(intSymbol, intTypeDef);
-       } catch(EnvironmentType.DoubleDefException de){throw de;}
+
+       this.envTypes.declare(floatSymbol, floatTypeDef);
+       this.envTypes.declare(boolSymbol, boolTypeDef);
+       this.envTypes.declare(voidSymbol, voidTypeDef);
+       this.envTypes.declare(intSymbol, intTypeDef);
    }
 
-   public void envExpInit() throws EnvironmentExp.DoubleDefException{
+   public void envExpInit() {
        // Acompléter avec la méthode equals d'objets
        this.envExp = new EnvironmentExp(null);
    }
    
    
-    public DecacCompiler(CompilerOptions compilerOptions, File source) throws EnvironmentType.DoubleDefException, EnvironmentExp.DoubleDefException{
+    public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;
         this.symbolTable = new SymbolTable();
         this.envTypes= new EnvironmentType(null);
-        try {
-            this.envTypesInit();
-            this.envExpInit();
-        }catch(EnvironmentType.DoubleDefException | EnvironmentExp.DoubleDefException de){throw de;}
+        this.envTypesInit();
+        this.envExpInit();
         this.nombreRegistres = compilerOptions.getNombreRegistreMax();
     }
 

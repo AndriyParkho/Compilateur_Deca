@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 public class DecacMain {
     private static Logger LOG = Logger.getLogger(DecacMain.class);
     
-    public static void main(String[] args) throws EnvironmentType.DoubleDefException, EnvironmentExp.DoubleDefException{
+    public static void main(String[] args) {
         // example log4j message.
         LOG.info("Decac compiler started");
         boolean error = false;
@@ -67,12 +67,10 @@ public class DecacMain {
         	}
         } else {
             for (File source : options.getSourceFiles()) {
-                try {
-                    DecacCompiler compiler = new DecacCompiler(options, source);
-                    if (compiler.compile()) {
-                        error = true;
-                    }
-                }catch(EnvironmentType.DoubleDefException | EnvironmentExp.DoubleDefException de){throw de;}
+                DecacCompiler compiler = new DecacCompiler(options, source);
+                if (compiler.compile()) {
+                    error = true;
+                }
             }
         }
         System.exit(error ? 1 : 0);
