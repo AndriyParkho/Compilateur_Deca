@@ -287,11 +287,11 @@ public class DecacCompiler {
         assert(prog.checkAllLocations());
         if(getCompilerOptions().isParse()) {
         	//A FAIRE : decompilation de l'arbre et affichage de cette décompilation
-        	prog.decompile();
+        	System.out.println(prog.decompile());
         	System.exit(0);
         }
         prog.verifyProgram(this); //etape B
-        System.out.println(prog.prettyPrint());
+        LOG.info(prog.prettyPrint());
         assert(prog.checkAllDecorations());
         if(getCompilerOptions().isVerification()) {
         	System.exit(0);
