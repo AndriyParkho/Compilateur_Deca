@@ -1,8 +1,10 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
 
 /**
  *
@@ -24,6 +26,20 @@ public class And extends AbstractOpBool {
 	protected Instruction getMnemo(DVal op1, GPRegister op2) {
 		//A FAIRE : générer code pour ADD
 		throw new UnsupportedOperationException("not yet implemented");
+	}
+	
+	@Override
+	protected void codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label etiquette, GPRegister op) {
+		if(evaluation) {
+			Label finAnd = new Label("finAnd." + getLocation().getLine() + "."+getLocation().getPositionInLine());
+			getLeftOperand().codeGenSaut(compiler, false, finAnd);
+			getRightOperand().codeGenSaut(compiler, true, etiquette);
+			compiler.addLabel(finAnd);
+		}
+		else {
+			getLeftOperand().codeGenSaut(compiler, false, etiquette);
+			getRightOperand().codeGenSaut(compiler, false, etiquette);
+		}
 	}
 
 
