@@ -136,7 +136,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		} else if(numeroRegistre < compiler.getNombreRegistres()) {
     			GPRegister nextOp = Register.getR(op.getNumber() + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
-        		getRightOperand().codeGenExpr(compiler, op);
+        		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(new CMP(nextOp, op));
         		compiler.addInstruction(sautInstr);
     		}

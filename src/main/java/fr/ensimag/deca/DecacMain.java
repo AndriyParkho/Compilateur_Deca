@@ -55,7 +55,7 @@ public class DecacMain {
             System.exit(0);
         }
         if (options.getParallel()) {
-            // A FAIRE : instancier DecacCompiler pour chaque fichier à
+            // FAIT : instancier DecacCompiler pour chaque fichier à
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
@@ -63,10 +63,8 @@ public class DecacMain {
         		DecacCompiler compiler = new DecacCompiler(options, source);
         		Runnable myRunnable = () -> {compiler.compile();};
         		(new Thread(myRunnable)).start();
-//        		System.out.println("Fichier source : "+source);
         		
         	}
-            //throw new UnsupportedOperationException("Parallel build not yet implemented");
         } else {
             for (File source : options.getSourceFiles()) {
                 try {
