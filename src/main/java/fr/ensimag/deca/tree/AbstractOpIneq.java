@@ -1,5 +1,7 @@
 package fr.ensimag.deca.tree;
 
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.ima.pseudocode.Label;
 
 /**
  *
@@ -11,6 +13,5 @@ public abstract class AbstractOpIneq extends AbstractOpCmp {
     public AbstractOpIneq(AbstractExpr leftOperand, AbstractExpr rightOperand) {
         super(leftOperand, rightOperand);
     }
-
 
 }

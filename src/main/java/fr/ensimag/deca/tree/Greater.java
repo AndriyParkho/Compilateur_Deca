@@ -5,6 +5,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BGT;
+import fr.ensimag.ima.pseudocode.instructions.BLE;
 import fr.ensimag.ima.pseudocode.instructions.SGT;
 
 /**
@@ -31,11 +32,16 @@ public class Greater extends AbstractOpIneq {
 		return new SGT(op);
 	}
 
+
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
-		Label labelSaut = new Label(nom);
-		compiler.addInstruction(new BGT(labelSaut));
-		return labelSaut;
+	protected Instruction getSaut(Label etiquette) {
+		return new BGT(etiquette);
+	}
+
+
+	@Override
+	protected Instruction getNotSaut(Label etiquette) {
+		return new BLE(etiquette);
 	}
 
 }
