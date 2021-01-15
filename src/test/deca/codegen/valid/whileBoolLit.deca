@@ -1,0 +1,16 @@
+// Description:
+//    tests du while avec juste true et false
+//
+// Resultats:
+//    Boucle infini xInf
+
+{
+   while(false){
+   		println("On doit pas rentrer là");
+   }
+   
+   while(true){
+   		println("Boucle infini");
+   }
+}
+
