@@ -18,8 +18,7 @@ import java.io.PrintStream;
 public class NoInitialization extends AbstractInitialization {
 
     @Override
-    protected void verifyInitialization(DecacCompiler compiler, Type t,
-            EnvironmentExp localEnv, ClassDefinition currentClass)
+    protected void verifyInitialization(DecacCompiler compiler, Type t, ClassDefinition currentClass)
             throws ContextualError {
     	//Fait
     	//rien à vérifier

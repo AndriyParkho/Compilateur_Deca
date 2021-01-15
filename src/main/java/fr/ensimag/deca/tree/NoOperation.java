@@ -16,7 +16,7 @@ import java.io.PrintStream;
 public class NoOperation extends AbstractInst {
 
     @Override
-    protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
+    protected void verifyInst(DecacCompiler compiler,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
         //Fait

@@ -1,7 +1,12 @@
 // Description:
 //    test du sans objet pour la démonstration
 // Resultats:
-//    rien
+//	3.0
+//	5
+//	6.0
+//	0.833333
+//	0
+//	0.416667
 
 {
    float i;

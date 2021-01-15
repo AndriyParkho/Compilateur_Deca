@@ -34,7 +34,7 @@ public class TestPlusWithoutMock {
         boolean hasBeenVerified = false;
 
         @Override
-        public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+        public Type verifyExpr(DecacCompiler compiler,
                 ClassDefinition currentClass) throws ContextualError {
             hasBeenVerified = true;
             return INT;
@@ -92,13 +92,13 @@ public class TestPlusWithoutMock {
     }
 
     @Test
-    public void testType() throws ContextualError {
+    public void testType() throws ContextualError, EnvironmentExp.DoubleDefException, EnvironmentType.DoubleDefException {
         DecacCompiler compiler = new DecacCompiler(null, null);
         DummyIntExpression left = new DummyIntExpression();
         DummyIntExpression right = new DummyIntExpression();
         Plus t = new Plus(left, right);
         // check the result
-        assertTrue(t.verifyExpr(compiler, null, null).isInt());
+        assertTrue(t.verifyExpr(compiler, null).isInt());
         // check that the dummy expression have been called properly.
         left.checkProperUse();
         right.checkProperUse();

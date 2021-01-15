@@ -41,7 +41,7 @@ public class DeclVar extends AbstractDeclVar {
 
     @Override
     protected void verifyDeclVar(DecacCompiler compiler,
-            EnvironmentExp localEnv, ClassDefinition currentClass)
+            ClassDefinition currentClass)
             throws ContextualError {
     	//Fait
     	Type typeVar;
@@ -55,8 +55,8 @@ public class DeclVar extends AbstractDeclVar {
     	try {
     		VariableDefinition defVar= new VariableDefinition(typeVar,this.varName.getLocation());
     		this.varName.setDefinition(defVar);
-    		this.initialization.verifyInitialization(compiler, typeVar, localEnv, currentClass);
-    		localEnv.declare(this.varName.getName(), defVar);
+    		this.initialization.verifyInitialization(compiler, typeVar, currentClass);
+    		compiler.getEnvExp().declare(this.varName.getName(), defVar);
     	}catch(ContextualError ce)
     	{throw ce;}
     	 catch(EnvironmentExp.DoubleDefException doubleDefinition)

@@ -40,11 +40,9 @@ public class Program extends AbstractProgram {
     public void verifyProgram(DecacCompiler compiler) throws ContextualError {
         LOG.debug("verify program: start");
         try {
-        	EnvironmentExp localEnvExp = new EnvironmentExp(null);
-    		
-        	this.passe1(compiler, localEnvExp);
-        	this.passe2(compiler, localEnvExp);
-        	this.passe3(compiler, localEnvExp);
+        	this.passe1(compiler);
+        	this.passe2(compiler);
+        	this.passe3(compiler);
         }catch (ContextualError ce) {throw ce;}
         LOG.debug("verify program: end");
     }
@@ -77,27 +75,24 @@ public class Program extends AbstractProgram {
         main.prettyPrint(s, prefix, true);
     }
     
-    public void passe1(DecacCompiler compiler, EnvironmentExp localEnvExp) throws ContextualError{}
+    public void passe1(DecacCompiler compiler) throws ContextualError{
+        //A decommenter quand on voudra le tester mais ne pas commit ! Cette méthode doit rester vide jusqu'au rendu intermédiaire
+        /*try{
+            classes.verifyListClass(compiler);
+        }catch(ContextualError ce){throw ce;}*/
+    }
     
-    public void passe2(DecacCompiler compiler, EnvironmentExp localEnvExp) throws ContextualError{}
+    public void passe2(DecacCompiler compiler) throws ContextualError{
+        //A decommenter quand on voudra le tester mais ne pas commit ! Cette méthode doit rester vide jusqu'au rendu intermédiaire
+        /*try{
+            classes.verifyListClassMembers(compiler);
+        }catch(ContextualError ce){throw ce;}*/
+    }
     
-    public void passe3(DecacCompiler compiler, EnvironmentExp localEnvExp) throws ContextualError{
+    public void passe3(DecacCompiler compiler) throws ContextualError{
     	try {
-    		main.verifyMain(compiler, localEnvExp);
+    	    //classes.verifyListClassBody(compiler);
+    		main.verifyMain(compiler);
     	}catch(ContextualError ce) {throw ce;}
-    	/*this.iter(new TreeFunction() {
-            @Override
-            public void apply(Tree t) {
-                if (t instanceof Identifier) {
-                	((Identifier) t).setDefinition(localEnvExp.get(((Identifier) t).getName()));
-                }
-                else if(t instanceof AbstractExpr) {
-                	try {
-                		((AbstractExpr) t).setType(((AbstractExpr) t).verifyExpr(compiler, localEnvExp, currentClass));
-                	}
-                	catch (ContextualError e) {}
-                }
-            }
-        });*/
     }
 }

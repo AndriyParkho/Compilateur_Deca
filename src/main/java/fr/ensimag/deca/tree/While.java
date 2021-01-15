@@ -50,12 +50,12 @@ public class While extends AbstractInst {
     }
 
     @Override
-    protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
+    protected void verifyInst(DecacCompiler compiler,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
     	//Fait
-    	this.condition.verifyCondition(compiler, localEnv, currentClass);
-    	this.body.verifyListInst(compiler, localEnv, currentClass, returnType);
+    	this.condition.verifyCondition(compiler, currentClass);
+    	this.body.verifyListInst(compiler, currentClass, returnType);
     }
 
     @Override

@@ -30,14 +30,14 @@ public class Assign extends AbstractBinaryExpr {
     }
 
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Type verifyExpr(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
     	//le type de l'opérateur doit etre compatible avec le type de l'opérateur droite
     	//il suffit alors d'appeler la fonction verifyRValue
     	Type typeGauche;
     	try {
-    		typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-    		this.getRightOperand().verifyRValue(compiler, localEnv, currentClass, typeGauche);
+    		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
+    		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
     	}catch (ContextualError ce) {throw ce;}
     	this.setType(typeGauche);
     	return typeGauche;

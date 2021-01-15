@@ -60,10 +60,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * implements non-terminals "expr" and "lvalue" 
      *    of [SyntaxeContextuelle] in pass 3
      *
-     * @param compiler  (contains the "env_types" attribute)
-     * @param localEnv
-     *            Environment in which the expression should be checked
-     *            (corresponds to the "env_exp" attribute)
+     * @param compiler  (contains the "env_types" the "env_exp" attribute)
      * @param currentClass
      *            Definition of the class containing the expression
      *            (corresponds to the "class" attribute)
@@ -72,7 +69,7 @@ public abstract class AbstractExpr extends AbstractInst {
      *            (corresponds to the "type" attribute)
      */
     public abstract Type verifyExpr(DecacCompiler compiler,
-            EnvironmentExp localEnv, ClassDefinition currentClass)
+            ClassDefinition currentClass)
             throws ContextualError;
 
     /**
@@ -80,19 +77,18 @@ public abstract class AbstractExpr extends AbstractInst {
      * 
      * implements non-terminal "rvalue" of [SyntaxeContextuelle] in pass 3
      *
-     * @param compiler  contains the "env_types" attribute
-     * @param localEnv corresponds to the "env_exp" attribute
+     * @param compiler  contains the "env_types" and the "env_exp" attribute
      * @param currentClass corresponds to the "class" attribute
      * @param expectedType corresponds to the "type1" attribute            
      * @return this with an additional ConvFloat if needed...
      */
     public AbstractExpr verifyRValue(DecacCompiler compiler,
-            EnvironmentExp localEnv, ClassDefinition currentClass, 
+             ClassDefinition currentClass,
             Type expectedType)
             throws ContextualError {
     	Type typeReel;
     	try {
-    		typeReel=this.verifyExpr(compiler, localEnv , currentClass);
+    		typeReel=this.verifyExpr(compiler, currentClass);
     	} catch(ContextualError ce) { throw ce;}
     	//on vérifie d'abord s'il s'agit d'une classe
 		if(typeReel.isClass())
@@ -115,7 +111,7 @@ public abstract class AbstractExpr extends AbstractInst {
     		if(typeReel.isInt() && expectedType.isFloat())
     		{
     			ConvFloat entierEnReel= new ConvFloat(this);
-    			entierEnReel.verifyExpr(compiler, localEnv, currentClass);
+    			entierEnReel.verifyExpr(compiler, currentClass);
     			entierEnReel.setType(typeReel);
     			return entierEnReel;
     		}
@@ -132,11 +128,11 @@ public abstract class AbstractExpr extends AbstractInst {
     
     
     @Override
-    protected void verifyInst(DecacCompiler compiler, EnvironmentExp localEnv,
+    protected void verifyInst(DecacCompiler compiler,
             ClassDefinition currentClass, Type returnType)
             throws ContextualError {
     	try {
-    		this.verifyExpr(compiler, localEnv, currentClass);
+    		this.verifyExpr(compiler, currentClass);
     	} catch (ContextualError ce) {throw ce;}
     }
 
@@ -144,18 +140,16 @@ public abstract class AbstractExpr extends AbstractInst {
      * Verify the expression as a condition, i.e. check that the type is
      * boolean.
      *
-     * @param localEnv
-     *            Environment in which the condition should be checked.
      * @param currentClass
      *            Definition of the class containing the expression, or null in
      *            the main program.
      */
-    void verifyCondition(DecacCompiler compiler, EnvironmentExp localEnv,
+    void verifyCondition(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
        
     	Type type;
     	try {
-    		type=this.verifyExpr(compiler, localEnv, currentClass);
+    		type=this.verifyExpr(compiler, currentClass);
     	} catch (ContextualError ce) {throw ce;}
     	//il faut juste alors vérifier si type est bien un booléen
     	if(!type.isBoolean())

@@ -21,15 +21,15 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     }
 
     @Override
-    public Type verifyExpr(DecacCompiler compiler, EnvironmentExp localEnv,
+    public Type verifyExpr(DecacCompiler compiler,
             ClassDefinition currentClass) throws ContextualError {
         //throw new UnsupportedOperationException("not yet implemented");
     	//d'abord on récupère les deux opérateurs droite et gauche
     	Type typeGauche;
     	Type typeDroite;
     	try {
-    		typeGauche=this.getLeftOperand().verifyExpr(compiler, localEnv, currentClass);
-    		typeDroite=this.getRightOperand().verifyExpr(compiler, localEnv, currentClass);
+    		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
+    		typeDroite=this.getRightOperand().verifyExpr(compiler, currentClass);
     	} catch (ContextualError ce) {throw ce;}
     	//il faut ensuite s'assurer que les deux opérateurs sont des booléens
     	if((!typeGauche.isBoolean())||(!typeDroite.isBoolean()))
