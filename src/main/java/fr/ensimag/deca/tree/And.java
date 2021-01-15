@@ -22,24 +22,18 @@ public class And extends AbstractOpBool {
         return "&&";
     }
 
-
-	@Override
-	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		//A FAIRE : générer code pour ADD
-		throw new UnsupportedOperationException("not yet implemented");
-	}
 	
 	@Override
-	protected void codeGenSaut(DecacCompiler compiler, Boolean evaluation, Label etiquette, GPRegister op) {
+	protected void codeGenSaut(DecacCompiler compiler, boolean evaluation, Label etiquette, GPRegister op) {
 		if(evaluation) {
 			Label finAnd = new Label("finAnd." + getLocation().getLine() + "."+getLocation().getPositionInLine());
-			getLeftOperand().codeGenSaut(compiler, false, finAnd);
-			getRightOperand().codeGenSaut(compiler, true, etiquette);
+			getLeftOperand().codeGenSaut(compiler, false, finAnd, op);
+			getRightOperand().codeGenSaut(compiler, true, etiquette, op);
 			compiler.addLabel(finAnd);
 		}
 		else {
-			getLeftOperand().codeGenSaut(compiler, false, etiquette);
-			getRightOperand().codeGenSaut(compiler, false, etiquette);
+			getLeftOperand().codeGenSaut(compiler, false, etiquette, op);
+			getRightOperand().codeGenSaut(compiler, false, etiquette, op);
 		}
 	}
 
