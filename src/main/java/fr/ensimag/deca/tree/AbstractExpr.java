@@ -13,9 +13,11 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
+import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
@@ -163,7 +165,7 @@ public abstract class AbstractExpr extends AbstractInst {
      *
      * @param compiler
      */
-    protected void codeGenPrint(DecacCompiler compiler) {
+    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
     	//FAIT : traiter codeGenPrint pour les autres types que des chaînes de caractère
     	if(type.isString()) {
     		StringLiteral newThis= (StringLiteral) this;
@@ -172,7 +174,8 @@ public abstract class AbstractExpr extends AbstractInst {
     	}
     	else if(type.isFloat()) {
     		this.codeGenExpr(compiler, Register.R1);
-    		compiler.addInstruction(new WFLOAT());
+    		Instruction printInst = printHex ? new WFLOATX() : new WFLOAT();
+    		compiler.addInstruction(printInst);
     	}
     	
     	else if(type.isInt()) {
