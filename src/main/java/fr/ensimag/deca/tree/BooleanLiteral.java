@@ -12,6 +12,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
@@ -90,7 +91,13 @@ public class BooleanLiteral extends AbstractExpr {
 	
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-    	// A FAIRE
+    	if(!value) {
+    		(new BooleanLiteral(true)).codeGenSaut(compiler, !eval, etiquette, op);
+    	} else {
+    		if(eval) {
+    			compiler.addInstruction(new BRA(etiquette));
+    		}
+    	}
     }
 
 }

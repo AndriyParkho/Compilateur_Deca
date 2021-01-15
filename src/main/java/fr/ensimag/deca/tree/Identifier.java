@@ -254,7 +254,7 @@ public class Identifier extends AbstractIdentifier {
 	
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-		// A FAIRE
+		this.codeGenExpr(compiler, op);
     }
 
 	@Override
