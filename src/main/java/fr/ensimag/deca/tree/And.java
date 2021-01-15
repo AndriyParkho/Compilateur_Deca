@@ -22,6 +22,7 @@ public class And extends AbstractOpBool {
         return "&&";
     }
 
+
 	@Override
 	protected Instruction getMnemo(DVal op1, GPRegister op2) {
 		//A FAIRE : générer code pour ADD

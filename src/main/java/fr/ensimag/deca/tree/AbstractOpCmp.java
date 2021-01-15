@@ -1,23 +1,23 @@
 package fr.ensimag.deca.tree;
 
+import java.util.Objects;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.DValGetter;
+import fr.ensimag.deca.context.BooleanType;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
-
-import java.util.Objects;
-
-import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.DValGetter;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.BooleanType;
 
 
 /**
@@ -105,7 +105,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(this.getMnemo(op));
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres()) {
-    			GPRegister nextOp = Register.getR(op.getNumber() + 1);
+    			GPRegister nextOp = Register.getR(numeroRegistre + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(new CMP(nextOp, op), "Afin de tester "+getOperatorName());
@@ -114,6 +114,44 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	}
     }
     
-    protected abstract Instruction getMnemo(GPRegister op);
+    @Override
+	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
+    	DVal rightDval = DValGetter.getDVal(getRightOperand());
+    	int numeroRegistre = op.getNumber();
+    	if(rightDval != null) {
+    		getLeftOperand().codeGenSaut(compiler, eval, etiquette, op);
+    		compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
+    		compiler.addInstruction(this.getMnemo(op));
+    	}else {
+    		if(numeroRegistre == compiler.getNombreRegistres()) {
+    			getLeftOperand().codeGenExpr(compiler, op);
+    			compiler.addInstruction(new PUSH(op));
+    			getRightOperand().codeGenExpr(compiler, op);
+    			compiler.addInstruction(new LOAD(op, Register.R0));
+    			compiler.addInstruction(new POP(op));
+    			compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName());
+    			compiler.addInstruction(this.getMnemo(op));
+    			
+    		} else if(numeroRegistre < compiler.getNombreRegistres()) {
+    			GPRegister nextOp = Register.getR(op.getNumber() + 1);
+    			getLeftOperand().codeGenExpr(compiler, op);
+        		getRightOperand().codeGenExpr(compiler, nextOp);
+        		compiler.addInstruction(new CMP(nextOp, op), "Afin de tester "+getOperatorName());
+        		compiler.addInstruction(this.getMnemo(op));
+    		}
+    	}
+	}
+
+	protected abstract Instruction getMnemo(GPRegister op);
+    
+    /*
+     * Renvoie l'instruction du saut associé à l'expression booléenne
+     */
+    protected abstract Instruction getSaut(Label etiquette);
+    
+    /*
+     * Renvoie le saut inverse associé à l'expression booléenne
+     */
+    protected abstract Instruction getNotSaut(Label etiquette);
     
 }

@@ -9,6 +9,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
@@ -84,7 +85,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			compiler.addInstruction(new POP(op));
     			compiler.addInstruction(this.getMnemo(Register.R0, op));
     		} else if(n < compiler.getNombreRegistres()) {
-    			GPRegister nextOp = Register.getR(op.getNumber() + 1);
+    			GPRegister nextOp = Register.getR(n + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(this.getMnemo(nextOp, op));
@@ -93,7 +94,13 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     	this.printErrLabel(compiler);
     }
     
-    protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
+    @Override
+	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
+    	// A FAIRE : Vérifier
+		this.codeGenExpr(compiler, op);
+	}
+
+	protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
     
     protected abstract void printErrLabel(DecacCompiler compiler);
 }

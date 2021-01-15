@@ -45,7 +45,5 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     	throw new UnsupportedOperationException("not yet implemented");
     }
     
-    protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
-    
 
 }

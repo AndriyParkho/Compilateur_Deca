@@ -5,7 +5,9 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BGE;
 import fr.ensimag.ima.pseudocode.instructions.BLE;
+import fr.ensimag.ima.pseudocode.instructions.BLT;
 import fr.ensimag.ima.pseudocode.instructions.SGT;
 
 /**
@@ -29,12 +31,17 @@ public class Lower extends AbstractOpIneq {
 	protected Instruction getMnemo(GPRegister op) {
 		return new SGT(op);
 	}
-	
+
+
 	@Override
-	protected Label codeGenSaut(DecacCompiler compiler, String nom) {
-		Label labelSaut = new Label(nom);
-		compiler.addInstruction(new BLE(labelSaut));
-		return labelSaut;
+	protected Instruction getSaut(Label etiquette) {
+		return new BLT(etiquette);
+	}
+
+
+	@Override
+	protected Instruction getNotSaut(Label etiquette) {
+		return new BGE(etiquette);
 	}
 	
 }

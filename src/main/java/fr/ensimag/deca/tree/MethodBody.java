@@ -2,47 +2,41 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import org.apache.commons.lang.Validate;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
- * Declaration of a field
+ * Declaration of a class (<code>class name extends superClass {members}<code>).
  *
  * @author lagham
  * @date 14/01/2021
  */
-public class DeclField extends AbstractDeclField {
+public class MethodBody extends AbstractMethodBody {
 	
-	private AbstractIdentifier name;
-	private AbstractIdentifier type;
-	private AbstractInitialization initialization;
-	private Visibility visib;
+	private ListDeclVar listDeclVar;
+	private ListInst listInst;
 	
-	public DeclField(AbstractIdentifier name , AbstractIdentifier type , AbstractInitialization initialization , Visibility visib)
+	public MethodBody(ListDeclVar listVar, ListInst listInst)
 	{
-		this.name=name;
-		this.type=type;
-		this.initialization=initialization;
-		this.visib=visib;
+		Validate.notNull(listVar);
+		Validate.notNull(listInst);
+		this.listDeclVar=listVar;
+		this.listInst=listInst;
 	}
 	
 	
 	@Override
-	public  void verifyFieldMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
-            throws ContextualError{
+	public void verifyMethodBody(DecacCompiler compiler, EnvironmentExp localEnv, ClassDefinition currentClass, Type returnType)
+		    throws ContextualError{
 		//A FAIRE
 	}
 	
-	@Override
-    public void verifyFieldBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
-            throws ContextualError{
-		//A FAIRE
-	}
-	
-
 	@Override
     public void decompile(IndentPrintStream s) {
         s.print("class { ... A FAIRE ... }");
@@ -57,5 +51,5 @@ public class DeclField extends AbstractDeclField {
 	protected void iterChildren(TreeFunction f) {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
-	
+
 }

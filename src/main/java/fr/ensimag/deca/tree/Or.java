@@ -20,10 +20,4 @@ public class Or extends AbstractOpBool {
         return "||";
     }
 
-	@Override
-	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		//A FAIRE : générer code pour OR
-		throw new UnsupportedOperationException("not yet implemented");
-	}
-
 }
