@@ -1,0 +1,21 @@
+// Description:
+//    test du sans objet pour la démonstration
+// Resultats:
+//    rien
+
+{
+   float i;
+   int x = 5;
+   float y = 1.2*5;
+   float z = x/y;
+   int t;
+   t = 10 % x;
+   i = 1.5*4 / 2.0;
+   println(i);
+   println(x);
+   println(y);
+   println(z);
+   println(t);
+   println(z/2); 
+}
+

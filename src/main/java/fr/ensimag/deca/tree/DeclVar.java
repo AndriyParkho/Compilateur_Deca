@@ -100,19 +100,20 @@ public class DeclVar extends AbstractDeclVar {
     		Initialization init = (Initialization) initialization;
     		init.getExpression().codeGenInst(compiler);
     		compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
-    	} else {
-    		if(varName.getType().isInt()) {
-    			compiler.addInstruction(new LOAD(new ImmediateInteger(0), compiler.getRegisterStart()));
-    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
-    		} else if(varName.getType().isFloat()) {
-    			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), compiler.getRegisterStart()));
-    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
-    		} else if(varName.getType().isBoolean()) {
-    			compiler.addInstruction(new LOAD(0, compiler.getRegisterStart()));
-    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
-    		} else {
-    			throw new UnsupportedOperationException("not yet implemented");
-    		}
-    	}
+    	} 
+//    	else {
+//    		if(varName.getType().isInt()) {
+//    			compiler.addInstruction(new LOAD(new ImmediateInteger(0), compiler.getRegisterStart()));
+//    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+//    		} else if(varName.getType().isFloat()) {
+//    			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), compiler.getRegisterStart()));
+//    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+//    		} else if(varName.getType().isBoolean()) {
+//    			compiler.addInstruction(new LOAD(0, compiler.getRegisterStart()));
+//    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+//    		} else {
+//    			throw new UnsupportedOperationException("not yet implemented");
+//    		}
+//    	}
     }
 }
