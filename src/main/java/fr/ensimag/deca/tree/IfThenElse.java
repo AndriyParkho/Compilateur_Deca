@@ -39,7 +39,7 @@ public class IfThenElse extends AbstractInst {
             throws ContextualError {
     	//Fait
     	this.condition.verifyCondition(compiler, localEnv, currentClass);
-    	this.thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
+        this.thenBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
     	this.elseBranch.verifyListInst(compiler, localEnv, currentClass, returnType);
     }
 
@@ -47,7 +47,7 @@ public class IfThenElse extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler)  {
         // A FAIRE : gestion du branchement conditionnel
     	condition.codeGenExpr(compiler, compiler.getRegisterStart());
-    	Label labelSaut = condition.codeGenSaut(compiler, "sinonIfLine"+condition.getLocation().getLine());
+    	Label labelSaut = condition.codeGenSaut(compiler, "sinonIfLine"+condition.getLocation().getLine()+"Pos"+condition.getLocation().getPositionInLine());
     	elseBranch.codeGenListInst(compiler);
     	Label finIf = new Label("finIfLine"+condition.getLocation().getLine());
     	compiler.addInstruction(new BRA(finIf));

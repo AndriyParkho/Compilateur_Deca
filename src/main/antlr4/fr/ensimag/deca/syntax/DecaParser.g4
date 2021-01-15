@@ -178,7 +178,7 @@ if_then_else returns[IfThenElse tree]
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
             var=new IfThenElse($elsif_cond.tree,$elsif_li.tree,liste2);
-            setLocation(liste2,$elsif);
+            setLocation(var,$elsif);
             liste.add(var);
             liste=liste2;
         }

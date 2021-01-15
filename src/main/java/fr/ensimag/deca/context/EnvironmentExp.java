@@ -2,6 +2,7 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import org.apache.log4j.Logger;
+
 import java.util.Hashtable;
 
 /**
@@ -42,9 +43,16 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        //throw new UnsupportedOperationException("not yet implemented");
-    	//A modifier quand on aura plusieurs environnements.
-    	return this.donnees.get(key);
+        EnvironmentExp env_courant = this;
+        while (env_courant != null){
+            if (env_courant.donnees.get(key) != null){
+                return env_courant.donnees.get(key);
+            }
+            else{
+                env_courant = env_courant.parentEnvironment;
+            }
+        }
+        return null;
     }
 
     /**
@@ -63,15 +71,40 @@ public class EnvironmentExp {
      *
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-        //throw new UnsupportedOperationException("not yet implemented");
-    	//A modifier quand on aura plusieurs environnements
-		Logger LOG = Logger.getLogger("log");
-    	if (this.get(name) == null) { 
+    	if (this.donnees.get(name) == null) {
     		this.donnees.put(name, def);
     	}
     	else {
     		throw new DoubleDefException();
     	}
+    }
+
+
+    public EnvironmentExp union(EnvironmentExp env) throws DoubleDefException{
+        //Calcul de l'union de deux environnements. Renvoie une erreur contextuelle si indéfinie
+        for (Symbol symbol_this : this.donnees.keySet()){
+            for (Symbol symbol_env : env.donnees.keySet()){
+                if (symbol_this.getName().equals(symbol_env.getName())){
+                    throw new DoubleDefException();
+                }
+            }
+        }
+        EnvironmentExp Union;
+        if (this.parentEnvironment== null && env.parentEnvironment == null) {
+            Union = new EnvironmentExp(null);
+        }
+        else if (this.parentEnvironment == null){
+            Union = new EnvironmentExp(env.parentEnvironment);
+        }
+        else if (env.parentEnvironment == null){
+            Union = new EnvironmentExp(this.parentEnvironment);
+        }
+        else {
+            Union = new EnvironmentExp(this.parentEnvironment.union(env.parentEnvironment));
+        }
+        Union.donnees.putAll(this.donnees);
+        Union.donnees.putAll(env.donnees);
+        return Union;
     }
 
 }
