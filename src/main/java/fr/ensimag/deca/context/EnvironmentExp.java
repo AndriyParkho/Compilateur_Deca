@@ -22,7 +22,7 @@ import java.util.Hashtable;
  * @author gl10
  * @date 01/01/2021
  */
-public class EnvironmentExp {
+public class    EnvironmentExp {
     // A FAIRE : implémenter la structure de donnée représentant un
     // environnement (association nom -> définition, avec possibilité
     // d'empilement).
@@ -34,7 +34,7 @@ public class EnvironmentExp {
         this.parentEnvironment = parentEnvironment;
     }
 
-    public static class DoubleDefException extends Exception {
+    public static class DoubleDefException extends RuntimeException {
         private static final long serialVersionUID = -2733379901827316441L;
     }
 

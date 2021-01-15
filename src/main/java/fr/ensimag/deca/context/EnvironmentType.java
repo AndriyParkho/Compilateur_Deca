@@ -33,7 +33,7 @@ public class EnvironmentType {
         this.parentEnvironment = parentEnvironment;
     }
 
-    public static class DoubleDefException extends Exception {
+    public static class DoubleDefException extends RuntimeException {
         private static final long serialVersionUID = -2733379901827316441L;
     }
 

@@ -85,7 +85,7 @@ public class DecacCompiler {
     * méthode qui initialise l'environnement des types en y insérant 
     * tous les types prédéfinis
     */
-   public void envTypesInit () throws EnvironmentType.DoubleDefException
+   public void envTypesInit () /*throws EnvironmentType.DoubleDefException**/
    {
 	   Symbol intSymbol=this.symbolTable.create("int");
 	   Symbol floatSymbol=this.symbolTable.create("float");
@@ -104,13 +104,13 @@ public class DecacCompiler {
        this.envTypes.declare(intSymbol, intTypeDef);
    }
 
-   public void envExpInit() throws EnvironmentExp.DoubleDefException{
+   public void envExpInit() {
        // Acompléter avec la méthode equals d'objets
        this.envExp = new EnvironmentExp(null);
    }
    
    
-    public DecacCompiler(CompilerOptions compilerOptions, File source) throws EnvironmentType.DoubleDefException, EnvironmentExp.DoubleDefException{
+    public DecacCompiler(CompilerOptions compilerOptions, File source) {
         super();
         this.compilerOptions = compilerOptions;
         this.source = source;

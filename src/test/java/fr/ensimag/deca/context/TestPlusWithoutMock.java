@@ -92,7 +92,7 @@ public class TestPlusWithoutMock {
     }
 
     @Test
-    public void testType() throws ContextualError, EnvironmentExp.DoubleDefException, EnvironmentType.DoubleDefException {
+    public void testType() throws ContextualError {
         DecacCompiler compiler = new DecacCompiler(null, null);
         DummyIntExpression left = new DummyIntExpression();
         DummyIntExpression right = new DummyIntExpression();
