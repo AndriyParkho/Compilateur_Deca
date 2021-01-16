@@ -1,5 +1,7 @@
 package fr.ensimag.deca.tree;
 
+import java.util.Iterator;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -28,7 +30,10 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
 	
 	@Override
     public void decompile(IndentPrintStream s) {
-	 //A FAIRE
+		Iterator<AbstractDeclField> iterateur = this.iterator();
+        while(iterateur.hasNext()) {
+            iterateur.next().decompile(s);    
+        }
  }
 
 

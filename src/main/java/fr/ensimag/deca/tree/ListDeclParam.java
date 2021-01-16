@@ -5,6 +5,9 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -28,7 +31,10 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 	
 	 @Override
 	    public void decompile(IndentPrintStream s) {
-		 //A FAIRE
+			Iterator<AbstractDeclParam> iterateur = this.iterator();
+			while(iterateur.hasNext()) {
+				iterateur.next().decompile(s);				
+			}
 	 }
 
 }

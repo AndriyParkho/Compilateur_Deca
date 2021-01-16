@@ -20,11 +20,9 @@ public class ListDeclVar extends TreeList<AbstractDeclVar> {
     public void decompile(IndentPrintStream s) {
         Iterator<AbstractDeclVar> iterateur = this.iterator();
         while(iterateur.hasNext()) {
-            iterateur.next().decompile(s);
-            
+            iterateur.next().decompile(s);        
         }
-        
-        }
+    }
 
     /**
      * Implements non-terminal "list_decl_var" of [SyntaxeContextuelle] in pass 3

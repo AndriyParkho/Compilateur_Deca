@@ -43,7 +43,9 @@ public class DeclParam extends AbstractDeclParam {
 	
 	@Override
     public void decompile(IndentPrintStream s) {
-        s.print("class { ... A FAIRE ... }");
+		this.type.decompile(s);
+		s.print(" ");
+		this.name.decompile(s);
     }
 	
 	@Override
