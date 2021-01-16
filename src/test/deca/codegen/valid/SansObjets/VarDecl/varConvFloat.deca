@@ -2,10 +2,13 @@
 //    tests de déclaration de float
 //
 // Resultats:
-//    rien
+//  1.0
+//  3.0
 
 {
    float x = 1; 
    float y = 3;
+   println(x);
+   println(y);
 }
 

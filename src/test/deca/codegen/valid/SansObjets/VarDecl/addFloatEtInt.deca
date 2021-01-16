@@ -2,11 +2,16 @@
 //    test de déclaration de variable en additionant 1 float et 1 int, une variable int et une variable float
 //
 // Resultats:
-//    rien
+//  3.5
+//  5
+//  8.5
 
 {
    float x = 1.5 + 2;
    int y = 5;
    float z = x + y;
+   println(x);
+   println(y);
+   println(z);
 }
 

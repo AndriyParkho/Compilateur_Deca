@@ -2,15 +2,29 @@
 //    tests de déclaration de booléen
 //
 // Resultats:
-//    rien
+//  true
+//  true
+//  false
+//  false
 
 {
    int x = 2;
    int y = 4;
    boolean bool;
    bool = (x==x) == (y==y);
+   if(bool){
+	println("true");
+   }
    bool = ((x < y) != (x <= y) == (x > x) == (y>=y)) != ((x>=y) == (y <x) != (x<= x));
-	bool = !bool;
-	x == 0;
+   if(bool){
+        println("true");
+   }
+   bool = !bool;
+   if(!bool){
+        println("false");
+   }
+   if(!(x==0)){
+        println("false");
+   }
 }
 

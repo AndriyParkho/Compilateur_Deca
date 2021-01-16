@@ -2,10 +2,18 @@
 //    tests de déclaration de booléen
 //
 // Resultats:
-//    rien
+//  true
+//  false
 
 {
    boolean x = true;
    boolean y = false;
+   if (x){
+	println("true");
+   }
+   if (!y){
+	println("false");
+   }
 }
+
 

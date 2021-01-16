@@ -1,5 +1,5 @@
 // Description:
-//    champs et methodes simples
+//    champs et methodes simples. Skipped test. A modifier quand on aura la compilation objet
 //
 // Resultats:
 //    a.getX() = 1

@@ -2,9 +2,10 @@
 //    tests de déclaration d'entier
 //
 // Resultats:
-//    rien
+//  1
 
 {
    int x = 1 * 1;
+   println(x);
 }
 

@@ -2,10 +2,13 @@
 //    tests de déclaration d'entier
 //
 // Resultats:
-//    rien
+//    1
+//    3
 
 {
    int i = 1; 
    int y = 3;
+   println(i);
+   println(y);
 }
 

@@ -1,5 +1,5 @@
 // Description:
-//    Utilisation simple de la classe Math
+//    Utilisation simple de la classe Math. Skipped test. A modifier quand on compilera l'objet
 //
 // Resultats:
 //    cos(0.0) = 1.00000e+00

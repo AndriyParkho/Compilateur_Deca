@@ -2,7 +2,10 @@
 //    test de déclaration de variable en réalisant plusieurs opérations
 //
 // Resultats:
-//    rien
+//  54
+//  0
+//  3
+//  162
 
 {
    int x = 1 * 7 + 4 * 6  - 7 + 50 - 20;

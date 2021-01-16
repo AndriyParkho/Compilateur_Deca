@@ -21,7 +21,7 @@ if [ ! -f ./src/test/deca/codegen/valid/provided/cond0.ass ]; then
     exit 1
 fi
 
-resultat=$(ima ./src/test/deca/codegen/valid/provided/cond0.ass) || exit 1
+resultat=$(../global/bin/ima ./src/test/deca/codegen/valid/provided/cond0.ass) || exit 1
 rm -f ./src/test/deca/codegen/valid/provided/cond0.ass
 
 # On code en dur la valeur attendue.

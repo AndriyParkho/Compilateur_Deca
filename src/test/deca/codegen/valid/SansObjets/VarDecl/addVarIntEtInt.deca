@@ -2,10 +2,13 @@
 //    tests de déclaration d'un entier par addition d'un entier et d'une variable
 //
 // Resultats:
-//    rien
+//  1
+//  2
 
 {
    int x = 1;
    int y = 1 + x;
+   println(x);
+   println(y);
 }
 

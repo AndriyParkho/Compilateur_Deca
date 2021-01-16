@@ -2,7 +2,11 @@
 //    tests d'affichage de variable et différente cst
 //
 // Resultats:
-//    3.2  1   "Chaine de caractère"  5  53.0
+//  3.20000e+00
+//  1
+//  Chaine de caractère
+//  5
+//  5.30000e+01
 
 {
    int x = 5;

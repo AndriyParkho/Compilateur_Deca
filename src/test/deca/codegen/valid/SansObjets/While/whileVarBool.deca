@@ -11,6 +11,11 @@
    		println("On rentre 1 fois dans le while");
    		test = false;
    }
-   println("On sort du while parce que test : ", test);
+   if (test == false){
+   	println("On sort du while parce que test : ", "false");
+   }
+   else{
+	println("On sort du while parce que test : ", "true");
+   }
 }
 
