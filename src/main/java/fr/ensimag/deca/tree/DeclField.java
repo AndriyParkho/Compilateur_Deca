@@ -31,13 +31,13 @@ public class DeclField extends AbstractDeclField {
 	
 	
 	@Override
-	public  void verifyFieldMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public  void verifyFieldMembers(DecacCompiler compiler  , ClassDefinition currentClass)
             throws ContextualError{
 		//A FAIRE
 	}
 	
 	@Override
-    public void verifyFieldBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+    public void verifyFieldBody(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
 		//A FAIRE
 	}

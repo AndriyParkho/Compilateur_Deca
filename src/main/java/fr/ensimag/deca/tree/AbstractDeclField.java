@@ -13,9 +13,9 @@ import fr.ensimag.deca.context.EnvironmentExp;
  */
 public abstract class AbstractDeclField extends Tree {
 
-	public abstract void verifyFieldMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public abstract void verifyFieldMembers(DecacCompiler compiler  , ClassDefinition currentClass)
 	                     throws ContextualError;
-	public abstract void verifyFieldBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public abstract void verifyFieldBody(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError;
 
 }

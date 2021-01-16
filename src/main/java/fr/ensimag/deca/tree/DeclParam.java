@@ -30,13 +30,13 @@ public class DeclParam extends AbstractDeclParam {
 	
 	
 	@Override
-	public  void verifyParamMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public  void verifyParamMembers(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
 		//A FAIRE
 	}
 	
 	@Override
-    public void verifyParamBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+    public void verifyParamBody(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
 		//A FAIRE
 	}

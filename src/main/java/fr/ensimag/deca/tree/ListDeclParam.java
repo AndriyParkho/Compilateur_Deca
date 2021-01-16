@@ -16,13 +16,21 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 	
 	public  void verifyParamMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
-		//A FAIRE
+		//FAIT
+		for(AbstractDeclParam param : this.getList())
+		{
+			param.verifyParamMembers(compiler, currentClass);
+		}
 	}
 	
 	
     public void verifyParamBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
-		//A FAIRE
+		//FAIT
+    	for(AbstractDeclParam param : this.getList())
+    	{
+    		param.verifyParamBody(compiler, currentClass);
+    	}
 	}
 	
 	
