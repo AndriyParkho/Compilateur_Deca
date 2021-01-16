@@ -1,17 +1,13 @@
-//Description :
-//	test de If, Then, Else
-//
-//Résultats :
-//	ok 
-
-
 {
 	int x = 1;
     if (x == 1) {
-        printlnx("Bastien");
+        println("Bastien");
     }
     else if (x == 3) {
         println("Etienne");
+    }
+    else if (true) {
+        x = 5;
     }
     else {
         println("Louis");

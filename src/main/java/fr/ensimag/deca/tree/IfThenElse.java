@@ -60,13 +60,17 @@ public class IfThenElse extends AbstractInst {
 
     @Override
     public void decompile(IndentPrintStream s) {
-        s.print("if (");
-        condition.decompile();
-        s.println(") {");
-        thenBranch.decompile();
+        s.print("if ");
+        condition.decompile(s);
+        s.println(" {");
+        s.indent();
+        thenBranch.decompile(s);
+        s.unindent();
         s.println("} else {");
-        elseBranch.decompile();
-        s.println("}");
+        s.indent();
+        elseBranch.decompile(s);
+        s.unindent();
+        s.print("}");
     }
 
     public void setListElse(ListInst liste) {

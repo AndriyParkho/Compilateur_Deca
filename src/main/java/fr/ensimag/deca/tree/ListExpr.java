@@ -17,8 +17,7 @@ public class ListExpr extends TreeList<AbstractExpr> {
     public void decompile(IndentPrintStream s) {
         Iterator<AbstractExpr> iterateur = this.iterator();
         while(iterateur.hasNext()) {
-            iterateur.next().decompile(s);
-            
+            iterateur.next().decompile(s);  
         }
     }
 }
