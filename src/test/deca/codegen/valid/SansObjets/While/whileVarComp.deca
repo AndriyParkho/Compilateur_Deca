@@ -7,22 +7,23 @@
 //    On est dans le 1er while 3 fois
 //    On est dans le 2eme while 1 fois
 //    On est dans le 2eme while 2 fois
+//    On est dans le 2eme while 3 fois
 //    On est dans le 3eme while 1 fois
 
 {
    int i = 1;
    while(i <= 3){
-   		println("On est dans le 1er while ", i, "fois");
+   		println("On est dans le 1er while ", i, " fois");
    		i = i + 1;
    }
    
    while(i > 1){
-   		println("On est dans le 2eme while ", 4 - i, "fois");
+   		println("On est dans le 2eme while ", 5 - i, " fois");
    		i = i - 1;
    }
    
    while(i == 1){
-   		println("On est dans le 3eme while ", i, "fois");
+   		println("On est dans le 3eme while ", i, " fois");
    		i = i*2;
    }
 }

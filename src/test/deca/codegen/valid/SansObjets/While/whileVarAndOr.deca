@@ -1,0 +1,33 @@
+// Description:
+//    tests du while avec des tests du type && et ||
+//
+// Resultats:
+//    On est dans le 1er while
+//    On est dans le 1er while
+//    On est dans le 2eme while
+//    On est dans le 2eme while
+//    On est dans le 3eme while
+//    On est dans le 3eme while
+
+{
+   int i = 1;
+   int j = 3;
+   while((i <= 2) && (j >= 1)){
+   		println("On est dans le 1er while");
+   		i = i + 1;
+   		j = j - 1;
+   }
+   
+   while((i > 1) || (j < 0)){
+   		println("On est dans le 2eme while");
+   		i = i - 1;
+   		j = j + 1;
+   }
+   
+   while(((i == 1) && (j > 0)) || ((i==2) && (j < 0))){
+   		println("On est dans le 3eme while");
+   		i = i*2;
+   		j = - j;
+   }
+}
+

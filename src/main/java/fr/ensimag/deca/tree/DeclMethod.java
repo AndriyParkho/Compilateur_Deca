@@ -34,13 +34,13 @@ public class DeclMethod extends AbstractDeclMethod {
 
 	
 	@Override
-	public  void verifyMethodMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public  void verifyMethodMembers(DecacCompiler compiler  , ClassDefinition currentClass)
             throws ContextualError{
 		//A FAIRE
 	}
 	
 	@Override
-    public void verifyMethodBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+    public void verifyMethodBody(DecacCompiler compiler  , ClassDefinition currentClass)
             throws ContextualError{
 		//A FAIRE
 	}

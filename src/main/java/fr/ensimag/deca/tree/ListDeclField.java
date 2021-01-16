@@ -17,15 +17,23 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 public class ListDeclField extends TreeList<AbstractDeclField> {
 	
 	
-	public  void verifyFieldMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public  void verifyFieldMembers(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
-		//A FAIRE
+		//Fait
+		for(AbstractDeclField field : this.getList())
+		{
+			field.verifyFieldMembers(compiler, currentClass);
+		}
 	}
 	
 	
-    public void verifyFieldBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+    public void verifyFieldBody(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
-		//A FAIRE
+		//Fait
+    	for(AbstractDeclField field : this.getList())
+    	{
+    		field.verifyFieldBody(compiler, currentClass);
+    	}
 	}
 	
 	@Override

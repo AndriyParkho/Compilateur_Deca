@@ -20,13 +20,21 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 	
 	public  void verifyMethodMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
-		//A FAIRE
+		//FAIT
+		for(AbstractDeclMethod method : this.getList())
+		{
+			method.verifyMethodMembers(compiler, currentClass);
+		}
 	}
 	
 	
     public void verifyMethodBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
-		//A FAIRE
+		//Fait
+    	for(AbstractDeclMethod method : this.getList())
+    	{
+    		method.verifyMethodBody(compiler, currentClass);
+    	}
 	}
 	
 	@Override
