@@ -1,6 +1,7 @@
-package fr.ensimag.deca.tools;
+package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.context.*;
+import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tree.Location;
 
 public class EnvironmentExpTest {
