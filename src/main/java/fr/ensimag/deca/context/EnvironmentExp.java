@@ -30,6 +30,11 @@ public class    EnvironmentExp {
     EnvironmentExp parentEnvironment;
     Hashtable<Symbol,ExpDefinition> donnees = new Hashtable<Symbol,ExpDefinition>();
     
+    public Hashtable<Symbol,ExpDefinition> getDonnees()
+    {
+    	return this.donnees;
+    }
+    
     public EnvironmentExp(EnvironmentExp parentEnvironment) {
         this.parentEnvironment = parentEnvironment;
     }
