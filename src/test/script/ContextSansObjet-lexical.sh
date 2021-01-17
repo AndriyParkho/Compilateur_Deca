@@ -20,6 +20,7 @@ then
 		if test_lex $test_courant 2>&1 | grep -q -e $test_courant
 		then
 			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant"
+			echo "\e[37mRésultat obtenu : \n$(test_lexical $test_courant 2>&1)"
 			exit 1
 		else
 			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
@@ -35,6 +36,7 @@ then
 			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
 		else
 			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant"
+			echo "\e[37mRésultat obtenu : \n$(test_lexical $test_courant)"
 			exit 1
 		fi
 		index_file=$((index_file+1))
@@ -47,6 +49,7 @@ then
 		if test_lex $test_courant 2>&1 | grep -q -e $test_courant
 		then
 			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant"
+			echo "\e[37mRésultat obtenu : \n$(test_lexical $test_courant 2>&1)"
 			exit 1
 		else
 			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
@@ -62,6 +65,7 @@ then
 			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
 		else
 			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant"
+			echo "\e[37mRésultat obtenu : \n$(test_lexical $test_courant)"
 			exit 1
 		fi
 		index_file=$((index_file+1))

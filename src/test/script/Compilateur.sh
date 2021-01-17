@@ -20,7 +20,7 @@ if [ ${#list_tests[@]} != ${#list_answers[@]} ]; then
 fi
 
 
-for ((i=0 ; i<${#list_tests[@]} && i<${#list_answers[@]} ; i++)); do
+for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 	
 	skip=$(grep -e readInt\(\) -e readFloat\(\) -e Skipped\ test ${list_tests[i]})	
 	if [ ! -z "$skip" ]; then
