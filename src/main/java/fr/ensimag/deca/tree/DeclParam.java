@@ -48,8 +48,8 @@ public class DeclParam extends AbstractDeclParam {
 		{
 			throw new ContextualError("type introuvable dans envTypes", this.getLocation());
 		}
-		//le type existe mais il faut qu'il soit différent de void ou null
-		else if(typeDefParam.getType().isNull()||typeDefParam.getType().isVoid())
+		//le type existe mais il faut qu'il soit différent de void
+		else if(typeDefParam.getType().isVoid())
 		{
 			throw new ContextualError("un paramètre ne peut pas ètre de type void ou null", this.getLocation());
 		}
