@@ -51,7 +51,7 @@ public class DeclParam extends AbstractDeclParam {
 		//le type existe mais il faut qu'il soit différent de void
 		else if(typeDefParam.getType().isVoid())
 		{
-			throw new ContextualError("un paramètre ne peut pas ètre de type void ou null", this.getLocation());
+			throw new ContextualError("un paramètre ne peut pas ètre de type void", this.getLocation());
 		}
 		else
 		//le type est bon
