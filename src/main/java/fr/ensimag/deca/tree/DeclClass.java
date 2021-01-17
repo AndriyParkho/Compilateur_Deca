@@ -5,8 +5,13 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable.Symbol;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -44,21 +49,70 @@ public class DeclClass extends AbstractDeclClass {
         this.methodList.decompile(s);
         s.println(" }");
     }
-
+    /**
+     * vérification de la super classe et le nom
+     * ensuite , déclaration
+     * @param compiler
+     * @throws ContextualError
+     */
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //FAIT
+    	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(this.name.getName());
+    	if(superClassDef==null)
+    	{
+    		throw new ContextualError("super classe introuvable",this.getLocation());
+    	}
+    	else if(!this.superClass.verifyType(compiler).isClass())
+    	{
+    		throw new ContextualError("le champs superClass doit etre une classe",this.getLocation());
+    	}
+    	else if(compiler.getEnvTypes().get(this.name.getName())!=null)
+    	{
+    		throw new ContextualError("une telle classe est déja définie",this.getLocation());
+    	}
+    	//on peut alors déclarer la classe et faire les set
+    	ClassType typeClass=new ClassType(this.name.getName(),this.getLocation(),superClassDef);
+    	ClassDefinition defClass= typeClass.getDefinition();
+    	Symbol symClass=compiler.getSymbolTable().create(this.name.getName().toString());
+    	compiler.getEnvTypes().declare(symClass, defClass);
+    	this.name.setDefinition(defClass);
+    	this.name.setType(typeClass);
+    	
+    	
     }
-
+    /**
+     * on initialise le nombre de champs et de méthode
+     * on vérifie la déclaration des champs et des méthodes
+     * @param compiler
+     */
     @Override
     protected void verifyClassMembers(DecacCompiler compiler)
             throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //FAIT
+    	int numFields=0;
+    	int numMethods=0;
+    	if(this.superClass.getClassDefinition()!=null)
+    	{
+    		numFields=this.superClass.getClassDefinition().getNumberOfFields();
+    		numMethods=this.superClass.getClassDefinition().getNumberOfMethods();
+    	}
+    	this.name.getClassDefinition().setNumberOfFields(numFields);
+    	this.name.getClassDefinition().setNumberOfMethods(numMethods);
+    	ClassDefinition classDef=(ClassDefinition)compiler.getEnvTypes().get(this.name.getName());
+    	this.fieldList.verifyFieldMembers(compiler, classDef);
+    	this.methodList.verifyMethodMembers(compiler, classDef);
     }
-    
+    /**
+     * vérification des initialisation des champs et des corps des méthodes 
+     * @param compiler
+     */
     @Override
     protected void verifyClassBody(DecacCompiler compiler) throws ContextualError {
-        throw new UnsupportedOperationException("not yet implemented");
+        //FAIT
+    	ClassDefinition classDef=(ClassDefinition)compiler.getEnvTypes().get(this.name.getName());
+    	this.fieldList.verifyFieldBody(compiler, classDef);
+    	this.methodList.verifyMethodBody(compiler, classDef);
     }
 
 
