@@ -45,10 +45,16 @@ public class MethodCallStructuralTest {
         Method_test.setDefinition(((ClassDefinition) compiler.getEnvTypes().get(classeASymbol)).getMembers().get(method_testSymbol));
         Method_test.setType(methode_test.getType());
 
+        SymbolTable.Symbol ySymbol = compiler.getSymbolTable().create("y");
+        VariableDefinition yDef = new VariableDefinition(new IntType(ySymbol), loc);
+        compiler.getEnvExp().declare(ySymbol, yDef);
+
+        Identifier Y = new Identifier(ySymbol);
+
         ListExpr arguments = new ListExpr();
         arguments.add(X);
 
-        MethodCall method = new MethodCall(X, Method_test, arguments);
+        MethodCall method = new MethodCall(Y, Method_test, arguments);
         method.verifyExpr(compiler, null);
     }
 }

@@ -67,7 +67,7 @@ public abstract class AbstractMethodCall extends AbstractExpr{
             return this.getType();
         }
         else{
-            throw new ContextualError(String.format("%s n'est pas une classe", variable.getName().getName()),
+            throw new ContextualError(String.format("%s n'est pas un objet", variable.getName().getName()),
                     variable.getLocation());
         }
     }
