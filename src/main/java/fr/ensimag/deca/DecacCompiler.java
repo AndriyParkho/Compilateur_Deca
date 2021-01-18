@@ -114,6 +114,7 @@ public class DecacCompiler {
        sig.add(this.envTypes.get(this.symbolTable.create("Object")).getType());
        MethodDefinition equalsDef = new MethodDefinition(this.envTypes.get(this.symbolTable.create("boolean")).getType(),
                                                          Location.BUILTIN, sig, 0);
+       this.envExp.declare(equalsSymbol, equalsDef);
    }
    
    
