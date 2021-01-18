@@ -22,6 +22,9 @@ public class compilerInstruction {
 	}
 	
 	public static Label createErreurLabel(DecacCompiler compiler, String nom, String errorMessage, boolean addFirst) {
+		if(compiler.isVerificationTest()) {
+			return null;
+		}
 		Label newLabelError = new Label(nom);
 		compiler.addErrLblList(newLabelError, errorMessage);
 		if(addFirst) compiler.addInstructionBegin(new BOV(newLabelError));

@@ -119,6 +119,7 @@ public class DecacCompiler {
         this.envTypesInit();
         this.envExpInit();
         this.nombreRegistres = compilerOptions.getNombreRegistreMax();
+        this.verificationTest = compilerOptions.isSuppressionTest();
     }
 
     /**
@@ -199,6 +200,13 @@ public class DecacCompiler {
     
     private final CompilerOptions compilerOptions;
     private final File source;
+    
+    private boolean verificationTest = false;
+    
+    public boolean isVerificationTest() {
+    	return verificationTest;
+    }
+    
     
     /*
      * Nombre de registres disponibles
