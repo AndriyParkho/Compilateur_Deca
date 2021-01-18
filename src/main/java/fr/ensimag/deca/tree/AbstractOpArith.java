@@ -91,16 +91,22 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
         		compiler.addInstruction(this.getMnemo(nextOp, op));
     		}
     	}
-    	this.printErrLabel(compiler);
+    	if(this.getType().isFloat() || (this.getType().isInt() && (this.isDivide() || this.isModulo()))) {
+    		this.printErrLabel(compiler);
+    	}
+    	
     }
     
     @Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-    	// A FAIRE : Vérifier
 		this.codeGenExpr(compiler, op);
 	}
 
 	protected abstract Instruction getMnemo(DVal op1, GPRegister op2);
     
     protected abstract void printErrLabel(DecacCompiler compiler);
+    
+    protected abstract boolean isDivide();
+    
+    protected abstract boolean isModulo();
 }
