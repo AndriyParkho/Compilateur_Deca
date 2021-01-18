@@ -6,6 +6,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.TypeDefinition;
@@ -53,7 +54,7 @@ public class DeclField extends AbstractDeclField {
 	 * @throws ContextualError
 	 */
 	@Override
-	public  void verifyFieldMembers(DecacCompiler compiler  , ClassDefinition currentClass)
+	public  void verifyFieldMembers(DecacCompiler compiler  , ClassDefinition currentClass , int index)
             throws ContextualError{
 		//FAIT
 		Symbol symField= compiler.getSymbolTable().create(type.getName().getName());
@@ -68,9 +69,20 @@ public class DeclField extends AbstractDeclField {
 			throw new ContextualError("un champ ne peut pas etre de type void",this.getLocation());
 		}
 		//on peut alors faire la déclaration et les set
-		currentClass.incNumberOfFields();
-		FieldDefinition fieldDef= new FieldDefinition(typeDefField.getType(),this.getLocation(),
-				this.getVisibility(),currentClass,currentClass.getNumberOfFields());
+		FieldDefinition fieldDef;
+		//on cherche d'abord l'index adéquat
+		int vraiIndex=index;
+		ExpDefinition envClassDef=currentClass.getMembers().get(this.name.getName());
+		if(envClassDef!=null && envClassDef.isField())
+		{
+			FieldDefinition fieldClassDef= (FieldDefinition)envClassDef;
+			vraiIndex=fieldClassDef.getIndex();
+		}
+		
+		
+		//currentClass.incNumberOfFields();
+		 fieldDef= new FieldDefinition(typeDefField.getType(),this.getLocation(),
+				this.getVisibility(),currentClass,vraiIndex);
 		try {
 			if(!compiler.getEnvExp().getDonnees().containsKey(symField))
 			{

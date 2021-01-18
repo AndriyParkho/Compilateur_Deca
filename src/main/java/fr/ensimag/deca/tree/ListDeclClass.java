@@ -1,8 +1,11 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.deca.tools.SymbolTable;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -61,6 +64,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     
     public void codeGenListClassMethodTable(DecacCompiler compiler) {
     	// A FAIRE : Initialisation de la classe Object en le récupérant avec : compiler.getEnvTypes().get("Object").getDefinition()
+    	ClassDefinition objectDefinition = (ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create("Object"));
     	for(AbstractDeclClass classe : this.getList()) {
     		classe.codeGenClassMethodTable(compiler);
     	}
