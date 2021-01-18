@@ -24,9 +24,9 @@ public abstract class AbstractMethodCall extends AbstractExpr{
     public AbstractMethodCall(Identifier variable, Identifier method, ListExpr arguments){
         Validate.notNull(variable);
         Validate.notNull(method);
-        variable = variable;
-        method = method;
-        arguments = arguments;
+        this.variable = variable;
+        this.method = method;
+        this.arguments = arguments;
     }
 
     public Identifier getVariable(){ return variable; }
@@ -40,14 +40,14 @@ public abstract class AbstractMethodCall extends AbstractExpr{
             variable.verifyExpr(compiler, currentClass);
         }catch (ContextualError ce){throw ce;}
         if (variable.getType().isClass()){
-            if (((ClassDefinition) compiler.getEnvTypes().get(variable.getClassDefinition().getType().getName()))
+            if (((ClassDefinition) compiler.getEnvTypes().get(variable.getType().getName()))
                     .getMembers().get(method.getName()) == null) {
                 throw new ContextualError(String.format("La méthode %s n'existe pas pour la classe %s",
                         method.getName().getName(), variable.getType().getName().getName()), variable.getLocation());
             }
-            if (arguments.getList().size() != method.getMethodDefinition().getSignature().size()){
-                throw new ContextualError(String.format("%s ne possède pas le bon nombre d'arguments",
-                        method.getMethodDefinition().getType().getName().getName()),method.getLocation());
+            if ( arguments.getList().size() != method.getMethodDefinition().getSignature().size()){
+                throw new ContextualError(String.format("Le nombre d'arguments entrés dans %s ne correspond pas à sa signature",
+                        method.getName().getName()),method.getLocation());
             }
             else {
                 int index = 0;
@@ -56,8 +56,8 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                         expr.verifyExpr(compiler, currentClass);
                     } catch (ContextualError ce) { throw ce; }
                     if (expr.getType() != method.getMethodDefinition().getSignature().paramNumber(index)) {
-                        throw new ContextualError(String.format("%s n'est pas un bon %de argument pour la méthode %s",
-                                expr.getType().getName().getName(), index+10, method.getType().getName().getName()),
+                        throw new ContextualError(String.format("Argument %d de type %s ne correspond au type du %de argument de la méthode %s",
+                                index+1, expr.getType().getName().getName(), index+1, method.getName().getName()),
                                 expr.getLocation());
                     }
                     index++;

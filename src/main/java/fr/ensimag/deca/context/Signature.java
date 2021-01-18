@@ -20,8 +20,6 @@ public class Signature {
         return args.get(n);
     }
     
-    public int size() {
-        return args.size();
-    }
+    public int size() { return args.size(); }
 
 }
