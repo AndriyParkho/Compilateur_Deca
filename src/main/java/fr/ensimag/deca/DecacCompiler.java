@@ -91,17 +91,20 @@ public class DecacCompiler {
 	   Symbol floatSymbol=this.symbolTable.create("float");
 	   Symbol boolSymbol=this.symbolTable.create("boolean");
 	   Symbol voidSymbol=this.symbolTable.create("void");
-	   //Symbol objectSymbol=this.symbolTable.create("Object");
+	   Symbol objectSymbol=this.symbolTable.create("Object");
 
 	   TypeDefinition intTypeDef= new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
 	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
 	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
 	   TypeDefinition voidTypeDef= new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
+	   ClassDefinition objectClassDef = new ClassDefinition(new ClassType(objectSymbol, Location.BUILTIN, null),
+                                                            Location.BUILTIN, null);
 
        this.envTypes.declare(floatSymbol, floatTypeDef);
        this.envTypes.declare(boolSymbol, boolTypeDef);
        this.envTypes.declare(voidSymbol, voidTypeDef);
        this.envTypes.declare(intSymbol, intTypeDef);
+       this.envTypes.declare(objectSymbol, objectClassDef);
    }
 
    public void envExpInit() {
