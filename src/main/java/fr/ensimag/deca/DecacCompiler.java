@@ -93,10 +93,10 @@ public class DecacCompiler {
 	   Symbol voidSymbol=this.symbolTable.create("void");
 	   Symbol objectSymbol=this.symbolTable.create("Object");
 
-	   TypeDefinition intTypeDef= new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
-	   TypeDefinition floatTypeDef= new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
-	   TypeDefinition boolTypeDef= new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
-	   TypeDefinition voidTypeDef= new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
+	   TypeDefinition intTypeDef = new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
+	   TypeDefinition floatTypeDef = new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
+	   TypeDefinition boolTypeDef = new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
+	   TypeDefinition voidTypeDef = new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
 	   ClassDefinition objectClassDef = new ClassDefinition(new ClassType(objectSymbol, Location.BUILTIN, null),
                                                             Location.BUILTIN, null);
 
@@ -108,8 +108,13 @@ public class DecacCompiler {
    }
 
    public void envExpInit() {
-       // Acompléter avec la méthode equals d'objets
        this.envExp = new EnvironmentExp(null);
+       Symbol equalsSymbol=this.symbolTable.create("equals");
+       Signature sig = new Signature();
+       sig.add(this.envTypes.get(this.symbolTable.create("Object")).getType());
+       MethodDefinition equalsDef = new MethodDefinition(this.envTypes.get(this.symbolTable.create("boolean")).getType(),
+                                                         Location.BUILTIN, sig, 0);
+       this.envExp.declare(equalsSymbol, equalsDef);
    }
    
    
