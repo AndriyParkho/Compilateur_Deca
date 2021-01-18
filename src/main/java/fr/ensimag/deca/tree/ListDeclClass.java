@@ -1,10 +1,16 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.compilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 import org.apache.log4j.Logger;
 
@@ -64,7 +70,16 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     
     public void codeGenListClassMethodTable(DecacCompiler compiler) {
     	// A FAIRE : Initialisation de la classe Object en le récupérant avec : compiler.getEnvTypes().get("Object").getDefinition()
+    	compilerInstruction.decorationAssembleur(compiler, "Construction des tables des méthodes");
     	ClassDefinition objectDefinition = (ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create("Object"));
+    	objectDefinition.setMethodsTable();
+    	compiler.addComment("Construction de la table des méthodes de " + objectDefinition.getType().getName().getName());
+    	compiler.incrCountGB();
+    	compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
+    	objectDefinition.setOperand(new RegisterOffset(compiler.getCountGB(), Register.GB));
+		compiler.addInstruction(new STORE(Register.R0, objectDefinition.getOperand()));
+		objectDefinition.codeGenMethodTable(compiler);
+		
     	for(AbstractDeclClass classe : this.getList()) {
     		classe.codeGenClassMethodTable(compiler);
     	}
