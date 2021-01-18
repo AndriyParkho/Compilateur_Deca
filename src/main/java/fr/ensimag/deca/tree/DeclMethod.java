@@ -43,53 +43,53 @@ public class DeclMethod extends AbstractDeclMethod {
 	public  void verifyMethodMembers(DecacCompiler compiler  , ClassDefinition currentClass, int index)
             throws ContextualError{
 		//FAIT
-				EnvironmentExp envGlobClass=currentClass.getMembers();
-				ExpDefinition defClassMere=envGlobClass.get(this.name.getName());
-				int vraiIndex=index;
-				if(defClassMere!=null && defClassMere.isMethod())
+		EnvironmentExp envGlobClass=currentClass.getMembers();
+		ExpDefinition defClassMere=envGlobClass.get(this.name.getName());
+		int vraiIndex=index;
+		if(defClassMere!=null && defClassMere.isMethod())
+		{
+			FieldDefinition fieldClassDef= (FieldDefinition)defClassMere;
+			vraiIndex=fieldClassDef.getIndex();
+		}
+		
+		Type typeRetour=this.type.verifyType(compiler);
+		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(),vraiIndex);
+		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
+		this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
+		this.name.setDefinition(methodDef);
+		this.name.setType(typeRetour);
+		//avant de faire la déclaration,il faut vérifier le type de retour et la signature
+		//dans le cas d'une redéfinition
+		ExpDefinition superClassDef=currentClass.getSuperClass().getMembers().get(this.name.getName());
+		if(superClassDef!=null && superClassDef.isMethod())
+		{
+			MethodDefinition superMethodDef=(MethodDefinition)superClassDef;
+			if(!methodDef.getType().sameType(superMethodDef.getType()))
+			{
+				throw new ContextualError("type de retour incompatible",this.getLocation());
+			}
+			else if(methodDef.getSignature().size()!=superMethodDef.getSignature().size())
+			{
+				throw new ContextualError("Signature incompatible",this.getLocation());
+			}
+			else
+			{
+				for(int i=0;i<methodDef.getSignature().size();i++)
 				{
-					FieldDefinition fieldClassDef= (FieldDefinition)defClassMere;
-					vraiIndex=fieldClassDef.getIndex();
-				}
-				
-				Type typeRetour=this.type.verifyType(compiler);
-				MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(),vraiIndex);
-				EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
-				this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
-				this.name.setDefinition(methodDef);
-				this.name.setType(typeRetour);
-				//avant de faire la déclaration,il faut vérifier le type de retour et la signature
-				//dans le cas d'une redéfinition
-				ExpDefinition superClassDef=currentClass.getSuperClass().getMembers().get(this.name.getName());
-				if(superClassDef!=null && superClassDef.isMethod())
-				{
-					MethodDefinition superMethodDef=(MethodDefinition)superClassDef;
-					if(!methodDef.getType().sameType(superMethodDef.getType()))
+					if(!methodDef.getSignature().paramNumber(i).sameType(superMethodDef.getSignature().paramNumber(i)))
 					{
-						throw new ContextualError("type de retour incompatible",this.getLocation());
-					}
-					else if(methodDef.getSignature().size()!=superMethodDef.getSignature().size())
-					{
-						throw new ContextualError("Signature incompatible",this.getLocation());
-					}
-					else
-					{
-						for(int i=0;i<methodDef.getSignature().size();i++)
-						{
-							if(!methodDef.getSignature().paramNumber(i).sameType(superMethodDef.getSignature().paramNumber(i)))
-							{
-								throw new ContextualError("signature incompatible",this.getLocation());
-							}
-						}
+						throw new ContextualError("signature incompatible",this.getLocation());
 					}
 				}
-				
-				try {
-					currentClass.incNumberOfMethods();
-					envGlobClass.declare(this.name.getName(), methodDef);
-				}catch(EnvironmentExp.DoubleDefException doubleDef) {
-					throw new ContextualError("double définition d'une méthode",this.getLocation());
-				}
+			}
+		}
+		
+		try {
+			currentClass.incNumberOfMethods();
+			envGlobClass.declare(this.name.getName(), methodDef);
+		}catch(EnvironmentExp.DoubleDefException doubleDef) {
+			throw new ContextualError("double définition d'une méthode",this.getLocation());
+		}
 	}
 	
 	@Override

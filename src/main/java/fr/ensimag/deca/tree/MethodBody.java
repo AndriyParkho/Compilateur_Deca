@@ -35,9 +35,9 @@ public class MethodBody extends AbstractMethodBody {
 	public void verifyMethodBody(DecacCompiler compiler, ClassDefinition currentClass, Type returnType)
 		    throws ContextualError{
 		//FAIT
-				this.listDeclVar.verifyListDeclVariable(compiler, currentClass);
-				this.listInst.verifyListInst(compiler, currentClass, returnType);
-			    this.setType(returnType);
+	    this.listDeclVar.verifyListDeclVariable(compiler, currentClass);
+	    this.listInst.verifyListInst(compiler, currentClass, returnType);
+	    this.setType(returnType);
 	}
 	
 	@Override
