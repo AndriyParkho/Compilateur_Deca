@@ -1,0 +1,17 @@
+// Description:
+//    tests de déclaration de booléen
+//
+// Resultats:
+//    false
+
+{
+ 	if(false){
+ 		println("true");
+ 	}
+ 	else if(true){
+ 		println("false");
+ 	}
+ 	else{
+ 		println("erreur");
+ 	}
+}

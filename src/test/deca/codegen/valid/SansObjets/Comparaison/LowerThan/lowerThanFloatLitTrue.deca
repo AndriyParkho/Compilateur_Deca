@@ -1,0 +1,15 @@
+// Description:
+//    tests de > sur des int littéraux
+//
+// Resultats:
+//    true
+
+
+{
+   if(0.5 < 1.2){
+   println("true");
+   }else{
+   println("false");
+   }
+}
+

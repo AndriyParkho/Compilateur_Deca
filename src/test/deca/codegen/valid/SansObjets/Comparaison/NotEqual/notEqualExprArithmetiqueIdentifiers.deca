@@ -1,0 +1,16 @@
+// Description:
+//    tests de déclaration de booléen
+//
+// Resultats:
+//    true
+
+
+{
+	int x = 6, y = 4, z = 10;
+   if((x - y)*z != 5){
+   println("true");
+   }else{
+   println("false");
+   }
+}
+

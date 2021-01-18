@@ -1,0 +1,14 @@
+// Description:
+//    tests de > sur des floats littéraux
+//
+// Resultats:
+//    false
+
+
+{
+   if(0.2 >= 1.2){
+   println("true");
+   }else{
+   println("false");
+   }
+}

@@ -1,0 +1,15 @@
+// Description:
+//    tests de > sur des ints littéraux
+//
+// Resultats:
+//    true
+
+
+{
+   if(2 > 1){
+   println("true");
+   }else{
+   println("false");
+   }
+}
+

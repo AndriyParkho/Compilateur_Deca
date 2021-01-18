@@ -40,7 +40,7 @@ for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 		rm $fichier_ass
 		exit 1
 	fi
-	$(../global/bin/ima $fichier_ass > buffer)	
+	$(ima $fichier_ass > buffer)	
 	resultat=$(cat buffer)
 	attendu=$(cat ${list_answers[i]})
 
