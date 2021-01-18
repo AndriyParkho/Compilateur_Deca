@@ -22,7 +22,7 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 		//FAIT
 		for(AbstractDeclParam param : this.getList())
 		{
-			param.verifyParamMembers(compiler, currentClass);
+			param.verifyParamMembers(compiler,  lovalEnv ,currentClass);
 		}
 	}
 	
@@ -32,7 +32,7 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 		//FAIT
     	for(AbstractDeclParam param : this.getList())
     	{
-    		param.verifyParamBody(compiler, currentClass);
+    		param.verifyParamBody(compiler,  lovalEnv , currentClass);
     	}
 	}
 	
