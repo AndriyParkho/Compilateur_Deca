@@ -2,7 +2,7 @@
 //    tests de déclaration de variable par des divisions entière ou flotante
 //
 // Resultats:
-//    Erreur: Division par 0 non autorisée ligne 10 position 15
+//    Erreur: Division par 0.0 non autorisée ligne 10 position 15
 
 {
    int x = 5 / 6;

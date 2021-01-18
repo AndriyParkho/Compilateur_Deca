@@ -6,11 +6,11 @@
 
 
 {
-	int x = 2, y = 1;
-   if(x >= y){
-   println("true");
-   }else{
-   println("false");
-   }
+    int x = 2, y = 1;
+    if(x >= y){
+        println("true");
+    }else{
+        println("false");
+    }
 }
 

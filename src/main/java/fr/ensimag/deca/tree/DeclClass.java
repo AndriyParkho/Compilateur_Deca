@@ -126,4 +126,15 @@ public class DeclClass extends AbstractDeclClass {
         throw new UnsupportedOperationException("Not yet supported");
     }
 
+
+	@Override
+	protected void codeGenClassMethodTable(DecacCompiler compiler) {
+		// A FAIRE
+		// Définir le label de chaque méthode
+		// Empiler la superclass
+		// setOperand de cette class
+		// Générer la table des méthodes
+	}
+    
+
 }
