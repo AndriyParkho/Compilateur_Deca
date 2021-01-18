@@ -169,7 +169,6 @@ inst returns[AbstractInst tree]
 if_then_else returns[IfThenElse tree]
 @init {IfThenElse var;
         ListInst liste = new ListInst();
-        ListInst liste2 = new ListInst();
 }
     : if1=IF OPARENT condition=expr CPARENT OBRACE li_if=list_inst CBRACE {
             $tree=new IfThenElse($condition.tree,$li_if.tree,liste);
@@ -177,6 +176,7 @@ if_then_else returns[IfThenElse tree]
             var = $tree;   
         }
       (ELSE elsif=IF OPARENT elsif_cond=expr CPARENT OBRACE elsif_li=list_inst CBRACE {
+            ListInst liste2 = new ListInst();
             var=new IfThenElse($elsif_cond.tree,$elsif_li.tree,liste2);
             setLocation(var,$elsif);
             liste.add(var);

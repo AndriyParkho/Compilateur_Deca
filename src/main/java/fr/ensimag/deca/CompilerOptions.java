@@ -41,6 +41,7 @@ public class CompilerOptions {
     private boolean printBanner = false;
     private boolean verification = false;
     private boolean parse = false;
+    private boolean suppressionTest = false;
     private int nombreRegistreMax = 16;
     private List<File> sourceFiles = new ArrayList<File>();
 
@@ -82,6 +83,9 @@ public class CompilerOptions {
 	    		
 	    		case "-r" : isRegister = true;
 	    					break; 
+	    					
+	    		case "-n" : suppressionTest = true;
+	    					break;
 	    				
 	    		default : sourceFiles.add(new File(param));
 	    				  break;
@@ -136,6 +140,10 @@ public class CompilerOptions {
 
 	public boolean isParse() {
 		return parse;
+	}
+	
+	public boolean isSuppressionTest() {
+		return suppressionTest;
 	}
 
 	protected void displayUsage() {

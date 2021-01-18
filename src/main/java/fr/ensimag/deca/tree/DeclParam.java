@@ -38,7 +38,7 @@ public class DeclParam extends AbstractDeclParam {
 	 * @throws ContextualError
 	 */
 	@Override
-	public  void verifyParamMembers(DecacCompiler compiler , ClassDefinition currentClass)
+	public  void verifyParamMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
 		Symbol symParam=compiler.getSymbolTable().create(this.type.getName().getName());
@@ -67,7 +67,7 @@ public class DeclParam extends AbstractDeclParam {
 	 * @throws ContextualError
 	 */
 	@Override
-    public void verifyParamBody(DecacCompiler compiler , ClassDefinition currentClass)
+    public void verifyParamBody(DecacCompiler compiler ,EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
 		Symbol paramSymbol= compiler.getSymbolTable().create(this.name.getName().toString());
@@ -75,9 +75,9 @@ public class DeclParam extends AbstractDeclParam {
 		//si le nom n'existe pas deja dans l'environnement, on ajoute e paramètre
 		//sinon on lève une exception de double définition
 		try {
-			if(!compiler.getEnvExp().getDonnees().containsKey(paramSymbol))
+			if(!lovalEnv.getDonnees().containsKey(paramSymbol))
 			{
-				compiler.getEnvExp().declare(paramSymbol, defParam);
+				lovalEnv.declare(paramSymbol, defParam);
 			}
 			else
 			{

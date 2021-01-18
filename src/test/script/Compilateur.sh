@@ -21,7 +21,7 @@ fi
 
 
 for ((i=0 ; i<${#list_tests[@]} ; i++)); do
-	
+
 	skip=$(grep -e readInt\(\) -e readFloat\(\) -e Skipped\ test ${list_tests[i]})	
 	if [ ! -z "$skip" ]; then
 		echo -e "\e[97m$(($i+1))/${#list_tests[@]}	Test ${list_tests[i]} skipped"
@@ -49,6 +49,7 @@ for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 	else
 		echo -e "\e[31m$(($i+1))/${#list_tests[@]}	Résultat inattendu de ima pour ${list_tests[i]} :"
 		echo -e "\e[97mRésultat = $resultat"
+		echo "${list_answers[i]}"
 		echo "Attendu = $attendu"
 		rm buffer
 		rm $fichier_ass
