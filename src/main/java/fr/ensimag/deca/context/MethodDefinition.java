@@ -69,4 +69,16 @@ public class MethodDefinition extends ExpDefinition {
         return false;
     }
 
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof MethodDefinition) {
+			if(((MethodDefinition) obj).getIndex() == this.getIndex()) {
+				return true;
+			}
+		}
+		return false;
+	}
+    
+    
+
 }

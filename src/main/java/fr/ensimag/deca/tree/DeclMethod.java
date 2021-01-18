@@ -7,8 +7,8 @@ import org.apache.commons.lang.Validate;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.Label;
 
 /**
  * Declaration of a method
@@ -66,4 +66,12 @@ public class DeclMethod extends AbstractDeclMethod {
 	protected void iterChildren(TreeFunction f) {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
+
+
+	@Override
+	public void setLabel(String className) {
+		name.getMethodDefinition().setLabel(new Label("code." + className + "." + name.getName().getName()));
+	}
+	
+	
 }

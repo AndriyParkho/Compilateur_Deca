@@ -50,7 +50,7 @@ public class DecacCompiler {
     /*
      * Compteur de variable global utilisé
      */
-    private int countVar = 0;
+    private int countGB = 0;
     
     
     private Map<Label, String> errLblList = new HashMap<Label, String>();
@@ -355,15 +355,15 @@ public class DecacCompiler {
         return parser.parseProgramAndManageErrors(err);
     }
     
-	public int getCountVar() {
-		return countVar;
+	public int getCountGB() {
+		return countGB;
 	}
-	public void setCountVar(int countVar) {
-		this.countVar = countVar;
+	public void setCountGB(int countVar) {
+		this.countGB = countVar;
 	}
     
-    public void incrCountVar() {
-    	countVar++;
+    public void incrCountGB() {
+    	countGB++;
     }
 
 	public Map<Label, String> getErrLblList() {

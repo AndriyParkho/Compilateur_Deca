@@ -9,9 +9,14 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -130,10 +135,18 @@ public class DeclClass extends AbstractDeclClass {
 	@Override
 	protected void codeGenClassMethodTable(DecacCompiler compiler) {
 		// A FAIRE
-		// Définir le label de chaque méthode
-		// Empiler la superclass
+		ClassDefinition classDef = name.getClassDefinition();
+		// Définir le label de chaque méthode et créer le tableau des étiquettes
+		classDef.setMethodsTable();
+		compiler.addComment("Construction de la table des méthodes de " + this.name.getName().getName());
+		// Empiler l'@superclass
+		compiler.incrCountGB();
+		compiler.addInstruction(new LEA(superClass.getClassDefinition().getOperand(), Register.R0));
 		// setOperand de cette class
+		classDef.setOperand(new RegisterOffset(compiler.getCountGB(), Register.GB));
+		compiler.addInstruction(new STORE(Register.R0, classDef.getOperand()));
 		// Générer la table des méthodes
+		classDef.codeGenMethodTable(compiler);
 	}
     
 

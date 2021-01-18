@@ -1,7 +1,19 @@
 package fr.ensimag.deca.context;
 
-import fr.ensimag.deca.tree.Location;
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.apache.commons.lang.Validate;
+
+import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.tree.Location;
+import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.LabelOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Definition of a class.
@@ -11,6 +23,8 @@ import org.apache.commons.lang.Validate;
  */
 public class ClassDefinition extends TypeDefinition {
 
+    private DAddr operand;
+    private Set<MethodDefinition> methods = new TreeSet<MethodDefinition>(new MethodComparator());
 
     public void setNumberOfFields(int numberOfFields) {
         this.numberOfFields = numberOfFields;
@@ -74,6 +88,39 @@ public class ClassDefinition extends TypeDefinition {
         }
         members = new EnvironmentExp(parent);
         this.superClass = superClass;
+    }
+    
+    public void setOperand(DAddr operand) {
+        this.operand = operand;
+    }
+
+    public DAddr getOperand() {
+        return operand;
+    }
+
+	public Set<MethodDefinition> getMethods() {
+		return methods;
+	}
+    
+    public void setMethodsTable() {
+    	if(superClass != null) {
+    		methods.addAll(superClass.getMethods());
+    	}
+    	for(ExpDefinition data : members.getDonnees().values()) {
+    		if(data.isMethod()) {
+    			MethodDefinition method = (MethodDefinition) data;
+    			method.setLabel(new Label("code." + this.getType().getName().getName() + "." + method.getType().getName().getName()));
+    			methods.add(method);
+    		}
+    	}
+    }
+    
+    public void codeGenMethodTable(DecacCompiler compiler) {
+    	for(MethodDefinition method : methods) {
+    		compiler.incrCountGB();
+    		compiler.addInstruction(new LOAD(new LabelOperand(method.getLabel()), Register.R0));
+    		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getCountGB(), Register.GB)));
+    	}
     }
     
 }
