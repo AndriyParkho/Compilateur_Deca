@@ -1,0 +1,15 @@
+// Description:
+//    tests de > sur des floats littéraux
+//
+// Resultats:
+//    true
+
+
+{
+	float x = 0.1, y = 0.2;
+   if(x < y){
+   println("true");
+   }else{
+   println("false");
+   }
+}

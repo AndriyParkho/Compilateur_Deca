@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 	
 	
-	public  void verifyMethodMembers(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+	public  void verifyMethodMembers(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
 		for(AbstractDeclMethod method : this.getList())
@@ -28,7 +28,7 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 	}
 	
 	
-    public void verifyMethodBody(DecacCompiler compiler , EnvironmentExp lovalEnv , ClassDefinition currentClass)
+    public void verifyMethodBody(DecacCompiler compiler  , ClassDefinition currentClass)
             throws ContextualError{
 		//Fait
     	for(AbstractDeclMethod method : this.getList())

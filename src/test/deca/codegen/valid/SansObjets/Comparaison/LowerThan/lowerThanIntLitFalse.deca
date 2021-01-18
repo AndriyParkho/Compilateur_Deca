@@ -1,0 +1,13 @@
+// Description:
+//    tests de > pour des ints
+//    false
+
+
+{
+   if(2 < 1){
+   println("true");
+   }else{
+   println("false");
+   }
+}
+
