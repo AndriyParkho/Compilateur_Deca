@@ -1,0 +1,1 @@
+// Description://    tests de if else if else//// Resultats://    true{if(false){println("false");}else if(false){println("false");}else if (true){if (false){println("false");}if (false){println("false");}else if (false){println("false");}else{if (false){println("false");}if (true){println("true");}}}else{println("erreur");}}
