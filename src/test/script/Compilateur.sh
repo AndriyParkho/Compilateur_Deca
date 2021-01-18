@@ -49,7 +49,6 @@ for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 	else
 		echo -e "\e[31m$(($i+1))/${#list_tests[@]}	Résultat inattendu de ima pour ${list_tests[i]} :"
 		echo -e "\e[97mRésultat = $resultat"
-		echo "${list_answers[i]}"
 		echo "Attendu = $attendu"
 		rm buffer
 		rm $fichier_ass
