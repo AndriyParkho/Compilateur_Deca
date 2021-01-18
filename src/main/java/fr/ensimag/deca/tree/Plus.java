@@ -32,8 +32,21 @@ public class Plus extends AbstractOpArith {
 	@Override
 	protected void printErrLabel(DecacCompiler compiler) {
 		String nom = "add_overflow_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
-		String msgError = "Erreur: Overflow pendant une addition ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
+		String msgError = "Erreur: Overflow pendant l'addition ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
 		compilerInstruction.createErreurLabel(compiler, nom, msgError, false);
 	}
 
+
+	@Override
+	protected boolean isDivide() {
+		return false;
+	}
+
+
+	@Override
+	protected boolean isModulo() {
+		return false;
+	}
+
+	
 }

@@ -40,9 +40,24 @@ public class Divide extends AbstractOpArith {
 
 	@Override
 	protected void printErrLabel(DecacCompiler compiler) {
+		String zero = "0";
+		if(this.getType().isFloat()) zero = "0.0";
 		String nom = "zero_divide_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
-		String msgError = "Erreur: Division par 0 non autorisée ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
+		String msgError = "Erreur: Division par "+ zero +" non autorisée ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
 		compilerInstruction.createErreurLabel(compiler, nom, msgError, false);
 	}
 
+
+	@Override
+	protected boolean isDivide() {
+		return true;
+	}
+
+
+	@Override
+	protected boolean isModulo() {
+		return false;
+	}
+	
+	
 }
