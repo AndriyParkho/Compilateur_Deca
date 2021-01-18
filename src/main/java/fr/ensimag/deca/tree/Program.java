@@ -76,22 +76,20 @@ public class Program extends AbstractProgram {
     }
     
     public void passe1(DecacCompiler compiler) throws ContextualError{
-        //A decommenter quand on voudra le tester mais ne pas commit ! Cette méthode doit rester vide jusqu'au rendu intermédiaire
-        /*try{
+        try{
             classes.verifyListClass(compiler);
-        }catch(ContextualError ce){throw ce;}*/
+        }catch(ContextualError ce){throw ce;}
     }
     
     public void passe2(DecacCompiler compiler) throws ContextualError{
-        //A decommenter quand on voudra le tester mais ne pas commit ! Cette méthode doit rester vide jusqu'au rendu intermédiaire
-        /*try{
+        try{
             classes.verifyListClassMembers(compiler);
-        }catch(ContextualError ce){throw ce;}*/
+        }catch(ContextualError ce){throw ce;}
     }
     
     public void passe3(DecacCompiler compiler) throws ContextualError{
     	try {
-    	    //classes.verifyListClassBody(compiler);
+    	    classes.verifyListClassBody(compiler);
     		main.verifyMain(compiler);
     	}catch(ContextualError ce) {throw ce;}
     }
