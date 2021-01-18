@@ -2,13 +2,11 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import fr.ensimag.deca.context.*;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -17,7 +15,7 @@ import fr.ensimag.deca.tools.IndentPrintStream;
  * @author gl10
  * @date 18/01/2021
  */
-public abstract class AbstractMethodCall extends AbstractInst{
+public abstract class AbstractMethodCall extends AbstractExpr{
 
     private Identifier variable;
     private Identifier method;
@@ -35,26 +33,52 @@ public abstract class AbstractMethodCall extends AbstractInst{
     public Identifier getMethod() { return method; }
     public ListExpr getArguments() { return arguments; }
 
-    /**
-     * Implements non-terminal "inst" of [SyntaxeContextuelle] in pass 3
-     * @param compiler contains the "env_types" and the "env_exp" attribute
-     * @param currentClass
-     *          corresponds to the "class" attribute (null in the main bloc).
-     * @param returnType
-     *          corresponds to the "return" attribute (void in the main bloc).
-     */
-    protected void verifyInst(DecacCompiler compiler,
-                                       ClassDefinition currentClass, Type returnType) throws ContextualError{
+    @Override
+    public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass)
+                throws ContextualError {
+        try {
+            variable.verifyExpr(compiler, currentClass);
+        }catch (ContextualError ce){throw ce;}
+        if (variable.getType().isClass()){
+            if (((ClassDefinition) compiler.getEnvTypes().get(variable.getClassDefinition().getType().getName()))
+                    .getMembers().get(method.getName()) == null) {
+                throw new ContextualError(String.format("La méthode %s n'existe pas pour la classe %s",
+                        method.getName().getName(), variable.getType().getName().getName()), variable.getLocation());
+            }
+            if (arguments.getList().size() != method.getMethodDefinition().getSignature().size()){
+                throw new ContextualError(String.format("%s ne possède pas le bon nombre d'arguments",
+                        method.getMethodDefinition().getType().getName().getName()),method.getLocation());
+            }
+            else {
+                int index = 0;
+                for (AbstractExpr expr : arguments.getList()) {
+                    try {
+                        expr.verifyExpr(compiler, currentClass);
+                    } catch (ContextualError ce) { throw ce; }
+                    if (expr.getType() != method.getMethodDefinition().getSignature().paramNumber(index)) {
+                        throw new ContextualError(String.format("%s n'est pas un bon %de argument pour la méthode %s",
+                                expr.getType().getName().getName(), index+10, method.getType().getName().getName()),
+                                expr.getLocation());
+                    }
+                    index++;
+                }
+            }
+            this.setType(method.getMethodDefinition().getType());
+            return this.getType();
+        }
+        else{
+            throw new ContextualError(String.format("%s n'est pas une classe", variable.getName().getName()),
+                    variable.getLocation());
+        }
+    }
+
+    @Override
+    protected void codeGenInst(DecacCompiler compiler) throws jumpException{
         //A FAIRE
     }
 
-    /**
-     * Generate assembly code for the instruction.
-     *
-     * @param compiler
-     * @throws jumpException
-     */
-    protected void codeGenInst(DecacCompiler compiler) throws jumpException{
+    @Override
+    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
         //A FAIRE
     }
 

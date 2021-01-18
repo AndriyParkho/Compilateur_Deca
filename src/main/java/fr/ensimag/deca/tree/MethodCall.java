@@ -32,10 +32,30 @@ public class MethodCall extends AbstractMethodCall{
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         this.getArguments().prettyPrint(s, prefix, true);
     }
+
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         //A FAIRE
     }
 
+    @Override
+    public boolean isIntLiteral() {
+        return false;
+    }
+
+    @Override
+    public boolean isFloatLiteral() {
+        return false;
+    }
+
+    @Override
+    public boolean isBooleanLiteral() {
+        return false;
+    }
+
+    @Override
+    public boolean isIdentifier() {
+        return true;
+    }
 
 }
