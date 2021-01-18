@@ -58,6 +58,12 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
         }
     	
     }
-
+    
+    public void codeGenListClassMethodTable(DecacCompiler compiler) {
+    	// A FAIRE : Initialisation de la classe Object en le récupérant avec : compiler.getEnvTypes().get("Object").getDefinition()
+    	for(AbstractDeclClass classe : this.getList()) {
+    		classe.codeGenClassMethodTable(compiler);
+    	}
+    }
 
 }
