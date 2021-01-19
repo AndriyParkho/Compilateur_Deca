@@ -5,17 +5,16 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.compilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.MethodDefinition;
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
@@ -156,12 +155,16 @@ public class DeclClass extends AbstractDeclClass {
 	
 	@Override
 	protected void codeGenClassBody(DecacCompiler compiler) {
+		compilerInstruction.decorationAssembleur(compiler, name.getName().getName());
 		codeGenInitClass(compiler);
-		
 	}
 	
 	protected void codeGenInitClass(DecacCompiler compiler) {
-		//compiler.addLabel(null);
+		compiler.addLabel(name.getClassDefinition().getInitLabel());
+		for(AbstractDeclField field : fieldList.getList()) {
+			field.codeGenInitField(compiler);
+		}
+		compiler.addInstruction(new RTS());
 	}
     
 
