@@ -1,0 +1,10 @@
+//Description :
+//	Vérification contextuelle du type de sortie de * avec pour entrée <int, float>
+//
+//Résultats :
+//  Erreur contextuelle
+//	ligne 9 : type incompatible
+
+{
+    int x = 1*3.0;
+}

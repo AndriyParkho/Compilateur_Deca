@@ -1,0 +1,11 @@
+//Description : 
+//	double identification de x
+//
+//Resulats : 
+//Erreur contextuelle
+// 	Ligne 10 : throws DoubleDefException
+
+{
+	int x = 3;
+	int x = 0;
+}

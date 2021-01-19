@@ -1,0 +1,13 @@
+//Description:
+//  condition non booléenne dans if
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 9 : la condition doit être de type boolean
+{
+int a=2;
+if(a)
+{
+  print("bizarre!!");
+}
+}

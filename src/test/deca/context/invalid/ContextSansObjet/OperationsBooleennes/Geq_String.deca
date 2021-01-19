@@ -1,0 +1,10 @@
+//Description:
+//  Vérification contextuelle du type de sortie non int de >=. Si le résultat générait un string il serait affichable.
+//
+//Résultat:
+//  Erreur contextuelle
+//  ligne 8 : type non affichable (les types qu'on peut afficher sont int,float et string)
+
+{
+   println(1>=0);
+}

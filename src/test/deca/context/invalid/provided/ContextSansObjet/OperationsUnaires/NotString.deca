@@ -1,9 +1,0 @@
-//Description:
-//  Vérification contextuelle de l'opérateur ! sur un type string
-//Résultat:
-//  Erreur contextuelle
-//  ligne 8 : type boolean attendu
-
-{
-   !"true";
-}

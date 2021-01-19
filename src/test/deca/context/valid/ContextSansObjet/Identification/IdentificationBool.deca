@@ -1,0 +1,12 @@
+//Description :
+//	identification de variables booléennes et affectations de valeurs
+//
+//Résultats :
+//	ok 
+
+
+{
+    boolean x = true;
+    boolean y = true;
+    boolean z = false;
+}

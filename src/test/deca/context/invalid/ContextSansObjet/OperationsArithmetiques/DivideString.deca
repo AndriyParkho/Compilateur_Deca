@@ -1,0 +1,8 @@
+//Description :
+//	Vérification contextuelle de l'opérateur / avec des variables string
+//
+//Résultats :
+//	ligne 7 : les opérateurs doivent ètre de type numérique (int ou float)
+{
+    "world" / 3;
+}

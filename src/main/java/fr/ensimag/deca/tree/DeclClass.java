@@ -63,14 +63,14 @@ public class DeclClass extends AbstractDeclClass {
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         //FAIT
+		if(!this.superClass.verifyType(compiler).isClass())
+		{
+			throw new ContextualError("le champs superClass doit etre une classe",this.getLocation());
+		}
     	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(superClass.getName().getName()));
     	if(superClassDef==null)
     	{
     		throw new ContextualError("super classe introuvable",this.getLocation());
-    	}
-    	else if(!this.superClass.verifyType(compiler).isClass())
-    	{
-    		throw new ContextualError("le champs superClass doit etre une classe",this.getLocation());
     	}
     	else if(compiler.getEnvTypes().get(this.name.getName())!=null)
     	{

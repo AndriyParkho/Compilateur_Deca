@@ -1,0 +1,9 @@
+//Description:
+//  type non reconnu
+//
+//Résultat:
+// Erreur Contextuelle
+//  ligne 8 : type non défini
+{
+itn i=4;
+}

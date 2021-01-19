@@ -1,0 +1,11 @@
+//description:
+// test de la structure while sans instruction
+//
+//Résultat:
+//  ok
+{
+int i = 0;
+while(i<3)
+{
+}
+}

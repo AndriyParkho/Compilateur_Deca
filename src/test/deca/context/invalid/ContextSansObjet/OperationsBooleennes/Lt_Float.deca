@@ -1,0 +1,9 @@
+//Description:
+//  Vérification contextuelle du type de sortie non float de <
+//
+//Résultat:
+//  Erreur contextuelle
+//  ligne 8 : type incompatible
+{
+    float x = 1<0;
+}

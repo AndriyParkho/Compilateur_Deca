@@ -1,9 +1,0 @@
-//Description:
-//  Vérification contextuelle du type de sortie l'opérateur ! sur un type int
-//Résultat:
-//  Erreur contextuelle
-//  ligne 8 : type incompatible
-
-{
-   int x = !true;
-}

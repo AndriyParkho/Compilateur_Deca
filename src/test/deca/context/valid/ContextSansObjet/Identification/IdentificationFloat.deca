@@ -1,0 +1,12 @@
+//Description :
+//	identification de variables float et affectations de valeurs
+//
+//Résultats :
+//	ok 
+
+
+{
+	float y = 3.0;
+	float z = 1.01;
+	float x = 3;
+}

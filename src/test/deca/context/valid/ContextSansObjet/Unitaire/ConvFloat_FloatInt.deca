@@ -1,0 +1,9 @@
+//Description :
+//	Vérification contextuelle de convFloat d'une variable float affectée à un int
+//
+//Résultats :
+//  ok
+
+{
+    float x = 3;
+}

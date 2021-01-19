@@ -1,0 +1,12 @@
+//Description :
+//	identification de variables int et affectations de valeurs
+//
+//Résultats :
+//	ok 
+
+
+{
+	int x = 5;
+	int y = 0;
+	int z = -5;
+}

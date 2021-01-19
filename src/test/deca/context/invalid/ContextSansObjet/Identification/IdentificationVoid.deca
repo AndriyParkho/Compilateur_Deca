@@ -1,0 +1,10 @@
+//Description :
+//	création d'une variable de type void
+//
+//Résultats :
+//	Erreur contextuelle
+//	Ligne 9 : une variable ne peut pas être de type void <9, 1>
+
+{
+	void x;
+}

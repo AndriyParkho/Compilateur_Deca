@@ -1,0 +1,10 @@
+//Description:
+//  Vérification contextuelle de != avec des types incompatibles (boolean, string)
+//
+//Résultat:
+//  Erreur contextuelle
+//  ligne 9 : types non compatibles pour faire la comparaison
+{
+    boolean x = true;
+    x != "true" ;
+}

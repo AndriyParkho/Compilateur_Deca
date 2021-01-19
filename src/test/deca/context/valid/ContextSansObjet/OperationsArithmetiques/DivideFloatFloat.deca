@@ -1,0 +1,11 @@
+//Description :
+//	Vérification contextuelle de l'opérateur / avec des variables float
+//
+//Résultats :
+//	ok
+
+{
+    float x = 2.0/1.2;
+    float y = 3;
+    float z = x/y;
+}

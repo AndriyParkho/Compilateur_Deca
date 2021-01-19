@@ -1,0 +1,10 @@
+//Description :
+//	Vérification contextuelle de l'opérateur &&
+//
+//Résultats :
+//	ok
+
+{
+    boolean x = true;
+    boolean y = false && x;
+}

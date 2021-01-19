@@ -1,0 +1,10 @@
+//Description :
+//	Vérification contextuelle de convFloat d'une variable int affectée à un float
+//
+//Résultats :
+//  Erreur contextuelle
+//	ligne 9 : type incompatible
+
+{
+    int x = 3.0;
+}

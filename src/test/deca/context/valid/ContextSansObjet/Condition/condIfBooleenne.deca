@@ -1,0 +1,11 @@
+//Description:
+//  condition booléenne dans if
+//
+//Résultat:
+// ok
+{
+if(true)
+{
+    print("ok");
+}
+}

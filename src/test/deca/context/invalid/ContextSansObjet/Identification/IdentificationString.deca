@@ -1,0 +1,11 @@
+//Description :
+//	identification de variables string et affectations de valeurs
+//
+//Résultats :
+//	Erreur contextuelle
+//  Ligne 10 : type non défini
+
+
+{
+	string y = "Hello";
+}

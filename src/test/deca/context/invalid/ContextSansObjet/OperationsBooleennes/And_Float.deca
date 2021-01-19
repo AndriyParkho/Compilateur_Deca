@@ -1,0 +1,11 @@
+//Description :
+//	Vérification contextuelle de la sortie de l'opérateur && (différente de float)
+//
+//Résultats :
+//	Erreur Contextuelle
+//  Ligne 10 : type incompatible
+
+{
+    boolean x = true;
+    float y = x && false;
+}

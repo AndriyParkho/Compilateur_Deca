@@ -1,0 +1,10 @@
+//Description :
+//	Vérification contextuelle du type de sortie de + avec pour entrée <float, int>
+//
+//Résultats :
+//  Erreur contextuelle
+//	ligne 9 : type incompatible
+
+{
+    int x = 3.0+1;
+}

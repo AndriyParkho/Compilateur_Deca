@@ -1,9 +1,0 @@
-//Description:
-//  Vérification contextuelle de l'opérateur unaire - sur le type boolean
-//
-//Résultat:
-//  Erreur contextuelle
-//  ligne 8 : unaryMinus est applicable sur les types numériques
-{
-    -true;
-}
