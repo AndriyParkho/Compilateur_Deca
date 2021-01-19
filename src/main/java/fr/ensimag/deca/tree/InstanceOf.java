@@ -21,8 +21,14 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+		// FAIT
+		//on vérifie les deux champs et on fixe le type à boolean
+		this.type.verifyExpr(compiler, currentClass);
+		this.objet.verifyExpr(compiler, currentClass);
+		Type typeBool=compiler.getEnvTypes().get(compiler.getSymbolTable().create("boolean")).getType();
+		this.setType(typeBool);
+		return typeBool;
+		
 	}
 
 	@Override
@@ -54,25 +60,25 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public boolean isIntLiteral() {
-		// TODO Auto-generated method stub
+		//!
 		return false;
 	}
 
 	@Override
 	public boolean isFloatLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isBooleanLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isIdentifier() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 	
