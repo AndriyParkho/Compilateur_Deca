@@ -7,6 +7,7 @@ import org.apache.commons.lang.Validate;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
@@ -23,8 +24,21 @@ public class New extends AbstractExpr{
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+		// FAIT
+		//on vérifie que le type est bien une classe et on le fixe aprés
+		Definition TypeDef=compiler.getEnvTypes().get(compiler.getSymbolTable().create(identifier.getName().toString()));
+		if(TypeDef==null)
+		{
+			throw new ContextualError("type introuvble pour faire la déclaration",this.getLocation());
+		}
+		else if(!TypeDef.isClass())
+		{
+			throw new ContextualError("new déclare les classes uniquement",this.getLocation());
+		}
+		Type type=TypeDef.getType();
+		this.setType(type);
+		return type;
+		
 	}
 
 	@Override
@@ -54,25 +68,25 @@ public class New extends AbstractExpr{
 
 	@Override
 	public boolean isIntLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isFloatLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isBooleanLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isIdentifier() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 

@@ -13,8 +13,18 @@ public class This extends AbstractExpr{
 
 	@Override
 	public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
-		// TODO Auto-generated method stub
-		return null;
+		//Fait
+		//on fait appel à this que dans une classe
+		if(currentClass == null)
+		{
+			throw new ContextualError("utilisation de this non autotrisée",this.getLocation());
+		}
+		else
+		{
+			Type type=currentClass.getType();
+			this.setType(type);
+			return type;
+		}
 	}
 
 	@Override
@@ -43,25 +53,25 @@ public class This extends AbstractExpr{
 
 	@Override
 	public boolean isIntLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isFloatLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isBooleanLiteral() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 
 	@Override
 	public boolean isIdentifier() {
-		// TODO Auto-generated method stub
+		// !
 		return false;
 	}
 	

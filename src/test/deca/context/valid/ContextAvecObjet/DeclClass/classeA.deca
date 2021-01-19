@@ -1,0 +1,8 @@
+// Description:
+//    Programme minimaliste de déclaration d'une classe sans extends, sans champ, sans méthode, sans main.
+//
+// Resultats:
+//    ok
+//
+
+class A {}
