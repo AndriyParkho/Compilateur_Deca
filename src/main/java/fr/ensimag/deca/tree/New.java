@@ -34,10 +34,10 @@ public class New extends AbstractExpr{
 	public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
 		// FAIT
 		//on vérifie que le type est bien une classe et on le fixe aprés
-		Definition TypeDef=compiler.getEnvTypes().get(compiler.getSymbolTable().create(identifier.getName().toString()));
+		Definition TypeDef=compiler.getEnvTypes().get(compiler.getSymbolTable().create(identifier.getName().getName()));
 		if(TypeDef==null)
 		{
-			throw new ContextualError("type introuvble pour faire la déclaration",this.getLocation());
+			throw new ContextualError("Classe non définie",this.getLocation());
 		}
 		else if(!TypeDef.isClass())
 		{
@@ -45,6 +45,7 @@ public class New extends AbstractExpr{
 		}
 		Type type=TypeDef.getType();
 		this.setType(type);
+		identifier.setDefinition(TypeDef);
 		return type;
 		
 	}

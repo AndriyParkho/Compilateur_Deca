@@ -2,7 +2,7 @@
 //    Déclaration d'un champs de type void
 //
 // Resultats:
-//    Erreur contextuelle
+//    Erreur contextuelle ligne 9
 //    Un champ de peut pas être de type void
 
 class A {

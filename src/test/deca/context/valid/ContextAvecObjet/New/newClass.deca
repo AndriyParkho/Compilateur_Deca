@@ -1,0 +1,15 @@
+// Description:
+//    Déclaration class avec new
+//
+// Resultats:
+//    ok
+
+class A {
+    protected int x = -1;
+    float y = x;
+    boolean a = true;
+}
+
+{
+    A ObjetA = new A();
+}

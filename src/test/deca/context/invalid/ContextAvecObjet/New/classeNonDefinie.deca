@@ -1,0 +1,10 @@
+// Description:
+//    Déclaration d'une clsse non définie
+//
+// Resultats:
+//    Erreur contextuelle ligne 9
+//    Classe non définie
+
+{
+    int x = new A();
+}

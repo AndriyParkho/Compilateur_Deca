@@ -2,7 +2,7 @@
 //    Programme minimaliste de déclaration d'une classe avec extends B, sans champ, sans méthode, sans main.
 //
 // Resultats:
-//    Erreur contextuelle
+//    Erreur contextuelle ligne 8
 //    type non défini
 
 class A extends B{}

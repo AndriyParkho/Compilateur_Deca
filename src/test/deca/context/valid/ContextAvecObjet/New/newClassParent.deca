@@ -1,0 +1,16 @@
+// Description:
+//    Déclaration class avec new dans une classe mère
+//
+// Resultats:
+//    ok
+
+
+class B {
+    A ObjetA = new A();
+}
+
+class A extends B{
+    protected int x = -1;
+    float y = x;
+    boolean a = true;
+}

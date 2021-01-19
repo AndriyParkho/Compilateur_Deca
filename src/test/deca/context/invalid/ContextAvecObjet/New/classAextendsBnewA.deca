@@ -1,0 +1,16 @@
+// Description:
+//    Déclaration d'une classe dans une classe mère
+//
+// Resultats:
+//    Erreur contextuelle ligne 15
+//    les deux classes dont incompatibles.
+
+class A {
+    int x;
+}
+
+class B extends A{}
+
+{
+    A x = new B();
+}
