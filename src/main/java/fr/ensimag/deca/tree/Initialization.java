@@ -38,7 +38,7 @@ public class Initialization extends AbstractInitialization {
         //Fait
     	try {
     		this.expression=this.expression.verifyRValue(compiler, currentClass, t);
-    	}catch (ContextualError ce) {throw ce;}
+    	}catch (ContextualError ce) { throw ce; }
     }
 
 

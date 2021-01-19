@@ -25,6 +25,7 @@ public class ClassDefinition extends TypeDefinition {
 
     private DAddr operand;
     private Set<MethodDefinition> methods = new TreeSet<MethodDefinition>(new MethodComparator());
+    private Label initLabel;
 
     public void setNumberOfFields(int numberOfFields) {
         this.numberOfFields = numberOfFields;
@@ -88,6 +89,8 @@ public class ClassDefinition extends TypeDefinition {
         }
         members = new EnvironmentExp(parent);
         this.superClass = superClass;
+        // Création du label d'initialisation de la classe
+        this.initLabel = new Label("init." + type.getName().getName());
     }
     
     public void setOperand(DAddr operand) {
@@ -121,5 +124,13 @@ public class ClassDefinition extends TypeDefinition {
     		compiler.addInstruction(new STORE(Register.R0, new RegisterOffset(compiler.getCountGB(), Register.GB)));
     	}
     }
+
+	public Label getInitLabel() {
+		return initLabel;
+	}
+
+	public void setInitLabel(Label initLabel) {
+		this.initLabel = initLabel;
+	}
     
 }
