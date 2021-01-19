@@ -99,21 +99,18 @@ public class DeclVar extends AbstractDeclVar {
     	if(initialization.isInitialization()) {
     		Initialization init = (Initialization) initialization;
     		init.getExpression().codeGenInst(compiler);
-    		compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     	} 
     	else {
     		if(type.getType().isInt()) {
     			compiler.addInstruction(new LOAD(new ImmediateInteger(0), compiler.getRegisterStart()));
-    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     		} else if(type.getType().isFloat()) {
     			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), compiler.getRegisterStart()));
-    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     		} else if(type.getType().isBoolean()) {
     			compiler.addInstruction(new LOAD(0, compiler.getRegisterStart()));
-    			compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     		} else {
     			throw new UnsupportedOperationException("not supposed to get here");
     		}
     	}
+    	compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     }
 }
