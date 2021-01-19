@@ -25,14 +25,14 @@ public class This extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		s.print("this");
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
-		
+		s.print(prefix);
+        s.print("this");
+        s.println();
 	}
 
 	@Override
