@@ -1,0 +1,15 @@
+// Description:
+//    Déclaration de champs de même nom entre deux classes indépendantes
+//
+// Resultats:
+//    ok
+
+class A {
+    protected int x;
+    protected float y;
+}
+
+class B {
+    protected int x;
+    float y;
+}

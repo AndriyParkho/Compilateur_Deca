@@ -1,0 +1,14 @@
+// Description:
+//    Initialisation d'un champs via un identificateur créé ans une classe indépendante
+//
+// Resultats:
+//    Erreur contextuelle
+//    identificateur non défini
+
+class A {
+    protected int x;
+}
+
+class B {
+    int y = x;
+}
