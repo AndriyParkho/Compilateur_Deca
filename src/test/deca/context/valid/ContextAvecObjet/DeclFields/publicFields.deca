@@ -1,0 +1,11 @@
+// Description:
+//    Déclaration de champs de visibilité public
+//
+// Resultats:
+//    ok
+
+class A {
+    int x;
+    float y = 1.0;
+    boolean a;
+}

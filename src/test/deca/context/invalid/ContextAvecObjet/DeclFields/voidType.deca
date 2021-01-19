@@ -1,0 +1,10 @@
+// Description:
+//    Déclaration d'un champs de type void
+//
+// Resultats:
+//    Erreur contextuelle
+//    Un champ de peut pas être de type void
+
+class A {
+    protected void x;
+}

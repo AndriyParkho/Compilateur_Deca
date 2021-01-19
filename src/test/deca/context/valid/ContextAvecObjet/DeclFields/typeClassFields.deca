@@ -1,0 +1,12 @@
+// Description:
+//    Déclaration et initialisation de champs de type objet défini
+//
+// Resultats:
+//    ok
+
+class A {}
+
+class B {
+    A x;
+    Object y;
+}

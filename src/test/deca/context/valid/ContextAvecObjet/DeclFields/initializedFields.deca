@@ -1,0 +1,11 @@
+// Description:
+//    Déclaration et initialisation de champs
+//
+// Resultats:
+//    ok
+
+class A {
+    protected int x = -1;
+    float y = x;
+    boolean a = true;
+}

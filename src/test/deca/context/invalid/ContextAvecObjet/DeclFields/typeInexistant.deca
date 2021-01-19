@@ -1,0 +1,10 @@
+// Description:
+//    Déclaration d'un champs de type indéfini
+//
+// Resultats:
+//    Erreur contextuelle
+//    type inexistant
+
+class A {
+    protected in x;
+}

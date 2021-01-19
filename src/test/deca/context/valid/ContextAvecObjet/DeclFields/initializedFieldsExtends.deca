@@ -1,0 +1,15 @@
+// Description:
+//    Déclaration et initialisation de champs via extends
+//
+// Resultats:
+//    ok
+
+class A {
+    protected int x = -1;
+    float y = x;
+    boolean a = true;
+}
+
+class B extends A{
+    boolean b = a;
+}

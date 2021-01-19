@@ -1,0 +1,11 @@
+// Description:
+//    Déclaration de champs de même nom
+//
+// Resultats:
+//    Erreur contextuelle
+//    nom de champs déjà utilisé
+
+class A {
+    protected int x;
+    boolean x;
+}

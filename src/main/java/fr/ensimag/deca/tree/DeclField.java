@@ -66,7 +66,7 @@ public class DeclField extends AbstractDeclField {
 		//d'abord, on vérifie le type: défini, !void 
 		if(typeDefField==null)
 		{
-			throw new ContextualError("type introuvable dans envType",this.getLocation());
+			throw new ContextualError("type inexistant",this.getLocation());
 		}
 		else if(typeDefField.getType().isVoid())
 		{
