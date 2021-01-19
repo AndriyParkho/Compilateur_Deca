@@ -84,9 +84,9 @@ public class DeclField extends AbstractDeclField {
 		 fieldDef= new FieldDefinition(typeDefField.getType(),this.getLocation(),
 				this.getVisibility(),currentClass,vraiIndex);
 		try {
-			if(!compiler.getEnvExp().getDonnees().containsKey(symField))
+			if(!compiler.getEnvExp().getDonnees().containsKey(name.getName()))
 			{
-				compiler.getEnvExp().declare(symField, fieldDef);
+				compiler.getEnvExp().declare(name.getName(), fieldDef);
 			}
 			else
 			{

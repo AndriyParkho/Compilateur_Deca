@@ -102,7 +102,7 @@ public class DeclClass extends AbstractDeclClass {
     	}
     	this.name.getClassDefinition().setNumberOfFields(numFields);
     	this.name.getClassDefinition().setNumberOfMethods(numMethods);
-    	ClassDefinition classDef=(ClassDefinition)compiler.getEnvTypes().get(this.name.getName());
+    	ClassDefinition classDef=(ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(this.name.getName().getName()));
     	this.fieldList.verifyFieldMembers(compiler, classDef);
     	this.methodList.verifyMethodMembers(compiler, classDef);
     }
