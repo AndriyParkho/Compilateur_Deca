@@ -12,6 +12,10 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 /**
  * Declaration of a field
@@ -138,5 +142,19 @@ public class DeclField extends AbstractDeclField {
 	protected void iterChildren(TreeFunction f) {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
+	
+	@Override
+	public void codeGenInitField(DecacCompiler compiler) {
+		if(initialization.isInitialization()) {
+			Initialization init = (Initialization)initialization;
+			init.getExpression().codeGenExpr(compiler, GPRegister.R0);
+			}
+		else {
+			compiler.addInstruction(new LOAD(0, GPRegister.R0));
+		}
+		compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.R1));
+		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(name.getFieldDefinition().getIndex(), GPRegister.R1)));
+		
+	}
 
 }
