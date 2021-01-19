@@ -161,7 +161,7 @@ public class DeclClass extends AbstractDeclClass {
 	}
 	
 	protected void codeGenInitClass(DecacCompiler compiler) {
-		//
+		//compiler.addLabel(null);
 	}
     
 
