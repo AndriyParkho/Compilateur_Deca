@@ -40,7 +40,9 @@ public class MethodAsmBody extends AbstractMethodBody {
 	
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-	        throw new UnsupportedOperationException("Not yet supported");
+		s.print(prefix);
+        s.print(string.getValue());
+        s.println();
 	    }
 
 	@Override

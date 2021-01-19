@@ -97,7 +97,8 @@ public class DeclParam extends AbstractDeclParam {
 	
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-	        throw new UnsupportedOperationException("Not yet supported");
+			this.type.prettyPrint(s,prefix, false);
+			this.name.prettyPrint(s, prefix, false);
 	    }
 
 	@Override

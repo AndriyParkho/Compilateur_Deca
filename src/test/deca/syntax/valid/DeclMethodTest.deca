@@ -1,0 +1,7 @@
+class Jean {
+    int x = 3;
+
+    void printHello() {
+        println("Hello");
+    }
+}

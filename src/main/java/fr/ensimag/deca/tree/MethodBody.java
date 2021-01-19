@@ -48,7 +48,8 @@ public class MethodBody extends AbstractMethodBody {
 	
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-	        throw new UnsupportedOperationException("Not yet supported");
+			this.listDeclVar.prettyPrint(s, prefix, false);
+			this.listInst.prettyPrint(s, prefix, false);
 	    }
 
 	@Override
