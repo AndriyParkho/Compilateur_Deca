@@ -63,7 +63,7 @@ public class DeclClass extends AbstractDeclClass {
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         //FAIT
-    	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(this.name.getName());
+    	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(this.superClass.getName());
     	if(superClassDef==null)
     	{
     		throw new ContextualError("super classe introuvable",this.getLocation());
