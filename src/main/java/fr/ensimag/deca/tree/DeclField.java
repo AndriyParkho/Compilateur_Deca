@@ -99,7 +99,7 @@ public class DeclField extends AbstractDeclField {
 		}catch(EnvironmentExp.DoubleDefException doubleDef) {
 			throw new ContextualError("nom de champ déja utilisé",this.getLocation());
 		}
-		this.name.setDefinition(typeDefField);
+		this.name.setDefinition(fieldDef);
 		this.name.setType(typeDefField.getType());
 		this.type.setDefinition(fieldDef);
 		this.type.setType(typeDefField.getType());
