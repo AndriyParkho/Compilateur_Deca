@@ -29,7 +29,7 @@ public class New extends AbstractExpr{
 		Definition TypeDef=compiler.getEnvTypes().get(compiler.getSymbolTable().create(identifier.getName().getName()));
 		if(TypeDef==null)
 		{
-			throw new ContextualError("type introuvable pour faire la déclaration",this.getLocation());
+			throw new ContextualError("Classe non définie",this.getLocation());
 		}
 		else if(!TypeDef.isClass())
 		{
