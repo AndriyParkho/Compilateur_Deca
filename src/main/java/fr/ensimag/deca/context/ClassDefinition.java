@@ -109,7 +109,7 @@ public class ClassDefinition extends TypeDefinition {
     	for(ExpDefinition data : members.getDonnees().values()) {
     		if(data.isMethod()) {
     			MethodDefinition method = (MethodDefinition) data;
-    			method.setLabel(new Label("code." + this.getType().getName().getName() + "." + method.getType().getName().getName()));
+//    			method.setLabel(new Label("code." + this.getType().getName().getName() + "." + method.toString()));
     			methods.add(method);
     		}
     	}

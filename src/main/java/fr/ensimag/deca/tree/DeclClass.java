@@ -129,7 +129,8 @@ public class DeclClass extends AbstractDeclClass {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not yet supported");
+    	// A FAIRE
+//        throw new UnsupportedOperationException("Not yet supported");
     }
 
 
