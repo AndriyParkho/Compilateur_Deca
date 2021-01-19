@@ -22,8 +22,31 @@ public class Return extends AbstractInst{
 	@Override
 	protected void verifyInst(DecacCompiler compiler, ClassDefinition currentClass, Type returnType)
 			throws ContextualError {
-		// TODO 
+		// FAIT
+		//pas de return si returntype=void + type et returntype compatible (float<=int autorisé!)
 		
+		
+		if(returnType.isVoid())
+		{
+			throw new ContextualError("return non autorisé pour un returnType void",this.getLocation());
+		}
+		else
+		{
+			this.returnExpr.verifyRValue(compiler, currentClass, returnType);
+			Type type=this.returnExpr.getType();
+			if(returnType.isFloat() && type.isInt())
+			{
+				ConvFloat reel=new ConvFloat(returnExpr);
+				reel.verifyExpr(compiler, currentClass);
+				reel.setType(returnType);
+				this.returnExpr=reel;
+			}
+			else if(!type.sameType(returnType))
+			{
+				throw new ContextualError("type incompatible avec le returnType",this.getLocation());
+			}
+		}
+		this.returnExpr.setType(returnType);
 	}
 	@Override
 	protected void codeGenInst(DecacCompiler compiler) throws jumpException {

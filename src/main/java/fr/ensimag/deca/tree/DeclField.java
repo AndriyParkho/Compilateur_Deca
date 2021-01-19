@@ -81,12 +81,12 @@ public class DeclField extends AbstractDeclField {
 		
 		
 		//currentClass.incNumberOfFields();
-		 fieldDef= new FieldDefinition(typeDefField.getType(),this.getLocation(),
+		fieldDef= new FieldDefinition(typeDefField.getType(),this.getLocation(),
 				this.getVisibility(),currentClass,vraiIndex);
 		try {
-			if(!compiler.getEnvExp().getDonnees().containsKey(name.getName()))
+			if(currentClass.getMembers().get(name.getName()) == null)
 			{
-				compiler.getEnvExp().declare(name.getName(), fieldDef);
+				currentClass.getMembers().declare(name.getName(), fieldDef);
 			}
 			else
 			{
@@ -138,5 +138,5 @@ public class DeclField extends AbstractDeclField {
 	protected void iterChildren(TreeFunction f) {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
-	
+
 }
