@@ -1,20 +1,7 @@
-	TSTO #4
+	TSTO #0
 	BOV stack_overflow_error
-	ADDSP #4
+	ADDSP #0
 ; start main program
-; --------------------------------------------------
-;        Construction des tables des méthodes       
-; --------------------------------------------------
-; Construction de la table des méthodes de Object
-	LOAD #null, R0
-	STORE R0, 1(GB)
-	LOAD code.Object.boolean, R0
-	STORE R0, 2(GB)
-; Construction de la table des méthodes de A
-	LEA 1(GB), R0
-	STORE R0, 3(GB)
-	LOAD code.Object.boolean, R0
-	STORE R0, 4(GB)
 ; Main program
 ; Beginning of main instructions:
 	HALT

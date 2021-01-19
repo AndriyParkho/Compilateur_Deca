@@ -150,6 +150,16 @@ public class DeclClass extends AbstractDeclClass {
 		// Générer la table des méthodes
 		classDef.codeGenMethodTable(compiler);
 	}
+	
+	@Override
+	protected void codeGenClassBody(DecacCompiler compiler) {
+		codeGenInitClass(compiler);
+		
+	}
+	
+	protected void codeGenInitClass(DecacCompiler compiler) {
+		//
+	}
     
 
 }
