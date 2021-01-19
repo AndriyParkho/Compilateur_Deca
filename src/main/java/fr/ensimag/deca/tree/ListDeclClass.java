@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.InitObjectClass;
 import fr.ensimag.deca.codegen.compilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
@@ -72,15 +73,8 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     	// A FAIRE : 
     	// Initialisation de la classe Object
     	compilerInstruction.decorationAssembleur(compiler, "Construction des tables des méthodes");
-    	ClassDefinition objectDefinition = (ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create("Object"));
-    	objectDefinition.setMethodsTable();
-    	compiler.addComment("Construction de la table des méthodes de " + objectDefinition.getType().getName().getName());
-    	compiler.incrCountGB();
-    	compiler.addInstruction(new LOAD(new NullOperand(), Register.R0));
-    	objectDefinition.setOperand(new RegisterOffset(compiler.getCountGB(), Register.GB));
-		compiler.addInstruction(new STORE(Register.R0, objectDefinition.getOperand()));
-		objectDefinition.codeGenMethodTable(compiler);
-		
+    	InitObjectClass.initObjectMethodsTbl(compiler);
+    	
     	for(AbstractDeclClass classe : this.getList()) {
     		classe.codeGenClassMethodTable(compiler);
     	}
