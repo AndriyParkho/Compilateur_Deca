@@ -1,4 +1,4 @@
-class Test extends int {
+class Test {
 }
 
 class B{

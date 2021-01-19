@@ -34,14 +34,16 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
+		this.objet.decompile(s);
+		s.print(" instanceof ");
+		this.type.decompile(s);
 		
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
-		
+		this.objet.prettyPrint(s, prefix, false);
+        this.type.prettyPrint(s, prefix, true);
 	}
 
 	@Override

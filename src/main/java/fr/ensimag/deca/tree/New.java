@@ -51,14 +51,13 @@ public class New extends AbstractExpr{
 
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO Auto-generated method stub
-		
+		s.print("new ");
+		this.identifier.decompile(s);
 	}
 
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO Auto-generated method stub
-		
+		this.identifier.prettyPrint(s,prefix,true);
 	}
 
 	@Override
