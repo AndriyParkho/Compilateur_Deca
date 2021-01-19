@@ -65,15 +65,19 @@ public class ClassType extends Type {
         //Fait
     	if(potentialSuperClass.getName().getName().equals("Object"))
     	{
-    		return false;
+    		return true;
     	}
+        if (this.getName().getName().equals("Object")){
+            return false;
+        }
     	else if(this.getDefinition().getType().sameType(potentialSuperClass.getDefinition().getType()))
     	{
     		return true;
     	}
     	else 
     	{
-    		return potentialSuperClass.isSubClassOf(this.getDefinition().getSuperClass().getType());
+    	    System.out.println(this.getDefinition().getSuperClass().getType());
+    		return this.getDefinition().getSuperClass().getType().isSubClassOf(potentialSuperClass);
     	}
     	
     }
