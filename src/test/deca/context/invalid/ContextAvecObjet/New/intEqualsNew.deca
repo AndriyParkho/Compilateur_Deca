@@ -1,0 +1,14 @@
+// Description:
+//    Déclaration d'une classe dans un int
+//
+// Resultats:
+//    Erreur contextuelle ligne 9
+//    un type class était attendu!
+
+class A {
+    int x;
+}
+
+{
+    int x = new A();
+}
