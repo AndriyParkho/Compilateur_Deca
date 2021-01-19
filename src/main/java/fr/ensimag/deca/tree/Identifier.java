@@ -177,16 +177,23 @@ public class Identifier extends AbstractIdentifier {
         //Fait 
     	//si l'identificateur existe dans l'environnement local, on fait l'enrichissement
     	//sinon on lève une erreur contextuelle
-    	if(compiler.getEnvExp().get(this.name)!=null)
-    	{
-    		this.setDefinition(compiler.getEnvExp().get(this.name));
-    		this.setType(compiler.getEnvExp().get(this.name).getType());
-    		return compiler.getEnvExp().get(this.name).getType();
-    	}
-    	else
-    	{
-    		throw new ContextualError("identificateur non défini",this.getLocation());
-    	}
+        if (currentClass == null) {
+            if (compiler.getEnvExp().get(this.name) != null) {
+                this.setDefinition(compiler.getEnvExp().get(this.name));
+                this.setType(compiler.getEnvExp().get(this.name).getType());
+                return compiler.getEnvExp().get(this.name).getType();
+            } else {
+                throw new ContextualError("identificateur non défini", this.getLocation());
+            }
+        }else{
+            if (currentClass.getMembers().get(this.name) != null) {
+                this.setDefinition(currentClass.getMembers().get(this.name));
+                this.setType(currentClass.getMembers().get(this.name).getType());
+                return currentClass.getMembers().get(this.name).getType();
+            } else {
+                throw new ContextualError("identificateur non défini", this.getLocation());
+            }
+        }
     }
 
     /**
