@@ -576,7 +576,7 @@ decl_method returns [AbstractDeclMethod tree]
         setLocation(methodBody,$block.start);
         }
       | ASM OPARENT code=multi_line_string CPARENT SEMI {
-        methodBody=new MethodAsmBody($code.text);
+        methodBody=new MethodAsmBody(new StringLiteral($code.text));
         methodBody.setLocation($code.location);
         }
       ) {
