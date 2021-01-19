@@ -145,6 +145,7 @@ public class DeclField extends AbstractDeclField {
 	
 	@Override
 	public void codeGenInitField(DecacCompiler compiler) {
+		compiler.addComment("Initialisation de "+name.getName().getName());
 		if(initialization.isInitialization()) {
 			Initialization init = (Initialization)initialization;
 			init.getExpression().codeGenExpr(compiler, GPRegister.R0);
