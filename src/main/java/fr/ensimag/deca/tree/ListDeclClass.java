@@ -69,7 +69,8 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     }
     
     public void codeGenListClassMethodTable(DecacCompiler compiler) {
-    	// A FAIRE : Initialisation de la classe Object en le récupérant avec : compiler.getEnvTypes().get("Object").getDefinition()
+    	// A FAIRE : 
+    	// Initialisation de la classe Object
     	compilerInstruction.decorationAssembleur(compiler, "Construction des tables des méthodes");
     	ClassDefinition objectDefinition = (ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create("Object"));
     	objectDefinition.setMethodsTable();
