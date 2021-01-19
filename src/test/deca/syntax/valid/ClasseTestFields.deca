@@ -1,0 +1,5 @@
+class TestFields {
+    int y = 8;
+    float x = 8.8888888;
+    protected String nom = "ClassTest";
+}

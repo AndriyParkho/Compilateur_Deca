@@ -1,3 +1,8 @@
+//Description :
+//	test de while
+//
+//Résultats :
+//	ok 
 {int x = 0;
 while (true) {
     x = x + 1;

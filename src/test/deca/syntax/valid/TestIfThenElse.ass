@@ -1,0 +1,52 @@
+	TSTO #1
+	BOV stack_overflow_error
+	ADDSP #1
+; start main program
+; Main program
+	LOAD #1, R2
+	STORE R2, 1(GB)
+; Beginning of main instructions:
+	LOAD 1(GB), R2
+	CMP #1, R2
+	BNE Else_10_4
+	WSTR "Bastien"
+	WNL
+	BRA FinIf_10_4
+Else_10_4:
+	LOAD 1(GB), R2
+	CMP #3, R2
+	BNE Else_13_9
+	WSTR "Etienne"
+	WNL
+	BRA FinIf_13_9
+Else_13_9:
+	LOAD 1(GB), R2
+	CMP #7, R2
+	BNE Else_16_9
+	WSTR "Carotte"
+	WNL
+	BRA FinIf_16_9
+Else_16_9:
+	LOAD 1(GB), R2
+	CMP #8, R2
+	BNE Else_19_9
+	WSTR "Jean"
+	WNL
+	BRA FinIf_19_9
+Else_19_9:
+	WSTR "Louis"
+	WNL
+FinIf_19_9:
+FinIf_16_9:
+FinIf_13_9:
+FinIf_10_4:
+	HALT
+; end main program
+; --------------------------------------------------
+; Erreur : débordement de pile dans la génération de variables globales
+; --------------------------------------------------
+stack_overflow_error:
+	WSTR "Erreur : débordement de pile dans la génération de variables globales"
+	WNL
+	ERROR
+; end main program

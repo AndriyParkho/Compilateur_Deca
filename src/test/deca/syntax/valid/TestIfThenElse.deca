@@ -13,6 +13,12 @@
     else if (x == 3) {
         println("Etienne");
     }
+    else if (x == 7) {
+        println("Carotte");
+    }
+    else if (x == 8) {
+        println("Jean");
+    }
     else {
         println("Louis");
     }

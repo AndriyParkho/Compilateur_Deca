@@ -129,7 +129,9 @@ public class DeclField extends AbstractDeclField {
 	
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-	        throw new UnsupportedOperationException("Not yet supported");
+			type.prettyPrint(s, prefix, false);
+			name.prettyPrint(s, prefix, false);
+			initialization.prettyPrint(s, prefix, false);
 	    }
 
 	@Override
