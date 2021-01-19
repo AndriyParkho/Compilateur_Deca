@@ -6,6 +6,9 @@
 
 
 class A{
+int x;
+int y = 100;
+int z = 10+4*5;
 
 }
 

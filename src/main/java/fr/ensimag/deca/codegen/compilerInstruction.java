@@ -57,6 +57,16 @@ public class compilerInstruction {
 		compiler.addComment(ligne);
 	}
 	
+	public static void decorationLigne(DecacCompiler compiler, String message) {
+		int tailleMessage = message.length();
+		String ligne= "";
+		int nombreTiret = (decorationLigne - tailleMessage)/2;
+		for(int i = 0; i < nombreTiret - 1; ++i) {
+			ligne += "-";
+		}
+		compiler.addComment(ligne +" "+ message);
+	}
+	
 	public static Label labeSaut(DecacCompiler compiler, String nom) {
 		Label labelSaut = new Label(nom);
 		compiler.addLabel(labelSaut);

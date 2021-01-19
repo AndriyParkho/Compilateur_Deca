@@ -11,6 +11,14 @@ import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
+import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.NEW;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
 
 public class New extends AbstractExpr{
 	
@@ -43,8 +51,16 @@ public class New extends AbstractExpr{
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// TODO Auto-generated method stub
-		
+		// A FAIRE : Auto-generated method stub
+		compiler.addInstruction(new NEW(identifier.getClassDefinition().getNumberOfFields() + 1, op));
+		//compiler.addInstruction(new BOV(tasPleinLabel));
+		compiler.addInstruction(new LEA(identifier.getClassDefinition().getOperand(), GPRegister.R0));
+		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(0, op)));
+		compiler.addInstruction(new PUSH(op));
+		compiler.addInstruction(new BSR(identifier.getClassDefinition().getInitLabel()));
+		compiler.addInstruction(new POP(op));
+		compiler.incrCountGB();
+		compiler.addInstruction(new STORE(op, new RegisterOffset(compiler.getCountGB(), GPRegister.GB))); // peut etre changer en LB si on le déclare dans une classe, mais vraiment pas sûr
 	}
 
 

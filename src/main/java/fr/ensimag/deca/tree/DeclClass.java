@@ -160,10 +160,12 @@ public class DeclClass extends AbstractDeclClass {
 	}
 	
 	protected void codeGenInitClass(DecacCompiler compiler) {
+		compilerInstruction.decorationLigne(compiler, "Initialisation des champs de " + name.getName().getName());
 		compiler.addLabel(name.getClassDefinition().getInitLabel());
 		for(AbstractDeclField field : fieldList.getList()) {
 			field.codeGenInitField(compiler);
 		}
+		compiler.addComment("Retour au code principal");
 		compiler.addInstruction(new RTS());
 	}
     
