@@ -1,0 +1,8 @@
+// Description:
+//    Programme minimaliste de déclaration d'une classe avec extends Obect, sans champ, sans méthode, sans main.
+//
+// Resultats:
+//    Erreur contextuelle
+//    type non défini
+
+class A extends Obect{}
