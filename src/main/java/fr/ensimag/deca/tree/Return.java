@@ -32,13 +32,12 @@ public class Return extends AbstractInst{
 	}
 	@Override
 	public void decompile(IndentPrintStream s) {
-		// TODO 
-		
+		s.print("return ");
+		this.returnExpr.decompile(s);
 	}
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		// TODO 
-		
+		this.returnExpr.prettyPrint(s,prefix,true);
 	}
 	@Override
 	protected void iterChildren(TreeFunction f) {

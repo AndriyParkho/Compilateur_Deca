@@ -63,23 +63,23 @@ public class DeclClass extends AbstractDeclClass {
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         //FAIT
+		if(!this.superClass.verifyType(compiler).isClass())
+		{
+			throw new ContextualError("le champs superClass doit etre une classe",this.getLocation());
+		}
     	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(superClass.getName().getName()));
-    	if(superClassDef==null)
+		if(superClassDef==null)
     	{
     		throw new ContextualError("super classe introuvable",this.getLocation());
     	}
-    	else if(!this.superClass.verifyType(compiler).isClass())
-    	{
-    		throw new ContextualError("le champs superClass doit etre une classe",this.getLocation());
-    	}
-    	else if(compiler.getEnvTypes().get(this.name.getName())!=null)
+    	else if(compiler.getEnvTypes().get(compiler.getSymbolTable().create(this.name.getName().getName()))!=null)
     	{
     		throw new ContextualError("une telle classe est déja définie",this.getLocation());
     	}
     	//on peut alors déclarer la classe et faire les set
     	ClassType typeClass=new ClassType(this.name.getName(),this.getLocation(),superClassDef);
     	ClassDefinition defClass= typeClass.getDefinition();
-    	Symbol symClass=compiler.getSymbolTable().create(this.name.getName().toString());
+    	Symbol symClass=compiler.getSymbolTable().create(this.name.getName().getName());
     	compiler.getEnvTypes().declare(symClass, defClass);
     	this.name.setDefinition(defClass);
     	this.name.setType(typeClass);
@@ -129,7 +129,8 @@ public class DeclClass extends AbstractDeclClass {
 
     @Override
     protected void iterChildren(TreeFunction f) {
-        throw new UnsupportedOperationException("Not yet supported");
+    	// A FAIRE
+//        throw new UnsupportedOperationException("Not yet supported");
     }
 
 

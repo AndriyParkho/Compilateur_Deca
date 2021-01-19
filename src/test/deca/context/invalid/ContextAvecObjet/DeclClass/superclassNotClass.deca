@@ -1,0 +1,8 @@
+// Description:
+//    Superclass de type non classe
+//
+// Resultats:
+//    Erreur contextuelle
+//    Le champs superclass doit être une classe
+
+class A extends int {}

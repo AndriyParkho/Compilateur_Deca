@@ -1,0 +1,10 @@
+// Description:
+//    Double définition d'une classe
+//
+// Resultats:
+//    Erreur contextuelle
+//    Une telle classe est déjà définie
+
+class A {}
+class B {}
+class A extends B{}

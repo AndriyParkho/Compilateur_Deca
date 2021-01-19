@@ -1,0 +1,18 @@
+// Description:
+//    Programme minimaliste de déclarations de classes avec 10 extends, sans champ, sans méthode, sans main.
+//
+// Resultats:
+//    ok
+//
+class A {}
+class B extends A{}
+class C extends A{}
+class D extends A{}
+class E extends A{}
+class F extends E{}
+class G extends E{}
+class H extends G{}
+class I extends H{}
+class J extends I{}
+class K extends H{}
+
