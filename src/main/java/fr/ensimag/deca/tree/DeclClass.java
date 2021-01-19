@@ -63,7 +63,7 @@ public class DeclClass extends AbstractDeclClass {
     @Override
     protected void verifyClass(DecacCompiler compiler) throws ContextualError {
         //FAIT
-    	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(this.superClass.getName());
+    	ClassDefinition superClassDef=(ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(superClass.getName().getName()));
     	if(superClassDef==null)
     	{
     		throw new ContextualError("super classe introuvable",this.getLocation());
@@ -83,8 +83,6 @@ public class DeclClass extends AbstractDeclClass {
     	compiler.getEnvTypes().declare(symClass, defClass);
     	this.name.setDefinition(defClass);
     	this.name.setType(typeClass);
-    	
-    	
     }
     /**
      * on initialise le nombre de champs et de méthode
@@ -104,7 +102,7 @@ public class DeclClass extends AbstractDeclClass {
     	}
     	this.name.getClassDefinition().setNumberOfFields(numFields);
     	this.name.getClassDefinition().setNumberOfMethods(numMethods);
-    	ClassDefinition classDef=(ClassDefinition)compiler.getEnvTypes().get(this.name.getName());
+    	ClassDefinition classDef=(ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(this.name.getName().getName()));
     	this.fieldList.verifyFieldMembers(compiler, classDef);
     	this.methodList.verifyMethodMembers(compiler, classDef);
     }
