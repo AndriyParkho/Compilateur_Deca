@@ -16,6 +16,7 @@ import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 
 /**
  * Declaration of a method
@@ -133,5 +134,12 @@ public class DeclMethod extends AbstractDeclMethod {
 		name.getMethodDefinition().setLabel(new Label("code." + className + "." + name.getName().getName()));
 	}
 	
+	
+	public void codeGenMethod(DecacCompiler compiler) {
+		//A FAiRE : sauvegarde des registres
+		methodBody.codeGenMethodBody(compiler);
+		//A FAIRE ; restaurer les registres
+		compiler.addInstruction(new RTS());
+	}
 	
 }

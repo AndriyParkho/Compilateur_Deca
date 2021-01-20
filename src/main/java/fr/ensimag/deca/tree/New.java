@@ -58,8 +58,10 @@ public class New extends AbstractExpr{
 		compiler.addInstruction(new LEA(identifier.getClassDefinition().getOperand(), GPRegister.R0));
 		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(0, op)));
 		compiler.addInstruction(new PUSH(op));
+		compiler.incrementTempPile();
 		compiler.addInstruction(new BSR(identifier.getClassDefinition().getInitLabel()));
 		compiler.addInstruction(new POP(op));
+		compiler.decrementTempPile();
 		// Les 2 lignes suivantes doivent être commentées pour le cas de déclaration d'une variable globale : elles sont déjà STORE
 		//ça peut être problématique dans le cas d'un new dans une autre méthode.
 		//En fait non mais je tiens à laisser ma réfléxion ici en cas de problème.
