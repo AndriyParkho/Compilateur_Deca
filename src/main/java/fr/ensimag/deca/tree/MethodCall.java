@@ -22,7 +22,7 @@ import fr.ensimag.ima.pseudocode.instructions.SUBSP;
  */
 public class MethodCall extends AbstractMethodCall{
 
-    public MethodCall(Identifier variable, Identifier method, ListExpr arguments){
+    public MethodCall(AbstractExpr variable, AbstractIdentifier method, ListExpr arguments){
         super(variable, method, arguments);
     }
 

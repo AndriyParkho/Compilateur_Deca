@@ -52,16 +52,13 @@ public class DeclMethod extends AbstractDeclMethod {
 		//FAIT
 		EnvironmentExp envGlobClass=currentClass.getMembers();
 		ExpDefinition defClassMere=envGlobClass.get(this.name.getName());
-		int vraiIndex=index;
-		if(defClassMere!=null && defClassMere.isMethod())
-		{
-			FieldDefinition fieldClassDef= (FieldDefinition)defClassMere;
-			vraiIndex=fieldClassDef.getIndex();
-		}
 		Type typeRetour=this.type.verifyType(compiler);
-		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(),vraiIndex);
+		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(), index);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
 		this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
+		for (AbstractDeclParam param : this.paramList.getList()){
+			methodDef.getSignature().add(((DeclParam) param).getType().getType());
+		}
 		this.name.setDefinition(methodDef);
 		this.name.setType(typeRetour);
 		//avant de faire la déclaration,il faut vérifier le type de retour et la signature
@@ -89,7 +86,7 @@ public class DeclMethod extends AbstractDeclMethod {
 				}
 			}
 		}
-		
+
 		try {
 			currentClass.incNumberOfMethods();
 			envGlobClass.declare(this.name.getName(), methodDef);
@@ -102,9 +99,10 @@ public class DeclMethod extends AbstractDeclMethod {
     public void verifyMethodBody(DecacCompiler compiler  , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
-				EnvironmentExp envMethod=new EnvironmentExp(currentClass.getMembers());
-				this.paramList.verifyParamBody(compiler, envMethod, currentClass);
-				this.methodBody.verifyMethodBody(compiler, currentClass, this.type.getType());
+		((MethodDefinition)currentClass.getMembers().get(this.name.getName())).setLocalEnv(currentClass.getMembers());
+		compiler.setEnvExp(((MethodDefinition)currentClass.getMembers().get(this.name.getName())).getLocalEnv());
+		this.paramList.verifyParamBody(compiler, ((MethodDefinition)currentClass.getMembers().get(this.name.getName())).getLocalEnv(), currentClass);
+		this.methodBody.verifyMethodBody(compiler, currentClass, this.type.getType());
 	}
 	
 	@Override

@@ -12,6 +12,8 @@
        int y;
        float a = 1.5;
        float b;
+       y = 56 + x*7;
+       b = a*3 - 1.3;
        println(x);
        println(a);
 }

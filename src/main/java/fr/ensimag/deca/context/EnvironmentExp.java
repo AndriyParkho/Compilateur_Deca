@@ -29,7 +29,9 @@ public class EnvironmentExp {
 
     EnvironmentExp parentEnvironment;
     Hashtable<Symbol,ExpDefinition> donnees = new Hashtable<Symbol,ExpDefinition>();
-    
+
+    public EnvironmentExp getParentEnvironment() { return parentEnvironment; }
+
     public Hashtable<Symbol,ExpDefinition> getDonnees()
     {
     	return this.donnees;
@@ -76,7 +78,6 @@ public class EnvironmentExp {
      *
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-        System.out.println(this.donnees.containsKey(name));
     	if (!this.donnees.containsKey(name)) {
     		this.donnees.put(name, def);
     	}

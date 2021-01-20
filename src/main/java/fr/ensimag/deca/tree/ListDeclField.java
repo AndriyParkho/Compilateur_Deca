@@ -21,6 +21,7 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
             throws ContextualError{
 		//Fait
 		int index=currentClass.getNumberOfFields()+1;
+		compiler.setEnvExp(currentClass.getMembers());
 		for(AbstractDeclField field : this.getList())
 		{
 			field.verifyFieldMembers(compiler, currentClass, index);
@@ -33,6 +34,7 @@ public class ListDeclField extends TreeList<AbstractDeclField> {
     public void verifyFieldBody(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
 		//Fait
+		compiler.setEnvExp(currentClass.getMembers());
     	for(AbstractDeclField field : this.getList())
     	{
     		field.verifyFieldBody(compiler, currentClass);

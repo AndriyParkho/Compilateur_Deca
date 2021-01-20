@@ -22,6 +22,7 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
             throws ContextualError{
 		//FAIT
 		int index=currentClass.incNumberOfMethods()+1;
+		compiler.setEnvExp(currentClass.getMembers());
 		for(AbstractDeclMethod method : this.getList())
 		{
 			method.verifyMethodMembers(compiler, currentClass, index);

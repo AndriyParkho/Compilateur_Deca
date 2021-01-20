@@ -92,17 +92,11 @@ public class DeclField extends AbstractDeclField {
 		fieldDef= new FieldDefinition(typeDefField.getType(),this.getLocation(),
 				this.getVisibility(),currentClass,vraiIndex);
 		try {
-			//if(currentClass.getMembers().get(name.getName()) == null)
-			//{
-			currentClass.getMembers().declare(name.getName(), fieldDef);
-			/*}
-			else
-			{
-				throw new EnvironmentExp.DoubleDefException();
-			}*/
+			currentClass.getMembers().declare(compiler.getSymbolTable().create(name.getName().getName()), fieldDef);
 		}catch(EnvironmentExp.DoubleDefException doubleDef) {
 			throw new ContextualError("nom de champ déja utilisé",this.getLocation());
 		}
+		compiler.getSymbolTable().create(name.getName().getName());
 		this.name.setDefinition(fieldDef);
 		this.name.setType(typeDefField.getType());
 		this.type.setDefinition(fieldDef);

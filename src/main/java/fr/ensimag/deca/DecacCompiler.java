@@ -117,17 +117,23 @@ public class DecacCompiler {
    private EnvironmentType envTypes;
     //envExp contient les exp predefinis
     //il faut l'initialiser avec les exp prédéfinis
-    private EnvironmentExp envExp;
+    private EnvironmentExp envExpPre;
 
-   public EnvironmentType getEnvTypes()
+    public EnvironmentType getEnvTypes()
    {
 	   return this.envTypes;
    }
+    public EnvironmentExp getEnvExpPre()
+    {
+        return this.envExpPre;
+    }
+
+    private EnvironmentExp envExp;
     public EnvironmentExp getEnvExp()
     {
         return this.envExp;
     }
-   
+    public void setEnvExp(EnvironmentExp env){ this.envExp = env; }
    /**
     * méthode qui initialise l'environnement des types en y insérant 
     * tous les types prédéfinis
@@ -141,7 +147,7 @@ public class DecacCompiler {
 	   Symbol objectSymbol=this.symbolTable.create("Object");
 
 	   TypeDefinition intTypeDef = new TypeDefinition(new IntType(intSymbol),Location.BUILTIN);
-	   TypeDefinition floatTypeDef = new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN);
+	   TypeDefinition floatTypeDef = new TypeDefinition(new FloatType(floatSymbol),Location.BUILTIN );
 	   TypeDefinition boolTypeDef = new TypeDefinition(new BooleanType(boolSymbol),Location.BUILTIN);
 	   TypeDefinition voidTypeDef = new TypeDefinition(new VoidType(voidSymbol),Location.BUILTIN);
 	   ClassDefinition objectClassDef = new ClassDefinition(new ClassType(objectSymbol, Location.BUILTIN, null),
@@ -155,14 +161,15 @@ public class DecacCompiler {
    }
 
    public void envExpInit() {
-       this.envExp = new EnvironmentExp(null);
+       this.envExpPre = new EnvironmentExp(null);
        Symbol equalsSymbol=this.symbolTable.create("equals");
        Signature sig = new Signature();
        sig.add(this.envTypes.get(this.symbolTable.create("Object")).getType());
        MethodDefinition equalsDef = new MethodDefinition(this.envTypes.get(this.symbolTable.create("boolean")).getType(),
                                                          Location.BUILTIN, sig, 0);
        ((ClassDefinition)this.getEnvTypes().get(this.getSymbolTable().create("Object"))).getMembers().declare(equalsSymbol, equalsDef);
-       this.envExp.declare(equalsSymbol, equalsDef);
+       this.envExpPre.declare(equalsSymbol, equalsDef);
+       envExp = envExpPre;
    }
    
    

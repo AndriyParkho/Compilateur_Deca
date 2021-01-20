@@ -2,19 +2,11 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import fr.ensimag.deca.context.*;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.DValGetter;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.Definition;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.ExpDefinition;
-import fr.ensimag.deca.context.FieldDefinition;
-import fr.ensimag.deca.context.MethodDefinition;
-import fr.ensimag.deca.context.Type;
-import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
@@ -177,23 +169,19 @@ public class Identifier extends AbstractIdentifier {
         //Fait 
     	//si l'identificateur existe dans l'environnement local, on fait l'enrichissement
     	//sinon on lève une erreur contextuelle
-        if (currentClass == null) {
-            if (compiler.getEnvExp().get(this.name) != null) {
-                this.setDefinition(compiler.getEnvExp().get(this.name));
-                this.setType(compiler.getEnvExp().get(this.name).getType());
-                return compiler.getEnvExp().get(this.name).getType();
-            } else {
-                throw new ContextualError("identificateur non défini", this.getLocation());
-            }
-        }else{
-            System.out.println(this.name);
-            if (currentClass.getMembers().get(this.name) != null) {
-                this.setDefinition(currentClass.getMembers().get(this.name));
-                this.setType(currentClass.getMembers().get(this.name).getType());
-                return currentClass.getMembers().get(this.name).getType();
-            } else {
-                throw new ContextualError("identificateur non défini", this.getLocation());
-            }
+        if (compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())) != null) {
+            this.setDefinition(compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())));
+            this.setType(compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())).getType());
+            return compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())).getType();
+        }
+        else if (compiler.getEnvExp().get(this.name) != null ){
+            this.setDefinition(compiler.getEnvExp().get(this.name));
+            this.setType(compiler.getEnvExp().get(this.name).getType());
+            return compiler.getEnvExp().get(this.name).getType();
+        }
+        else {
+            System.out.println(this.name.getName());
+            throw new ContextualError("identificateur non défini", this.getLocation());
         }
     }
 

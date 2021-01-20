@@ -390,9 +390,13 @@ select_expr returns[AbstractExpr tree]
         (o=OPARENT args=list_expr CPARENT {
             // we matched "e1.i(args)"
             assert($args.tree != null);
+            $tree = new MethodCall($e1.tree, $i.tree, $args.tree);
+            setLocation($tree, $e1.start);
         }
         | /* epsilon */ {
             // we matched "e.i"
+            $tree = new Dot($e1.tree, $i.tree);
+            setLocation($tree, $e1.start);
         }
         )
     ;
@@ -426,6 +430,8 @@ primary_expr returns[AbstractExpr tree]
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
             assert($expr.tree != null);
+            $tree = new CastExpr($type.tree, $expr.tree);
+            setLocation($tree, $cast);
         }
     | literal {
             assert($literal.tree != null);
@@ -466,6 +472,8 @@ literal returns[AbstractExpr tree]
         setLocation($tree, $THIS);
         }
     | NULL {
+        $tree = new Null();
+        setLocation($tree, $NULL);
         }
     ;
 

@@ -23,7 +23,9 @@ public class DeclParam extends AbstractDeclParam {
 	
 	private AbstractIdentifier name;
 	private AbstractIdentifier type;
-	
+
+	public AbstractIdentifier getType(){return type;}
+
 	public DeclParam(AbstractIdentifier type , AbstractIdentifier name)
 	{
 		this.type=type;
@@ -58,8 +60,11 @@ public class DeclParam extends AbstractDeclParam {
 		{
 			this.type.setDefinition(typeDefParam);
 			this.type.setType(typeDefParam.getType());
+			ParamDefinition nameDef = new ParamDefinition(typeDefParam.getType(), this.getLocation());
+			this.name.setDefinition(nameDef);
+			this.name.setType(typeDefParam.getType());
 		}
-		}
+	}
 	/**
 	 * vérification de l'initialisation et de l'unicité du nom
 	 * @param compiler
@@ -67,10 +72,10 @@ public class DeclParam extends AbstractDeclParam {
 	 * @throws ContextualError
 	 */
 	@Override
-    public void verifyParamBody(DecacCompiler compiler ,EnvironmentExp lovalEnv , ClassDefinition currentClass)
+    public void verifyParamBody(DecacCompiler compiler, EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
-		Symbol paramSymbol= compiler.getSymbolTable().create(this.name.getName().toString());
+		Symbol paramSymbol= compiler.getSymbolTable().create(this.name.getName().getName());
 		ParamDefinition defParam= new ParamDefinition(this.type.getType(),this.name.getLocation());
 		//si le nom n'existe pas deja dans l'environnement, on ajoute e paramètre
 		//sinon on lève une exception de double définition
@@ -87,7 +92,7 @@ public class DeclParam extends AbstractDeclParam {
 			throw new ContextualError("nom du paramètre déja utilisé",this.getLocation());
 		}
 	}
-	
+
 	@Override
     public void decompile(IndentPrintStream s) {
 		this.type.decompile(s);
