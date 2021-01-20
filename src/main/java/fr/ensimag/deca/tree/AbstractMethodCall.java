@@ -17,11 +17,11 @@ import fr.ensimag.deca.tools.IndentPrintStream;
  */
 public abstract class AbstractMethodCall extends AbstractExpr{
 
-    private Identifier variable;
-    private Identifier method;
+    private AbstractExpr variable;
+    private AbstractIdentifier method;
     private ListExpr arguments;
 
-    public AbstractMethodCall(Identifier variable, Identifier method, ListExpr arguments){
+    public AbstractMethodCall(AbstractExpr variable, AbstractIdentifier method, ListExpr arguments){
         Validate.notNull(variable);
         Validate.notNull(method);
         this.variable = variable;
@@ -29,8 +29,8 @@ public abstract class AbstractMethodCall extends AbstractExpr{
         this.arguments = arguments;
     }
 
-    public Identifier getVariable(){ return variable; }
-    public Identifier getMethod() { return method; }
+    public AbstractExpr getVariable(){ return variable; }
+    public AbstractIdentifier getMethod() { return method; }
     public ListExpr getArguments() { return arguments; }
 
     @Override
@@ -67,7 +67,7 @@ public abstract class AbstractMethodCall extends AbstractExpr{
             return this.getType();
         }
         else{
-            throw new ContextualError(String.format("%s n'est pas un objet", variable.getName().getName()),
+            throw new ContextualError(String.format("%s n'est pas un objet"),
                     variable.getLocation());
         }
     }
