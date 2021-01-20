@@ -1,0 +1,21 @@
+// Description:
+//    Override avec une autre signature (type différent)
+//
+// Resultats:
+//    Erreur contextuelle ligne 18
+//    type de retour incompatible
+class A{
+
+    int x;
+
+    void setX(int y){
+        x = y;
+    }
+}
+
+class B extends A{
+
+    void setX(float y){
+        x = y;
+    }
+}

@@ -1,0 +1,17 @@
+// Description:
+//   Méthode de même nom qu'un attribut de la classe mère.
+//
+// Resultats:
+//    ok
+class A{
+
+    int x;
+
+    void setX(int y){
+        x = y;
+    }
+}
+
+class B extends A{
+    void x(){}
+}

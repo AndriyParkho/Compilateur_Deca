@@ -1,0 +1,14 @@
+// Description:
+//    Déclaration d'une méthode qui ne renvoie pas le bon type
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    type incompatible
+class A{
+
+    int x;
+
+    boolean setX(int y){
+        x = y;
+        return x;
+    }
+}

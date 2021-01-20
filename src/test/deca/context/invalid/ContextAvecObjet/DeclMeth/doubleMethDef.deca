@@ -1,0 +1,18 @@
+// Description:
+//    Déclaration de deux méthodes de même nom
+//
+// Resultats:
+//    Erreur contextuelle ligne 15
+//    double définition d'une méthode
+class A{
+
+    int x;
+
+    void setX(int y){
+        x = y;
+    }
+
+    int setX(float z){
+        return 1;
+    }
+}

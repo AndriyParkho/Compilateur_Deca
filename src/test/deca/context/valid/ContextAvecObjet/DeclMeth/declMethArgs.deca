@@ -1,0 +1,14 @@
+// Description:
+//    Déclaration d'une méthode avec plusieurs arguments
+//
+// Resultats:
+//    ok
+//
+class A{
+
+    float x;
+
+    void setX(int y, float z, boolean a, Object O, Object OB){
+        x = y*z;
+    }
+}

@@ -1,0 +1,26 @@
+// Description:
+//    Déclaration de plusieurs méthodes avec plusieurs arguments
+//
+// Resultats:
+//    ok
+//
+class A{
+
+    float x;
+
+    void setX(int y, float z, boolean a, Object O, Object OB){
+        x = y*z;
+    }
+
+    boolean isClass(){
+        return true;
+    }
+
+    boolean equals(float y){
+        return x==y;
+    }
+
+    float getXcoefs(int y, float z){
+        return (x+z)*y;
+    }
+}

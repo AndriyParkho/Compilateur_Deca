@@ -1,0 +1,28 @@
+// Description:
+//    Override d'une méthode
+//
+// Resultats:
+//    ok
+//
+class A{
+
+    float x;
+
+    void setX(int y, float z, boolean a, Object O, Object OB){
+        x = y*z;
+    }
+
+    boolean isClass(){
+        return true;
+    }
+}
+
+class B extends A{
+    void setX(int y, float z, boolean a, Object O, Object OB){
+        if (a){
+            x = y*z;
+        }else{
+            x = y;
+        }
+    }
+}
