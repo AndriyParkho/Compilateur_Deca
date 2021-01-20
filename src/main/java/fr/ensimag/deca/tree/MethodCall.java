@@ -1,15 +1,20 @@
 package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
-import fr.ensimag.ima.pseudocode.instructions.WNL;
-import org.apache.commons.lang.Validate;
-
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.SUBSP;
 
 /**
  * @author gl10
@@ -35,7 +40,25 @@ public class MethodCall extends AbstractMethodCall{
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        //A FAIRE
+        //réserver emplacement paramètres +1
+    	int nombreParametres = getArguments().size();
+    	GPRegister registreStockage = GPRegister.getR(2);
+    	compiler.addInstruction(new ADDSP(nombreParametres + 1));
+    	compiler.addInstruction(new LOAD(getVariable().getVariableDefinition().getOperand(), registreStockage));
+    	compiler.addInstruction(new STORE(registreStockage, new RegisterOffset(0, GPRegister.SP)));
+    	int spOffset =0;
+    	for(AbstractExpr argument : getArguments().getList()) {
+    		++spOffset;
+    		argument.codeGenExpr(compiler, registreStockage);
+    		compiler.addInstruction(new STORE(registreStockage, new RegisterOffset(- spOffset, GPRegister.SP)));
+    		
+    	}
+    	compiler.addInstruction(new LOAD(new RegisterOffset(0, GPRegister.SP), registreStockage));
+    	compiler.addInstruction(new CMP(new NullOperand(), registreStockage));
+    	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+    	compiler.addInstruction(new LOAD(new RegisterOffset(0, registreStockage), registreStockage));
+    	compiler.addInstruction(new BSR(new RegisterOffset(getMethod().getMethodDefinition().getIndex(), registreStockage)));
+    	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
 
     @Override

@@ -23,18 +23,17 @@ public class CompilerInstruction {
 	
 	public static void gestionPileVariablesGlobales(DecacCompiler compiler) {		
 		compiler.addInstructionBegin(new ADDSP(compiler.getCountGB()));
-		createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile", true);
+		compiler.addInstructionBegin(new BOV(createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile")));
+		
         compiler.addInstructionBegin(new TSTO(compiler.getCountGB()+compiler.getTempMax()));
 	}
 	
-	public static Label createErreurLabel(DecacCompiler compiler, String nom, String errorMessage, boolean addFirst) {
+	public static Label createErreurLabel(DecacCompiler compiler, String nom, String errorMessage) {
 		if(compiler.isVerificationTest()) {
 			return null;
 		}
 		Label newLabelError = compiler.createLabel(nom);
 		compiler.addErrLblList(newLabelError, errorMessage);
-		if(addFirst) compiler.addInstructionBegin(new BOV(newLabelError));
-		else compiler.addInstruction(new BOV(newLabelError));
 		return newLabelError;
 	}
 	

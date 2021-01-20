@@ -6,6 +6,7 @@ import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.instructions.ADD;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 
 /**
  * @author gl10
@@ -33,7 +34,7 @@ public class Plus extends AbstractOpArith {
 	protected void printErrLabel(DecacCompiler compiler) {
 		String nom = "add_overflow_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String msgError = "Erreur: Overflow pendant l'addition ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		CompilerInstruction.createErreurLabel(compiler, nom, msgError, false);
+		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, nom, msgError)));
 	}
 
 
