@@ -11,11 +11,19 @@ import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.BSR;
 import fr.ensimag.ima.pseudocode.instructions.LEA;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.SUBSP;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Declaration of a class (<code>class name extends superClass {members}<code>).
@@ -162,9 +170,30 @@ public class DeclClass extends AbstractDeclClass {
 	protected void codeGenInitClass(DecacCompiler compiler) {
 		CompilerInstruction.decorationLigne(compiler, "Initialisation des champs de " + name.getName().getName());
 		compiler.addLabel(name.getClassDefinition().getInitLabel());
-		name.getClassDefinition().setDebutBloc(compiler.getLastInstructionIndex());
+		//compiler.addInstruction(new TSTO(new ImmediateInteger(3)));
+		boolean haveSuperclass = !"Object".equals(superClass.getName().getName()); 
+		
+		if(haveSuperclass) {
+			compiler.addInstruction(new TSTO(new ImmediateInteger(3)));
+			compiler.addInstruction(new BOV(compiler.createLabel("stack_overflow_error")));
+			compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.R1));
+		}
 		for(AbstractDeclField field : fieldList.getList()) {
-			field.codeGenInitField(compiler);
+			if(haveSuperclass) {
+				field.codeGenInitExtendsField(compiler, true);				
+			}
+			else field.codeGenInitField(compiler);
+		}
+		
+		if(haveSuperclass) {
+			compiler.addComment("Appel de l'initialisation des champs hérités de " + superClass.getName().getName());
+			compiler.addInstruction(new PUSH(GPRegister.R1));
+			compiler.addInstruction(new BSR(name.getClassDefinition().getInitLabel()));
+			compiler.addInstruction(new SUBSP(new ImmediateInteger(1)));
+			
+			for(AbstractDeclField field : fieldList.getList()) {
+				field.codeGenInitExtendsField(compiler, false);
+			}
 		}
 		compiler.addComment("Retour au code principal");
 		compiler.addInstruction(new RTS());

@@ -19,5 +19,7 @@ public abstract class AbstractDeclField extends Tree {
             throws ContextualError;
 	
 	public abstract void codeGenInitField(DecacCompiler compiler);
+	
+	public abstract void codeGenInitExtendsField(DecacCompiler compiler, boolean toZero);
 
 }

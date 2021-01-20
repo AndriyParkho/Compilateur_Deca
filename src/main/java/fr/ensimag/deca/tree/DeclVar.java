@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -101,15 +102,7 @@ public class DeclVar extends AbstractDeclVar {
     		init.getExpression().codeGenInst(compiler);
     	} 
     	else {
-    		if(type.getType().isInt()) {
-    			compiler.addInstruction(new LOAD(new ImmediateInteger(0), compiler.getRegisterStart()));
-    		} else if(type.getType().isFloat()) {
-    			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), compiler.getRegisterStart()));
-    		} else if(type.getType().isBoolean()) {
-    			compiler.addInstruction(new LOAD(0, compiler.getRegisterStart()));
-    		} else {
-    			throw new UnsupportedOperationException("not supposed to get here");
-    		}
+    		CompilerInstruction.initVarToZero(compiler, type, compiler.getRegisterStart());
     	}
     	compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
     }

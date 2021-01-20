@@ -1,10 +1,15 @@
 package fr.ensimag.deca.codegen;
 
 import fr.ensimag.deca.*;
+import fr.ensimag.deca.tree.AbstractIdentifier;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
 import fr.ensimag.ima.pseudocode.instructions.WNL;
 import fr.ensimag.ima.pseudocode.instructions.WSTR;
@@ -17,7 +22,7 @@ public class CompilerInstruction {
 	
 	public static void gestionPileVariablesGlobales(DecacCompiler compiler) {		
 		compiler.addInstructionBegin(new ADDSP(compiler.getCountGB()));
-		createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile dans la génération de variables globales", true);
+		createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile", true);
         compiler.addInstructionBegin(new TSTO(compiler.getCountGB()+compiler.getTempMax()));
 	}
 	
@@ -25,7 +30,7 @@ public class CompilerInstruction {
 		if(compiler.isVerificationTest()) {
 			return null;
 		}
-		Label newLabelError = new Label(nom);
+		Label newLabelError = compiler.createLabel(nom);
 		compiler.addErrLblList(newLabelError, errorMessage);
 		if(addFirst) compiler.addInstructionBegin(new BOV(newLabelError));
 		else compiler.addInstruction(new BOV(newLabelError));
@@ -71,6 +76,18 @@ public class CompilerInstruction {
 		Label labelSaut = new Label(nom);
 		compiler.addLabel(labelSaut);
 		return labelSaut;
+	}
+	
+	public static void initVarToZero(DecacCompiler compiler, AbstractIdentifier type, GPRegister op) {
+		if(type.getType().isInt()) {
+			compiler.addInstruction(new LOAD(new ImmediateInteger(0), op));
+		} else if(type.getType().isFloat()) {
+			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), op));
+		} else if(type.getType().isBoolean()) {
+			compiler.addInstruction(new LOAD(0, op));
+		} else {
+			throw new UnsupportedOperationException("not supposed to use a "+type.getType().toString());
+		}
 	}
 	
 	
