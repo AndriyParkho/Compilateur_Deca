@@ -38,14 +38,18 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                 throws ContextualError {
         try {
             variable.verifyExpr(compiler, currentClass);
+            compiler.setEnvExp(((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName()))).getMembers());
+            method.verifyExpr(compiler, currentClass);
+            System.out.println(method.getMethodDefinition());
+            compiler.setEnvExp(currentClass.getMembers());
         }catch (ContextualError ce){throw ce;}
         if (variable.getType().isClass()){
-            if (((ClassDefinition) compiler.getEnvTypes().get(variable.getType().getName()))
+            if (((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName())))
                     .getMembers().get(method.getName()) == null) {
                 throw new ContextualError(String.format("La méthode %s n'existe pas pour la classe %s",
                         method.getName().getName(), variable.getType().getName().getName()), variable.getLocation());
             }
-            if ( arguments.getList().size() != method.getMethodDefinition().getSignature().size()){
+            if (arguments.getList().size() != method.getMethodDefinition().getSignature().size()){
                 throw new ContextualError(String.format("Le nombre d'arguments entrés dans %s ne correspond pas à sa signature",
                         method.getName().getName()),method.getLocation());
             }

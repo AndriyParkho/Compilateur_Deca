@@ -32,3 +32,15 @@ class B extends A{
  	}
 }
 
+class C extends B{
+	int x = 15;
+	
+	int getX(){
+		return x - 10;
+	}
+	
+	boolean testC(boolean bool){
+		return bool;
+	}
+}
+

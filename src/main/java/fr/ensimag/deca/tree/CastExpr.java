@@ -47,31 +47,45 @@ public class CastExpr extends AbstractExpr{
 
     @Override
     public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
-        // TODO Auto-generated method stub
-        return null;
+        //FAIT
+    	Type typeActuel;
+    	Type typeCast;
+    	try {
+    		typeActuel=this.variable.verifyExpr(compiler, currentClass);
+        	typeCast=this.type.verifyExpr(compiler, currentClass);
+    	}catch(ContextualError ce) {throw ce;}
+    	//il faut que le type actuel soit un sous type du type de cast 
+    	//sinon le seul cas possible c'est la conversion int/float
+    	if((!typeActuel.sousType(typeCast))&& !(typeActuel.isInt()&&typeCast.isFloat()))
+    	{
+    		throw new ContextualError("cast impossible",this.getLocation());
+    	}
+    	this.setType(typeCast);
+    	return typeCast;
+    	
     }
 
     @Override
     public boolean isBooleanLiteral() {
-        // TODO Auto-generated method stub
+        // !
         return false;
     }
     
     @Override
     public boolean isFloatLiteral() {
-        // TODO Auto-generated method stub
+        // !
         return false;
     }
 
     @Override
     public boolean isIdentifier() {
-        // TODO Auto-generated method stub
+        // !
         return false;
     }
 
     @Override
     public boolean isIntLiteral() {
-        // TODO Auto-generated method stub
+        // !
         return false;
     }
 

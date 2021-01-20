@@ -3,6 +3,7 @@ import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
+import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
@@ -35,6 +36,8 @@ public class MethodCall extends AbstractMethodCall{
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
+        this.getVariable().prettyPrint(s, prefix, true);
+        this.getMethod().prettyPrint(s, prefix, true);
         this.getArguments().prettyPrint(s, prefix, true);
     }
 
@@ -44,8 +47,8 @@ public class MethodCall extends AbstractMethodCall{
     	int nombreParametres = getArguments().size();
     	GPRegister registreStockage = GPRegister.getR(2);
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
-    	AbstractIdentifier newVariable = (AbstractIdentifier)getVariable();
-    	compiler.addInstruction(new LOAD(newVariable.getVariableDefinition().getOperand(), registreStockage));
+
+    	compiler.addInstruction(new LOAD(((Identifier)getVariable()).getVariableDefinition().getOperand(), registreStockage));
     	compiler.addInstruction(new STORE(registreStockage, new RegisterOffset(0, GPRegister.SP)));
     	int spOffset =0;
     	for(AbstractExpr argument : getArguments().getList()) {
