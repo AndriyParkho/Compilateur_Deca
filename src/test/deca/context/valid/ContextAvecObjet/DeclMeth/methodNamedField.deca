@@ -1,0 +1,14 @@
+// Description:
+//   Méthode de même nom qu'un attribut
+//
+// Resultats:
+//    ok
+class A{
+
+    int x;
+
+    void x(int y){
+        x = y;
+    }
+}
+

@@ -1,0 +1,14 @@
+// Description:
+//   Méthode de même nom que la classe
+//
+// Resultats:
+//    ok
+class A{
+
+    int x;
+
+    void A(int y){
+        x = y;
+    }
+}
+

@@ -1,0 +1,21 @@
+// Description:
+//    Override avec une autre signature (1 arg en plus)
+//
+// Resultats:
+//    Erreur contextuelle ligne 18
+//    signature incompatible
+class A{
+
+    int x;
+
+    void setX(int y){
+        x = y;
+    }
+}
+
+class B extends A{
+
+    void setX(int y, int z){
+        x = y*z;
+    }
+}

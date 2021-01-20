@@ -1,0 +1,31 @@
+// Description:
+//    Déclaration d'une méthode de même nom dans deux classes différentes
+//
+// Resultats:
+//    ok
+//
+class A{
+
+    float x;
+
+    void setX(int y, float z, boolean a, Object O, Object OB){
+        x = y*z;
+    }
+
+    boolean isClass(){
+        return true;
+    }
+}
+
+class B {
+
+    float x;
+
+    void setX(int y, float z, boolean a, Object O, Object OB){
+        if (a){
+            x = y*z;
+        }else{
+            x = y;
+        }
+    }
+}
