@@ -53,7 +53,8 @@ public class DeclMethod extends AbstractDeclMethod {
 		EnvironmentExp envGlobClass=currentClass.getMembers();
 		ExpDefinition defClassMere=envGlobClass.get(this.name.getName());
 		Type typeRetour=this.type.verifyType(compiler);
-		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(), index);
+		ExpDefinition superClassDef=currentClass.getSuperClass().getMembers().get(this.name.getName());
+		MethodDefinition methodDef = new MethodDefinition(typeRetour, this.getLocation(), new Signature(), index);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
 		this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
 		for (AbstractDeclParam param : this.paramList.getList()){
@@ -63,10 +64,10 @@ public class DeclMethod extends AbstractDeclMethod {
 		this.name.setType(typeRetour);
 		//avant de faire la déclaration,il faut vérifier le type de retour et la signature
 		//dans le cas d'une redéfinition
-		ExpDefinition superClassDef=currentClass.getSuperClass().getMembers().get(this.name.getName());
 		if(superClassDef!=null && superClassDef.isMethod())
 		{
 			MethodDefinition superMethodDef=(MethodDefinition)superClassDef;
+			methodDef.setIndex(superMethodDef.getIndex());
 			if(!methodDef.getType().sameType(superMethodDef.getType()))
 			{
 				throw new ContextualError("type de retour incompatible",this.getLocation());
