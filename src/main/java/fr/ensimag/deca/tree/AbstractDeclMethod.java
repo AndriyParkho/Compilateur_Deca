@@ -19,5 +19,7 @@ public abstract class AbstractDeclMethod extends Tree {
             throws ContextualError;
     
     public abstract void setLabel(String className);
+    
+    public abstract void codeGenMethod(DecacCompiler compiler);
 
 }

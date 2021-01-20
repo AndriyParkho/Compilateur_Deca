@@ -6,13 +6,15 @@
 
 
 class A{
-	int x = 5;
-	boolean y;
-	float z;
-	int louis = 100*100;
 }
+
+class B extends A{
+}
+
+class C extends B{}
 
 {
- 
+	A a;
+	B b;
+	C c = new C();
 }
-

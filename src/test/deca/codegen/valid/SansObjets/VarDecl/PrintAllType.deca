@@ -13,7 +13,7 @@
    float y = 10.6;
    println(3.2);
    println(1);
-   println("Chaine de caractère");
+   println("Chaine de caractère $&#");
    println(x);
    println(x*y);
 }

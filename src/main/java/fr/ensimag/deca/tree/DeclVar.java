@@ -94,8 +94,15 @@ public class DeclVar extends AbstractDeclVar {
     @Override
     protected void codeGenDeclVar(DecacCompiler compiler) {
     	// A FAIRE : Fonction non fini pour l'instant
-    	compiler.incrCountGB();
-    	DAddr varOperand = new RegisterOffset(compiler.getCountGB(), Register.GB);
+    	DAddr varOperand;
+    	if(!compiler.isInMethod()) {
+	    	compiler.incrCountGB();
+	    	varOperand = new RegisterOffset(compiler.getCountGB(), Register.GB);
+    	}
+    	else {
+    		compiler.incrCountLB();
+    		varOperand = new RegisterOffset(compiler.getCountLB(), Register.LB);
+    	}
     	VariableDefinition varDef = varName.getVariableDefinition();
     	varDef.setOperand(varOperand);
     	if(initialization.isInitialization()) {

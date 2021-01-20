@@ -53,5 +53,10 @@ public class MethodBody extends AbstractMethodBody {
 	protected void iterChildren(TreeFunction f) {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
+	
+	public void codeGenMethodBody(DecacCompiler compiler) {
+		listDeclVar.codeGenListDeclVar(compiler); //A FAIRE : indiquer que l'on est dans une méthode pour écrire dans LB et pas dans GB
+		listInst.codeGenListInst(compiler);
+	}
 
 }

@@ -6,6 +6,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.xml.Log4jEntityResolver;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -15,7 +16,12 @@ import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.deca.context.Signature;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.POP;
+import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 
 /**
  * Declaration of a method
@@ -133,5 +139,29 @@ public class DeclMethod extends AbstractDeclMethod {
 		name.getMethodDefinition().setLabel(new Label("code." + className + "." + name.getName().getName()));
 	}
 	
+	
+	public void codeGenMethod(DecacCompiler compiler) {
+		CompilerInstruction.decorationLigne(compiler, "Sauvegarde des registres");
+		saveRegisters(compiler);
+		methodBody.codeGenMethodBody(compiler);
+		//compiler.addLabel(compiler.createLabel("fin."+));
+		CompilerInstruction.decorationLigne(compiler, "Restauration des registres");
+		restoreRegisters(compiler);
+		compiler.addInstruction(new RTS());
+	}
+	
+	public void saveRegisters(DecacCompiler compiler) {
+		compiler.addInstruction(new PUSH(GPRegister.getR(2))); //ici on met les adresses des objets dans R2 (par défaut)
+		compiler.setRegisterStart(3); //on met les résultats des epxression dans R3
+		compiler.addInstruction(new PUSH(GPRegister.getR(3)));
+		//ajouter +2 au variable pour le TSTO		
+	}
+	
+	public void restoreRegisters(DecacCompiler compiler) {
+		compiler.addInstruction(new POP(GPRegister.getR(3)));
+		compiler.addInstruction(new POP(GPRegister.getR(2)));
+		compiler.setRegisterStart(2);
+		//enlever 2
+	}
 	
 }
