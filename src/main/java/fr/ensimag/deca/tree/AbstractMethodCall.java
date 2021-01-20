@@ -36,11 +36,12 @@ public abstract class AbstractMethodCall extends AbstractExpr{
     @Override
     public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass)
                 throws ContextualError {
+        EnvironmentExp envLocal = compiler.getEnvExp();
         try {
             variable.verifyExpr(compiler, currentClass);
             compiler.setEnvExp(((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName()))).getMembers());
             method.verifyExpr(compiler, currentClass);
-            compiler.setEnvExp(currentClass.getMembers());
+            compiler.setEnvExp(envLocal);
         }catch (ContextualError ce){throw ce;}
         if (variable.getType().isClass()){
             if (((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName())))
@@ -56,9 +57,9 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                 int index = 0;
                 for (AbstractExpr expr : arguments.getList()) {
                     try {
-                        compiler.setEnvExp(method.getMethodDefinition().getLocalEnv());
+                        //compiler.setEnvExp(method.getMethodDefinition().getLocalEnv());
                         expr.verifyExpr(compiler, currentClass);
-                        compiler.setEnvExp(currentClass.getMembers());
+                        //compiler.setEnvExp(currentClass.getMembers());
                     } catch (ContextualError ce) { throw ce; }
                     if (expr.getType() != method.getMethodDefinition().getSignature().paramNumber(index)) {
                         throw new ContextualError(String.format("Argument %d de type %s ne correspond au type du %de argument de la méthode %s",
@@ -72,7 +73,7 @@ public abstract class AbstractMethodCall extends AbstractExpr{
             return this.getType();
         }
         else{
-            throw new ContextualError(String.format("%s n'est pas un objet"),
+            throw new ContextualError(String.format("%s n'est pas un objet", variable.getType().getName().getName()),
                     variable.getLocation());
         }
     }
