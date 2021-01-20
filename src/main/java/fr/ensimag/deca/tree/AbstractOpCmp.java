@@ -98,9 +98,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		if(numeroRegistre == compiler.getNombreRegistres()) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
+    			compiler.incrementTempPile();
     			getRightOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
+    			compiler.decrementTempPile();
     			compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName());
     			compiler.addInstruction(this.getMnemo(op));
     			
@@ -127,9 +129,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		if(numeroRegistre == compiler.getNombreRegistres()) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
+    			compiler.incrementTempPile();
     			getRightOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
+    			compiler.decrementTempPile();
     			compiler.addInstruction(new CMP(rightDval, op));
     			compiler.addInstruction(sautInstr);
     			

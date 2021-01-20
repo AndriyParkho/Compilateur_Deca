@@ -13,7 +13,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
-import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -50,8 +50,30 @@ public class DecacCompiler {
     /*
      * Compteur de variable global utilisé
      */
-    private int countGB = 0;
     
+    
+    private int countGB = 0;
+    private int tempPile = 0;
+    private int maxTempPile = 0;
+    
+    public void incrementTempPile() {
+    	tempPile ++;
+    	if(tempPile > maxTempPile) {
+    		maxTempPile = tempPile;
+    	}    	
+    }
+    
+    public void decrementTempPile() {
+    	tempPile --;
+    }
+    
+    public int getTempMax() {
+    	return maxTempPile;
+    }
+    
+    public void setTempPile(int nouvelleValeur) {
+    	tempPile = nouvelleValeur;
+    }
     
     private Map<Label, String> errLblList = new HashMap<Label, String>();
     /**
@@ -370,6 +392,7 @@ public class DecacCompiler {
     
     public void incrCountGB() {
     	countGB++;
+
     }
 
 	public Map<Label, String> getErrLblList() {
@@ -382,7 +405,7 @@ public class DecacCompiler {
     
     public void codeGenErrLbl() {
     	for (Map.Entry<Label, String> lbl : errLblList.entrySet()) {
-    		compilerInstruction.labelErreurGeneration(this, lbl.getKey(), lbl.getValue());
+    		CompilerInstruction.labelErreurGeneration(this, lbl.getKey(), lbl.getValue());
     	}
     }
 

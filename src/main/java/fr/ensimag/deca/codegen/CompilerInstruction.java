@@ -11,14 +11,14 @@ import fr.ensimag.ima.pseudocode.instructions.WSTR;
 /*
  * Permet de factoriser les différentes instructions
  */
-public class compilerInstruction {
+public class CompilerInstruction {
 	
 	private static int decorationLigne = 50;
 	
 	public static void gestionPileVariablesGlobales(DecacCompiler compiler) {		
 		compiler.addInstructionBegin(new ADDSP(compiler.getCountGB()));
 		createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile dans la génération de variables globales", true);
-        compiler.addInstructionBegin(new TSTO(compiler.getCountGB()));
+        compiler.addInstructionBegin(new TSTO(compiler.getCountGB()+compiler.getTempMax()));
 	}
 	
 	public static Label createErreurLabel(DecacCompiler compiler, String nom, String errorMessage, boolean addFirst) {

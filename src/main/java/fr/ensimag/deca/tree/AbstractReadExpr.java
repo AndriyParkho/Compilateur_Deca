@@ -1,7 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Register;
@@ -51,7 +51,7 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 		
 		String nomErr = "io_error" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String errorMessage = "Erreur : Input/Output erreur ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		compilerInstruction.createErreurLabel(compiler, nomErr, errorMessage, false);
+		CompilerInstruction.createErreurLabel(compiler, nomErr, errorMessage, false);
 		
 		compiler.addInstruction(new LOAD(Register.R1, op));
 	}

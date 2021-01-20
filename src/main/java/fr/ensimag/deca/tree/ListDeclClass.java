@@ -2,7 +2,7 @@ package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.InitObjectClass;
-import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.tools.IndentPrintStream;
@@ -72,7 +72,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     public void codeGenListClassMethodTable(DecacCompiler compiler) {
     	// A FAIRE : 
     	// Initialisation de la classe Object
-    	compilerInstruction.decorationAssembleur(compiler, "Construction des tables des méthodes");
+    	CompilerInstruction.decorationAssembleur(compiler, "Construction des tables des méthodes");
     	InitObjectClass.initObjectMethodsTbl(compiler);
     	
     	for(AbstractDeclClass classe : this.getList()) {

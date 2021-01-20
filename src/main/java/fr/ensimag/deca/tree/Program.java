@@ -6,7 +6,7 @@ import org.apache.commons.lang.Validate;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
@@ -56,7 +56,7 @@ public class Program extends AbstractProgram {
         //A FAIRE : piles + avancées
         compiler.addComment("end main program");
         classes.codeGenListClassBody(compiler);
-        compilerInstruction.gestionPileVariablesGlobales(compiler);
+        CompilerInstruction.gestionPileVariablesGlobales(compiler);
         compiler.codeGenErrLbl();
     }
 

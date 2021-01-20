@@ -1,7 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
@@ -33,7 +33,7 @@ public class Multiply extends AbstractOpArith {
 	protected void printErrLabel(DecacCompiler compiler) {
 		String nom = "mult_overflow_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String msgError = "Erreur: Overflow pendant la multiplication ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		compilerInstruction.createErreurLabel(compiler, nom, msgError, false);
+		CompilerInstruction.createErreurLabel(compiler, nom, msgError, false);
 	}
 
 

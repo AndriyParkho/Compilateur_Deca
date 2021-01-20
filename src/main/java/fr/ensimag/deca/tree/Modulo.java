@@ -6,7 +6,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.instructions.REM;
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.codegen.compilerInstruction;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
@@ -58,7 +58,7 @@ public class Modulo extends AbstractOpArith {
 		if(this.getType().isFloat()) zero = "0.0";
 		String nom = "zero_modulo_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String msgError = "Erreur: Modulo par " + zero + " non autorisé ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		compilerInstruction.createErreurLabel(compiler, nom, msgError, false);
+		CompilerInstruction.createErreurLabel(compiler, nom, msgError, false);
 	}
 
 	@Override

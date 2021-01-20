@@ -80,15 +80,19 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     		if(n == compiler.getNombreRegistres()) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
+    			compiler.incrementTempPile();
     			getRightOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
+    			compiler.decrementTempPile();
     			compiler.addInstruction(this.getMnemo(Register.R0, op));
     		} else if(n < compiler.getNombreRegistres()) {
     			GPRegister nextOp = Register.getR(n + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(this.getMnemo(nextOp, op));
+    		}else {
+    			throw new UnsupportedOperationException("Mauvais registre");
     		}
     	}
     	if(this.getType().isFloat() || (this.getType().isInt() && (this.isDivide() || this.isModulo()))) {
