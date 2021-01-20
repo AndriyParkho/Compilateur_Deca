@@ -44,7 +44,8 @@ public class MethodCall extends AbstractMethodCall{
     	int nombreParametres = getArguments().size();
     	GPRegister registreStockage = GPRegister.getR(2);
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
-    	compiler.addInstruction(new LOAD(getVariable().getVariableDefinition().getOperand(), registreStockage));
+    	AbstractIdentifier newVariable = (AbstractIdentifier)getVariable();
+    	compiler.addInstruction(new LOAD(newVariable.getVariableDefinition().getOperand(), registreStockage));
     	compiler.addInstruction(new STORE(registreStockage, new RegisterOffset(0, GPRegister.SP)));
     	int spOffset =0;
     	for(AbstractExpr argument : getArguments().getList()) {
