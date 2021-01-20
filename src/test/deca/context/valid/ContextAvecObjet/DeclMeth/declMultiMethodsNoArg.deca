@@ -1,0 +1,46 @@
+// Description:
+//    Déclaration de plusieurs méthodes sans argument
+//
+// Resultats:
+//    ok
+//
+class A{
+
+    boolean isClass(){
+        return true;
+    }
+
+    boolean isInt(){
+        return false;
+    }
+
+    boolean isFloat(){
+        return false;
+    }
+
+    boolean isBoolean(){
+        return false;
+    }
+
+
+    boolean isString(){
+        return false;
+    }
+
+    boolean isVoid(){
+        return false;
+    }
+
+    Object SuperClass(){
+        return new Object();
+    }
+
+    int nbFilles(){
+        return 0;
+    }
+
+    float un(){
+        return 1.0;
+    }
+
+}

@@ -76,7 +76,8 @@ public class EnvironmentExp {
      *
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-    	if (this.donnees.get(name) == null) {
+        System.out.println(this.donnees.containsKey(name));
+    	if (!this.donnees.containsKey(name)) {
     		this.donnees.put(name, def);
     	}
     	else {

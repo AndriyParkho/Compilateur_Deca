@@ -31,16 +31,16 @@ import fr.ensimag.ima.pseudocode.instructions.RTS;
  */
 public class DeclMethod extends AbstractDeclMethod {
 	
-	private AbstractIdentifier name;
 	private AbstractIdentifier type;
+	private AbstractIdentifier name;
 	private ListDeclParam paramList;
 	private AbstractMethodBody methodBody;
 	
-	public DeclMethod(AbstractIdentifier name , AbstractIdentifier type , ListDeclParam paramList , AbstractMethodBody methodBody)
+	public DeclMethod(AbstractIdentifier type , AbstractIdentifier name , ListDeclParam paramList , AbstractMethodBody methodBody)
 	{
+		this.type=type;
 		Validate.notNull(name);
 		this.name=name;
-		this.type=type;
 		this.paramList=paramList;
 		this.methodBody=methodBody;
 	}
@@ -58,7 +58,6 @@ public class DeclMethod extends AbstractDeclMethod {
 			FieldDefinition fieldClassDef= (FieldDefinition)defClassMere;
 			vraiIndex=fieldClassDef.getIndex();
 		}
-		
 		Type typeRetour=this.type.verifyType(compiler);
 		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(),vraiIndex);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);

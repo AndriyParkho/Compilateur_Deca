@@ -76,7 +76,6 @@ public class ClassType extends Type {
     	}
     	else 
     	{
-    	    System.out.println(this.getDefinition().getSuperClass().getType());
     		return this.getDefinition().getSuperClass().getType().isSubClassOf(potentialSuperClass);
     	}
     	

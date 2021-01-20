@@ -24,11 +24,11 @@ public class DeclParam extends AbstractDeclParam {
 	private AbstractIdentifier name;
 	private AbstractIdentifier type;
 	
-	public DeclParam(AbstractIdentifier name , AbstractIdentifier type)
+	public DeclParam(AbstractIdentifier type , AbstractIdentifier name)
 	{
+		this.type=type;
 		Validate.notNull(name);
 		this.name=name;
-		this.type=type;
 	}
 	
 	/**
