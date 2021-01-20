@@ -12,7 +12,10 @@ class A{
 	int louis = 100*100;
 }
 
-{
- 
+class B extends A{
+ 	int y = 9;
+ 	int x = 10;
+ 	float a;
+ 	float b = 12.4;
 }
 

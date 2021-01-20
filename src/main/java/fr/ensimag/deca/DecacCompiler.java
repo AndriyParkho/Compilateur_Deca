@@ -76,6 +76,8 @@ public class DecacCompiler {
     }
     
     private Map<Label, String> errLblList = new HashMap<Label, String>();
+    private Map<String, Label> lblMap = new HashMap<String, Label>();
+    
     /**
      * Portable newline character.
      */
@@ -419,4 +421,12 @@ public class DecacCompiler {
     	}
     }
 
+    public Label createLabel(String nom) {
+    	Label lbl = lblMap.get(nom);
+    	if(lbl == null) {
+    		lbl = new Label(nom);
+    		lblMap.put(nom, lbl);
+    	}
+    	return lbl;
+    }
 }
