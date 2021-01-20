@@ -1,0 +1,14 @@
+// Description:
+//    Déclaration de champs de même nom entre une classe mère et une classe fille
+//
+// Resultats:
+//    Erreur contextuelle ligne 13
+//    Nom de champs déjà utilisé
+
+class A {
+    protected int x;
+}
+
+class B extends A{
+    protected int x;
+}

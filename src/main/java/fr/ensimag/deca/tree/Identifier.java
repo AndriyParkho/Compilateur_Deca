@@ -186,6 +186,7 @@ public class Identifier extends AbstractIdentifier {
                 throw new ContextualError("identificateur non défini", this.getLocation());
             }
         }else{
+            System.out.println(this.name);
             if (currentClass.getMembers().get(this.name) != null) {
                 this.setDefinition(currentClass.getMembers().get(this.name));
                 this.setType(currentClass.getMembers().get(this.name).getType());
