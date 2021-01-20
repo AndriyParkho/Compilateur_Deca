@@ -22,8 +22,15 @@ public class Or extends AbstractOpBool {
     
     @Override
     protected void codeGenSaut(DecacCompiler compiler, boolean evaluation, Label etiquette, GPRegister op) {
-    	AbstractExpr nouvelleExpression = new Not(new And(new Not(getLeftOperand()), new Not(getRightOperand())));
-    	nouvelleExpression.codeGenSaut(compiler, evaluation, etiquette, op);
+    	Not notLeft = new Not(getLeftOperand());
+    	notLeft.setLocation(getLeftOperand().getLocation());
+    	Not notRight = new Not(getRightOperand());
+    	notRight.setLocation(getRightOperand().getLocation());
+    	And andNot = new And(notLeft, notRight);
+    	andNot.setLocation(this.getLocation());
+    	Not notAnd = new Not(andNot);
+    	notAnd.setLocation(this.getLocation());
+    	notAnd.codeGenSaut(compiler, evaluation, etiquette, op);
     }
 
 }
