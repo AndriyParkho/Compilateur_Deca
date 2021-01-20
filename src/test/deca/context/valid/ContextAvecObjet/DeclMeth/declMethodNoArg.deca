@@ -1,0 +1,12 @@
+// Description:
+//    Déclaration d'une méthode sans argument
+//
+// Resultats:
+//    ok
+//
+class A{
+
+    boolean isClass(){
+        return true;
+    }
+}
