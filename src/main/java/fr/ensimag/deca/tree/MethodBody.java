@@ -57,7 +57,7 @@ public class MethodBody extends AbstractMethodBody {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
 	
-	public void codeGenMethod(DecacCompiler compiler) {
+	public void codeGenMethodBody(DecacCompiler compiler) {
 		listDeclVar.codeGenListDeclVar(compiler); //A FAIRE : indiquer que l'on est dans une méthode pour écrire dans LB et pas dans GB
 		listInst.codeGenListInst(compiler);
 	}
