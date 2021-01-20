@@ -53,8 +53,20 @@ public class DecacCompiler {
     
     
     private int countGB = 0;
+    private int countLB = 0;
+    
     private int tempPile = 0;
     private int maxTempPile = 0;
+    
+    private boolean inMethod = false;
+    
+    public boolean isInMethod() {
+    	return inMethod;
+    }
+    
+    public void setIsInMethod(boolean newValeur) {
+    	inMethod = newValeur;
+    }
     
     public void incrementTempPile() {
     	tempPile ++;
@@ -75,6 +87,17 @@ public class DecacCompiler {
     	tempPile = nouvelleValeur;
     }
     
+    public int getCountLB() {
+    	return countLB;
+    }
+    
+    public void incrCountLB() {
+    	countLB++;
+    }
+    
+    public void setCountLB(int newValeur) {
+    	countLB = newValeur;
+    }
     private Map<Label, String> errLblList = new HashMap<Label, String>();
     private Map<String, Label> lblMap = new HashMap<String, Label>();
     
@@ -268,6 +291,10 @@ public class DecacCompiler {
     	return registerStart;
     }
     
+    public void setRegisterStart(int newStart) {
+    	registerStart = GPRegister.getR(newStart);
+    }
+    
 	/**
      * The main program. Every instruction generated will eventually end up here.
      */
@@ -404,7 +431,6 @@ public class DecacCompiler {
     
     public void incrCountGB() {
     	countGB++;
-
     }
 
 	public Map<Label, String> getErrLblList() {

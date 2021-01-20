@@ -39,6 +39,12 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
     		method.verifyMethodBody(compiler, currentClass);
     	}
 	}
+    
+    public void codeGenListMethod(DecacCompiler compiler) {
+    	  for(AbstractDeclMethod abstractMethod : this.getList()) {
+    		  abstractMethod.codeGenMethod(compiler);
+    	  }
+    }
 	
 	@Override
     public void decompile(IndentPrintStream s) {
