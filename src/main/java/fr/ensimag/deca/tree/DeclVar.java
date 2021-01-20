@@ -56,13 +56,14 @@ public class DeclVar extends AbstractDeclVar {
     	try {
     		VariableDefinition defVar= new VariableDefinition(typeVar,this.varName.getLocation());
     		this.varName.setDefinition(defVar);
-    		this.initialization.verifyInitialization(compiler, typeVar, currentClass);
-    		compiler.getEnvExp().declare(this.varName.getName(), defVar);
+            this.initialization.verifyInitialization(compiler, typeVar, currentClass);
+            compiler.getEnvExp().declare(this.varName.getName(), defVar);
+            compiler.getSymbolTable().create(this.varName.getName().getName());
     	}catch(ContextualError ce)
     	{throw ce;}
     	 catch(EnvironmentExp.DoubleDefException doubleDefinition)
     	{throw new ContextualError("double définition d'une variable",this.getLocation());}
-    	
+
     }
 
     

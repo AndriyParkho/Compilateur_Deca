@@ -2,13 +2,10 @@ package fr.ensimag.deca.tree;
 
 import java.io.PrintStream;
 
+import fr.ensimag.deca.context.*;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 
 /**
@@ -35,8 +32,8 @@ public class MethodBody extends AbstractMethodBody {
 	public void verifyMethodBody(DecacCompiler compiler, ClassDefinition currentClass, Type returnType)
 		    throws ContextualError{
 		//FAIT
-	    this.listDeclVar.verifyListDeclVariable(compiler, currentClass);
-	    this.listInst.verifyListInst(compiler, currentClass, returnType);
+		this.listDeclVar.verifyListDeclVariable(compiler, currentClass);
+		this.listInst.verifyListInst(compiler, currentClass, returnType);
 	    this.setType(returnType);
 	}
 	

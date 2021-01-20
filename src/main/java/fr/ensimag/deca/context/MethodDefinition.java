@@ -43,7 +43,17 @@ public class MethodDefinition extends ExpDefinition {
 
     private final Signature signature;
     private Label label;
-    
+
+    private EnvironmentExp localEnv;
+
+    public void setLocalEnv (EnvironmentExp EnvClass){
+        localEnv = new EnvironmentExp(EnvClass);
+    }
+
+    public EnvironmentExp getLocalEnv() {
+        return localEnv;
+    }
+
     /**
      * 
      * @param type Return type of the method

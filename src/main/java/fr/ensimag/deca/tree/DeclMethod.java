@@ -96,9 +96,10 @@ public class DeclMethod extends AbstractDeclMethod {
     public void verifyMethodBody(DecacCompiler compiler  , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
-				EnvironmentExp envMethod=new EnvironmentExp(currentClass.getMembers());
-				this.paramList.verifyParamBody(compiler, envMethod, currentClass);
-				this.methodBody.verifyMethodBody(compiler, currentClass, this.type.getType());
+		((MethodDefinition)currentClass.getMembers().get(this.name.getName())).setLocalEnv(currentClass.getMembers());
+		compiler.setEnvExp(((MethodDefinition)currentClass.getMembers().get(this.name.getName())).getLocalEnv());
+		this.paramList.verifyParamBody(compiler, ((MethodDefinition)currentClass.getMembers().get(this.name.getName())).getLocalEnv(), currentClass);
+		this.methodBody.verifyMethodBody(compiler, currentClass, this.type.getType());
 	}
 	
 	@Override
