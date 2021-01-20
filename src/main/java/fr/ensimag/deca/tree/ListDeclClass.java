@@ -82,7 +82,6 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     
     public void codeGenListClassBody(DecacCompiler compiler) {
     	
-    	
     	for(AbstractDeclClass classe : getList()) {
     		classe.codeGenClassBody(compiler);
     	}

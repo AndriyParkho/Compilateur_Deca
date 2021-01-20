@@ -52,7 +52,6 @@ public class Assign extends AbstractBinaryExpr {
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		compiler.addComment(getLeftOperand().toString() + " = " + getRightOperand().toString());
 		getRightOperand().codeGenExpr(compiler, op);
 		compiler.addInstruction(new STORE(op, (DAddr) DValGetter.getDVal(getLeftOperand())));
 	}

@@ -5,6 +5,7 @@ import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
@@ -51,7 +52,7 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 		
 		String nomErr = "io_error" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String errorMessage = "Erreur : Input/Output erreur ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		CompilerInstruction.createErreurLabel(compiler, nomErr, errorMessage, false);
+		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, nomErr, errorMessage)));
 		
 		compiler.addInstruction(new LOAD(Register.R1, op));
 	}

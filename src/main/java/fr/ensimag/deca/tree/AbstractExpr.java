@@ -194,7 +194,6 @@ public abstract class AbstractExpr extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-    	compiler.setTempPile(0);
         this.codeGenExpr(compiler, compiler.getRegisterStart());
     }
     

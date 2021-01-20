@@ -40,9 +40,9 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
     	}
 	}
     
-    public void codeGenListMethod(DecacCompiler compiler) {
+    public void codeGenListMethod(DecacCompiler compiler, String nomClasse) {
     	  for(AbstractDeclMethod abstractMethod : this.getList()) {
-    		  abstractMethod.codeGenMethod(compiler);
+    		  abstractMethod.codeGenMethod(compiler, nomClasse);
     	  }
     }
 	
