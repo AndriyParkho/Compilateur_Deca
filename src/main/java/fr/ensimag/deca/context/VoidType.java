@@ -19,9 +19,8 @@ public class VoidType extends Type {
     }
 
     @Override
-    public boolean sameType(Type otherType) {
-        throw new UnsupportedOperationException("not yet implemented");
-    }
+    public boolean sameType(Type otherType) { return otherType.isVoid(); }
+
 
 
 }

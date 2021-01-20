@@ -169,8 +169,6 @@ public class Identifier extends AbstractIdentifier {
         //Fait 
     	//si l'identificateur existe dans l'environnement local, on fait l'enrichissement
     	//sinon on lève une erreur contextuelle
-        System.out.println(compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())));
-        System.out.println("r");
         if (compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())) != null) {
             this.setDefinition(compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())));
             this.setType(compiler.getEnvExp().get(compiler.getSymbolTable().create(this.name.getName())).getType());
