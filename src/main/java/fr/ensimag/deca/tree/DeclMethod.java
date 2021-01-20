@@ -56,6 +56,9 @@ public class DeclMethod extends AbstractDeclMethod {
 		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(), index);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
 		this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
+		for (AbstractDeclParam param : this.paramList.getList()){
+			methodDef.getSignature().add(((DeclParam) param).getType().getType());
+		}
 		this.name.setDefinition(methodDef);
 		this.name.setType(typeRetour);
 		//avant de faire la déclaration,il faut vérifier le type de retour et la signature
@@ -83,10 +86,6 @@ public class DeclMethod extends AbstractDeclMethod {
 				}
 			}
 		}
-		else if (superClassDef!=null && superClassDef.isField()){
-			throw new ContextualError("Une méthode ne peut Override un attribut", this.getLocation());
-		}
-
 
 		try {
 			currentClass.incNumberOfMethods();
