@@ -52,14 +52,8 @@ public class DeclMethod extends AbstractDeclMethod {
 		//FAIT
 		EnvironmentExp envGlobClass=currentClass.getMembers();
 		ExpDefinition defClassMere=envGlobClass.get(this.name.getName());
-		int vraiIndex=index;
-		if(defClassMere!=null && defClassMere.isMethod())
-		{
-			FieldDefinition fieldClassDef= (FieldDefinition)defClassMere;
-			vraiIndex=fieldClassDef.getIndex();
-		}
 		Type typeRetour=this.type.verifyType(compiler);
-		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(),vraiIndex);
+		MethodDefinition methodDef= new MethodDefinition(typeRetour, this.getLocation(), new Signature(), index);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
 		this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
 		this.name.setDefinition(methodDef);
@@ -89,7 +83,11 @@ public class DeclMethod extends AbstractDeclMethod {
 				}
 			}
 		}
-		
+		else if (superClassDef!=null && superClassDef.isField()){
+			throw new ContextualError("Une méthode ne peut Override un attribut", this.getLocation());
+		}
+
+
 		try {
 			currentClass.incNumberOfMethods();
 			envGlobClass.declare(this.name.getName(), methodDef);
