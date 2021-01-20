@@ -26,6 +26,7 @@ public class ClassDefinition extends TypeDefinition {
     private DAddr operand;
     private Set<MethodDefinition> methods = new TreeSet<MethodDefinition>(new MethodComparator());
     private Label initLabel;
+    private int debutBloc;
 
     public void setNumberOfFields(int numberOfFields) {
         this.numberOfFields = numberOfFields;
@@ -132,5 +133,14 @@ public class ClassDefinition extends TypeDefinition {
 	public void setInitLabel(Label initLabel) {
 		this.initLabel = initLabel;
 	}
+
+	public int getDebutBloc() {
+		return debutBloc;
+	}
+
+	public void setDebutBloc(int debutBloc) {
+		this.debutBloc = debutBloc;
+	}
+	
     
 }

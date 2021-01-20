@@ -75,4 +75,16 @@ public class IMAProgram {
     public void addFirst(Instruction i, String comment) {
         addFirst(new Line(null, i, comment));
     }
+    
+    public void addAfter(Instruction i, int index) {
+    	lines.add(index + 1, new Line(i));
+    }
+    
+    public void addAfter(Instruction i, String comment, int index) {
+    	lines.add(index + 1, new Line(null, i, comment));
+    }
+    
+    public int getLength() {
+    	return lines.size();
+    }
 }
