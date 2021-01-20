@@ -161,6 +161,7 @@ public class DeclClass extends AbstractDeclClass {
 	
 	protected void codeGenInitClass(DecacCompiler compiler) {
 		compiler.addLabel(name.getClassDefinition().getInitLabel());
+		name.getClassDefinition().setDebutBloc(compiler.getLastInstructionIndex());
 		for(AbstractDeclField field : fieldList.getList()) {
 			field.codeGenInitField(compiler);
 		}

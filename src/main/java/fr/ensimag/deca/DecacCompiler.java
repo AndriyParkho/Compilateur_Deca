@@ -197,7 +197,17 @@ public class DecacCompiler {
     	program.addFirst(instruction, comment);
     }
     
-
+    public void addInstructionAfter(Instruction instruction, int index) {
+    	program.addAfter(instruction, index);
+    }
+    
+    public void addInstructionBegin(Instruction instruction, String comment, int index) {
+    	program.addAfter(instruction, comment, index);
+    }
+    
+    public int getLastInstructionIndex() {
+    	return program.getLength() - 1;
+    }
     
     /**
      * @see 

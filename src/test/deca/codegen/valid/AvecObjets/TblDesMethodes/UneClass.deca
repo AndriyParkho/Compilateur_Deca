@@ -6,7 +6,10 @@
 
 
 class A{
-
+	int x = 5;
+	int y;
+	int z;
+	int louis = 100*100;
 }
 
 {

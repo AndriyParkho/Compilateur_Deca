@@ -12,6 +12,8 @@ import org.apache.commons.lang.Validate;
  */
 public class MethodDefinition extends ExpDefinition {
 
+	private int debutBloc;
+	
     @Override
     public boolean isMethod() {
         return true;
@@ -77,6 +79,14 @@ public class MethodDefinition extends ExpDefinition {
 			}
 		}
 		return false;
+	}
+
+	public int getDebutBloc() {
+		return debutBloc;
+	}
+
+	public void setDebutBloc(int debutBloc) {
+		this.debutBloc = debutBloc;
 	}
     
     
