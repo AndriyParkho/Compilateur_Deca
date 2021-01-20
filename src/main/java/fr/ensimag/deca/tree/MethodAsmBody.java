@@ -49,10 +49,13 @@ public class MethodAsmBody extends AbstractMethodBody {
 
 
 	@Override
-	public void codeGenMethod(DecacCompiler compiler) {
+	public void codeGenMethodBody(DecacCompiler compiler) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 	
 
 }
