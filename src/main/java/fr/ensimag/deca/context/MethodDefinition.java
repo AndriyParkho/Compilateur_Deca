@@ -1,5 +1,6 @@
 package fr.ensimag.deca.context;
 
+import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.ima.pseudocode.Label;
 import org.apache.commons.lang.Validate;
@@ -85,11 +86,18 @@ public class MethodDefinition extends ExpDefinition {
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof MethodDefinition) {
-			if(((MethodDefinition) obj).getIndex() == this.getIndex()) {
+			MethodDefinition method = (MethodDefinition) obj;
+			if(method.getIndex() == this.getIndex()) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+
+	@Override
+	public int hashCode() {
+		return this.getIndex();
 	}
 
 	public int getDebutBloc() {
