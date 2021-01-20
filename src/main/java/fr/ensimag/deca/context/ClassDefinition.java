@@ -112,7 +112,11 @@ public class ClassDefinition extends TypeDefinition {
     	for(ExpDefinition data : members.getDonnees().values()) {
     		if(data.isMethod()) {
     			MethodDefinition method = (MethodDefinition) data;
-    			methods.add(method);
+    			if(!methods.add(method)) {
+    				methods.remove(method);
+    				methods.add(method);
+    			}
+    			
     		}
     	}
     }

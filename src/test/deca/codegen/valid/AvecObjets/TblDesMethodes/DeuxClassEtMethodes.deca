@@ -21,12 +21,14 @@ class B extends A{
  	int x = 10;
  	float a;
  	float b = 12.4;
- 	int getX(){
- 		return x - 5;
- 	}
+ 	
  	
  	float testB(int c){
  		return a + b + x;
+ 	}
+ 	
+ 	int getX(){
+ 		return x - 5;
  	}
 }
 
