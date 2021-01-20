@@ -6,6 +6,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.ERROR;
@@ -85,6 +86,8 @@ public class CompilerInstruction {
 			compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), op));
 		} else if(type.getType().isBoolean()) {
 			compiler.addInstruction(new LOAD(0, op));
+		} else if(type.getType().isClass()) {
+			compiler.addInstruction(new LOAD(new NullOperand(), op));
 		} else {
 			throw new UnsupportedOperationException("not supposed to use a "+type.getType().toString());
 		}

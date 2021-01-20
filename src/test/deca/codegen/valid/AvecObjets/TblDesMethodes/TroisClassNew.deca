@@ -1,0 +1,20 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+}
+
+class B extends A{
+}
+
+class C extends B{}
+
+{
+	A a;
+	B b;
+	C c = new C();
+}
