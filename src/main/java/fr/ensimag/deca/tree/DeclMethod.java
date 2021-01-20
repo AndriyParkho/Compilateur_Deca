@@ -137,24 +137,27 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	
-	public void codeGenMethod(DecacCompiler compiler) {
-		CompilerInstruction.decorationLigne(compiler, "Sauvegarde des registres");
+	public void codeGenMethod(DecacCompiler compiler, String nomDeLaClasse) {
+		CompilerInstruction.decorationLigne(compiler, name.getName().getName());
+		compiler.addLabel(compiler.createLabel("code."+nomDeLaClasse+"."+name.getName().getName()));
+		compiler.addComment("Sauvegarde des registres");
 		saveRegisters(compiler);
+		compiler.addComment("Corps de la méthode");
 		methodBody.codeGenMethodBody(compiler);
-		//compiler.addLabel(compiler.createLabel("fin."+));
-		CompilerInstruction.decorationLigne(compiler, "Restauration des registres");
+		compiler.addComment("Restauration des registres");
 		restoreRegisters(compiler);
+		compiler.addLabel(compiler.createLabel("fin."+ nomDeLaClasse+"."+name.getName().getName()));
 		compiler.addInstruction(new RTS());
 	}
 	
-	public void saveRegisters(DecacCompiler compiler) {
+	private void saveRegisters(DecacCompiler compiler) {
 		compiler.addInstruction(new PUSH(GPRegister.getR(2))); //ici on met les adresses des objets dans R2 (par défaut)
 		compiler.setRegisterStart(3); //on met les résultats des epxression dans R3
 		compiler.addInstruction(new PUSH(GPRegister.getR(3)));
 		//ajouter +2 au variable pour le TSTO		
 	}
 	
-	public void restoreRegisters(DecacCompiler compiler) {
+	private void restoreRegisters(DecacCompiler compiler) {
 		compiler.addInstruction(new POP(GPRegister.getR(3)));
 		compiler.addInstruction(new POP(GPRegister.getR(2)));
 		compiler.setRegisterStart(2);
