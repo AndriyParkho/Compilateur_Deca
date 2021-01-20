@@ -40,7 +40,6 @@ public abstract class AbstractMethodCall extends AbstractExpr{
             variable.verifyExpr(compiler, currentClass);
             compiler.setEnvExp(((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName()))).getMembers());
             method.verifyExpr(compiler, currentClass);
-            System.out.println(method.getMethodDefinition());
             compiler.setEnvExp(currentClass.getMembers());
         }catch (ContextualError ce){throw ce;}
         if (variable.getType().isClass()){
@@ -57,7 +56,9 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                 int index = 0;
                 for (AbstractExpr expr : arguments.getList()) {
                     try {
+                        compiler.setEnvExp(method.getMethodDefinition().getLocalEnv());
                         expr.verifyExpr(compiler, currentClass);
+                        compiler.setEnvExp(currentClass.getMembers());
                     } catch (ContextualError ce) { throw ce; }
                     if (expr.getType() != method.getMethodDefinition().getSignature().paramNumber(index)) {
                         throw new ContextualError(String.format("Argument %d de type %s ne correspond au type du %de argument de la méthode %s",
