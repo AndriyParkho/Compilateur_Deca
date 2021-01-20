@@ -2,7 +2,7 @@
 //    Déclaration de champs de même nom
 //
 // Resultats:
-//    Erreur contextuelle
+//    Erreur contextuelle linge 10
 //    nom de champs déjà utilisé
 
 class A {

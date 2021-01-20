@@ -2,7 +2,7 @@
 //    Déclaration de champs de même nom entre une classe mère et une classe fille
 //
 // Resultats:
-//    Erreur contextuelle
+//    Erreur contextuelle ligne 13
 //    Nom de champs déjà utilisé
 
 class A {

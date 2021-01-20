@@ -1,0 +1,16 @@
+// Description:
+//    Déclaration d'une classe dans une classe indépendante
+//
+// Resultats:
+//    Erreur contextuelle ligne 15
+//    les deux classes dont incompatibles.
+
+class A {
+    int x;
+}
+
+class B {}
+
+{
+    B x = new A();
+}

@@ -1,0 +1,8 @@
+// Description:
+//    Rédéfinition de la classe Objet
+//
+// Resultats:
+//    Erreur contextuelle ligne 8
+//    une telle classe est déjà définie
+
+class Object{}

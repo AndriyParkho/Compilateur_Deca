@@ -52,14 +52,10 @@ public class ClassType extends Type {
     @Override
     public boolean sameType(Type otherType) {
         //Fait
-    	if((otherType.isClass())&&(this.getClass()==otherType.getClass()))
-    	{
-    		return true;
-    	}
-    	else 
-    	{
-    		return false;
-    	}
+        if (otherType.isClass()){
+            return this.getDefinition()==((ClassType)otherType).getDefinition();
+        }
+    	return false;
     }
 
     /**
@@ -69,15 +65,19 @@ public class ClassType extends Type {
         //Fait
     	if(potentialSuperClass.getName().getName().equals("Object"))
     	{
-    		return false;
+    		return true;
     	}
+        if (this.getName().getName().equals("Object")){
+            return false;
+        }
     	else if(this.getDefinition().getType().sameType(potentialSuperClass.getDefinition().getType()))
     	{
     		return true;
     	}
     	else 
     	{
-    		return potentialSuperClass.isSubClassOf(this.getDefinition().getSuperClass().getType());
+    	    System.out.println(this.getDefinition().getSuperClass().getType());
+    		return this.getDefinition().getSuperClass().getType().isSubClassOf(potentialSuperClass);
     	}
     	
     }

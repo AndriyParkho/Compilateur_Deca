@@ -2,7 +2,7 @@
 //    Superclass de type non classe
 //
 // Resultats:
-//    Erreur contextuelle
+//    Erreur contextuelle ligne 8
 //    Le champs superclass doit être une classe
 
 class A extends int {}

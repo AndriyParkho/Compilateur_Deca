@@ -1,0 +1,20 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+int x;
+int y = 1;
+boolean bool1;
+boolean bool2 = false;
+float flottant;
+float flottant2 = 2.4;
+}
+
+{
+ A newA = new A();
+}
+

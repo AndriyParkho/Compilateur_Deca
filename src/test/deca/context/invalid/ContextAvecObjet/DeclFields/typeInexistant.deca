@@ -3,7 +3,7 @@
 //
 // Resultats:
 //    Erreur contextuelle
-//    type inexistant
+//    type inexistant ligne 9
 
 class A {
     protected in x;

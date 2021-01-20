@@ -162,8 +162,9 @@ inst returns[AbstractInst tree]
         }
     | RETURN expr SEMI {
             assert($expr.tree != null);
+            $tree = new Return($expr.tree);
+            setLocation($tree, $RETURN);
         }
-        // A Faire
     ;
 
 if_then_else returns[IfThenElse tree]
@@ -308,7 +309,8 @@ inequality_expr returns[AbstractExpr tree]
     | e1=inequality_expr INSTANCEOF type {
             assert($e1.tree != null);
             assert($type.tree != null);
-            
+            $tree = new InstanceOf($type.tree, $e1.tree);
+            setLocation($tree, $e1.start);
         }
         // a finir juste au dessus, manque classe INSTANCEOF
     ;
@@ -418,6 +420,8 @@ primary_expr returns[AbstractExpr tree]
         }
     | NEW ident OPARENT CPARENT {
             assert($ident.tree != null);
+            $tree =  new New($ident.tree);
+            setLocation($tree, $NEW);
         }
     | cast=OPARENT type CPARENT OPARENT expr CPARENT {
             assert($type.tree != null);
@@ -458,6 +462,8 @@ literal returns[AbstractExpr tree]
         setLocation($tree,$FALSE);
         }
     | THIS {
+        $tree = new This();
+        setLocation($tree, $THIS);
         }
     | NULL {
         }

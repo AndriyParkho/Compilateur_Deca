@@ -2,7 +2,7 @@
 //    Double définition d'une classe
 //
 // Resultats:
-//    Erreur contextuelle
+//    Erreur contextuelle ligne 9
 //    Une telle classe est déjà définie
 
 class A {}

@@ -13,6 +13,8 @@ import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.ImmediateFloat;
+import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -145,12 +147,21 @@ public class DeclField extends AbstractDeclField {
 	
 	@Override
 	public void codeGenInitField(DecacCompiler compiler) {
+		compiler.addComment("Initialisation de "+name.getName().getName());
 		if(initialization.isInitialization()) {
 			Initialization init = (Initialization)initialization;
 			init.getExpression().codeGenExpr(compiler, GPRegister.R0);
 			}
 		else {
-			compiler.addInstruction(new LOAD(0, GPRegister.R0));
+			if(type.getType().isInt()) {
+			compiler.addInstruction(new LOAD(new ImmediateInteger(0), GPRegister.R0));
+			}else if(type.getType().isFloat()) {
+				compiler.addInstruction(new LOAD(new ImmediateFloat(0.0f), GPRegister.R0));
+			}else if(type.getType().isBoolean()) {
+				compiler.addInstruction(new LOAD(0, GPRegister.R0));
+			}else {
+				throw new UnsupportedOperationException("not supposed to use a "+type.getType().toString());
+			}
 		}
 		compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.R1));
 		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(name.getFieldDefinition().getIndex(), GPRegister.R1)));
