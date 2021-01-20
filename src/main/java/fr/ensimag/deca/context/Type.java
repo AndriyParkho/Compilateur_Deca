@@ -77,5 +77,26 @@ public abstract class Type {
             throws ContextualError {
         throw new ContextualError(errorMessage, l);
     }
+    /**
+     * on vérifie si this est un sous type de superType
+     * 
+     */
+    public boolean sousType(Type otherType)
+    {
+    	if((this.sameType(otherType))||(this.isNull() && otherType.isClass()))
+    	{
+    		return true;
+    	}
+    	else if(this.isClass())
+    	{
+    		ClassType classe=(ClassType)this;
+    		ClassType superClasse=(ClassType)otherType;
+    		if(classe.isSubClassOf(superClasse))
+    		{
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 
 }

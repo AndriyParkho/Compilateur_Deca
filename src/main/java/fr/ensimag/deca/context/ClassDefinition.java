@@ -1,7 +1,7 @@
 package fr.ensimag.deca.context;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.apache.commons.lang.Validate;
 
@@ -24,7 +24,7 @@ import fr.ensimag.ima.pseudocode.instructions.STORE;
 public class ClassDefinition extends TypeDefinition {
 
     private DAddr operand;
-    private Set<MethodDefinition> methods = new TreeSet<MethodDefinition>(new MethodComparator());
+    private Set<MethodDefinition> methods = new HashSet<MethodDefinition>();
     private Label initLabel;
 
     public void setNumberOfFields(int numberOfFields) {
@@ -112,7 +112,11 @@ public class ClassDefinition extends TypeDefinition {
     	for(ExpDefinition data : members.getDonnees().values()) {
     		if(data.isMethod()) {
     			MethodDefinition method = (MethodDefinition) data;
-    			methods.add(method);
+    			if(!methods.add(method)) {
+    				methods.remove(method);
+    				methods.add(method);
+    			}
+    			
     		}
     	}
     }
