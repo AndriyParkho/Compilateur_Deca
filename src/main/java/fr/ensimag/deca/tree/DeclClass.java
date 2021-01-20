@@ -170,7 +170,6 @@ public class DeclClass extends AbstractDeclClass {
 	protected void codeGenInitClass(DecacCompiler compiler) {
 		CompilerInstruction.decorationLigne(compiler, "Initialisation des champs de " + name.getName().getName());
 		compiler.addLabel(name.getClassDefinition().getInitLabel());
-		//compiler.addInstruction(new TSTO(new ImmediateInteger(3)));
 		boolean haveSuperclass = !"Object".equals(superClass.getName().getName()); 
 		
 		if(haveSuperclass) {
@@ -188,7 +187,7 @@ public class DeclClass extends AbstractDeclClass {
 		if(haveSuperclass) {
 			compiler.addComment("Appel de l'initialisation des champs hérités de " + superClass.getName().getName());
 			compiler.addInstruction(new PUSH(GPRegister.R1));
-			compiler.addInstruction(new BSR(name.getClassDefinition().getInitLabel()));
+			compiler.addInstruction(new BSR(superClass.getClassDefinition().getInitLabel()));
 			compiler.addInstruction(new SUBSP(new ImmediateInteger(1)));
 			
 			for(AbstractDeclField field : fieldList.getList()) {
