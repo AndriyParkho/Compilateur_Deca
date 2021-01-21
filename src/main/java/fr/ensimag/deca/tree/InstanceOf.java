@@ -42,6 +42,12 @@ public class InstanceOf extends AbstractExpr{
 
 		this.type.verifyType(compiler);
 		this.objet.verifyExpr(compiler, currentClass);
+		try {
+			if (!this.type.getType().isClass() || !this.type.getType().isClass()) {
+				throw new ContextualError(String.format("%s n'est pas une instance de classe", this.type.getType().getName().getName()),
+						this.getLocation());
+			}
+		}catch(ContextualError ce){throw ce;}
 		Type typeBool=compiler.getEnvTypes().get(compiler.getSymbolTable().create("boolean")).getType();
 		this.setType(typeBool);
 		return typeBool;
