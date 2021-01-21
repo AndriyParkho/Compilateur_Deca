@@ -1,0 +1,18 @@
+//Description
+//  Appel d'un attribut après upcast
+//
+//Résultat
+//  ok
+
+class A{
+    int x;
+}
+class B extends A{
+    A ObjetA;
+}
+{
+    B b = new B();
+    A a = (B)(b);
+    a.x;
+    a.ObjetA;
+}

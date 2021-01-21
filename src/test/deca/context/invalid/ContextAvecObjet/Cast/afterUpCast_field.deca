@@ -1,0 +1,19 @@
+//Description
+//  Appel d'un champs après upcast
+//
+//Résultat
+//  Erreur contextuelle ligne 18
+//  identificateur non défini
+
+class A{
+    int x;
+}
+class B extends A{
+    int y;
+}
+{
+    B b = new B();
+    A a = (A)(b);
+    int x = a.x;
+    a.y;
+}

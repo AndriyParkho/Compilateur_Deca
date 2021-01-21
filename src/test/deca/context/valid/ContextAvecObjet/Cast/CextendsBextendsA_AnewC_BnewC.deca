@@ -1,0 +1,15 @@
+//Description
+//  Déclarer une variable de classe A avec new C() où B extends A et une variable de classe B avec new C() où C extends B
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends A{}
+class C extends B{}
+{
+    A a = new C();
+    B b = new C();
+    Object c;
+    c = new C();
+}
