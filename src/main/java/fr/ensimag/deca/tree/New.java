@@ -52,7 +52,7 @@ public class New extends AbstractExpr{
 	}
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE : Auto-generated method stub
 		compiler.addInstruction(new NEW(identifier.getClassDefinition().getNumberOfFields() + 1, op));
 		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, "tas_plein", "Erreur : allocation impossible, tas plein")));
@@ -105,6 +105,18 @@ public class New extends AbstractExpr{
 	@Override
 	public boolean isIdentifier() {
 		// !
+		return false;
+	}
+
+	@Override
+	public boolean isDot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

@@ -48,7 +48,7 @@ public class MethodCall extends AbstractMethodCall{
     }
     
     @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
     	int nombreParametres = getArguments().size();
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
 

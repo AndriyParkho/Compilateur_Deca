@@ -145,6 +145,27 @@ public class Identifier extends AbstractIdentifier {
                             + " is not a Exp identifier, you can't call getExpDefinition on it");
         }
     }
+    
+    /**
+     * Like {@link #getDefinition()}, but works only if the definition is a ParamDefinition.
+     * 
+     * This method essentially performs a cast, but throws an explicit exception
+     * when the cast fails.
+     * 
+     * @throws DecacInternalError
+     *             if the definition is not a param definition.
+     */
+    @Override
+    public ParamDefinition getParamDefinition() {
+        try {
+            return (ParamDefinition) definition;
+        } catch (ClassCastException e) {
+            throw new DecacInternalError(
+                    "Identifier "
+                            + getName()
+                            + " is not a param identifier, you can't call getParamDefinition on it");
+        }
+    }
 
     @Override
     public void setDefinition(Definition definition) {
@@ -244,7 +265,7 @@ public class Identifier extends AbstractIdentifier {
     }
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		compiler.addInstruction(new LOAD(DValGetter.getDVal(this, compiler), op));
 	}
 	
@@ -276,5 +297,13 @@ public class Identifier extends AbstractIdentifier {
 		return true;
 	}
 
-	
+	@Override
+	public boolean isDot() {
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		return false;
+	}
 }

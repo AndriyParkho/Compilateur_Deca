@@ -40,7 +40,7 @@ public class CastExpr extends AbstractExpr{
     }
 
     @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
         // TODO Auto-generated method stub
         
     }
@@ -89,5 +89,17 @@ public class CastExpr extends AbstractExpr{
         // !
         return false;
     }
+
+	@Override
+	public boolean isDot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

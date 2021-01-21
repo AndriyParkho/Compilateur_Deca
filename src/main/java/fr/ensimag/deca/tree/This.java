@@ -30,7 +30,7 @@ public class This extends AbstractExpr{
 	}
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		///A FAIRE : mettre dans R2 l'adresse de l'objet
 		compiler.addInstruction(new LOAD(new RegisterOffset(2, GPRegister.LB), op));
 		
@@ -74,6 +74,17 @@ public class This extends AbstractExpr{
 	@Override
 	public boolean isIdentifier() {
 		// !
+		return false;
+	}
+    
+    @Override
+	public boolean isDot() {
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 	

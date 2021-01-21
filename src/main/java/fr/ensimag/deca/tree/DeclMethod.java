@@ -145,6 +145,11 @@ public class DeclMethod extends AbstractDeclMethod {
 		name.getMethodDefinition().setLabel(new Label("code." + className + "." + name.getName().getName()));
 	}
 	
+	public void setParamsOperand() {
+		for(AbstractDeclParam param : paramList.getList()) {
+			param.setParamOperand();
+		}
+	}
 	
 	public void codeGenMethod(DecacCompiler compiler, String nomDeLaClasse) {
 		compiler.setCurrentMethod(this);

@@ -59,7 +59,7 @@ public class InstanceOf extends AbstractExpr{
 	}
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE
 		throw new UnsupportedOperationException("La fonction codeGenExpr n'est pas implémentée pour l'expression : InstanceOf");
 	}
@@ -170,6 +170,18 @@ public class InstanceOf extends AbstractExpr{
 	@Override
 	public boolean isIdentifier() {
 		// !
+		return false;
+	}
+
+	@Override
+	public boolean isDot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 	

@@ -153,6 +153,7 @@ public class DeclClass extends AbstractDeclClass {
 		// Définir le label de chaque méthode et créer le tableau des étiquettes
 		for(AbstractDeclMethod method : methodList.getList()) {
 			method.setLabel(name.getName().getName());
+			method.setParamsOperand();
 		}
 		classDef.setMethodsTable();
 		compiler.addComment("Construction de la table des méthodes de " + this.name.getName().getName());

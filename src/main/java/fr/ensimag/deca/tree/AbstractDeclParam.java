@@ -24,6 +24,7 @@ public abstract class AbstractDeclParam extends Tree {
             throws ContextualError;
     
     public abstract void codeGenParam(DecacCompiler compiler);
-
+    
+    public abstract void setParamOperand();
 
 }

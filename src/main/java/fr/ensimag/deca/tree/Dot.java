@@ -3,6 +3,8 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CompilerInstruction;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ClassType;
 import fr.ensimag.deca.context.ContextualError;
@@ -11,7 +13,13 @@ import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.BEQ;
+import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 public class Dot extends AbstractLValue {
     private AbstractExpr objet;
@@ -23,13 +31,9 @@ public class Dot extends AbstractLValue {
     }
 
     @Override
-    protected void codeGenPrint(DecacCompiler compiler, boolean printHex) {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-        throw new UnsupportedOperationException("Not yet implemented");
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+        DVal valueDVal = DValGetter.getDVal(this, compiler);
+        compiler.addInstruction(new LOAD(valueDVal, op));
     }
     /**
      * on vérifie les points suivants:
@@ -105,8 +109,18 @@ public class Dot extends AbstractLValue {
         // TODO Auto-generated method stub
         
     }
+    
+    
 
-    @Override
+    public AbstractExpr getObjet() {
+		return objet;
+	}
+
+	public AbstractIdentifier getAppel() {
+		return appel;
+	}
+
+	@Override
 	public boolean isIntLiteral() {
 		// !
 		return false;
@@ -127,6 +141,16 @@ public class Dot extends AbstractLValue {
 	@Override
 	public boolean isIdentifier() {
 		// !
+		return false;
+	}
+	
+    @Override
+	public boolean isDot() {
+		return true;
+	}
+    
+    @Override
+	public boolean isMethod() {
 		return false;
 	}
 }

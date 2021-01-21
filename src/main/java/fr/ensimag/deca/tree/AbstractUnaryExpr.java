@@ -66,6 +66,14 @@ public abstract class AbstractUnaryExpr extends AbstractExpr {
 		return false;
 	}
 
+	@Override
+	public boolean isDot() {
+		return false;
+	}
 	
+	@Override
+	public boolean isMethod() {
+		return false;
+	}
 
 }

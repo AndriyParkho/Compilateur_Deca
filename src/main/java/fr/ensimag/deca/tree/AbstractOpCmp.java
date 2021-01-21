@@ -87,7 +87,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	
     }
     
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+    public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
     	DVal rightDval = DValGetter.getDVal(getRightOperand(), compiler);
     	int numeroRegistre = op.getNumber();
     	if(rightDval != null) {

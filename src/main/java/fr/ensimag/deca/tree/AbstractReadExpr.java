@@ -46,7 +46,7 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 	}
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// FAIT
 		compiler.addInstruction(this.getMnemo());
 		
@@ -58,5 +58,15 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 	}
 	
 	protected abstract Instruction getMnemo();
+	
+	@Override
+	public boolean isDot() {
+		return false;
+	}
+	
+	@Override
+	public boolean isMethod() {
+		return false;
+	}
 
 }
