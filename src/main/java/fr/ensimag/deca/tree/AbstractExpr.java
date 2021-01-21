@@ -100,7 +100,7 @@ public abstract class AbstractExpr extends AbstractInst {
         		ClassType classReelle= (ClassType) typeReel;
         		ClassType classAttendue= (ClassType) expectedType;
         		if(!classReelle.isSubClassOf(classAttendue))
-        			throw new ContextualError(String.format("%s ne peut etre cast en %s", classAttendue, classReelle),this.getLocation());
+        			throw new ContextualError(String.format("%s ne peut etre cast en %s", classReelle, classAttendue),this.getLocation());
         	}
     		else
     		{

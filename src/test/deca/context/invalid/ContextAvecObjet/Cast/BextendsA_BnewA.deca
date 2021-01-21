@@ -1,0 +1,12 @@
+//Description
+//  Déclarer une variable de classe A avec newB() où B extends A
+//
+//Résultat
+//  Erreur contextuelle ligne11
+//  A ne peut être cast en B
+
+class A{}
+class B extends A{}
+{
+    B b = new A();
+}

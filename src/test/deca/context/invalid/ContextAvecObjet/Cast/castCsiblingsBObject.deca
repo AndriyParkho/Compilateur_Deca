@@ -1,0 +1,12 @@
+//Description
+//  Cast de deux classes qui extend Object
+//
+//Résultat
+//  Erreur contextuelle ligne 11
+//  A ne peut être cast en B
+
+class A{}
+class B {}
+{
+    B b = new A();
+}

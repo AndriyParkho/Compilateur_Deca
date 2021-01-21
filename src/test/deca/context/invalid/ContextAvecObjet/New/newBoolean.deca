@@ -1,0 +1,10 @@
+// Description:
+//    Déclaration d'une classe non définie
+//
+// Resultats:
+//    Erreur contextuelle ligne 9
+//    new déclare les classes uniquement
+
+{
+    boolean x = new boolean();
+}

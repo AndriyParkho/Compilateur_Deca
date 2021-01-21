@@ -1,0 +1,17 @@
+//Description
+//  Cast d'une sortie de méthode
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends A{
+    A spawner(){
+        return new A();
+    }
+}
+{
+    B b = new B();
+    A a = b.spawner();
+    a = new B();
+}

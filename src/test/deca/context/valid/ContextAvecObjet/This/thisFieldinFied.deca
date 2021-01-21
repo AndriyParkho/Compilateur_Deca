@@ -1,0 +1,10 @@
+//Description
+//  Appel à this.field dans l'instanciation d'un field
+//
+//Réponse
+//  ok
+
+class A{
+    int x;
+    int y = this.x;
+}

@@ -1,0 +1,10 @@
+//Description
+//  Cast d'un float en boolean
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  un float ne peut pas être cast dans un boolean
+{
+    float a = 1.0;
+    boolean x = (boolean)(a);
+}

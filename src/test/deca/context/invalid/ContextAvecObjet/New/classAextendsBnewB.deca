@@ -2,7 +2,8 @@
 //    Déclaration d'une classe dans une classe fille
 //
 // Resultats:
-//    ok
+//    Erreur contextuelle ligne 14
+//    B ne peut être cast en A
 
 class B {}
 

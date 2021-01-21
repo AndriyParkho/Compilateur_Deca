@@ -34,7 +34,7 @@ public class MethodBody extends AbstractMethodBody {
 		//FAIT
 		this.listDeclVar.verifyListDeclVariable(compiler, currentClass);
 		this.listInst.verifyListInst(compiler, currentClass, returnType);
-	    this.setType(returnType);
+		this.setType(returnType);
 	}
 	
 	@Override
@@ -55,7 +55,7 @@ public class MethodBody extends AbstractMethodBody {
 	    }
 	
 	public void codeGenMethodBody(DecacCompiler compiler) {
-		listDeclVar.codeGenListDeclVar(compiler); //A FAIRE : indiquer que l'on est dans une méthode pour écrire dans LB et pas dans GB
+		listDeclVar.codeGenListDeclVar(compiler);
 		listInst.codeGenListInst(compiler);
 	}
 

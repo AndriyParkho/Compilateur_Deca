@@ -1,0 +1,12 @@
+//Description
+//  Appel à this.field dans une méthode
+//
+//Réponse
+//  ok
+
+class A{
+    int x;
+    void setX(int x){
+        this.x = this.x + x;
+    }
+}

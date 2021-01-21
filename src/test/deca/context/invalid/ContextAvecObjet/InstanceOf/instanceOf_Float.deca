@@ -1,0 +1,13 @@
+// Description:
+//   test sortie instanceof != float
+//
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    type incompatible
+class A{
+    float x = 0;
+}
+{
+    A a = new A();
+    float x = a instanceof A;
+}

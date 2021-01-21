@@ -1,0 +1,13 @@
+// Description:
+//   test sortie instanceof != int
+//
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    type incompatible
+class A{
+    int x = 0;
+}
+{
+    A a = new A();
+    int x = a instanceof A;
+}

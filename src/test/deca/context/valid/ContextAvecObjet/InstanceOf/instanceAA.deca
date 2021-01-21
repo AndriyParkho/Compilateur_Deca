@@ -1,0 +1,11 @@
+// Description:
+//    test basique d'instance
+//
+// Resultats:
+//    ok
+//
+class A{}
+{
+    A a = new A();
+    boolean x = a instanceof A;
+}

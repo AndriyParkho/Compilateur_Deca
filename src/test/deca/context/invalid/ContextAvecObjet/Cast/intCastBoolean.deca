@@ -1,0 +1,10 @@
+//Description
+//  Cast d'un boolean en int
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  un boolean ne peut pas être cast dans un int
+{
+    boolean a = true;
+    int x = (int)(a);
+}

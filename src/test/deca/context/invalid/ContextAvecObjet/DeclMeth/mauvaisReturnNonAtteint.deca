@@ -1,0 +1,15 @@
+//Description
+//  test d'une méthode devant retourner un int mais peut return un boolean nécessairement
+//
+//Résultat
+//  Erreur contextuelle ligne 9
+//  type incompatible
+
+class A{
+    int inutile(boolean a){
+        if (a){
+            return a;
+        }
+        return 1;
+    }
+}

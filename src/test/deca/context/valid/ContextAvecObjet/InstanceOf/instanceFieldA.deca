@@ -1,0 +1,13 @@
+// Description:
+//    instance of sortie d'un attribut de type class
+//
+// Resultats:
+//    ok
+//
+class A{
+    Object o = new A();
+}
+{
+    A a = new A();
+    boolean x = a.o instanceof A;
+}

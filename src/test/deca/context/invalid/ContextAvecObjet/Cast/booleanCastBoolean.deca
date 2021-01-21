@@ -1,0 +1,10 @@
+//Description
+//  Cast d'un boolean en boolean
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  un boolean ne peut pas être cast dans un boolean
+{
+    boolean a = true;
+    boolean x = (boolean)(a);
+}

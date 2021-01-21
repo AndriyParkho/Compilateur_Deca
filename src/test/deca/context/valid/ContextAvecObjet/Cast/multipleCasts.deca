@@ -1,0 +1,26 @@
+//Description
+//  Test basique d'upcasts
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends A{}
+class C extends A{}
+class D extends C{}
+class E extends D{}
+class F extends D{}
+class G extends B{}
+class H extends B{}
+class I extends G{}
+
+{
+    B b = new B();
+    A a = (A)(b);
+    E e = new E();
+    D d = (D)(e);
+    A a1 = (A)(d);
+    A a2 = (A)(a1);
+    I i = new I();
+    Object o = (Object)(i);
+}

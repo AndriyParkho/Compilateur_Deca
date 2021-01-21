@@ -1,0 +1,9 @@
+//Description
+//  Cast d'un string en boolean
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  un string ne peut pas être cast dans un boolean
+{
+    boolean x = (boolean)("true");
+}

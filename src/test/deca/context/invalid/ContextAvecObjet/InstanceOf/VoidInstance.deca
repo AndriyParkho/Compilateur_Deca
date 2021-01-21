@@ -1,0 +1,13 @@
+// Description:
+//   void instance of
+//
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    void n'est pas une instance de classe
+class A{
+    void getX(){}
+}
+{
+    A a = new A();
+    boolean x = a.x instanceof A;
+}

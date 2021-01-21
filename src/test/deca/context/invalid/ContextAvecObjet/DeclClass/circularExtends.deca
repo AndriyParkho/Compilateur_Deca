@@ -1,0 +1,10 @@
+// Description
+// Déclarations circulaires de classes :A=>B=>C=>A
+//
+//Résultat
+//  Erreur contextuelle ligne 8
+//  type non défini
+
+class A extends B{}
+class B extends C{}
+class C extends A{}

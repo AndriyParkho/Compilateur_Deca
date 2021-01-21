@@ -1,0 +1,13 @@
+//Description
+//  Cast de deux variables indépendantes
+//
+//Résultat
+//  Erreur contextuelle ligne 12
+//  A ne peut être cast en C
+
+class A{}
+class B{}
+class C extends B{}
+{
+    C c = new A();
+}

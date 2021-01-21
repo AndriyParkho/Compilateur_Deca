@@ -148,7 +148,7 @@ public class DeclClass extends AbstractDeclClass {
 
 	@Override
 	protected void codeGenClassMethodTable(DecacCompiler compiler) {
-		// A FAIRE
+		// FAIT
 		ClassDefinition classDef = name.getClassDefinition();
 		// Définir le label de chaque méthode et créer le tableau des étiquettes
 		for(AbstractDeclMethod method : methodList.getList()) {

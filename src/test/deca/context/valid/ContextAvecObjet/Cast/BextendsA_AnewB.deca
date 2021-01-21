@@ -1,0 +1,11 @@
+//Description
+//  Déclarer une variable de classe A avec newB() où B extends A
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends A{}
+{
+    A a = new B();
+}

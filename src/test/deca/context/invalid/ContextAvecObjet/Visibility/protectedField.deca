@@ -1,0 +1,14 @@
+// Description:
+//    appel impossible d'un champs protégé
+//
+// Resultats:
+//  ContextualError ligne 13
+//  appel impossible de float : champs protégé
+class A{
+	protected float x;
+
+}
+{
+	A a=new A();
+	float y=a.x;
+}

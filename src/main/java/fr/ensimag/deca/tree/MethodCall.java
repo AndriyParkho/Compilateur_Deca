@@ -44,24 +44,28 @@ public class MethodCall extends AbstractMethodCall{
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         //réserver emplacement paramètres +1
+    	codeGenExpr(compiler, compiler.getRegisterStart());
+    }
+    
+    @Override
+    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
     	int nombreParametres = getArguments().size();
-    	GPRegister registreStockage = GPRegister.getR(2);
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
 
-    	compiler.addInstruction(new LOAD(((Identifier)getVariable()).getVariableDefinition().getOperand(), registreStockage));
-    	compiler.addInstruction(new STORE(registreStockage, new RegisterOffset(0, GPRegister.SP)));
+    	compiler.addInstruction(new LOAD(((Identifier)getVariable()).getVariableDefinition().getOperand(), op));
+    	compiler.addInstruction(new STORE(op, new RegisterOffset(0, GPRegister.SP)));
     	int spOffset =0;
     	for(AbstractExpr argument : getArguments().getList()) {
     		++spOffset;
-    		argument.codeGenExpr(compiler, registreStockage);
-    		compiler.addInstruction(new STORE(registreStockage, new RegisterOffset(- spOffset, GPRegister.SP)));
+    		argument.codeGenExpr(compiler, op);
+    		compiler.addInstruction(new STORE(op, new RegisterOffset(- spOffset, GPRegister.SP)));
     		
     	}
-    	compiler.addInstruction(new LOAD(new RegisterOffset(0, GPRegister.SP), registreStockage));
-    	compiler.addInstruction(new CMP(new NullOperand(), registreStockage));
+    	compiler.addInstruction(new LOAD(new RegisterOffset(0, GPRegister.SP), op));
+    	compiler.addInstruction(new CMP(new NullOperand(), op));
     	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
-    	compiler.addInstruction(new LOAD(new RegisterOffset(0, registreStockage), registreStockage));
-    	compiler.addInstruction(new BSR(new RegisterOffset(getMethod().getMethodDefinition().getIndex(), registreStockage)));
+    	compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
+    	compiler.addInstruction(new BSR(new RegisterOffset(getMethod().getMethodDefinition().getIndex(), op)));
     	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
 

@@ -1,0 +1,14 @@
+//Description
+//  Appel de this.field dans un main
+//
+//Résultat
+//  Erreur contextuelle ligne
+//  utilisation de this non autotrisée en dehors d'une classe
+
+class A{
+    int x;
+}
+{
+    A a =new A ();
+    println(this.x);
+}

@@ -1,0 +1,13 @@
+// Description:
+//   boolean instance of
+//
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    boolean n'est pas un objet deca
+class A{
+    boolean x = true;
+}
+{
+    A a = new A();
+    boolean x = a.x instanceof A;
+}

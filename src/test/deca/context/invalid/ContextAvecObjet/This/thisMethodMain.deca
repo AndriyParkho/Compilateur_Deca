@@ -1,0 +1,16 @@
+//Description
+//  Appel de this.method dans un main
+//
+//Résultat
+//  Erreur contextuelle ligne
+//  utilisation de this non autotrisée en dehors d'une classe
+
+class A{
+    int x(){
+        return 1;
+    }
+}
+{
+    A a = new A ();
+    println(this.x());
+}
