@@ -2,7 +2,7 @@
 //    appel impossible d'un champs protégé hérité
 //
 // Resultats:
-//  ContextualError ligne 13
+//  ContextualError ligne 14
 //  appel impossible de float : champs protégé
 class A{
 	protected float x;
