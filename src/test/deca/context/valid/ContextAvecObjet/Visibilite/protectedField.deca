@@ -1,0 +1,20 @@
+// Description:
+//    appel un champs protégé dans une sous classe
+//
+// Resultats:
+// ok
+//
+class A{
+	protected float x;
+	float getX(){
+		return this.x;
+	} 
+}
+class B extends A{
+  void setX(float y)
+  	{
+  		this.x=y;
+  	}
+  }
+
+
