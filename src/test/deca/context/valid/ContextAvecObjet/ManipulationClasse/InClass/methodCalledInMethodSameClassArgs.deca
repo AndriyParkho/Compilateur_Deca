@@ -1,0 +1,23 @@
+// Description:
+//  Appel d'une méthode avec plusieurs arguments dans la classe dans une méthode
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(boolean a, int y1, int y2, int y3){
+        if(a){
+            return x*y1*y2*y3;
+        }
+        return x;
+    }
+
+    void setX(boolean a, int y1, int y2, int y3){
+        x = this.getX(a, y1, y2, y3);
+    }
+}
+
+
+

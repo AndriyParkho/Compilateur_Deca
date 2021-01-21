@@ -1,0 +1,26 @@
+// Description:
+//  Appel d'une méthode avec un argument dans l'initialisation d'un attribut d'une classe indépendante
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(int y){
+        return x+y;
+    }
+
+    void setX(int a){
+        x = this.getX(a);
+    }
+}
+
+class B {
+    A a = new A();
+    int y;
+    int x = a.getX(y);
+}
+
+
+

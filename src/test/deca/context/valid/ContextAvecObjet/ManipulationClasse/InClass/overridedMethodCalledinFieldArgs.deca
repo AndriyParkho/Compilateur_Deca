@@ -1,0 +1,39 @@
+// Description:
+//  Appel de deux méthodes avec un argument dont l'une est overrided dans un champs
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(int y, int y1, float z, float z1, boolean a, boolean b){
+        if (a&&b){
+            return y1-y;
+        }
+        return x;
+    }
+
+}
+
+class B extends A {
+    int getX(int z, int y1, float y, float z1, boolean b, boolean a){
+        return -x+z-y1;
+    }
+}
+
+class C{
+    A a = new A();
+    B b = new B();
+    int c;
+    int c1;
+    float g;
+    float Hello;
+    boolean t;
+    boolean f;
+    int x = a.getX(c, c, Hello, g+Hello, t, !t);
+    int y = b.getX(c1, c, 2.0, c, t, t||f);
+}
+
+
+

@@ -1,0 +1,28 @@
+// Description:
+//  Appel d'une méthode avec plusieurs arguments dans l'initialisation d'un attribut d'une classe fille
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(boolean a, int y, float z, int y1){
+        return x-y1+y;
+    }
+
+    void setX(boolean a, int y2, float z, int y1){
+        x = this.getX(a, y1, z, y2);
+    }
+}
+
+class B extends A{
+    boolean a;
+    int y = 0;
+    float z;
+    int y1;
+    int x = this.getX(a, y, z, y1);
+}
+
+
+

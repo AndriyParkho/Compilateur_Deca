@@ -1,0 +1,24 @@
+// Description:
+//  Appel d'une méthode sans argument dans l'initialisation d'un attribut d'une classe fille
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(){
+        return x;
+    }
+
+    void setX(){
+        x = this.getX();
+    }
+}
+
+class B extends A{
+    int x = this.getX();
+}
+
+
+
