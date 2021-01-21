@@ -19,10 +19,12 @@ then
 	for test_courant in $(find ./src/test/deca/context/valid/ -type f |grep \\.deca); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant"
+			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
+			test_context $test_courant 2>&1
 			exit 1
 		else
-			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
+			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant\e[37m"
+			test_context $test_courant
 		fi
 		index_file=$((index_file+1))
 	done
@@ -32,9 +34,12 @@ then
 	for test_courant in $(find ./src/test/deca/context/invalid/ -type f |grep \\.deca); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
+			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant\e[37m"
+			test_context $test_courant 2>&1
 		else
-			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant"
+			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
+			test_context $test_courant
+			test_context $test_courant >1
 			exit 1
 		fi
 		index_file=$((index_file+1))
@@ -46,7 +51,8 @@ then
 	for test_courant in $(find ./src/test/deca/context/valid/ -type f |grep \\.deca); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant"
+			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
+			test_context $test_courant 2>&1
 			exit 1
 		else
 			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
@@ -61,7 +67,8 @@ then
 		then
 			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
 		else
-			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant"
+			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
+			test_context $test_courant
 			exit 1
 		fi
 		index_file=$((index_file+1))
