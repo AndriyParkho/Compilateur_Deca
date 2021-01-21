@@ -47,5 +47,12 @@ public class ListDeclParam extends TreeList<AbstractDeclParam> {
 				iterateur.next().decompile(s);				
 			}
 	 }
+	 
+	
+	 public void codeGenListParam(DecacCompiler compiler) {
+		 for(AbstractDeclParam param : this.getList()) {
+			 //param.codeGenParam(compiler);
+		 }
+	 }
 
 }

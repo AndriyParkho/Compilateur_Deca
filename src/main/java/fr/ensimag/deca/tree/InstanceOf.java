@@ -50,6 +50,7 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		// A FAIRE
 		throw new UnsupportedOperationException("La fonction codeGenExpr n'est pas implémentée pour l'expression : InstanceOf");
 	}
 	

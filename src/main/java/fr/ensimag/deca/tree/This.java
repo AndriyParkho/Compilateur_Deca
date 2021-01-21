@@ -8,6 +8,8 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 public class This extends AbstractExpr{
 
@@ -29,7 +31,8 @@ public class This extends AbstractExpr{
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// TODO Auto-generated method stub
+		///A FAIRE : mettre dans R2 l'adresse de l'objet
+		compiler.addInstruction(new LOAD(new RegisterOffset(2, GPRegister.LB), op));
 		
 	}
 

@@ -141,13 +141,15 @@ public class DeclMethod extends AbstractDeclMethod {
 	public void codeGenMethod(DecacCompiler compiler, String nomDeLaClasse) {
 		CompilerInstruction.decorationLigne(compiler, name.getName().getName());
 		compiler.addLabel(compiler.createLabel("code."+nomDeLaClasse+"."+name.getName().getName()));
+		name.getMethodDefinition().setDebutBloc(compiler.getLastInstructionIndex());
 		compiler.addComment("Sauvegarde des registres");
 		saveRegisters(compiler);
 		compiler.addComment("Corps de la méthode");
+		paramList.codeGenListParam(compiler);
 		methodBody.codeGenMethodBody(compiler);
+		compiler.addLabel(compiler.createLabel("fin."+ nomDeLaClasse+"."+name.getName().getName()));
 		compiler.addComment("Restauration des registres");
 		restoreRegisters(compiler);
-		compiler.addLabel(compiler.createLabel("fin."+ nomDeLaClasse+"."+name.getName().getName()));
 		compiler.addInstruction(new RTS());
 	}
 	
