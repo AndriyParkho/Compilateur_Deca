@@ -3,10 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.codegen.DValGetter;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -38,7 +35,28 @@ public class Assign extends AbstractBinaryExpr {
     	Type typeGauche;
     	try {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
+    		this.getRightOperand().setType(typeGauche);
     		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
+    		if (compiler.getEnvTypes().get(compiler.getSymbolTable().create(typeGauche.getName().getName())) != null) {
+    		    if (compiler.getEnvTypes().get(compiler.getSymbolTable().create(typeGauche.getName().getName())).getType().isClass()) {
+                    ClassType left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
+                    ClassType right;
+                    if (this.getRightOperand().getClass()==New.class) {
+                        right = (ClassType) ((New) this.getRightOperand()).getType();
+                    }
+                    else {
+                        right = (ClassType) ((CastExpr) this.getRightOperand()).getType();
+                    }
+                    if (left == right) {
+                        compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                    } else if (right.isSubClassOf(left) && !left.isSubClassOf(right)) {
+                        compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                        System.out.println(compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType());
+                    } else {
+                        throw new ContextualError(String.format("%s ne peut etre cast en %s", right, left), this.getLocation());
+                    }
+                }
+            }
     	}catch (ContextualError ce) {throw ce;}
     	this.setType(typeGauche);
     	return typeGauche;

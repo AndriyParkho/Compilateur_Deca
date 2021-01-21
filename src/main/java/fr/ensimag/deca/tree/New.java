@@ -111,7 +111,4 @@ public class New extends AbstractExpr{
 		// !
 		return false;
 	}
-
-	
-	
 }

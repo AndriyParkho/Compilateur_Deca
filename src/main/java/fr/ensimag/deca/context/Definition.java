@@ -2,6 +2,8 @@ package fr.ensimag.deca.context;
 
 import fr.ensimag.deca.tree.Location;
 
+import java.security.PublicKey;
+
 /**
  * Definition of an identifier.
  * 
@@ -33,6 +35,7 @@ public abstract class Definition {
     public Type getType() {
         return type;
     }
+    public  void setType(Type type) { this.type=type; }
 
     public Location getLocation() {
         return location;

@@ -99,8 +99,8 @@ public abstract class AbstractExpr extends AbstractInst {
         	{
         		ClassType classReelle= (ClassType) typeReel;
         		ClassType classAttendue= (ClassType) expectedType;
-        		if(!classAttendue.isSubClassOf(classReelle))
-        			throw new ContextualError("les deux classes sont incompatibles",this.getLocation());
+        		if(!classReelle.isSubClassOf(classAttendue))
+        			throw new ContextualError(String.format("%s ne peut etre cast en %s", classAttendue, classReelle),this.getLocation());
         	}
     		else
     		{
@@ -122,6 +122,7 @@ public abstract class AbstractExpr extends AbstractInst {
     			throw new ContextualError("type incompatible",this.getLocation());
     		}
     	}
+		this.setType(typeReel);
     	return this;
     	
         

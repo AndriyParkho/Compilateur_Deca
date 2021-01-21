@@ -1,0 +1,15 @@
+// Description:
+//    Déclaration d'une classe dans une classe mère
+//
+// Resultats:
+//    ok
+
+class A {
+    int x;
+}
+
+class B extends A{}
+
+{
+    A x = new B();
+}
