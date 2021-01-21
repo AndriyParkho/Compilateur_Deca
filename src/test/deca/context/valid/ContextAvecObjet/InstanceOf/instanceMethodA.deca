@@ -1,0 +1,15 @@
+// Description:
+//    instance of sortie d'une méthode
+//
+// Resultats:
+//    ok
+//
+class A{
+    Object spawner(){
+        return new Object();
+    }
+}
+{
+    A a = new A();
+    boolean x = a.spawner() instanceof A;
+}

@@ -1,0 +1,13 @@
+// Description:
+//   float instance of
+//
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    float n'est pas un objet deca
+class A{
+    float x = 0;
+}
+{
+    A a = new A();
+    boolean x = a.x instanceof A;
+}

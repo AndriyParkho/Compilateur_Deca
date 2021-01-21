@@ -1,0 +1,13 @@
+// Description:
+//   test sortie instanceof != string. Non affichable
+//
+// Resultats:
+//    Erreur contextuelle ligne 12
+//    type non affichable(les types qu'on peut afficher sont int,float et string)
+class A{
+    int x = 0;
+}
+{
+    A a = new A();
+    println(a instanceof A);
+}
