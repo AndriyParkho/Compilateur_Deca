@@ -56,7 +56,7 @@ public class CastExpr extends AbstractExpr{
     	}catch(ContextualError ce) {throw ce;}
     	//il faut que le type actuel soit un sous type du type de cast 
     	//sinon le seul cas possible c'est la conversion int/float
-    	if(!(typeCast.isClass() && typeActuel.isClass() && typeActuel.sousType(typeCast)) && !(typeCast.isInt()&&typeActuel.isFloat()))
+    	if(!(typeCast.isClass() && typeActuel.isClass() && typeActuel.sousType(typeCast)) && !(typeCast.isInt()&&(typeActuel.isFloat()||typeActuel.isInt())))
     	{
     		throw new ContextualError(String.format("Un %s ne peut pas être cast dans un %s",
                     typeActuel.getName().getName(), typeCast.getName().getName()),this.getLocation());
