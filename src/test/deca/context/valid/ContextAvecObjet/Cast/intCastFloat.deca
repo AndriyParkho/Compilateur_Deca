@@ -1,0 +1,12 @@
+//Description
+//  Cast d'un float en int
+//
+//Réponse
+//  ok
+{
+    float a = 1.2;
+    int x = (int)(1.0);
+    int y = (int)(a);
+    int z = (int)(y);
+    int t = (int)(1);
+}

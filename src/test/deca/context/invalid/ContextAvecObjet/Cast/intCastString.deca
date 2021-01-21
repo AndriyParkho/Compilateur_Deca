@@ -1,0 +1,9 @@
+//Description
+//  Cast d'un string en int
+//
+//Réponse
+//  Erreur contextuelle ligne 8
+//  un string ne peut pas être cast dans un int
+{
+    int x = (int)("1");
+}

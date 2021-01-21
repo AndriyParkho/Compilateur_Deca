@@ -1,0 +1,9 @@
+//Description
+//  Cast d'un string en float
+//
+//Réponse
+//  Erreur contextuelle ligne 8
+//  un string ne peut pas être cast dans un float
+{
+    float x = (float)("1.0");
+}

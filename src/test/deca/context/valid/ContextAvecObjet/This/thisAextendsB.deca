@@ -1,0 +1,32 @@
+//Description
+//  Appel à this dans une méthode fille
+//
+//Réponse
+//  ok
+
+class A{
+    int x;
+    int setX(int x){
+        return this.x;
+    }
+
+    float calcul(int y, float z){
+        return y*z;
+    }
+}
+
+class B extends A{
+    boolean x;
+
+    float getX(int z, float y){
+        this.setX(z);
+        if (this.x){
+            return this.calcul(z,z);
+        }
+    }
+}
+
+{
+    B b = new B();
+    b.getX(0, 0);
+}
