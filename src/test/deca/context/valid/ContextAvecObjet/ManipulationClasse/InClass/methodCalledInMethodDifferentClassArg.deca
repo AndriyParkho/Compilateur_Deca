@@ -1,0 +1,28 @@
+// Description:
+//  Appel d'une méthode avec un argument dans la classe dans une méthode
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(boolean a){
+        if (a){
+            return x;
+        }
+        return 0;
+    }
+}
+
+class B{
+    A ObjetA = new A();
+    int x;
+
+    void setX(boolean a){
+        x = ObjetA.getX(a);
+    }
+}
+
+
+

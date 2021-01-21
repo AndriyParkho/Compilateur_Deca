@@ -1,0 +1,30 @@
+// Description:
+//  Appel de deux méthodes sans argument dont l'une est overrided dans un champs
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(){
+        return x;
+    }
+
+}
+
+class B extends A {
+    int getX(){
+        return -x;
+    }
+}
+
+class C{
+    A a = new A();
+    B b = new B();
+    int x = a.getX();
+    int y = b.getX();
+}
+
+
+

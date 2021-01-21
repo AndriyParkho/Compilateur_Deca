@@ -1,0 +1,25 @@
+// Description:
+//  Appel d'une méthode dans la classe dans une méthode
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(){
+        return x;
+    }
+}
+
+class B{
+    A a = new A();
+    int x;
+
+    void setX(){
+        x = a.getX();
+    }
+}
+
+
+

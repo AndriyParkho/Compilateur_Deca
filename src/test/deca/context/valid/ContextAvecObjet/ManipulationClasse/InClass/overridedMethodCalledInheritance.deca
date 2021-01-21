@@ -1,0 +1,27 @@
+// Description:
+//  Appel d'une méthode overrided sans argument dans sa version originale
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(){
+        return x;
+    }
+
+}
+
+class B extends A {
+    A a = new A();
+    int y = a.getX();
+
+    int getX(){
+        return -x;
+    }
+}
+
+
+
+

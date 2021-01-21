@@ -1,0 +1,31 @@
+// Description:
+//  Appel d'une méthode overrided avec plusieurs arguments dans sa version originale
+//
+// Resultats:
+//    ok
+
+class A {
+    int x = -1;
+
+    int getX(boolean a, int y, int y1, float z){
+        if(!a){
+            return 0;
+        }
+        return x+y1;
+    }
+
+}
+
+class B extends A {
+    A a = new A();
+    boolean b;
+    int y = a.getX(b, 0, 0, 0);
+
+    int getX(boolean a, int y, int y1, float z){
+        return -x;
+    }
+}
+
+
+
+
