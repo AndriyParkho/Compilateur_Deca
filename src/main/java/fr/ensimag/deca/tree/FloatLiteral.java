@@ -72,7 +72,7 @@ public class FloatLiteral extends AbstractExpr {
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this, compiler), op));
 		
 	}
 

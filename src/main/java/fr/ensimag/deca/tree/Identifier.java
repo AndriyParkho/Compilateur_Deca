@@ -245,12 +245,12 @@ public class Identifier extends AbstractIdentifier {
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this, compiler), op));
 	}
 	
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this, compiler), op));
 		compiler.addInstruction(new CMP(0, op));
 		if(eval) compiler.addInstruction(new BNE(etiquette));
 		else compiler.addInstruction(new BEQ(etiquette));
