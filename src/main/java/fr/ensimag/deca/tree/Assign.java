@@ -36,15 +36,17 @@ public class Assign extends AbstractBinaryExpr {
     	try {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
     		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
-    		if (compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType().isClass()) {
-                ClassType left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
-                ClassType right = (ClassType)((New)this.getRightOperand()).getType();
-                if (left == right) {
-                    compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
-                } else if (right.isSubClassOf(left) && !left.isSubClassOf(right)) {
-                    compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
-                } else {
-                    throw new ContextualError(String.format("%s ne peut etre cast en %s", right, left), this.getLocation());
+    		if (compiler.getEnvTypes().get(((Identifier) this.getLeftOperand()).getName()) != null) {
+                if (compiler.getEnvTypes().get(((Identifier) this.getLeftOperand()).getName()).getType().isClass()) {
+                    ClassType left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
+                    ClassType right = (ClassType) ((New) this.getRightOperand()).getType();
+                    if (left == right) {
+                        compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                    } else if (right.isSubClassOf(left) && !left.isSubClassOf(right)) {
+                        compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                    } else {
+                        throw new ContextualError(String.format("%s ne peut etre cast en %s", right, left), this.getLocation());
+                    }
                 }
             }
     	}catch (ContextualError ce) {throw ce;}
