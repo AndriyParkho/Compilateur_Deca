@@ -99,7 +99,7 @@ public abstract class AbstractExpr extends AbstractInst {
         	{
         		ClassType classReelle= (ClassType) typeReel;
         		ClassType classAttendue= (ClassType) expectedType;
-        		if(!classAttendue.isSubClassOf(classReelle))
+        		if(!classAttendue.isSubClassOf(classReelle) && !classReelle.isSubClassOf(classAttendue))
         			throw new ContextualError("les deux classes sont incompatibles",this.getLocation());
         	}
     		else

@@ -24,7 +24,8 @@ public class InstanceOf extends AbstractExpr{
 	public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
 		// FAIT
 		//on vérifie les deux champs et on fixe le type à boolean
-		this.type.verifyExpr(compiler, currentClass);
+
+		this.type.verifyType(compiler);
 		this.objet.verifyExpr(compiler, currentClass);
 		Type typeBool=compiler.getEnvTypes().get(compiler.getSymbolTable().create("boolean")).getType();
 		this.setType(typeBool);

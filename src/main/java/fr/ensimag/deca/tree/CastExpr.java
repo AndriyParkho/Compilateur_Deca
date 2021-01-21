@@ -52,11 +52,11 @@ public class CastExpr extends AbstractExpr{
     	Type typeCast;
     	try {
     		typeActuel=this.variable.verifyExpr(compiler, currentClass);
-        	typeCast=this.type.verifyExpr(compiler, currentClass);
+        	typeCast=this.type.verifyType(compiler);
     	}catch(ContextualError ce) {throw ce;}
     	//il faut que le type actuel soit un sous type du type de cast 
     	//sinon le seul cas possible c'est la conversion int/float
-    	if((!typeActuel.sousType(typeCast))&& !(typeActuel.isInt()&&typeCast.isFloat()))
+    	if((!typeActuel.sousType(typeCast)) && !(typeActuel.isInt()&&typeCast.isFloat()))
     	{
     		throw new ContextualError("cast impossible",this.getLocation());
     	}

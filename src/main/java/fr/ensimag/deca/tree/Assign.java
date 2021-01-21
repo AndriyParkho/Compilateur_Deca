@@ -3,10 +3,7 @@ package fr.ensimag.deca.tree;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.codegen.DValGetter;
-import fr.ensimag.deca.context.ClassDefinition;
-import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.*;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -39,6 +36,9 @@ public class Assign extends AbstractBinaryExpr {
     	try {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
     		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
+    		try{
+                ((VariableDefinition)compiler.getEnvExp().get(((Identifier)this.getLeftOperand()).getName())).setType(this.getRightOperand().getType());
+            }catch(Exception c){}
     	}catch (ContextualError ce) {throw ce;}
     	this.setType(typeGauche);
     	return typeGauche;
