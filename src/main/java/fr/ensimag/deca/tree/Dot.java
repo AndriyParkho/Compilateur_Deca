@@ -73,7 +73,7 @@ public class Dot extends AbstractLValue {
     	//vérification de la visibilité
     	//à ce stade, l'attribut est bien un field
     	FieldDefinition defField=attribut.asFieldDefinition("", this.getLocation());
-        if(defField.getVisibility()==Visibility.PROTECTED)
+        if((defField.getVisibility()==Visibility.PROTECTED )&& (currentClass.getMembers().get(this.appel.getName())==null))
         {
         	throw new ContextualError(String.format("appel impossible de %s : champs protégé", defField.getType().getName().getName()),this.getLocation());
         }
