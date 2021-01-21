@@ -1,0 +1,21 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A { }
+class B extends A { }
+class C extends B { }
+
+{	
+	A a;
+	B b;
+	a = new C();
+	if (a instanceof B) {
+		b = (B)(a);
+		println("ok");
+	}
+}
+

@@ -8,6 +8,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
 
 public class InstanceOf extends AbstractExpr{
 	
@@ -33,10 +34,15 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// TODO Auto-generated method stub
-		
+		throw new jumpException("La fonction codeGenExpr n'est pas implémentée pour l'expression : InstanceOf");
 	}
+	
 
+
+	@Override
+	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
+		// A FAIRE
+	}
 
 	@Override
 	public void decompile(IndentPrintStream s) {
