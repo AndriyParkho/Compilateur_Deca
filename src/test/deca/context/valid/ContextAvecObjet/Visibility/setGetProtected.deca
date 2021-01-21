@@ -1,0 +1,21 @@
+// Description:
+//   set et get pour un champs protégé
+//
+// Resultats:
+// ok
+//
+class A{
+	protected float x;
+	float getX(){
+		return this.x;
+	} 
+	void setX(float n){
+		this.x=n;
+	}
+}
+{
+	A a=new A();
+	float y=a.getX();
+	a.setX(12.3);
+	
+}
