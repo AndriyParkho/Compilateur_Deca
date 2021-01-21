@@ -36,9 +36,18 @@ public class Assign extends AbstractBinaryExpr {
     	try {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
     		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
-    		try{
-                ((VariableDefinition)compiler.getEnvExp().get(((Identifier)this.getLeftOperand()).getName())).setType(this.getRightOperand().getType());
-            }catch(Exception c){}
+    		if (compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType().isClass()) {
+                ClassType left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
+                ClassType right = (ClassType)((New)this.getRightOperand()).getType();
+                System.out.println("left " + left.getName().getName() +"    right " + right.getName().getName());
+                if (left == right) {
+                    compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                } else if (right.isSubClassOf(left) && !left.isSubClassOf(right)) {
+                    compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                } else {
+                    throw new ContextualError(String.format("%s ne peut etre cast en %s", right, left), this.getLocation());
+                }
+            }
     	}catch (ContextualError ce) {throw ce;}
     	this.setType(typeGauche);
     	return typeGauche;
