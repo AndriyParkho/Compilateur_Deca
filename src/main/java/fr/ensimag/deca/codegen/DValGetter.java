@@ -24,6 +24,9 @@ public class DValGetter {
 			IntLiteral intExpr = (IntLiteral) e;
 			return new ImmediateInteger(intExpr.getValue());
 		} else if(e.isIdentifier()) {
+			if(e.isMethod()) {
+				return GPRegister.R1;
+			}
 			Identifier identifierExpr = (Identifier) e;
 			Definition identifierDef = identifierExpr.getDefinition();
 			if(identifierDef.isParam()) {
@@ -35,9 +38,7 @@ public class DValGetter {
 				newIdentifierDef.setOperand(new RegisterOffset(newIdentifierDef.getIndex(), GPRegister.getR(2)));
 				return newIdentifierDef.getOperand();
 			}
-			else if(identifierDef.isMethod()){
-				return GPRegister.R1;
-			}
+
 			return identifierExpr.getVariableDefinition().getOperand();
 			
 		} else if(e.isFloatLiteral()){

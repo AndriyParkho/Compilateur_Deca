@@ -243,6 +243,10 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     public abstract boolean isIdentifier();
     
+    public boolean isMethod() {
+    	return false;
+    }
+    
 
     
     protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
