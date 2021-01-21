@@ -63,7 +63,7 @@ public class Dot extends AbstractLValue {
     	}catch(ContextualError ce) {throw ce;}
     	
     	//vérification de l'attribut (champs qui existe)
-    	ExpDefinition attribut=envLocal.get(this.appel.getName());
+    	ExpDefinition attribut=envLocal.get(compiler.getSymbolTable().create(this.appel.getName().getName()));
     	if(attribut==null || !attribut.isField())
     	{
     		throw new ContextualError(String.format("l'attribut %s n'existe pas pour la classe %s", this.appel.getName().getName(),
