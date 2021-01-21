@@ -41,7 +41,7 @@ public class Dot extends AbstractLValue {
     
     @Override
     public Type verifyExpr(DecacCompiler compiler, ClassDefinition currentClass) throws ContextualError {
-        //en cours
+        //FAIT
     	//vérification du type de l'objet 
     	Type typeObjet;
     	try {
