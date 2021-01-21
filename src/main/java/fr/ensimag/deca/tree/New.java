@@ -5,6 +5,7 @@ import java.io.PrintStream;
 import org.apache.commons.lang.Validate;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Definition;
@@ -54,7 +55,7 @@ public class New extends AbstractExpr{
 	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE : Auto-generated method stub
 		compiler.addInstruction(new NEW(identifier.getClassDefinition().getNumberOfFields() + 1, op));
-		//compiler.addInstruction(new BOV(tasPleinLabel));
+		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, "tas_plein", "Erreur : allocation impossible, tas plein")));
 		compiler.addInstruction(new LEA(identifier.getClassDefinition().getOperand(), GPRegister.R0));
 		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(0, op)));
 		compiler.addInstruction(new PUSH(op));
@@ -62,11 +63,6 @@ public class New extends AbstractExpr{
 		compiler.addInstruction(new BSR(identifier.getClassDefinition().getInitLabel()));
 		compiler.addInstruction(new POP(op));
 		compiler.decrementTempPile();
-		// Les 2 lignes suivantes doivent être commentées pour le cas de déclaration d'une variable globale : elles sont déjà STORE
-		//ça peut être problématique dans le cas d'un new dans une autre méthode.
-		//En fait non mais je tiens à laisser ma réfléxion ici en cas de problème.
-		//compiler.incrCountGB();
-		//compiler.addInstruction(new STORE(op, new RegisterOffset(compiler.getCountGB(), GPRegister.GB))); // peut etre changer en LB si on le déclare dans une classe, mais vraiment pas sûr
 	}
 
 
