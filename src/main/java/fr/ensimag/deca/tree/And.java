@@ -26,7 +26,7 @@ public class And extends AbstractOpBool {
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean evaluation, Label etiquette, GPRegister op) {
 		if(evaluation) {
-			Label finAnd = new Label("finAnd." + getLocation().getLine() + "."+getLocation().getPositionInLine());
+			Label finAnd = compiler.createLabel("finAnd." + getLocation().getLine() + "."+getLocation().getPositionInLine());
 			getLeftOperand().codeGenSaut(compiler, false, finAnd, op);
 			getRightOperand().codeGenSaut(compiler, true, etiquette, op);
 			compiler.addLabel(finAnd);
