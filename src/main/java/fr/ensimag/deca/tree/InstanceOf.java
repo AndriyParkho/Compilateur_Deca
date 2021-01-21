@@ -43,8 +43,12 @@ public class InstanceOf extends AbstractExpr{
 		this.type.verifyType(compiler);
 		this.objet.verifyExpr(compiler, currentClass);
 		try {
-			if (!this.type.getType().isClass() || !this.type.getType().isClass()) {
+			if (!this.type.getType().isClass()){
 				throw new ContextualError(String.format("%s n'est pas une instance de classe", this.type.getType().getName().getName()),
+						this.getLocation());
+			}
+			else if (!this.objet.getType().isClass()) {
+				throw new ContextualError(String.format("%s n'est pas un objet deca", this.objet.getType().getName().getName()),
 						this.getLocation());
 			}
 		}catch(ContextualError ce){throw ce;}
