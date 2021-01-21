@@ -1,0 +1,15 @@
+// Description:
+//    appel impossible d'un champs protégé hérité
+//
+// Resultats:
+//  ContextualError ligne 13
+//  appel impossible de float : champs protégé
+class A{
+	protected float x;
+}
+class B extends A{}
+class c extends b{}
+{
+	B a=new C();
+	float y=a.x;
+}
