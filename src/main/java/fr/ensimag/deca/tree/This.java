@@ -19,7 +19,7 @@ public class This extends AbstractExpr{
 		//on fait appel à this que dans une classe
 		if(currentClass == null)
 		{
-			throw new ContextualError("utilisation de this non autotrisée",this.getLocation());
+			throw new ContextualError("utilisation de this non autotrisée en dehors d'une classe",this.getLocation());
 		}
 		else
 		{
