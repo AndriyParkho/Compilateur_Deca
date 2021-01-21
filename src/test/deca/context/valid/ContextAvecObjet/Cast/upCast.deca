@@ -1,0 +1,13 @@
+//Description
+//  Test basique d'upcast
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends A{}
+
+{
+    B b = new B();
+    A a = (A)(b);
+}

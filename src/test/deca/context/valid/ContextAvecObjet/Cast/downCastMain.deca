@@ -1,0 +1,21 @@
+//Description
+//  DownCast
+//
+//Résultat
+//  ok
+
+class A{
+}
+class B extends A{
+    int un(){
+        return 1;
+    }
+}
+{
+    A a;
+    B b;
+    a = new B();
+    b = (B)(a);
+    b.un();
+}
+

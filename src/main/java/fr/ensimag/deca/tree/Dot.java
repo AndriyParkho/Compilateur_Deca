@@ -48,7 +48,7 @@ public class Dot extends AbstractLValue {
     		typeObjet=objet.verifyExpr(compiler, currentClass);
     		if(!typeObjet.isClass())
     		{
-    			throw new ContextualError("le dot est utilisable uniquement pour les instances de classe",this.getLocation());
+    			throw new ContextualError("l'appel d'attribut est utilisable uniquement pour les instances de classe",this.getLocation());
     		}
     	}catch(ContextualError ce) {throw ce;}
     	
@@ -63,10 +63,11 @@ public class Dot extends AbstractLValue {
     	}catch(ContextualError ce) {throw ce;}
     	
     	//vérification de l'attribut (champs qui existe)
-    	ExpDefinition attribut=envLocal.get(this.appel.getName());
+    	ExpDefinition attribut=envLocal.get(compiler.getSymbolTable().create(this.appel.getName().getName()));
     	if(attribut==null || !attribut.isField())
     	{
-    		throw new ContextualError("attribut non valide",this.getLocation());
+    		throw new ContextualError(String.format("l'attribut %s n'existe pas pour la classe %s", this.appel.getName().getName(),
+                    this.objet.getType().getName().getName()),this.getLocation());
     	}
     	
     	//vérification de la visibilité
@@ -74,7 +75,7 @@ public class Dot extends AbstractLValue {
     	FieldDefinition defField=attribut.asFieldDefinition("", this.getLocation());
         if(defField.getVisibility()==Visibility.PROTECTED)
         {
-        	throw new ContextualError("appel impossible d'un champs protégé",this.getLocation());
+        	throw new ContextualError(String.format("appel impossible de %s : champs protégé", defField.getType().getName().getName()),this.getLocation());
         }
         
         //si tout est bon, on fixe le type récupéré dans la définition

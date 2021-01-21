@@ -1,0 +1,22 @@
+//Description
+//  Appel d'une méthode après upcast
+//
+//Résultat
+//  ok
+
+class A{
+    int un(){
+        return 1;
+    }
+}
+class B extends A{
+    A spawner(){
+        return new A();
+    }
+}
+{
+    B b = new B();
+    A a = b.spawner();
+    a = new B();
+    a.spawner();
+}
