@@ -122,6 +122,7 @@ public abstract class AbstractExpr extends AbstractInst {
     			throw new ContextualError("type incompatible",this.getLocation());
     		}
     	}
+		this.setType(typeReel);
     	return this;
     	
         
