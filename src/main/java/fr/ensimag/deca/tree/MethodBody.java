@@ -34,7 +34,19 @@ public class MethodBody extends AbstractMethodBody {
 		//FAIT
 		this.listDeclVar.verifyListDeclVariable(compiler, currentClass);
 		this.listInst.verifyListInst(compiler, currentClass, returnType);
-	    this.setType(returnType);
+		if (!returnType.isVoid()){
+			boolean isReturn = false;
+			for (AbstractInst inst : this.listInst.getList()){
+				isReturn = inst.getClass()==Return.class;
+			}
+			try{
+				if (!isReturn){
+					throw new ContextualError(String.format("La méthode doit renvoyer un %s", returnType.getName().getName()),
+							this.getLocation());
+				}
+			}catch(ContextualError ce){throw ce;}
+		}
+		this.setType(returnType);
 	}
 	
 	@Override
