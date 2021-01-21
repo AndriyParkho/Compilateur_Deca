@@ -39,6 +39,10 @@ public class DeclClass extends AbstractDeclClass {
 	private ListDeclField fieldList;
 	
 	
+	public AbstractIdentifier getName() {
+		return name;
+	}
+	
 	public DeclClass(AbstractIdentifier name , AbstractIdentifier superClass , ListDeclMethod methodList , ListDeclField fieldList)
 	{
 		Validate.notNull(name);
@@ -164,6 +168,7 @@ public class DeclClass extends AbstractDeclClass {
 	
 	@Override
 	protected void codeGenClassBody(DecacCompiler compiler) {
+		compiler.setCurrentClass(this);
 		CompilerInstruction.decorationAssembleur(compiler, "Classe "+name.getName().getName());
 		codeGenInitClass(compiler);
 		compiler.setIsInMethod(true); //on indique au compilateur que l'on se trouve désormais dans une méthode

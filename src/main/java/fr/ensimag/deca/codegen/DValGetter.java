@@ -3,6 +3,7 @@ package fr.ensimag.deca.codegen;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.ParamDefinition;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.FloatLiteral;
@@ -29,14 +30,20 @@ public class DValGetter {
 				return ((ParamDefinition)identifierDef).getOperand();
 			}
 			else if(identifierDef.isField()) {
-				compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), compiler.getRegisterStart()));
-				return ((ExpDefinition)identifierDef).getOperand();
+				compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.getR(2)));
+				FieldDefinition newIdentifierDef = (FieldDefinition)identifierDef;
+				newIdentifierDef.setOperand(new RegisterOffset(newIdentifierDef.getIndex(), GPRegister.getR(2)));
+				return newIdentifierDef.getOperand();
+			}
+			else if(identifierDef.isMethod()){
+				return GPRegister.R1;
 			}
 			return identifierExpr.getVariableDefinition().getOperand();
+			
 		} else if(e.isFloatLiteral()){
 			FloatLiteral floatExpr = (FloatLiteral) e;
 			return new ImmediateFloat(floatExpr.getValue());
-		} else {
+		}else {
 			return null;
 		}
 	}
