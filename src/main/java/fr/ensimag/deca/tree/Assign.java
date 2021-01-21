@@ -39,7 +39,6 @@ public class Assign extends AbstractBinaryExpr {
     		if (compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType().isClass()) {
                 ClassType left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
                 ClassType right = (ClassType)((New)this.getRightOperand()).getType();
-                System.out.println("left " + left.getName().getName() +"    right " + right.getName().getName());
                 if (left == right) {
                     compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
                 } else if (right.isSubClassOf(left) && !left.isSubClassOf(right)) {
