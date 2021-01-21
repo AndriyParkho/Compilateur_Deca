@@ -1,0 +1,14 @@
+//Description
+//  test d'une méthode devant retourner un int mais ne le return pas nécessairement
+//
+//Résultat
+//  Erreur contextuelle ligne 9
+//  La méthode doit renvoyer un int
+
+class A{
+    int inutile(boolean a){
+        if (a){
+            return 1;
+        }
+    }
+}
