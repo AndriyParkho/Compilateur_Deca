@@ -46,10 +46,10 @@ public class IfThenElse extends AbstractInst {
     @Override
     protected void codeGenInst(DecacCompiler compiler)  {
         // A FAIRE : gestion du branchement conditionnel
-    	Label elseLbl = new Label("Else_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine());
+    	Label elseLbl = compiler.createLabel("Else_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine());
     	condition.codeGenSaut(compiler, false, elseLbl, compiler.getRegisterStart());
     	thenBranch.codeGenListInst(compiler);
-    	Label finIfLbl = new Label("FinIf_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine());
+    	Label finIfLbl = compiler.createLabel("FinIf_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine());
     	compiler.addInstruction(new BRA(finIfLbl));
     	
     	compiler.addLabel(elseLbl);
