@@ -12,6 +12,9 @@ import fr.ensimag.deca.context.ParamDefinition;
 import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 /**
  * Declaration of a parametre
@@ -110,5 +113,12 @@ public class DeclParam extends AbstractDeclParam {
 	protected void iterChildren(TreeFunction f) {
 	        throw new UnsupportedOperationException("Not yet supported");
 	    }
+
+	@Override
+	public void codeGenParam(DecacCompiler compiler) {
+		//compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.getR(2)));
+		
+		
+	}
 
 }

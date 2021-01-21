@@ -144,6 +144,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addComment("Sauvegarde des registres");
 		saveRegisters(compiler);
 		compiler.addComment("Corps de la méthode");
+		paramList.codeGenListParam(compiler);
 		methodBody.codeGenMethodBody(compiler);
 		compiler.addComment("Restauration des registres");
 		restoreRegisters(compiler);

@@ -1,5 +1,8 @@
 package fr.ensimag.deca.codegen;
 
+import fr.ensimag.deca.context.Definition;
+import fr.ensimag.deca.context.ExpDefinition;
+import fr.ensimag.deca.context.ParamDefinition;
 import fr.ensimag.deca.tree.AbstractExpr;
 import fr.ensimag.deca.tree.FloatLiteral;
 import fr.ensimag.deca.tree.Identifier;
@@ -17,6 +20,13 @@ public class DValGetter {
 			return new ImmediateInteger(intExpr.getValue());
 		} else if(e.isIdentifier()) {
 			Identifier identifierExpr = (Identifier) e;
+			Definition identifierDef = identifierExpr.getDefinition();
+			if(identifierDef.isParam()) {
+				return ((ParamDefinition)identifierDef).getOperand();
+			}
+			else if(identifierDef.isField()) {
+				return ((ExpDefinition)identifierDef).getOperand();
+			}
 			return identifierExpr.getVariableDefinition().getOperand();
 		} else if(e.isFloatLiteral()){
 			FloatLiteral floatExpr = (FloatLiteral) e;

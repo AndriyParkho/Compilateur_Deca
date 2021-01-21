@@ -17,5 +17,8 @@ public abstract class AbstractDeclParam extends Tree {
             throws ContextualError;
     public abstract void verifyParamBody(DecacCompiler compiler  ,EnvironmentExp lovalEnv , ClassDefinition currentClass)
             throws ContextualError;
+    
+    public abstract void codeGenParam(DecacCompiler compiler);
+
 
 }
