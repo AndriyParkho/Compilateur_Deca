@@ -117,11 +117,12 @@ public class DeclParam extends AbstractDeclParam {
 
 	@Override
 	public void codeGenParam(DecacCompiler compiler) {
-		//compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.getR(2)));	
+		// A FAIRE : ou peut-être pas	
 	}
 
 	public void setParamOperand() {
 		ParamDefinition paramDef = name.getParamDefinition();
+		System.out.println("Dans le DECLPARAM : location du paramètre " + name.getName().getName() + " " + paramDef.getLocation());
 		paramDef.setOperand(new RegisterOffset(-2 -getIndex(), Register.LB));
 	}
 }

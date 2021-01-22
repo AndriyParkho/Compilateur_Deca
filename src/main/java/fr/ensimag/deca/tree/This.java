@@ -84,8 +84,12 @@ public class This extends AbstractExpr{
 
 	@Override
 	public boolean isMethod() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean isThis() {
+		return true;
 	}
 	
 }

@@ -98,7 +98,7 @@ public class InstanceOf extends AbstractExpr{
 			}
 			
 		} else if(numeroRegistre < compiler.getNombreRegistres()) {
-			GPRegister nextOp = Register.getR(numeroRegistre + 1);
+			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
@@ -114,6 +114,7 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(equalInst);
 				currentObjetClass = currentObjetClass.getSuperClass();
 			}
+			compiler.freeRegister(nextOp);
 		}
 	}
 	
@@ -159,7 +160,7 @@ public class InstanceOf extends AbstractExpr{
 			}
 			
 		} else if(numeroRegistre < compiler.getNombreRegistres()) {
-			GPRegister nextOp = Register.getR(numeroRegistre + 1);
+			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
@@ -175,6 +176,7 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(sautInstr);
 				currentObjetClass = currentObjetClass.getSuperClass();
 			}
+			compiler.freeRegister(nextOp);
 		}
 		if(!eval) {
 			compiler.addInstruction(new BRA(etiquette));
@@ -234,6 +236,12 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public boolean isMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isThis() {
 		// TODO Auto-generated method stub
 		return false;
 	}

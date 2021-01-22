@@ -44,7 +44,9 @@ public class MethodCall extends AbstractMethodCall{
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         //réserver emplacement paramètres +1
-    	codeGenExpr(compiler, compiler.getRegisterStart());
+    	GPRegister r = compiler.getRegisterStart();
+    	codeGenExpr(compiler, r);
+    	compiler.freeRegister(r);
     }
     
     @Override
@@ -94,4 +96,11 @@ public class MethodCall extends AbstractMethodCall{
     	return true;
     }
 
+	@Override
+	public boolean isThis() {
+		return false;
+	}
+
+    
 }
+

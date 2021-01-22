@@ -153,4 +153,10 @@ public class Dot extends AbstractLValue {
 	public boolean isMethod() {
 		return false;
 	}
+
+	@Override
+	public boolean isThis() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

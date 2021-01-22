@@ -85,7 +85,7 @@ public abstract class AbstractMethodCall extends AbstractExpr{
     }
 
     @Override
-    protected void codeGenInst(DecacCompiler compiler) throws jumpException{
+    protected void codeGenInst(DecacCompiler compiler) throws JumpException{
         //A FAIRE
     }
 

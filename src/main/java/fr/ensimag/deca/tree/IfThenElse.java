@@ -6,6 +6,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 
@@ -47,7 +48,9 @@ public class IfThenElse extends AbstractInst {
     protected void codeGenInst(DecacCompiler compiler)  {
         // A FAIRE : gestion du branchement conditionnel
     	Label elseLbl = compiler.createLabel("Else_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine());
-    	condition.codeGenSaut(compiler, false, elseLbl, compiler.getRegisterStart());
+    	GPRegister r = compiler.getRegisterStart();
+    	condition.codeGenSaut(compiler, false, elseLbl, r);
+    	compiler.freeRegister(r);
     	thenBranch.codeGenListInst(compiler);
     	Label finIfLbl = compiler.createLabel("FinIf_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine());
     	compiler.addInstruction(new BRA(finIfLbl));
