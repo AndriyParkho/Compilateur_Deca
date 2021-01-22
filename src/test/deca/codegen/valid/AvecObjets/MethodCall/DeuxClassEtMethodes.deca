@@ -14,6 +14,10 @@ class A{
 	int getX(){
 		return x;
 	}
+	
+	int testA(){
+		return 5;
+	}
 }
 
 class B extends A{

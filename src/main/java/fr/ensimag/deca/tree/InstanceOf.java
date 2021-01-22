@@ -82,7 +82,7 @@ public class InstanceOf extends AbstractExpr{
 			// ON vérifie si l'objet n'est pas null
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
-			compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
 			
 			while(currentObjetClass != null) {
@@ -102,7 +102,7 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
-			compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
 			compiler.addInstruction(new CMP(nextOp, op));
 			compiler.addInstruction(equalInst);
@@ -144,7 +144,7 @@ public class InstanceOf extends AbstractExpr{
 			// ON vérifie si l'objet n'est pas null
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
-			compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
 			
 			while(currentObjetClass != null) {
@@ -164,7 +164,7 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
-			compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
 			compiler.addInstruction(new CMP(nextOp, op));
 			compiler.addInstruction(sautInstr);

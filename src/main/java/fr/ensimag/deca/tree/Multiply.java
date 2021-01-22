@@ -34,7 +34,7 @@ public class Multiply extends AbstractOpArith {
 	protected void printErrLabel(DecacCompiler compiler) {
 		String nom = "mult_overflow_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String msgError = "Erreur: Overflow pendant la multiplication ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, nom, msgError)));
+		CompilerInstruction.codeGenErreur(compiler, new BOV(CompilerInstruction.createErreurLabel(compiler, nom, msgError)));
 	}
 
 

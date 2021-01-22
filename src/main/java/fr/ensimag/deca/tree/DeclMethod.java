@@ -178,7 +178,9 @@ public class DeclMethod extends AbstractDeclMethod {
 		if(compiler.getCountLB() !=0){
 			compiler.addInstructionAfter(new ADDSP(compiler.getCountLB()), indice);
 		}
-		compiler.addInstructionAfter(new BOV(CompilerInstruction.createErreurLabel(compiler, "stack_overflow_error", "Erreur : pile pleine")), indice);
+		if(!compiler.isVerificationTest()) {
+			compiler.addInstructionAfter(new BOV(CompilerInstruction.createErreurLabel(compiler, "stack_overflow_error", "Erreur : pile pleine")), indice);
+		}
 		compiler.addInstructionAfter(new TSTO(compiler.getCountLB() + compiler.getMaxTempPileMethod()), indice);
 	}
 	
