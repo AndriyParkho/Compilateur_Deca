@@ -12,6 +12,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
@@ -207,7 +208,10 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     public abstract void codeGenExpr(DecacCompiler compiler, GPRegister op);
     
-
+    public DVal codeGenAssignDot(DecacCompiler compiler, GPRegister op) {
+    	throw new UnsupportedOperationException("L'assign de fonctionne que sur des variables globales ou des champs de classes"); 
+    }
+    
     @Override
     protected void decompileInst(IndentPrintStream s) {
         decompile(s);
