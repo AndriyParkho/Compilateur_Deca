@@ -64,6 +64,7 @@ public class DeclParam extends AbstractDeclParam {
 			this.type.setDefinition(typeDefParam);
 			this.type.setType(typeDefParam.getType());
 			ParamDefinition nameDef = new ParamDefinition(typeDefParam.getType(), this.getLocation());
+			nameDef.setIndex(this.getIndex());
 			this.name.setDefinition(nameDef);
 			this.name.setType(typeDefParam.getType());
 		}
