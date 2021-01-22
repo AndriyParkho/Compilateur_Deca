@@ -1,0 +1,27 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+
+	void printRandom(){
+		println("ça marche A");
+	}
+}
+
+class B{
+	void printRandom(){
+		println("ça marche B");
+	}
+}
+
+{
+ A a = new A();	
+ B b = new B();
+ a.printRandom();
+ b.printRandom();
+}
+

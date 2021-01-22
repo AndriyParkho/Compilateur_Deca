@@ -1,0 +1,23 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+	int x = 1;
+	int y = 1;
+	int z = 2;
+	void calculX(){
+		x = (x + y) * z;
+		println(x);
+	}
+}
+
+
+{
+A a = new A();
+a.calculX();
+}
+
