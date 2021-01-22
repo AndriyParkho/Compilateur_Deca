@@ -72,6 +72,12 @@ public class Assign extends AbstractBinaryExpr {
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		//A FAIRE
 		getRightOperand().codeGenExpr(compiler, op);
-		compiler.addInstruction(new STORE(op, (DAddr) DValGetter.getDVal(getLeftOperand(), compiler)));
+		if(getLeftOperand().isDot()) {
+			GPRegister r = compiler.getRegisterStart();
+			compiler.addInstruction(new STORE(op, (DAddr) getLeftOperand().codeGenAssignDot(compiler, r)));
+			compiler.freeRegister(r);
+		} else {
+			compiler.addInstruction(new STORE(op, (DAddr) DValGetter.getDVal(getLeftOperand(), compiler)));
+		}
 	}
 }

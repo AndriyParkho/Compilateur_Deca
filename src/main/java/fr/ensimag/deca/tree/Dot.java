@@ -17,6 +17,7 @@ import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
@@ -32,8 +33,31 @@ public class Dot extends AbstractLValue {
 
     @Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-        DVal valueDVal = DValGetter.getDVal(this, compiler);
-        compiler.addInstruction(new LOAD(valueDVal, op));
+        DVal valueDVal = DValGetter.getDVal(objet, compiler);
+        if(valueDVal == null) {
+        	objet.codeGenExpr(compiler, op);
+        } else {
+        	compiler.addInstruction(new LOAD(valueDVal, op));
+        }
+        compiler.addInstruction(new CMP(new NullOperand(), op));
+    	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+    	compiler.addInstruction(new LOAD(new RegisterOffset(getAppel().getFieldDefinition().getIndex(), op), op));
+    }
+    
+    @Override
+    public DVal codeGenAssignDot(DecacCompiler compiler, GPRegister op) {
+    	DVal valueDVal = DValGetter.getDVal(objet, compiler);
+        if(valueDVal == null) {
+        	objet.codeGenAssignDot(compiler, op);
+            compiler.addInstruction(new CMP(new NullOperand(), op));
+        	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+        	compiler.addInstruction(new LOAD(new RegisterOffset(getAppel().getFieldDefinition().getIndex(), op), op));
+        } else {
+        	compiler.addInstruction(new LOAD(valueDVal, op));
+        	compiler.addInstruction(new CMP(new NullOperand(), op));
+        	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+        }
+        return new RegisterOffset(getAppel().getFieldDefinition().getIndex(), op);
     }
     /**
      * on vérifie les points suivants:
