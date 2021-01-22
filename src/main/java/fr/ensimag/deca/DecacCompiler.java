@@ -72,6 +72,9 @@ public class DecacCompiler {
     private int tempPile = 0;
     private int maxTempPile = 0;
     
+    private int tempPileMethod = 0;
+    private int maxTempPileMethod = 0;
+    
     private boolean inMethod = false;
     
     private DeclClass currentClass;
@@ -103,11 +106,37 @@ public class DecacCompiler {
     	inMethod = newValeur;
     }
     
+    public void incementTempPileMethod() {
+    	tempPileMethod ++;
+    	if(tempPileMethod > maxTempPileMethod) {
+    		maxTempPileMethod = tempPileMethod;
+    	}
+    }
+    
+    public void decrementTempPileMethod() {
+    	tempPileMethod --;
+    }
+    
+    public void setTempPileMethod(int nouveau) {
+    	tempPileMethod = nouveau;
+    }
+    
+    public int getMaxTempPileMethod() {
+    	return maxTempPileMethod;
+    }
+    
     public void incrementTempPile() {
-    	tempPile ++;
-    	if(tempPile > maxTempPile) {
-    		maxTempPile = tempPile;
-    	}    	
+    	if(!isInMethod()) {
+	    	tempPile ++;
+	    	if(tempPile > maxTempPile) {
+	    		maxTempPile = tempPile;
+	    	}	    	
+    	}else {
+    		tempPileMethod++;
+    		if(tempPileMethod > maxTempPileMethod) {
+    			maxTempPileMethod = tempPileMethod;
+    		}
+    	}
     }
     
     public void decrementTempPile() {
@@ -120,6 +149,10 @@ public class DecacCompiler {
     
     public void setTempPile(int nouvelleValeur) {
     	tempPile = nouvelleValeur;
+    }
+    
+    public void setMaxTempPile(int nouvelleValeur) {
+    	maxTempPile = nouvelleValeur;
     }
     
     public int getCountLB() {

@@ -63,8 +63,6 @@ public class DValGetter {
 //		}
 		else if(e.isThis()){
 			return new RegisterOffset(-2, Register.LB);
-		}else if(e.isMethod()) {
-			return GPRegister.R1;
 		}
 		else {
 			return null;

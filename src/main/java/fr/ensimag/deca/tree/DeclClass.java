@@ -177,7 +177,6 @@ public class DeclClass extends AbstractDeclClass {
 		compiler.setIsInMethod(true); //on indique au compilateur que l'on se trouve désormais dans une méthode
 		//de cette manière, les variables stockées le seront dans le LB.
 		methodList.codeGenListMethod(compiler, name.getName().getName());
-		compiler.setIsInMethod(false);
 	}
 	
 	protected void codeGenInitClass(DecacCompiler compiler) {

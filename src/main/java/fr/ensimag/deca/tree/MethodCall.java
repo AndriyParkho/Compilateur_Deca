@@ -68,6 +68,9 @@ public class MethodCall extends AbstractMethodCall{
     	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
     	compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
     	compiler.addInstruction(new BSR(new RegisterOffset(getMethod().getMethodDefinition().getIndex(), op)));
+    	if(!getMethod().getDefinition().getType().isVoid()) {
+    		compiler.addInstruction(new LOAD(GPRegister.R1, op));	
+    	}
     	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
 
