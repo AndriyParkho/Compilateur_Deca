@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ import fr.ensimag.deca.tree.DeclClass;
 import fr.ensimag.deca.tree.DeclMethod;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
+import fr.ensimag.deca.tree.RegisterException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.IMAProgram;
@@ -77,6 +79,8 @@ public class DecacCompiler {
     
     private DeclClass currentClass;
     private DeclMethod currentMethod;
+    
+    private boolean[] freeRegister;
     
     public DeclClass getCurrentClass() {
     	return currentClass;
@@ -247,6 +251,9 @@ public class DecacCompiler {
         this.envExpInit();
         this.nombreRegistres = compilerOptions.getNombreRegistreMax();
         this.verificationTest = compilerOptions.isSuppressionTest();
+        this.freeRegister = new boolean[nombreRegistres - 2];
+        for(int i = 0; i < nombreRegistres - 2 ; i++)
+        	freeRegister[i] = true;
     }
 
     /**
@@ -352,18 +359,24 @@ public class DecacCompiler {
     /*
      * Premier registre où on stock le résultat des instructions 
      */
-    private GPRegister registerStart = Register.getR(2);
+//    private GPRegister registerStart = Register.getR(2);
         
     public int getNombreRegistres() {
 		return nombreRegistres;
 	}
     
     public GPRegister getRegisterStart() {
-    	return registerStart;
+    	for(int i = 0; i < nombreRegistres - 2; i++) {
+    		if(freeRegister[i]) {
+    			freeRegister[i] = false;
+    			return Register.getR(i + 2);
+    		}		
+    	}
+    	throw new RegisterException("Plus aucun registre n'est disponible");
     }
     
-    public void setRegisterStart(int newStart) {
-    	registerStart = GPRegister.getR(newStart);
+    public void freeRegister(GPRegister r) {
+    	freeRegister[r.getNumber() - 2] = true;
     }
     
 	/**

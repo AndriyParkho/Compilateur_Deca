@@ -139,8 +139,11 @@ public class DeclMethod extends AbstractDeclMethod {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		type.iter(f);
+		name.iter(f);
+		paramList.iter(f);
+		methodBody.iter(f);
+	}
 
 
 	@Override
@@ -149,6 +152,7 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	public void setParamsOperand() {
+		System.out.println("Dans le DECLMETH :" + name.getName().getName());
 		for(AbstractDeclParam param : paramList.getList()) {
 			param.setParamOperand();
 		}
@@ -181,9 +185,11 @@ public class DeclMethod extends AbstractDeclMethod {
 	private void saveRegisters(DecacCompiler compiler) {
 		compiler.incementTempPileMethod();
 		compiler.addInstruction(new PUSH(GPRegister.getR(2))); //ici on met les adresses des objets dans R2 (par défaut)
-		compiler.setRegisterStart(3); //on met les résultats des expression dans R3
+
+//		compiler.setRegisterStart(3); //on met les résultats des epxression dans R3
 		compiler.incementTempPileMethod();
-		compiler.addInstruction(new PUSH(GPRegister.getR(3)));		
+		compiler.addInstruction(new PUSH(GPRegister.getR(3)));
+		//ajouter +2 au variable pour le TSTO		
 	}
 	
 	private void restoreRegisters(DecacCompiler compiler) {
@@ -191,7 +197,13 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addInstruction(new POP(GPRegister.getR(3)));
 		compiler.decrementTempPile();
 		compiler.addInstruction(new POP(GPRegister.getR(2)));
+<<<<<<< HEAD
 		compiler.setRegisterStart(2);
 			}
+=======
+//		compiler.setRegisterStart(2);
+		//enlever 2
+	}
+>>>>>>> 1b1bc4d95bc8ab4002bb97a28c147093422c20be
 	
 }

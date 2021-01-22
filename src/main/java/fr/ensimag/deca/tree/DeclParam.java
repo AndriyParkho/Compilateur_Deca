@@ -65,6 +65,7 @@ public class DeclParam extends AbstractDeclParam {
 			this.type.setDefinition(typeDefParam);
 			this.type.setType(typeDefParam.getType());
 			ParamDefinition nameDef = new ParamDefinition(typeDefParam.getType(), this.getLocation());
+			nameDef.setIndex(this.getIndex());
 			this.name.setDefinition(nameDef);
 			this.name.setType(typeDefParam.getType());
 		}
@@ -112,16 +113,19 @@ public class DeclParam extends AbstractDeclParam {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		type.iter(f);
+		name.iter(f);
+	}
 
 	@Override
 	public void codeGenParam(DecacCompiler compiler) {
-		//compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.getR(2)));	
+		// A FAIRE : ou peut-être pas	
 	}
 
 	public void setParamOperand() {
 		ParamDefinition paramDef = name.getParamDefinition();
-		paramDef.setOperand(new RegisterOffset(-2 -getIndex(), Register.LB));
+		System.out.println("Dans le DECLPARAM : location du paramètre " + name.getName().getName() + " " + paramDef.getLocation());
+		paramDef.setOperand(new RegisterOffset(-2 - getIndex(), Register.LB));
+		System.out.println(paramDef.getOperand());
 	}
 }

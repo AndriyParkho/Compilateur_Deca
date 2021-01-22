@@ -1,7 +1,13 @@
 package fr.ensimag.deca.tree;
 
+import java.io.PrintStream;
+
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ContextualError;
+import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Register;
@@ -68,5 +74,13 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 	public boolean isMethod() {
 		return false;
 	}
+
+
+	@Override
+	public boolean isThis() {
+		return false;
+	}
+	
+	
 
 }

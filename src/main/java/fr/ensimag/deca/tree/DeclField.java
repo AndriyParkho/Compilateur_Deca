@@ -138,8 +138,10 @@ public class DeclField extends AbstractDeclField {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		name.iter(f);
+		type.iter(f);
+		initialization.iter(f);
+	}
 	
 	@Override
 	public void codeGenInitField(DecacCompiler compiler) {

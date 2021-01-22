@@ -98,6 +98,13 @@ public class StringLiteral extends AbstractStringLiteral {
     @Override
 	public boolean isMethod() {
 		return false;
+	}
+
+	@Override
+	public boolean isThis() {
+		return false;
 	}	
+    
+    
 	
 }

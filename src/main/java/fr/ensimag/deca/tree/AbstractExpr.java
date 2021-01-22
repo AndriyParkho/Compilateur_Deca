@@ -195,7 +195,9 @@ public abstract class AbstractExpr extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        this.codeGenExpr(compiler, compiler.getRegisterStart());
+    	GPRegister r = compiler.getRegisterStart();
+        this.codeGenExpr(compiler, r);
+        compiler.freeRegister(r);
     }
     
     /**
@@ -247,8 +249,10 @@ public abstract class AbstractExpr extends AbstractInst {
     
     public abstract boolean isDot();
     
+    public abstract boolean isThis();
+    
     protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-    	throw new jumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());
+    	throw new JumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());
     }
 
 }

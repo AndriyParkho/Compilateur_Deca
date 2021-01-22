@@ -24,6 +24,7 @@ import fr.ensimag.ima.pseudocode.instructions.LEA;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.SEQ;
 
 public class InstanceOf extends AbstractExpr{
 	
@@ -61,7 +62,60 @@ public class InstanceOf extends AbstractExpr{
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE
-		throw new UnsupportedOperationException("La fonction codeGenExpr n'est pas implémentée pour l'expression : InstanceOf");
+    	int numeroRegistre = op.getNumber();
+    	ClassType objetType;
+    	ClassDefinition currentObjetClass;
+    	ClassDefinition typeClass;
+    	Instruction equalInst = new SEQ(op);
+    	try {
+	    	objetType = (ClassType)objet.getType();
+	    	currentObjetClass = (ClassDefinition)objetType.getDefinition();
+    	} catch(Exception e) {
+    		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types : " + objet.getType().getName().getName());
+    	}
+    	try {
+    		typeClass = type.getClassDefinition();
+    	} catch(Exception e) {
+    		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types : " + type.getType().getName().getName());
+    	}
+		if(numeroRegistre == compiler.getNombreRegistres()) {
+			// ON vérifie si l'objet n'est pas null
+			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
+			compiler.addInstruction(new CMP(new NullOperand(), op));
+			compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+			
+			
+			while(currentObjetClass != null) {
+				compiler.addInstruction(new LEA(typeClass.getOperand(), op));
+				compiler.addInstruction(new PUSH(op));
+				compiler.incrementTempPile();
+				compiler.addInstruction(new LEA(currentObjetClass.getOperand(), Register.R0));
+				compiler.addInstruction(new POP(op));
+				compiler.decrementTempPile();
+				compiler.addInstruction(new CMP(Register.R0, op));
+				compiler.addInstruction(equalInst);
+				currentObjetClass = currentObjetClass.getSuperClass();
+			}
+			
+		} else if(numeroRegistre < compiler.getNombreRegistres()) {
+			GPRegister nextOp = compiler.getRegisterStart();
+			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
+			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
+			compiler.addInstruction(new CMP(new NullOperand(), op));
+			compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+			
+			compiler.addInstruction(new CMP(nextOp, op));
+			compiler.addInstruction(equalInst);
+			currentObjetClass = currentObjetClass.getSuperClass();
+			
+			while(currentObjetClass != null) {
+				compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
+				compiler.addInstruction(new CMP(nextOp, op));
+				compiler.addInstruction(equalInst);
+				currentObjetClass = currentObjetClass.getSuperClass();
+			}
+			compiler.freeRegister(nextOp);
+		}
 	}
 	
 
@@ -106,7 +160,7 @@ public class InstanceOf extends AbstractExpr{
 			}
 			
 		} else if(numeroRegistre < compiler.getNombreRegistres()) {
-			GPRegister nextOp = Register.getR(numeroRegistre + 1);
+			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
@@ -122,6 +176,7 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(sautInstr);
 				currentObjetClass = currentObjetClass.getSuperClass();
 			}
+			compiler.freeRegister(nextOp);
 		}
 		if(!eval) {
 			compiler.addInstruction(new BRA(etiquette));
@@ -181,6 +236,12 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	public boolean isMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isThis() {
 		// TODO Auto-generated method stub
 		return false;
 	}

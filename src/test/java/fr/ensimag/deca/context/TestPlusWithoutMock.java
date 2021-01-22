@@ -100,6 +100,12 @@ public class TestPlusWithoutMock {
 			// TODO Auto-generated method stub
 			return false;
 		}
+
+		@Override
+		public boolean isThis() {
+			// TODO Auto-generated method stub
+			return false;
+		}
     }
 
     @Test
