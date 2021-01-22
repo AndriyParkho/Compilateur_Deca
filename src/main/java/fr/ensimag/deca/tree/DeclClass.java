@@ -88,7 +88,10 @@ public class DeclClass extends AbstractDeclClass {
     		throw new ContextualError("une telle classe est déja définie",this.getLocation());
     	}
     	//on peut alors déclarer la classe et faire les set
-    	ClassType typeClass=new ClassType(this.name.getName(),this.getLocation(),superClassDef);
+		ClassType typeClass=new ClassType(this.name.getName(),this.getLocation(),superClassDef);
+		if (superClass.getType().getName().getName().equals("Object")){
+			typeClass=new ClassType(this.name.getName(),this.getLocation(),((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create("Object"))));
+		}
     	ClassDefinition defClass= typeClass.getDefinition();
     	Symbol symClass=compiler.getSymbolTable().create(this.name.getName().getName());
     	compiler.getEnvTypes().declare(symClass, defClass);
