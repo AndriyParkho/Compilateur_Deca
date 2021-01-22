@@ -40,7 +40,7 @@ public class Dot extends AbstractLValue {
         	compiler.addInstruction(new LOAD(valueDVal, op));
         }
         compiler.addInstruction(new CMP(new NullOperand(), op));
-    	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+        CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
     	compiler.addInstruction(new LOAD(new RegisterOffset(getAppel().getFieldDefinition().getIndex(), op), op));
     }
     
@@ -50,12 +50,12 @@ public class Dot extends AbstractLValue {
         if(valueDVal == null) {
         	objet.codeGenAssignDot(compiler, op);
             compiler.addInstruction(new CMP(new NullOperand(), op));
-        	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+            CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
         	compiler.addInstruction(new LOAD(new RegisterOffset(getAppel().getFieldDefinition().getIndex(), op), op));
         } else {
         	compiler.addInstruction(new LOAD(valueDVal, op));
         	compiler.addInstruction(new CMP(new NullOperand(), op));
-        	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+        	CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
         }
         return new RegisterOffset(getAppel().getFieldDefinition().getIndex(), op);
     }

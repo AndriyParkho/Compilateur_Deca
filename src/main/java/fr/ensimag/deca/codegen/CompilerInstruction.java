@@ -5,6 +5,7 @@ import fr.ensimag.deca.tree.AbstractIdentifier;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
+import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
@@ -23,27 +24,32 @@ public class CompilerInstruction {
 	
 	public static void gestionPileVariablesGlobales(DecacCompiler compiler) {		
 		compiler.addInstructionBegin(new ADDSP(compiler.getCountGB()));
-		compiler.addInstructionBegin(new BOV(createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile")));
+		if(!compiler.isVerificationTest())
+			compiler.addInstructionBegin(new BOV(createErreurLabel(compiler, "stack_overflow_error", "Erreur : débordement de pile")));
 		
         compiler.addInstructionBegin(new TSTO(compiler.getCountGB()+compiler.getTempMax()));
 	}
 	
 	public static Label createErreurLabel(DecacCompiler compiler, String nom, String errorMessage) {
-		if(compiler.isVerificationTest()) {
-			return null;
-		}
 		Label newLabelError = compiler.createLabel(nom);
-		compiler.addErrLblList(newLabelError, errorMessage);
+		if(!compiler.isVerificationTest()) {
+			compiler.addErrLblList(newLabelError, errorMessage);
+		}
 		return newLabelError;
 	}
 	
 	public static void labelErreurGeneration(DecacCompiler compiler, Label newLabelError, String errorMessage) {
-        
         decorationAssembleur(compiler, errorMessage);
         compiler.addLabel(newLabelError);
         compiler.addInstruction(new WSTR(errorMessage));
         compiler.addInstruction(new WNL());
         compiler.addInstruction(new ERROR());
+	}
+	
+	public static void codeGenErreur(DecacCompiler compiler, Instruction errInstr) {
+		if(!compiler.isVerificationTest()) {
+			compiler.addInstruction(errInstr);
+		}
 	}
 	
 	public static void decorationAssembleur(DecacCompiler compiler, String message) {

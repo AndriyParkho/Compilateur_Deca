@@ -63,7 +63,7 @@ public class CastExpr extends AbstractExpr{
         	Label errLbl = CompilerInstruction.createErreurLabel(compiler, "cast_error_" + getLocation().getLine() + "_" + getLocation().getPositionInLine(),  errMsg);
         	Label castLbl = compiler.createLabel("cast_" + getLocation().getLine() + "_" + getLocation().getPositionInLine());
         	testCmpClass.codeGenSaut(compiler, true, castLbl, op);
-        	compiler.addInstruction(new BRA(errLbl));
+        	CompilerInstruction.codeGenErreur(compiler, new BRA(errLbl));
         	compiler.addLabel(castLbl);
         	variable.codeGenExpr(compiler, op);
         }

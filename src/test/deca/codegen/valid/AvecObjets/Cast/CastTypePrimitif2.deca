@@ -1,0 +1,17 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    7
+//    5.0
+
+{	
+	int x = 5;
+	int a = 7;
+	float y = 1.5;
+	int b = (int) (y/0.2);
+	float c = (float) ((7*x)/a);
+	println(b);
+	println(c);
+}
+

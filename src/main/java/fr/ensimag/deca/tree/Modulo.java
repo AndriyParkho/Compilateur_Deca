@@ -58,7 +58,7 @@ public class Modulo extends AbstractOpArith {
 		if(this.getType().isFloat()) zero = "0.0";
 		String nom = "zero_modulo_error_" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String msgError = "Erreur: Modulo par " + zero + " non autorisé ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, nom, msgError)));
+		CompilerInstruction.codeGenErreur(compiler, new BOV(CompilerInstruction.createErreurLabel(compiler, nom, msgError)));
 	}
 
 	@Override

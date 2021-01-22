@@ -58,7 +58,7 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 		
 		String nomErr = "io_error" + this.getLocation().getLine() + "_" + this.getLocation().getPositionInLine();
 		String errorMessage = "Erreur : Input/Output erreur ligne " + this.getLocation().getLine() + " position " + this.getLocation().getPositionInLine();
-		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, nomErr, errorMessage)));
+		CompilerInstruction.codeGenErreur(compiler, new BOV(CompilerInstruction.createErreurLabel(compiler, nomErr, errorMessage)));
 		
 		compiler.addInstruction(new LOAD(Register.R1, op));
 	}

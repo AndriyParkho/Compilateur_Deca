@@ -51,16 +51,6 @@ public class DValGetter {
 			FloatLiteral floatExpr = (FloatLiteral) e;
 			return new ImmediateFloat(floatExpr.getValue());
 		}
-//		else if(e.isDot()){
-//			Dot dot = (Dot) e;
-//			DVal objetDVal = DValGetter.getDVal(dot.getObjet(), compiler);
-//			GPRegister r = compiler.getRegisterStart();
-//	    	compiler.addInstruction(new LOAD(objetDVal, r));
-//	    	compiler.addInstruction(new CMP(new NullOperand(), r));
-//	    	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
-//	    	compiler.freeRegister(r);
-//			return new RegisterOffset(dot.getAppel().getFieldDefinition().getIndex(), r);
-//		}
 		else if(e.isThis()){
 			return new RegisterOffset(-2, Register.LB);
 		}

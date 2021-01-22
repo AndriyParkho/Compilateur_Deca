@@ -55,7 +55,7 @@ public class New extends AbstractExpr{
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE : Auto-generated method stub
 		compiler.addInstruction(new NEW(identifier.getClassDefinition().getNumberOfFields() + 1, op));
-		compiler.addInstruction(new BOV(CompilerInstruction.createErreurLabel(compiler, "tas_plein", "Erreur : allocation impossible, tas plein")));
+		CompilerInstruction.codeGenErreur(compiler, new BOV(CompilerInstruction.createErreurLabel(compiler, "tas_plein", "Erreur : allocation impossible, tas plein")));
 		compiler.addInstruction(new LEA(identifier.getClassDefinition().getOperand(), GPRegister.R0));
 		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(0, op)));
 		compiler.addInstruction(new PUSH(op));
