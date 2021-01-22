@@ -1,0 +1,45 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+	int x = 5;
+	int y;
+	int z;
+	int louis = 100*100;
+	
+	int getX(){
+		return x;
+	}
+}
+
+class B extends A{
+ 	int y = 9;
+ 	int x = 10;
+ 	float a;
+ 	float b = 12.4;
+ 	
+ 	
+ 	float testB(int c){
+ 		return a + b + x;
+ 	}
+ 	
+ 	int getX(){
+ 		return x - 20;
+ 	}
+}
+
+{
+	A testA = new A();
+	B xB = new B();
+	float d;
+	
+	println(testA.getX());
+	println(xB.getX());
+	d = xB.testB(6);
+	println(d);
+}
+
