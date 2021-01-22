@@ -1,0 +1,23 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+	int x = 5;
+	
+	int getX(){
+	return x;
+	}
+}
+
+{
+A a = new A();
+int y ;
+y = 10 + a.getX() + 5;
+println(y);
+println(a.getX());
+}
+
