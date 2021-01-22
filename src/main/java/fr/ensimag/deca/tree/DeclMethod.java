@@ -70,9 +70,9 @@ public class DeclMethod extends AbstractDeclMethod {
 		int indice=index;
 		if(defClassMere!=null && defClassMere.isMethod())
 		{
-			MethodDefinition superMethodDef=(MethodDefinition)defClassMere;
-			indice=superMethodDef.getIndex();
+				indice=((MethodDefinition)defClassMere).getIndex();
 		}
+		
 		//on fait la définition avec le bon indice
 		MethodDefinition methodDef = new MethodDefinition(typeRetour, this.getLocation(), new Signature(), indice);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
