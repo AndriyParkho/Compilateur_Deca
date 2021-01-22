@@ -29,9 +29,9 @@ public class DValGetter {
 			IntLiteral intExpr = (IntLiteral) e;
 			return new ImmediateInteger(intExpr.getValue());
 		} else if(e.isIdentifier()) {
-			if(e.isMethod()) {
-				return GPRegister.R1;
-			}
+			//if(e.isMethod()) {
+			//	return GPRegister.R1;
+			//}
 			Identifier identifierExpr = (Identifier) e;
 			Definition identifierDef = identifierExpr.getDefinition();
 			if(identifierDef.isParam()) {
