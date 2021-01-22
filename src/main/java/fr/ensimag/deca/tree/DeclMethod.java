@@ -197,13 +197,9 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addInstruction(new POP(GPRegister.getR(3)));
 		compiler.decrementTempPile();
 		compiler.addInstruction(new POP(GPRegister.getR(2)));
-<<<<<<< HEAD
-		compiler.setRegisterStart(2);
-			}
-=======
+
 //		compiler.setRegisterStart(2);
 		//enlever 2
 	}
->>>>>>> 1b1bc4d95bc8ab4002bb97a28c147093422c20be
 	
 }

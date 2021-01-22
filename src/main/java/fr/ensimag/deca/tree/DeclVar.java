@@ -99,7 +99,6 @@ public class DeclVar extends AbstractDeclVar {
     protected void codeGenDeclVar(DecacCompiler compiler) {
     	// A FAIRE : Fonction non fini pour l'instant
     	DAddr varOperand;
-    	System.out.println("On est dans une méthode : "+compiler.isInMethod());
     	if(!compiler.isInMethod()) {
 	    	compiler.incrCountGB();
 	    	varOperand = new RegisterOffset(compiler.getCountGB(), Register.GB);
