@@ -98,5 +98,11 @@ public class IntLiteral extends AbstractExpr {
 		return false;
 	}
 
+	@Override
+	public boolean isThis() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 }

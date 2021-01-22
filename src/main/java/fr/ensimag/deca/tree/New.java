@@ -60,8 +60,12 @@ public class New extends AbstractExpr{
 		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(0, op)));
 		compiler.addInstruction(new PUSH(op));
 		compiler.incrementTempPile();
+		compiler.incrementTempPile();
+		compiler.incrementTempPile();
 		compiler.addInstruction(new BSR(identifier.getClassDefinition().getInitLabel()));
 		compiler.addInstruction(new POP(op));
+		compiler.decrementTempPile();
+		compiler.decrementTempPile();
 		compiler.decrementTempPile();
 	}
 
@@ -116,6 +120,12 @@ public class New extends AbstractExpr{
 
 	@Override
 	public boolean isMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isThis() {
 		// TODO Auto-generated method stub
 		return false;
 	}

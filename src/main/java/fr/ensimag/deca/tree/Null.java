@@ -80,5 +80,11 @@ public class Null extends AbstractExpr{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean isThis() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }

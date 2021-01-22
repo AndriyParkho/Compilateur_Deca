@@ -87,10 +87,11 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			compiler.decrementTempPile();
     			compiler.addInstruction(this.getMnemo(Register.R0, op));
     		} else if(n < compiler.getNombreRegistres()) {
-    			GPRegister nextOp = Register.getR(n + 1);
     			getLeftOperand().codeGenExpr(compiler, op);
+    			GPRegister nextOp = compiler.getRegisterStart();
         		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(this.getMnemo(nextOp, op));
+        		compiler.freeRegister(nextOp);
     		}else {
     			throw new UnsupportedOperationException("Mauvais registre");
     		}

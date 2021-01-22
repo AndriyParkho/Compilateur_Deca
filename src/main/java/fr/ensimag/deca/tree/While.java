@@ -10,6 +10,7 @@ import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
 
@@ -45,8 +46,9 @@ public class While extends AbstractInst {
     	compiler.addLabel(debutWhile);
         body.codeGenListInst(compiler);
         compiler.addLabel(finWhile);
-        condition.codeGenSaut(compiler, true, debutWhile, compiler.getRegisterStart());
-    	
+        GPRegister r = compiler.getRegisterStart();
+        condition.codeGenSaut(compiler, true, debutWhile, r);
+        compiler.freeRegister(r);
     }
 
     @Override

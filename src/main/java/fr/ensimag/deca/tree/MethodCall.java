@@ -44,7 +44,9 @@ public class MethodCall extends AbstractMethodCall{
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
         //réserver emplacement paramètres +1
-    	codeGenExpr(compiler, compiler.getRegisterStart());
+    	GPRegister r = compiler.getRegisterStart();
+    	codeGenExpr(compiler, r);
+    	compiler.freeRegister(r);
     }
     
     @Override
@@ -66,6 +68,9 @@ public class MethodCall extends AbstractMethodCall{
     	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
     	compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
     	compiler.addInstruction(new BSR(new RegisterOffset(getMethod().getMethodDefinition().getIndex(), op)));
+    	if(!getMethod().getDefinition().getType().isVoid()) {
+    		compiler.addInstruction(new LOAD(GPRegister.R1, op));	
+    	}
     	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
 
@@ -87,11 +92,18 @@ public class MethodCall extends AbstractMethodCall{
 
     @Override
     public boolean isIdentifier() {
-        return true;
+        return false;
     }
     
     public boolean isMethod() {
     	return true;
     }
 
+	@Override
+	public boolean isThis() {
+		return false;
+	}
+
+    
 }
+

@@ -7,7 +7,6 @@ import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.BooleanType;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
-import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
@@ -107,10 +106,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(this.getMnemo(op));
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres()) {
-    			GPRegister nextOp = Register.getR(numeroRegistre + 1);
+    			GPRegister nextOp = compiler.getRegisterStart();
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(new CMP(nextOp, op), "Afin de tester "+getOperatorName());
+        		compiler.freeRegister(nextOp);
         		compiler.addInstruction(this.getMnemo(op));
     		}
     	}
@@ -138,10 +138,11 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(sautInstr);
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres()) {
-    			GPRegister nextOp = Register.getR(op.getNumber() + 1);
+    			GPRegister nextOp = compiler.getRegisterStart();
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
         		compiler.addInstruction(new CMP(nextOp, op));
+        		compiler.freeRegister(nextOp);
         		compiler.addInstruction(sautInstr);
     		}
     	}

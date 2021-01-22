@@ -98,6 +98,12 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
 	public boolean isMethod() {
 		return false;
 	}
+
+	@Override
+	public boolean isThis() {
+		return false;
+	}
+	
 	
 	
 }

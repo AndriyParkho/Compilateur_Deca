@@ -16,7 +16,13 @@ class B{
 
 {
 	B b = new B();
+	int z = b.y + b.a.x*b.a.x;
 	println(b.a.x);
 	println(b.y + b.a.x);
+	println(z);
+	b.y = 10;
+	println(b.y);
+	b.a.x = 6;
+	println(b.a.x);
 }
 

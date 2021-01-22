@@ -13,6 +13,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
+import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.ImmediateFloat;
 import fr.ensimag.ima.pseudocode.ImmediateInteger;
 import fr.ensimag.ima.pseudocode.Register;
@@ -108,13 +109,15 @@ public class DeclVar extends AbstractDeclVar {
     	}
     	VariableDefinition varDef = varName.getVariableDefinition();
     	varDef.setOperand(varOperand);
+    	GPRegister r = compiler.getRegisterStart();
     	if(initialization.isInitialization()) {
     		Initialization init = (Initialization) initialization;
-    		init.getExpression().codeGenInst(compiler);
+    		init.getExpression().codeGenExpr(compiler, r);
     	} 
     	else {
-    		CompilerInstruction.initVarToZero(compiler, type, compiler.getRegisterStart());
+    		CompilerInstruction.initVarToZero(compiler, type, r);
     	}
-    	compiler.addInstruction(new STORE(compiler.getRegisterStart(), varOperand));
+    	compiler.addInstruction(new STORE(r, varOperand));
+    	compiler.freeRegister(r);
     }
 }

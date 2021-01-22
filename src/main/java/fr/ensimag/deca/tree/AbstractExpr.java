@@ -12,6 +12,7 @@ import fr.ensimag.deca.context.EnvironmentExp;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
@@ -195,7 +196,9 @@ public abstract class AbstractExpr extends AbstractInst {
 
     @Override
     protected void codeGenInst(DecacCompiler compiler) {
-        this.codeGenExpr(compiler, compiler.getRegisterStart());
+    	GPRegister r = compiler.getRegisterStart();
+        this.codeGenExpr(compiler, r);
+        compiler.freeRegister(r);
     }
     
     /**
@@ -205,7 +208,10 @@ public abstract class AbstractExpr extends AbstractInst {
      */
     public abstract void codeGenExpr(DecacCompiler compiler, GPRegister op);
     
-
+    public DVal codeGenAssignDot(DecacCompiler compiler, GPRegister op) {
+    	throw new UnsupportedOperationException("L'assign de fonctionne que sur des variables globales ou des champs de classes"); 
+    }
+    
     @Override
     protected void decompileInst(IndentPrintStream s) {
         decompile(s);
@@ -247,8 +253,10 @@ public abstract class AbstractExpr extends AbstractInst {
     
     public abstract boolean isDot();
     
+    public abstract boolean isThis();
+    
     protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-    	throw new jumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());
+    	throw new JumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());
     }
 
 }

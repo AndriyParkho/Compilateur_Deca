@@ -19,9 +19,12 @@ import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.ADDSP;
+import fr.ensimag.ima.pseudocode.instructions.BOV;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
+import fr.ensimag.ima.pseudocode.instructions.TSTO;
 
 /**
  * Declaration of a method
@@ -149,15 +152,19 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	public void setParamsOperand() {
+		System.out.println("Dans le DECLMETH :" + name.getName().getName());
 		for(AbstractDeclParam param : paramList.getList()) {
 			param.setParamOperand();
 		}
 	}
 	
 	public void codeGenMethod(DecacCompiler compiler, String nomDeLaClasse) {
+		compiler.setMaxTempPile(0);
+		compiler.setTempPileMethod(0);
 		compiler.setCurrentMethod(this);
 		CompilerInstruction.decorationLigne(compiler, name.getName().getName());
 		compiler.addLabel(compiler.createLabel("code."+nomDeLaClasse+"."+name.getName().getName()));
+		int indice = compiler.getLastInstructionIndex();
 		name.getMethodDefinition().setDebutBloc(compiler.getLastInstructionIndex());
 		compiler.addComment("Sauvegarde des registres");
 		saveRegisters(compiler);
@@ -168,19 +175,30 @@ public class DeclMethod extends AbstractDeclMethod {
 		compiler.addComment("Restauration des registres");
 		restoreRegisters(compiler);
 		compiler.addInstruction(new RTS());
+		if(compiler.getCountLB() !=0){
+			compiler.addInstructionAfter(new ADDSP(compiler.getCountLB()), indice);
+		}
+		compiler.addInstructionAfter(new BOV(CompilerInstruction.createErreurLabel(compiler, "stack_overflow_error", "Erreur : pile pleine")), indice);
+		compiler.addInstructionAfter(new TSTO(compiler.getCountLB() + compiler.getMaxTempPileMethod()), indice);
 	}
 	
 	private void saveRegisters(DecacCompiler compiler) {
+		compiler.incementTempPileMethod();
 		compiler.addInstruction(new PUSH(GPRegister.getR(2))); //ici on met les adresses des objets dans R2 (par défaut)
-		compiler.setRegisterStart(3); //on met les résultats des epxression dans R3
+
+//		compiler.setRegisterStart(3); //on met les résultats des epxression dans R3
+		compiler.incementTempPileMethod();
 		compiler.addInstruction(new PUSH(GPRegister.getR(3)));
 		//ajouter +2 au variable pour le TSTO		
 	}
 	
 	private void restoreRegisters(DecacCompiler compiler) {
+		compiler.decrementTempPile();
 		compiler.addInstruction(new POP(GPRegister.getR(3)));
+		compiler.decrementTempPile();
 		compiler.addInstruction(new POP(GPRegister.getR(2)));
-		compiler.setRegisterStart(2);
+
+//		compiler.setRegisterStart(2);
 		//enlever 2
 	}
 	

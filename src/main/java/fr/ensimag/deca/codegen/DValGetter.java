@@ -29,18 +29,19 @@ public class DValGetter {
 			IntLiteral intExpr = (IntLiteral) e;
 			return new ImmediateInteger(intExpr.getValue());
 		} else if(e.isIdentifier()) {
-			if(e.isMethod()) {
-				return GPRegister.R1;
-			}
 			Identifier identifierExpr = (Identifier) e;
 			Definition identifierDef = identifierExpr.getDefinition();
 			if(identifierDef.isParam()) {
-				return ((ParamDefinition)identifierDef).getOperand();
+				ParamDefinition paramDef = (ParamDefinition)identifierDef;
+				System.out.println("Dans le DVAL : location du paramètre " + paramDef.getLocation());
+				return paramDef.getOperand();
 			}
 			else if(identifierDef.isField()) {
-				compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.getR(2)));
+				GPRegister r = compiler.getRegisterStart();
+				compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), r));
 				FieldDefinition newIdentifierDef = (FieldDefinition)identifierDef;
-				newIdentifierDef.setOperand(new RegisterOffset(newIdentifierDef.getIndex(), GPRegister.getR(2)));
+				newIdentifierDef.setOperand(new RegisterOffset(newIdentifierDef.getIndex(), r));
+				compiler.freeRegister(r);
 				return newIdentifierDef.getOperand();
 			}
 
@@ -49,13 +50,19 @@ public class DValGetter {
 		} else if(e.isFloatLiteral()){
 			FloatLiteral floatExpr = (FloatLiteral) e;
 			return new ImmediateFloat(floatExpr.getValue());
-		}else if(e.isDot()){
-			Dot dot = (Dot) e;
-			DVal objetDVal = DValGetter.getDVal(dot.getObjet(), compiler);
-	    	compiler.addInstruction(new LOAD(objetDVal, Register.getR(3)));
-	    	compiler.addInstruction(new CMP(new NullOperand(), Register.getR(3)));
-	    	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
-			return new RegisterOffset(dot.getAppel().getFieldDefinition().getIndex(), Register.getR(3));
+		}
+//		else if(e.isDot()){
+//			Dot dot = (Dot) e;
+//			DVal objetDVal = DValGetter.getDVal(dot.getObjet(), compiler);
+//			GPRegister r = compiler.getRegisterStart();
+//	    	compiler.addInstruction(new LOAD(objetDVal, r));
+//	    	compiler.addInstruction(new CMP(new NullOperand(), r));
+//	    	compiler.addInstruction(new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+//	    	compiler.freeRegister(r);
+//			return new RegisterOffset(dot.getAppel().getFieldDefinition().getIndex(), r);
+//		}
+		else if(e.isThis()){
+			return new RegisterOffset(-2, Register.LB);
 		}
 		else {
 			return null;

@@ -55,7 +55,7 @@ public class Return extends AbstractInst{
 		this.returnExpr.setType(returnType);
 	}
 	@Override
-	protected void codeGenInst(DecacCompiler compiler) throws jumpException {
+	protected void codeGenInst(DecacCompiler compiler) throws JumpException {
 		returnExpr.codeGenExpr(compiler, GPRegister.R1);
 		compiler.addInstruction(new BRA(compiler.createLabel("fin."+CompilerInstruction.currentClassMethodString(compiler))));
 		compiler.addInstruction(new WSTR("Erreur : sortie de la méthode "+CompilerInstruction.currentClassMethodString(compiler) + " sans return"));

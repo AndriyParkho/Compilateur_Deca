@@ -5,14 +5,20 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.MethodDefinition;
 import fr.ensimag.ima.pseudocode.GPRegister;
-import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
+import fr.ensimag.ima.pseudocode.instructions.BNE;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
 import fr.ensimag.ima.pseudocode.instructions.CMP;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.LOAD;
+import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
+import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 public class InitObjectClass {
 
@@ -45,15 +51,31 @@ public class InitObjectClass {
 		compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.getR(2))); //adresse de l'objet dans R2
 		compiler.addInstruction(new LOAD(new RegisterOffset(-3, GPRegister.LB), GPRegister.getR(3)));
 		compiler.addInstruction(new CMP(GPRegister.getR(2), GPRegister.getR(3)));
-		//compiler.addInstruction(new BNE(compiler.createLabel(null)));
+		compiler.addInstruction(new BNE(compiler.createLabel("object.notEqual")));
 		//set RO a true
+		compiler.addInstruction(new LOAD(1, GPRegister.R1));
 		//BRA fin
+		compiler.addInstruction(new BRA(compiler.createLabel("fin.Object.equals")));
 		//partie erreur sortie sans return
+		compiler.addInstruction(new WSTR("Erreur : sortie de la méthode Object.equals sans return"));
+		compiler.addInstruction(new WNL());
+		compiler.addInstruction(new ERROR());
 		//label faux
+		compiler.addLabel(compiler.createLabel("object.notEqual"));
 		//set R0 a false
+		compiler.addInstruction(new LOAD(0, GPRegister.R1));
 		//BRA fin
+		compiler.addInstruction(new BRA(compiler.createLabel("fin.Object.equals")));
 		//partie erreur sortie sans return
+		compiler.addInstruction(new WSTR("Erreur : sortie de la méthode Object.equals sans return"));
+		compiler.addInstruction(new WNL());
+		compiler.addInstruction(new ERROR());
 		//label fin
+		compiler.addLabel(compiler.createLabel("fin.Object.equals"));
 		//RTS
+
+		compiler.addInstruction(new POP(GPRegister.getR(2)));
+		compiler.addInstruction(new POP(GPRegister.getR(3)));
+		compiler.addInstruction(new RTS());
 	}
 }
