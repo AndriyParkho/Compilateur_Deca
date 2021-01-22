@@ -1,0 +1,21 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+	int x = 0;
+	void setX(int b){
+		x = b;
+		println(x);
+	}
+}
+
+
+{
+A a = new A();
+a.setX(2);
+}
+

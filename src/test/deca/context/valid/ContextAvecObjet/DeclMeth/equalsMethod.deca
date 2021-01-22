@@ -1,0 +1,20 @@
+//Description
+//  Test appel equals method dans une méthode
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends Object{}
+class C extends A{
+    void test(Object a, D d){
+        this.equals(this);
+        this.equals(a);
+        this.equals(d);
+    }
+}
+class D extends B{
+    boolean equals(Object obj){
+        return true;
+    }
+}
