@@ -51,8 +51,9 @@ public class MethodBody extends AbstractMethodBody {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		listInst.iter(f);
+		listDeclVar.iter(f);
+	}
 	
 	public void codeGenMethodBody(DecacCompiler compiler) {
 		listDeclVar.codeGenListDeclVar(compiler);

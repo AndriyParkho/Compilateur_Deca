@@ -136,8 +136,11 @@ public class DeclMethod extends AbstractDeclMethod {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		type.iter(f);
+		name.iter(f);
+		paramList.iter(f);
+		methodBody.iter(f);
+	}
 
 
 	@Override

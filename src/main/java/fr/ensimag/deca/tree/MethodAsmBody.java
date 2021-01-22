@@ -44,8 +44,8 @@ public class MethodAsmBody extends AbstractMethodBody {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		string.iter(f);
+	}
 
 
 	@Override
