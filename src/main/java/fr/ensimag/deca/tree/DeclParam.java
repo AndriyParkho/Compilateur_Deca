@@ -81,7 +81,7 @@ public class DeclParam extends AbstractDeclParam {
             throws ContextualError{
 		//FAIT
 		Symbol paramSymbol= compiler.getSymbolTable().create(this.name.getName().getName());
-		ParamDefinition defParam= new ParamDefinition(this.type.getType(),this.name.getLocation());
+		ParamDefinition defParam= this.name.getParamDefinition();	
 		//si le nom n'existe pas deja dans l'environnement, on ajoute e paramètre
 		//sinon on lève une exception de double définition
 		try {
