@@ -45,7 +45,9 @@ public abstract class AbstractMethodCall extends AbstractExpr{
         }catch (ContextualError ce){throw ce;}
         if (variable.getType().isClass()){
             if (((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName())))
-                    .getMembers().get(compiler.getSymbolTable().create(method.getName().getName())) == null) {
+                    .getMembers().get(compiler.getSymbolTable().create(method.getName().getName())) == null &&
+                    ((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName())))
+                            .getMembers().get(method.getName()) == null) {
                 throw new ContextualError(String.format("La méthode %s n'existe pas pour la classe %s",
                         method.getName().getName(), variable.getType().getName().getName()), variable.getLocation());
             }
