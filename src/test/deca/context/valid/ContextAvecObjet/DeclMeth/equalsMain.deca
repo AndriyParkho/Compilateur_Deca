@@ -1,0 +1,52 @@
+//Description
+//  Test appel equals method dans un main
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends Object{}
+class C extends A{}
+class D extends B{
+    boolean equals(Object obj){
+        return true;
+    }
+}
+
+{
+    Object o = new Object();
+    A a = new A();
+    B b = new B();
+    C c = new C();
+    D d = new D();
+
+    o.equals(o);
+    o.equals(a);
+    o.equals(b);
+    o.equals(c);
+    o.equals(d);
+
+    a.equals(o);
+    a.equals(a);
+    a.equals(b);
+    a.equals(c);
+    a.equals(d);
+
+    b.equals(o);
+    b.equals(a);
+    b.equals(b);
+    b.equals(c);
+    b.equals(d);
+
+    c.equals(o);
+    c.equals(a);
+    c.equals(b);
+    c.equals(c);
+    c.equals(d);
+
+    d.equals(o);
+    d.equals(a);
+    d.equals(b);
+    d.equals(c);
+    d.equals(d);
+}

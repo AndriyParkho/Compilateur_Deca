@@ -1,0 +1,59 @@
+// Description:
+//    Déclaration de méthode après plusieurs extends
+//
+// Resultats:
+//    ok
+
+class A {
+    int x(){
+        return 1;
+    }
+    float y(){
+        return 1.0;
+    }
+    boolean a(){
+        return true;
+    }
+}
+
+class B extends A{}
+class C extends B{}
+class D extends C{}
+class E extends D{}
+class F extends E{}
+{
+    F f = new F();
+    E e = new E();
+    D d = new D();
+    C c = new C();
+    B b = new B();
+    A a = new A();
+
+    int x;
+    float y;
+    boolean A;
+
+    x = f.x();
+    y = f.y();
+    A = f.a();
+
+    x = e.x();
+    y = e.y();
+    A = e.a();
+
+    x = d.x();
+    y = d.y();
+    A = d.a();
+
+    x = c.x();
+    y = c.y();
+    A = c.a();
+
+    x = b.x();
+    y = b.y();
+    A = b.a();
+
+    x = a.x();
+    y = a.y();
+    A = a.a();
+}
