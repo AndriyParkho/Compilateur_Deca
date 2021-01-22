@@ -47,12 +47,9 @@ public class Assign extends AbstractBinaryExpr {
                     else {
                         right = (ClassType) ((CastExpr) this.getRightOperand()).getType();
                     }
-                    if (left == right) {
+                    if (left == right || right.isSubClassOf(left) && !left.isSubClassOf(right)) {
                         compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
-                    } else if (right.isSubClassOf(left) && !left.isSubClassOf(right)) {
-                        compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
-                        System.out.println(compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType());
-                    } else {
+                    }else {
                         throw new ContextualError(String.format("%s ne peut etre cast en %s", right, left), this.getLocation());
                     }
                 }

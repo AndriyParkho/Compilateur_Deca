@@ -2,8 +2,7 @@
 //  Cast d'un float en float
 //
 //Réponse
-//  Erreur contextuelle ligne 9
-//  un float ne peut pas être casts
+//  ok
 {
     float a = 1.0;
     float x = (float)(a);
