@@ -2,8 +2,7 @@
 //  Cast d'un int en float
 //
 //Réponse
-//  Erreur contextuelle ligne 9
-//  un int ne peut pas être cast dans un float
+//  ok
 {
     int a = 1;
     float x = (float)(a);
