@@ -65,6 +65,7 @@ public class DeclParam extends AbstractDeclParam {
 			this.type.setDefinition(typeDefParam);
 			this.type.setType(typeDefParam.getType());
 			ParamDefinition nameDef = new ParamDefinition(typeDefParam.getType(), this.getLocation());
+			nameDef.setIndex(this.getIndex());
 			this.name.setDefinition(nameDef);
 			this.name.setType(typeDefParam.getType());
 		}
@@ -112,8 +113,9 @@ public class DeclParam extends AbstractDeclParam {
 
 	@Override
 	protected void iterChildren(TreeFunction f) {
-	        throw new UnsupportedOperationException("Not yet supported");
-	    }
+		type.iter(f);
+		name.iter(f);
+	}
 
 	@Override
 	public void codeGenParam(DecacCompiler compiler) {

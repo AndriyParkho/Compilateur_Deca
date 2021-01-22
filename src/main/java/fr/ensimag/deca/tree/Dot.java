@@ -78,11 +78,11 @@ public class Dot extends AbstractLValue {
     	//à ce stade, l'attribut est bien un field
     	FieldDefinition defField=attribut.asFieldDefinition("", this.getLocation());
     	if (defField.getVisibility()==Visibility.PROTECTED && currentClass == null){
-            throw new ContextualError(String.format("appel impossible de %s : champs protégé", defField.getType().getName().getName()),this.getLocation());
+            throw new ContextualError(String.format("appel impossible de %s : champs protégé", this.appel.getName().getName()),this.getLocation());
         }
         else if(defField.getVisibility()==Visibility.PROTECTED && currentClass.getMembers().get(compiler.getSymbolTable().create(this.appel.getName().getName()))==null)
         {
-        	throw new ContextualError(String.format("appel impossible de %s : champs protégé", defField.getType().getName().getName()),this.getLocation());
+        	throw new ContextualError(String.format("appel impossible de %s : champs protégé", this.appel.getName().getName()),this.getLocation());
         }
         
         //si tout est bon, on fixe le type récupéré dans la définition

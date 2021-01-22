@@ -10,6 +10,11 @@ import fr.ensimag.deca.tree.Location;
  */
 public class ParamDefinition extends ExpDefinition {
 
+    private int index;
+
+    public int getIndex(){return index;}
+    public void setIndex(int i){this.index = i;}
+
     public ParamDefinition(Type type, Location location) {
         super(type, location);
     }
