@@ -70,8 +70,8 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     }
     
     @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-    	DVal rightDVal = DValGetter.getDVal(getRightOperand());
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+    	DVal rightDVal = DValGetter.getDVal(getRightOperand(), compiler);
     	int n = op.getNumber();
     	if(rightDVal != null) {
     		getLeftOperand().codeGenExpr(compiler, op);

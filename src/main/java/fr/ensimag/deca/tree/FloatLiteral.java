@@ -71,8 +71,8 @@ public class FloatLiteral extends AbstractExpr {
     }
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		compiler.addInstruction(new LOAD(DValGetter.getDVal(this), op));
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+		compiler.addInstruction(new LOAD(DValGetter.getDVal(this, compiler), op));
 		
 	}
 
@@ -93,6 +93,18 @@ public class FloatLiteral extends AbstractExpr {
 
 	@Override
 	public boolean isIdentifier() {
+		return false;
+	}
+
+	@Override
+	public boolean isDot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

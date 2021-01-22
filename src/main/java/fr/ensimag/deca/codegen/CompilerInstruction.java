@@ -92,5 +92,9 @@ public class CompilerInstruction {
 		}
 	}
 	
+	public static String currentClassMethodString(DecacCompiler compiler) {
+		return compiler.getCurrentClass().getName().getName().getName() + "." + compiler.getCurrentMethod().getName().getName().getName();
+	}
+	
 	
 }

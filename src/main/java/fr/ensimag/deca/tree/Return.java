@@ -3,10 +3,16 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 public class Return extends AbstractInst{
 	
@@ -50,7 +56,11 @@ public class Return extends AbstractInst{
 	}
 	@Override
 	protected void codeGenInst(DecacCompiler compiler) throws jumpException {
-		//A FAIRE
+		returnExpr.codeGenExpr(compiler, GPRegister.R1);
+		compiler.addInstruction(new BRA(compiler.createLabel("fin."+CompilerInstruction.currentClassMethodString(compiler))));
+		compiler.addInstruction(new WSTR("Erreur : sortie de la méthode "+CompilerInstruction.currentClassMethodString(compiler) + " sans return"));
+		compiler.addInstruction(new WNL());
+		compiler.addInstruction(new ERROR());
 		
 	}
 	@Override

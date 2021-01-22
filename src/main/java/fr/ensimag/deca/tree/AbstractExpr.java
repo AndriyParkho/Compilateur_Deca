@@ -203,7 +203,7 @@ public abstract class AbstractExpr extends AbstractInst {
      * @param compiler
      * @param op
      */
-    protected abstract void codeGenExpr(DecacCompiler compiler, GPRegister op);
+    public abstract void codeGenExpr(DecacCompiler compiler, GPRegister op);
     
 
     @Override
@@ -242,6 +242,10 @@ public abstract class AbstractExpr extends AbstractInst {
      * Fonction pour savoir si l'expression est un Identifier afin d'éviter les instanceOf
      */
     public abstract boolean isIdentifier();
+    
+    public abstract boolean isMethod();
+    
+    public abstract boolean isDot();
     
     protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
     	throw new jumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());

@@ -64,7 +64,7 @@ public class BooleanLiteral extends AbstractExpr {
     }
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		int bool = value ? 1 : 0;
 		compiler.addInstruction(new LOAD(bool, op));
 	}
@@ -99,5 +99,17 @@ public class BooleanLiteral extends AbstractExpr {
     		}
     	}
     }
+
+	@Override
+	public boolean isDot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

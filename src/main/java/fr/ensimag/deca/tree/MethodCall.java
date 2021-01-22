@@ -48,7 +48,7 @@ public class MethodCall extends AbstractMethodCall{
     }
     
     @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
     	int nombreParametres = getArguments().size();
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
 
@@ -69,6 +69,7 @@ public class MethodCall extends AbstractMethodCall{
     	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
 
+
     @Override
     public boolean isIntLiteral() {
         return false;
@@ -87,6 +88,10 @@ public class MethodCall extends AbstractMethodCall{
     @Override
     public boolean isIdentifier() {
         return true;
+    }
+    
+    public boolean isMethod() {
+    	return true;
     }
 
 }

@@ -40,7 +40,7 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     	return typeDroite;
     }
     
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister R) {
+    public void codeGenExpr(DecacCompiler compiler, GPRegister R) {
     	//A FAIRE : generation de code pour un opérateur booléen
     	throw new UnsupportedOperationException("not yet implemented");
     }

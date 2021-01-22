@@ -64,7 +64,7 @@ public class StringLiteral extends AbstractStringLiteral {
     }
 
 	@Override
-	protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE
 		throw new UnsupportedOperationException("not yet implemented");
 		
@@ -89,6 +89,15 @@ public class StringLiteral extends AbstractStringLiteral {
 	public boolean isIdentifier() {
 		return false;
 	}
-	
+    
+    @Override
+	public boolean isDot() {
+		return false;
+	}
+    
+    @Override
+	public boolean isMethod() {
+		return false;
+	}	
 	
 }

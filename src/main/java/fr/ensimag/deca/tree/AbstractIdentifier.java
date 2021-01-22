@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.Definition;
 import fr.ensimag.deca.context.ExpDefinition;
 import fr.ensimag.deca.context.FieldDefinition;
 import fr.ensimag.deca.context.MethodDefinition;
+import fr.ensimag.deca.context.ParamDefinition;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.tools.DecacInternalError;
@@ -78,9 +79,21 @@ public abstract class AbstractIdentifier extends AbstractLValue {
      * when the cast fails.
      *
      * @throws DecacInternalError
-     *             if the definition is not a field definition.
+     *             if the definition is not a variable definition.
      */
     public abstract VariableDefinition getVariableDefinition();
+    
+    /**
+     * Like {@link #getDefinition()}, but works only if the definition is a
+     * ParamDefinition.
+     *
+     * This method essentially performs a cast, but throws an explicit exception
+     * when the cast fails.
+     *
+     * @throws DecacInternalError
+     *             if the definition is not a param definition.
+     */
+    public abstract ParamDefinition getParamDefinition();
 
     public abstract void setDefinition(Definition definition);
 

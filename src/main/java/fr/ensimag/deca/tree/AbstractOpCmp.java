@@ -87,8 +87,8 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	
     }
     
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-    	DVal rightDval = DValGetter.getDVal(getRightOperand());
+    public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+    	DVal rightDval = DValGetter.getDVal(getRightOperand(), compiler);
     	int numeroRegistre = op.getNumber();
     	if(rightDval != null) {
     		getLeftOperand().codeGenExpr(compiler, op);
@@ -118,7 +118,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     
     @Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-    	DVal rightDval = DValGetter.getDVal(getRightOperand());
+    	DVal rightDval = DValGetter.getDVal(getRightOperand(), compiler);
     	int numeroRegistre = op.getNumber();
     	Instruction sautInstr = eval ? this.getSaut(etiquette) : this.getNotSaut(etiquette);
     	if(rightDval != null) {

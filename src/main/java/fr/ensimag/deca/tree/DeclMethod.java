@@ -36,6 +36,14 @@ public class DeclMethod extends AbstractDeclMethod {
 	private ListDeclParam paramList;
 	private AbstractMethodBody methodBody;
 	
+	public AbstractIdentifier getName() {
+		return name;
+	}
+	
+	public AbstractIdentifier getType() {
+		return type;
+	}
+	
 	public DeclMethod(AbstractIdentifier type , AbstractIdentifier name , ListDeclParam paramList , AbstractMethodBody methodBody)
 	{
 		this.type=type;
@@ -137,8 +145,14 @@ public class DeclMethod extends AbstractDeclMethod {
 		name.getMethodDefinition().setLabel(new Label("code." + className + "." + name.getName().getName()));
 	}
 	
+	public void setParamsOperand() {
+		for(AbstractDeclParam param : paramList.getList()) {
+			param.setParamOperand();
+		}
+	}
 	
 	public void codeGenMethod(DecacCompiler compiler, String nomDeLaClasse) {
+		compiler.setCurrentMethod(this);
 		CompilerInstruction.decorationLigne(compiler, name.getName().getName());
 		compiler.addLabel(compiler.createLabel("code."+nomDeLaClasse+"."+name.getName().getName()));
 		name.getMethodDefinition().setDebutBloc(compiler.getLastInstructionIndex());

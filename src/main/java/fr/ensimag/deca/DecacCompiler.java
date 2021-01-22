@@ -8,18 +8,30 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.ensimag.deca.context.*;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.codegen.CompilerInstruction;
+import fr.ensimag.deca.context.BooleanType;
+import fr.ensimag.deca.context.ClassDefinition;
+import fr.ensimag.deca.context.ClassType;
+import fr.ensimag.deca.context.EnvironmentExp;
+import fr.ensimag.deca.context.EnvironmentType;
+import fr.ensimag.deca.context.FloatType;
+import fr.ensimag.deca.context.IntType;
+import fr.ensimag.deca.context.MethodDefinition;
+import fr.ensimag.deca.context.Signature;
+import fr.ensimag.deca.context.TypeDefinition;
+import fr.ensimag.deca.context.VoidType;
 import fr.ensimag.deca.syntax.DecaLexer;
 import fr.ensimag.deca.syntax.DecaParser;
 import fr.ensimag.deca.tools.DecacInternalError;
 import fr.ensimag.deca.tools.SymbolTable;
 import fr.ensimag.deca.tools.SymbolTable.Symbol;
 import fr.ensimag.deca.tree.AbstractProgram;
+import fr.ensimag.deca.tree.DeclClass;
+import fr.ensimag.deca.tree.DeclMethod;
 import fr.ensimag.deca.tree.Location;
 import fr.ensimag.deca.tree.LocationException;
 import fr.ensimag.ima.pseudocode.AbstractLine;
@@ -59,6 +71,25 @@ public class DecacCompiler {
     private int maxTempPile = 0;
     
     private boolean inMethod = false;
+    
+    private DeclClass currentClass;
+    private DeclMethod currentMethod;
+    
+    public DeclClass getCurrentClass() {
+    	return currentClass;
+    }
+    
+    public void setCurrentClass(DeclClass newClass) {
+    	currentClass = newClass;
+    }
+    
+    public DeclMethod getCurrentMethod() {
+    	return currentMethod;
+    }
+    
+    public void setCurrentMethod(DeclMethod newMethod) {
+    	currentMethod = newMethod;
+    }
     
     public boolean isInMethod() {
     	return inMethod;

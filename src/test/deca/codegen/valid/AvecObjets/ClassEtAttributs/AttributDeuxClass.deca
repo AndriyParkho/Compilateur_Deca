@@ -1,0 +1,22 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+	int x = 5;
+}
+
+class B{
+	A a = new A();
+	int y = 20;
+}
+
+{
+	B b = new B();
+	println(b.a.x);
+	println(b.y + b.a.x);
+}
+

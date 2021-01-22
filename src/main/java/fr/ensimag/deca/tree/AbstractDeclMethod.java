@@ -20,6 +20,8 @@ public abstract class AbstractDeclMethod extends Tree {
     
     public abstract void setLabel(String className);
     
+    public abstract void setParamsOperand();
+    
     public abstract void codeGenMethod(DecacCompiler compiler, String nomDeLaClasse);
 
 }

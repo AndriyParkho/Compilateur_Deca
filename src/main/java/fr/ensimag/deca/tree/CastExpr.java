@@ -3,11 +3,16 @@ package fr.ensimag.deca.tree;
 import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
+import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
+import fr.ensimag.ima.pseudocode.instructions.BRA;
+import fr.ensimag.ima.pseudocode.instructions.FLOAT;
+import fr.ensimag.ima.pseudocode.instructions.INT;
 
 public class CastExpr extends AbstractExpr{
     private AbstractIdentifier type;
@@ -40,8 +45,28 @@ public class CastExpr extends AbstractExpr{
     }
 
     @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-        // TODO Auto-generated method stub
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+    	Type typeType = type.getType();
+    	Type varType = variable.getType();
+        if(typeType.sameType(varType)) {
+        	variable.codeGenExpr(compiler, op);
+        } else if(typeType.isFloat() && varType.isInt()){
+        	variable.codeGenExpr(compiler, op);
+        	compiler.addInstruction(new FLOAT(op, op));
+        } else if(typeType.isInt() && varType.isFloat()) {
+        	variable.codeGenExpr(compiler, op);
+        	compiler.addInstruction(new INT(op, op));
+        } else if(typeType.isClass() && varType.isClassOrNull()) {
+        	InstanceOf testCmpClass = new InstanceOf(type, variable);
+        	testCmpClass.setLocation(this.getLocation());
+        	String errMsg = "Erreur : Cast impossible Ligne " + getLocation().getLine() + " Position " + getLocation().getPositionInLine();
+        	Label errLbl = CompilerInstruction.createErreurLabel(compiler, "cast_error_" + getLocation().getLine() + "_" + getLocation().getPositionInLine(),  errMsg);
+        	Label castLbl = compiler.createLabel("cast_" + getLocation().getLine() + "_" + getLocation().getPositionInLine());
+        	testCmpClass.codeGenSaut(compiler, true, castLbl, op);
+        	compiler.addInstruction(new BRA(errLbl));
+        	compiler.addLabel(castLbl);
+        	variable.codeGenExpr(compiler, op);
+        }
         
     }
 
@@ -89,5 +114,17 @@ public class CastExpr extends AbstractExpr{
         // !
         return false;
     }
+
+	@Override
+	public boolean isDot() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

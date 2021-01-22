@@ -90,8 +90,12 @@ public abstract class AbstractMethodCall extends AbstractExpr{
     }
 
     @Override
-    protected void codeGenExpr(DecacCompiler compiler, GPRegister op) {
+	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
         //A FAIRE
     }
 
+    @Override
+	public boolean isDot() {
+		return false;
+	}
 }

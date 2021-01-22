@@ -88,4 +88,16 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
 	public boolean isIdentifier() {
 		return false;
 	}
+
+	@Override
+	public boolean isDot() {
+		return false;
+	}
+
+	@Override
+	public boolean isMethod() {
+		return false;
+	}
+	
+	
 }
