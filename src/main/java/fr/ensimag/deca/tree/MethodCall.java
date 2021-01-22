@@ -89,7 +89,7 @@ public class MethodCall extends AbstractMethodCall{
 
     @Override
     public boolean isIdentifier() {
-        return true;
+        return false;
     }
     
     public boolean isMethod() {

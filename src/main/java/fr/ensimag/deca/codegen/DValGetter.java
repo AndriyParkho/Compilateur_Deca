@@ -29,9 +29,6 @@ public class DValGetter {
 			IntLiteral intExpr = (IntLiteral) e;
 			return new ImmediateInteger(intExpr.getValue());
 		} else if(e.isIdentifier()) {
-			if(e.isMethod()) {
-				return GPRegister.R1;
-			}
 			Identifier identifierExpr = (Identifier) e;
 			Definition identifierDef = identifierExpr.getDefinition();
 			if(identifierDef.isParam()) {
@@ -63,6 +60,8 @@ public class DValGetter {
 			return new RegisterOffset(dot.getAppel().getFieldDefinition().getIndex(), r);
 		} else if(e.isThis()){
 			return new RegisterOffset(-2, Register.LB);
+		}else if(e.isMethod()) {
+			return GPRegister.R1;
 		}
 		else {
 			return null;
