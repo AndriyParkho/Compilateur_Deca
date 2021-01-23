@@ -62,6 +62,13 @@ public class InstanceOf extends AbstractExpr{
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE
+		DVal objetDVal = DValGetter.getDVal(objet, compiler);
+		if(objetDVal == null) {
+			objet.codeGenExpr(compiler, op);
+		} else {
+			compiler.addInstruction(new LOAD(objetDVal, op));
+		}
+		
     	int numeroRegistre = op.getNumber();
     	ClassType objetType;
     	ClassDefinition currentObjetClass;
@@ -80,7 +87,6 @@ public class InstanceOf extends AbstractExpr{
     	}
 		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
 			// ON vérifie si l'objet n'est pas null
-			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
 			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
@@ -100,7 +106,6 @@ public class InstanceOf extends AbstractExpr{
 		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
 			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
-			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
 			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
@@ -123,6 +128,12 @@ public class InstanceOf extends AbstractExpr{
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
 		// A FAIRE
+		DVal objetDVal = DValGetter.getDVal(objet, compiler);
+		if(objetDVal == null) {
+			objet.codeGenExpr(compiler, op);
+		} else {
+			compiler.addInstruction(new LOAD(objetDVal, op));
+		}
 		Label finInstanceOf = compiler.createLabel("finInstanceOf." + getLocation().getLine() + "."+getLocation().getPositionInLine());
     	int numeroRegistre = op.getNumber();
     	Instruction sautInstr = eval ? new BEQ(etiquette) : new BEQ(finInstanceOf);
@@ -142,7 +153,6 @@ public class InstanceOf extends AbstractExpr{
     	}
 		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
 			// ON vérifie si l'objet n'est pas null
-			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
 			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
@@ -162,7 +172,6 @@ public class InstanceOf extends AbstractExpr{
 		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
 			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
-			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
 			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
