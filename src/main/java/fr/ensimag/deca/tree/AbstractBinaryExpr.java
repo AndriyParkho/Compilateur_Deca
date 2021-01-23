@@ -66,44 +66,7 @@ public abstract class AbstractBinaryExpr extends AbstractExpr {
     protected void prettyPrintChildren(PrintStream s, String prefix) {
         leftOperand.prettyPrint(s, prefix, false);
         rightOperand.prettyPrint(s, prefix, true);
-    }
-    
-    @Override
-	public boolean isFloatLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isBooleanLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
-	@Override
-	public boolean isDot() {
-		return false;
-	}
-
-	@Override
-	public boolean isMethod() {
-		return false;
-	}
-
-	@Override
-	public boolean isThis() {
-		return false;
-	}
-	
+    }	
 	
 	
 }

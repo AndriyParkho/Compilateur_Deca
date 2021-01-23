@@ -77,42 +77,8 @@ public class FloatLiteral extends AbstractExpr {
 	}
 
 	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-	@Override
 	public boolean isFloatLiteral() {
 		return true;
 	}
-
-	@Override
-	public boolean isBooleanLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
-	@Override
-	public boolean isDot() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isMethod() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isThis() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	
 }

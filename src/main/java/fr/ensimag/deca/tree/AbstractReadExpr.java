@@ -27,30 +27,6 @@ public abstract class AbstractReadExpr extends AbstractExpr {
     }
 
 
-
-	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isFloatLiteral() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isBooleanLiteral() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// FAIT
@@ -63,24 +39,6 @@ public abstract class AbstractReadExpr extends AbstractExpr {
 		compiler.addInstruction(new LOAD(Register.R1, op));
 	}
 	
-	protected abstract Instruction getMnemo();
-	
-	@Override
-	public boolean isDot() {
-		return false;
-	}
-	
-	@Override
-	public boolean isMethod() {
-		return false;
-	}
-
-
-	@Override
-	public boolean isThis() {
-		return false;
-	}
-	
-	
+	protected abstract Instruction getMnemo();	
 
 }

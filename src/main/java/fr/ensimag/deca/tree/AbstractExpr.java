@@ -232,28 +232,46 @@ public abstract class AbstractExpr extends AbstractInst {
     /*
      * Fonction pour savoir si l'expression est un IntLiteral afin d'éviter les instanceOf
      */
-    public abstract boolean isIntLiteral();
+    public boolean isIntLiteral(){
+    	return false;
+    }
     
     /*
      * Fonction pour savoir si l'expression est un FloatLiteral afin d'éviter les instanceOf
      */
-    public abstract boolean isFloatLiteral();
+    public boolean isFloatLiteral(){
+    	return false;
+    }
     
     /*
      * Fonction pour savoir si l'expression est un FloatLiteral afin d'éviter les instanceOf
      */
-    public abstract boolean isBooleanLiteral();
+    public boolean isBooleanLiteral(){
+    	return false;
+    }
     
     /*
      * Fonction pour savoir si l'expression est un Identifier afin d'éviter les instanceOf
      */
-    public abstract boolean isIdentifier();
+    public boolean isIdentifier(){
+    	return false;
+    }
     
-    public abstract boolean isMethod();
+    public boolean isMethod() {
+    	return false;
+    }
     
-    public abstract boolean isDot();
+    public boolean isDot() {
+    	return false;
+    }
     
-    public abstract boolean isThis();
+    public boolean isThis() {
+    	return false;
+    }
+    
+    public boolean isNull() {
+    	return false;
+    }
     
     protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
     	throw new JumpException("La fonction codeGenSaut n'est pas implémentée pour des expressions de type : " + getType());

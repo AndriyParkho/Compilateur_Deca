@@ -143,44 +143,9 @@ public class Dot extends AbstractLValue {
 	public AbstractIdentifier getAppel() {
 		return appel;
 	}
-
-	@Override
-	public boolean isIntLiteral() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isFloatLiteral() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isBooleanLiteral() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isIdentifier() {
-		// !
-		return false;
-	}
 	
     @Override
 	public boolean isDot() {
 		return true;
-	}
-    
-    @Override
-	public boolean isMethod() {
-		return false;
-	}
-
-	@Override
-	public boolean isThis() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

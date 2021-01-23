@@ -70,25 +70,9 @@ public class BooleanLiteral extends AbstractExpr {
 	}
 
 	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isFloatLiteral() {
-		return false;
-	}
-
-	@Override
 	public boolean isBooleanLiteral() {
 		return true;
 	}
-
-	@Override
-	public boolean isIdentifier() {
-		return false;
-	}
-	
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
     	if(!value) {
@@ -99,23 +83,4 @@ public class BooleanLiteral extends AbstractExpr {
     		}
     	}
     }
-
-	@Override
-	public boolean isDot() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isMethod() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isThis() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

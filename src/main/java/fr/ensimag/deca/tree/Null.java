@@ -9,6 +9,8 @@ import fr.ensimag.deca.context.NullType;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.NullOperand;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 
 public class Null extends AbstractExpr{
 
@@ -23,7 +25,7 @@ public class Null extends AbstractExpr{
 
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// TODO Auto-generated method stub
+		compiler.addInstruction(new LOAD(new NullOperand(), op));
 		
 	}
 
@@ -44,47 +46,10 @@ public class Null extends AbstractExpr{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public boolean isIntLiteral() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isFloatLiteral() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isBooleanLiteral() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isIdentifier() {
-		// !
-		return false;
-	}
-
-	@Override
-	public boolean isDot() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isMethod() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isThis() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isNull() {
+		return true;
 	}
 	
 }
