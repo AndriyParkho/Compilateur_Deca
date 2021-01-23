@@ -17,6 +17,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
@@ -175,13 +176,19 @@ public abstract class AbstractExpr extends AbstractInst {
     		compiler.addInstruction(new WSTR(newThis.getValue()));
     	}
     	else if(type.isFloat()) {
-    		this.codeGenExpr(compiler, Register.R1);
+    		GPRegister r = compiler.getRegisterStart();
+    		this.codeGenExpr(compiler, r);
+    		compiler.addInstruction(new LOAD(r, Register.R1));
+    		compiler.freeRegister(r);
     		Instruction printInst = printHex ? new WFLOATX() : new WFLOAT();
     		compiler.addInstruction(printInst);
     	}
     	
     	else if(type.isInt()) {
-    		this.codeGenExpr(compiler, Register.R1);
+    		GPRegister r = compiler.getRegisterStart();
+    		this.codeGenExpr(compiler, r);
+    		compiler.addInstruction(new LOAD(r, Register.R1));
+    		compiler.freeRegister(r);
     		compiler.addInstruction(new WINT());
     	}
     	
