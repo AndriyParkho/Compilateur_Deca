@@ -109,7 +109,7 @@ public abstract class AbstractExpr extends AbstractInst {
     			throw new ContextualError("un type class était attendu!",this.getLocation());
     		}
     	}
-    	//sinon, pour deux types différents , une seul possibilité: float=int
+    	//sinon, pour deux types différents , deux  possibilité: float=int ou null in object
 		else if(!typeReel.sameType(expectedType))
     	{
     		if(typeReel.isInt() && expectedType.isFloat())
@@ -119,7 +119,7 @@ public abstract class AbstractExpr extends AbstractInst {
     			entierEnReel.setType(typeReel);
     			return entierEnReel;
     		}
-    		else
+    		else if (!(typeReel.isNull() && expectedType.isClass()))
     		{
     			throw new ContextualError("type incompatible",this.getLocation());
     		}
