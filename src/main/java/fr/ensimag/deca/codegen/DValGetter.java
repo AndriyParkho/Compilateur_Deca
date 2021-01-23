@@ -33,7 +33,6 @@ public class DValGetter {
 			Definition identifierDef = identifierExpr.getDefinition();
 			if(identifierDef.isParam()) {
 				ParamDefinition paramDef = (ParamDefinition)identifierDef;
-				System.out.println("Dans le DVAL : location du paramètre " + paramDef.getLocation());
 				return paramDef.getOperand();
 			}
 			else if(identifierDef.isField()) {
