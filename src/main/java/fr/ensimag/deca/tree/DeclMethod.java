@@ -172,7 +172,6 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	public void setParamsOperand() {
-		System.out.println("Dans le DECLMETH :" + name.getName().getName());
 		for(AbstractDeclParam param : paramList.getList()) {
 			param.setParamOperand();
 		}
