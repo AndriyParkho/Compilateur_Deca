@@ -1,0 +1,31 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+
+	void printRandom() asm("
+			TSTO #2
+			BOV stack_overflow_error
+		; Sauvegarde des registres
+			PUSH R2
+			PUSH R3
+		; Corps de la méthode
+			WSTR "ça marche A"
+			WNL
+		fin.A.printRandom:
+		; Restauration des registres
+			POP R3
+			POP R2
+			RTS
+	");
+}
+
+{
+	 A a = new A();	
+	 
+	 a.printRandom();
+}
