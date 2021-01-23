@@ -69,7 +69,11 @@ public class DeclMethod extends AbstractDeclMethod {
 		int indice=index;
 		if(defClassMere!=null && defClassMere.isMethod())
 		{
-				indice=((MethodDefinition)defClassMere).getIndex();
+			indice=((MethodDefinition)defClassMere).getIndex();
+			currentClass.setNumberOfMethods(currentClass.getNumberOfMethods()-1);
+		}
+		if (this.name.getName().getName().equals("equals")){
+			indice = ((MethodDefinition)((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create("Object"))).getMembers().get(compiler.getSymbolTable().create("equals"))).getIndex();
 		}
 		
 		//on fait la définition avec le bon indice
@@ -115,10 +119,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		}
 		//en fin , on fait la déclaration 
 		try {
-			
 			envGlobClass.declare(this.name.getName(), methodDef);
-			currentClass.incNumberOfMethods();
-			
 		}catch(EnvironmentExp.DoubleDefException doubleDef) {
 			throw new ContextualError("double définition d'une méthode",this.getLocation());
 		}
@@ -171,6 +172,7 @@ public class DeclMethod extends AbstractDeclMethod {
 	}
 	
 	public void setParamsOperand() {
+		System.out.println("Dans le DECLMETH :" + name.getName().getName());
 		for(AbstractDeclParam param : paramList.getList()) {
 			param.setParamOperand();
 		}
