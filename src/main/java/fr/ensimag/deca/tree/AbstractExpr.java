@@ -115,9 +115,9 @@ public abstract class AbstractExpr extends AbstractInst {
     		if(typeReel.isInt() && expectedType.isFloat())
     		{
     			ConvFloat entierEnReel= new ConvFloat(this);
-    			entierEnReel.verifyExpr(compiler, currentClass);
-    			entierEnReel.setType(typeReel);
-    			return entierEnReel;
+				entierEnReel.verifyExpr(compiler, currentClass);
+				entierEnReel.setType(expectedType);
+				return entierEnReel;
     		}
     		else if (!(typeReel.isNull() && expectedType.isClass()))
     		{
