@@ -71,12 +71,12 @@ public class InstanceOf extends AbstractExpr{
 	    	objetType = (ClassType)objet.getType();
 	    	currentObjetClass = (ClassDefinition)objetType.getDefinition();
     	} catch(Exception e) {
-    		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types : " + objet.getType().getName().getName());
+    		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types primitifs");
     	}
     	try {
     		typeClass = type.getClassDefinition();
     	} catch(Exception e) {
-    		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types : " + type.getType().getName().getName());
+    		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types primitifs");
     	}
 		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
 			// ON vérifie si l'objet n'est pas null
