@@ -77,7 +77,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     		getLeftOperand().codeGenExpr(compiler, op);
     		compiler.addInstruction(this.getMnemo(rightDVal, op));
     	} else {
-    		if(n == compiler.getNombreRegistres()) {
+    		if(n == compiler.getNombreRegistres() - 1) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
     			compiler.incrementTempPile();
@@ -86,7 +86,7 @@ public abstract class AbstractOpArith extends AbstractBinaryExpr {
     			compiler.addInstruction(new POP(op));
     			compiler.decrementTempPile();
     			compiler.addInstruction(this.getMnemo(Register.R0, op));
-    		} else if(n < compiler.getNombreRegistres()) {
+    		} else if(n < compiler.getNombreRegistres() - 1) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			GPRegister nextOp = compiler.getRegisterStart();
         		getRightOperand().codeGenExpr(compiler, nextOp);

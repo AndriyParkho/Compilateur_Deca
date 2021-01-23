@@ -94,7 +94,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
     		compiler.addInstruction(this.getMnemo(op));
     	}else {
-    		if(numeroRegistre == compiler.getNombreRegistres()) {
+    		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
     			compiler.incrementTempPile();
@@ -105,7 +105,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(new CMP(Register.R0, op), "Afin de tester "+getOperatorName());
     			compiler.addInstruction(this.getMnemo(op));
     			
-    		} else if(numeroRegistre < compiler.getNombreRegistres()) {
+    		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
     			GPRegister nextOp = compiler.getRegisterStart();
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
@@ -126,7 +126,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		compiler.addInstruction(new CMP(rightDval, op));
     		compiler.addInstruction(sautInstr);
     	}else {
-    		if(numeroRegistre == compiler.getNombreRegistres()) {
+    		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
     			getLeftOperand().codeGenExpr(compiler, op);
     			compiler.addInstruction(new PUSH(op));
     			compiler.incrementTempPile();
@@ -137,7 +137,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(new CMP(Register.R0, op));
     			compiler.addInstruction(sautInstr);
     			
-    		} else if(numeroRegistre < compiler.getNombreRegistres()) {
+    		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
     			GPRegister nextOp = compiler.getRegisterStart();
     			getLeftOperand().codeGenExpr(compiler, op);
         		getRightOperand().codeGenExpr(compiler, nextOp);
