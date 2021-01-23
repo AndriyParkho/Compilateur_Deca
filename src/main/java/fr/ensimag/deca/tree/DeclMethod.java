@@ -61,24 +61,40 @@ public class DeclMethod extends AbstractDeclMethod {
 	public  void verifyMethodMembers(DecacCompiler compiler  , ClassDefinition currentClass, int index)
             throws ContextualError{
 		//FAIT
+		
 		EnvironmentExp envGlobClass=currentClass.getMembers();
 		ExpDefinition defClassMere=envGlobClass.get(this.name.getName());
 		Type typeRetour=this.type.verifyType(compiler);
-		ExpDefinition superClassDef=currentClass.getSuperClass().getMembers().get(this.name.getName());
-		MethodDefinition methodDef = new MethodDefinition(typeRetour, this.getLocation(), new Signature(), index);
+	
+		//vérification de l'indice:
+		int indice=index;
+		if(defClassMere!=null && defClassMere.isMethod())
+		{
+				indice=((MethodDefinition)defClassMere).getIndex();
+		}
+		
+		//on fait la définition avec le bon indice
+		MethodDefinition methodDef = new MethodDefinition(typeRetour, this.getLocation(), new Signature(), indice);
 		EnvironmentExp methodEnv=new EnvironmentExp(envGlobClass);
+		//on vérifie les paramètres dans l'environnement de la méthode
 		this.paramList.verifyParamMembers(compiler, methodEnv, currentClass);
+		//on règle la signature de la méthode
 		for (AbstractDeclParam param : this.paramList.getList()){
 			methodDef.getSignature().add(((DeclParam) param).getType().getType());
 		}
+		//on fait les set
 		this.name.setDefinition(methodDef);
 		this.name.setType(typeRetour);
-		//avant de faire la déclaration,il faut vérifier le type de retour et la signature
-		//dans le cas d'une redéfinition
+		
+		
+		
+		//vérification dans le cas d'une redéfinition
+		ExpDefinition superClassDef=currentClass.getSuperClass().getMembers().get(this.name.getName());
+		
 		if(superClassDef!=null && superClassDef.isMethod())
 		{
 			MethodDefinition superMethodDef=(MethodDefinition)superClassDef;
-			methodDef.setIndex(superMethodDef.getIndex());
+			
 			if(!methodDef.getType().sameType(superMethodDef.getType()))
 			{
 				throw new ContextualError("type de retour incompatible",this.getLocation());
@@ -98,13 +114,17 @@ public class DeclMethod extends AbstractDeclMethod {
 				}
 			}
 		}
-
+		//en fin , on fait la déclaration 
 		try {
-			currentClass.incNumberOfMethods();
+			
 			envGlobClass.declare(this.name.getName(), methodDef);
+			currentClass.incNumberOfMethods();
+			
 		}catch(EnvironmentExp.DoubleDefException doubleDef) {
 			throw new ContextualError("double définition d'une méthode",this.getLocation());
 		}
+
+		
 	}
 	
 	@Override
