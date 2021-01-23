@@ -1,0 +1,22 @@
+// Description:
+//  Réalisation d'un liste chaînée d'entier en deca
+//
+// Resultats:
+// 
+// Historique:
+//    cree le 23/01/2021
+
+class ListChaine{
+	int valeur;
+	ListChaine suivant;
+	
+	void setCellule(int val, ListChaine suiv){
+		this.valeur = val;
+		this.suivant = suiv; 
+	}
+}
+
+{
+    
+
+}
