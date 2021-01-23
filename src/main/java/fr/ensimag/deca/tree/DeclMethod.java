@@ -55,7 +55,6 @@ public class DeclMethod extends AbstractDeclMethod {
 		this.paramList=paramList;
 		this.methodBody=methodBody;
 	}
-
 	
 	@Override
 	public  void verifyMethodMembers(DecacCompiler compiler  , ClassDefinition currentClass, int index)
