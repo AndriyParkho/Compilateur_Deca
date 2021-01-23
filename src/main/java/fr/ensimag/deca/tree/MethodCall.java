@@ -5,6 +5,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
@@ -53,11 +54,13 @@ public class MethodCall extends AbstractMethodCall{
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
     	int nombreParametres = getArguments().size();
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
-    	//stocke DVAL
-    	//if dval null
-    	//codegenexepr
-    	//else
-    	//load
+    	
+    	DVal objetDVal = DValGetter.getDVal(getVariable(), compiler);
+		if(objetDVal == null) {
+			getVariable().codeGenExpr(compiler, op);
+		} else {
+			compiler.addInstruction(new LOAD(objetDVal, op));
+		}
     	compiler.addInstruction(new LOAD((DValGetter.getDVal(getVariable(), compiler)), op));
     	
     	compiler.addInstruction(new STORE(op, new RegisterOffset(0, GPRegister.SP)));
@@ -87,11 +90,12 @@ public class MethodCall extends AbstractMethodCall{
     	}
      	int nombreParametres = getArguments().size();
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
-    	//stocke DVAL
-    	//if dval null
-    	//codegenexepr
-    	//else
-    	//load
+    	DVal objetDVal = DValGetter.getDVal(getVariable(), compiler);
+		if(objetDVal == null) {
+			getVariable().codeGenExpr(compiler, op);
+		} else {
+			compiler.addInstruction(new LOAD(objetDVal, op));
+		}
     	compiler.addInstruction(new LOAD((DValGetter.getDVal(getVariable(), compiler)), op));
     	
     	compiler.addInstruction(new STORE(op, new RegisterOffset(0, GPRegister.SP)));

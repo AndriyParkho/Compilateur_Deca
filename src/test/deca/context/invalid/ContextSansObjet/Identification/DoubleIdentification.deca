@@ -3,7 +3,7 @@
 //
 //Resulats : 
 //Erreur contextuelle
-// 	Ligne 10 : throws DoubleDefException
+// 	Ligne 10 : double définition de la variable x
 
 {
 	int x = 3;
