@@ -78,7 +78,7 @@ public class InstanceOf extends AbstractExpr{
     	} catch(Exception e) {
     		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types : " + type.getType().getName().getName());
     	}
-		if(numeroRegistre == compiler.getNombreRegistres()) {
+		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
 			// ON vérifie si l'objet n'est pas null
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
@@ -97,7 +97,7 @@ public class InstanceOf extends AbstractExpr{
 				currentObjetClass = currentObjetClass.getSuperClass();
 			}
 			
-		} else if(numeroRegistre < compiler.getNombreRegistres()) {
+		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
 			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
@@ -140,7 +140,7 @@ public class InstanceOf extends AbstractExpr{
     	} catch(Exception e) {
     		throw new UnsupportedOperationException("Instance of ne s'applique pas sur les types : " + type.getType().getName().getName());
     	}
-		if(numeroRegistre == compiler.getNombreRegistres()) {
+		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
 			// ON vérifie si l'objet n'est pas null
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
 			compiler.addInstruction(new CMP(new NullOperand(), op));
@@ -159,7 +159,7 @@ public class InstanceOf extends AbstractExpr{
 				currentObjetClass = currentObjetClass.getSuperClass();
 			}
 			
-		} else if(numeroRegistre < compiler.getNombreRegistres()) {
+		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
 			GPRegister nextOp = compiler.getRegisterStart();
 			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
 			compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
