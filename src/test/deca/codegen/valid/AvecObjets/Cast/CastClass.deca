@@ -1,0 +1,31 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    3
+//	  2
+//	  1
+
+class A {
+	int x = 1;
+}
+
+class B extends A{
+	int x = 2;
+}
+
+class C extends B{
+	int x = 3;
+}
+
+{	
+	A a = new C();
+	B b;
+	A c;
+	println(a.x);
+	b = (B) (a);
+	println(b.x);
+	c = (A) (a);
+	println(c.x);
+}
+

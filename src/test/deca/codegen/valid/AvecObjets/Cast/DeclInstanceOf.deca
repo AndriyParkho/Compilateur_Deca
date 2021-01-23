@@ -12,8 +12,10 @@ class C extends B { }
 {	
 	A a;
 	B b;
+	boolean bool;
 	a = new C();
-	if (a instanceof B) {
+	bool = a instanceof B; 
+	if (bool) {
 		b = (B)(a);
 		println("ok");
 	} else{
