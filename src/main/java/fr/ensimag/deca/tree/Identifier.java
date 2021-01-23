@@ -278,38 +278,7 @@ public class Identifier extends AbstractIdentifier {
     }
 
 	@Override
-	public boolean isIntLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isFloatLiteral() {
-		return false;
-	}
-
-	@Override
-	public boolean isBooleanLiteral() {
-		return false;
-	}
-
-	@Override
 	public boolean isIdentifier() {
 		return true;
-	}
-
-	@Override
-	public boolean isDot() {
-		return false;
-	}
-
-	@Override
-	public boolean isMethod() {
-		return false;
-	}
-
-	@Override
-	public boolean isThis() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

@@ -52,6 +52,8 @@ public class DValGetter {
 		}
 		else if(e.isThis()){
 			return new RegisterOffset(-2, Register.LB);
+		} else if(e.isNull()) {
+			return new NullOperand();
 		}
 		else {
 			return null;

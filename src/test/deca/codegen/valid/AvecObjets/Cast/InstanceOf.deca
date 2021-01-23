@@ -2,7 +2,7 @@
 //    tests de la déclaration d'une seule class
 //
 // Resultats:
-//    Rien
+//    ok
 
 
 class A { }
@@ -16,9 +16,9 @@ class D {}
 	a = new C();
 	if (b instanceof C) {
 		b = (B)(a);
-		println("ok");
-	} else{
 		println("pas ok");
+	} else{
+		println("ok");
 	}
 }
 

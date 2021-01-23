@@ -75,36 +75,10 @@ public class MethodCall extends AbstractMethodCall{
     	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
 
-
     @Override
-    public boolean isIntLiteral() {
-        return false;
-    }
-
-    @Override
-    public boolean isFloatLiteral() {
-        return false;
-    }
-
-    @Override
-    public boolean isBooleanLiteral() {
-        return false;
-    }
-
-    @Override
-    public boolean isIdentifier() {
-        return false;
-    }
-    
     public boolean isMethod() {
     	return true;
     }
-
-	@Override
-	public boolean isThis() {
-		return false;
-	}
-
     
 }
 
