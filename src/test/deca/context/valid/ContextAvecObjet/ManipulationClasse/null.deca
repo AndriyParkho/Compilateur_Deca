@@ -1,0 +1,35 @@
+//Description
+//  Objets instanciés à null
+//
+//Résultat
+//  ok
+
+class A{}
+class B extends Object{}
+class C extends A{
+    int x;
+    Object o = null;
+
+    void test(){}
+    Object getO(){
+        return this.o;
+    }
+    int getX(){
+        return x;
+    }
+}
+class D extends C{}
+
+{
+    Object o = null;
+    A a = null;
+    B b = null;
+    C c = null;
+    D d = null;
+
+    c.x;
+    c.o;
+    c.test();
+    d.getX();
+    d.equals(o);
+}
