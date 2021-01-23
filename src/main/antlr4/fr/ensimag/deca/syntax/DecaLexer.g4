@@ -95,7 +95,7 @@ ou bien qu’un littéral non nul est trop petit et que l’arrondi se fait vers
 */
 
 // Chaînes de caractères
-fragment STRING_CAR : ~('"' | '\\');
+fragment STRING_CAR : ~('"' | '\\' | '\n');
 fragment EOL : '\n';
 STRING : '"' (STRING_CAR | '\\"' | '\\\\')* '"';
 MULTI_LINE_STRING : '"' (STRING_CAR | EOL | '\\"' | '\\\\')* '"';

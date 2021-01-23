@@ -8,19 +8,10 @@
 class A{
 
 	void printRandom() asm("
-			TSTO #2
-			BOV stack_overflow_error
-		; Sauvegarde des registres
-			PUSH R2
-			PUSH R3
 		; Corps de la méthode
-			WSTR "ça marche A"
+			LOAD #5, R1
+			WINT
 			WNL
-		fin.A.printRandom:
-		; Restauration des registres
-			POP R3
-			POP R2
-			RTS
 	");
 }
 
