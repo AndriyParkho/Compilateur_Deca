@@ -124,8 +124,6 @@ public class DeclParam extends AbstractDeclParam {
 
 	public void setParamOperand() {
 		ParamDefinition paramDef = name.getParamDefinition();
-		System.out.println("Dans le DECLPARAM : location du paramètre " + name.getName().getName() + " " + paramDef.getLocation());
 		paramDef.setOperand(new RegisterOffset(-2 - getIndex(), Register.LB));
-		System.out.println("Operand set : " + paramDef.getOperand());
 	}
 }
