@@ -8,4 +8,5 @@
 .project
 .metadata
 .settings
-\*.ass
+*.ass
+.gitignore

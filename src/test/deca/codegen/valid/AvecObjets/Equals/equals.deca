@@ -18,7 +18,11 @@ class B{
 	B b = new B();
 	A a = new A();
 	
-	println("a et a :", a.equals(a));
-	println("b et a :", b.equals(b));
+	if(a.equals(a) && !a.equals(b)){
+	println("true");
+	}else{
+	println("Erreur");
+	}	
+	
 }
 
