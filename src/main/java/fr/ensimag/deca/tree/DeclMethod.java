@@ -119,10 +119,7 @@ public class DeclMethod extends AbstractDeclMethod {
 		}
 		//en fin , on fait la déclaration 
 		try {
-			
 			envGlobClass.declare(this.name.getName(), methodDef);
-			//currentClass.incNumberOfMethods();
-			
 		}catch(EnvironmentExp.DoubleDefException doubleDef) {
 			throw new ContextualError("double définition d'une méthode",this.getLocation());
 		}
