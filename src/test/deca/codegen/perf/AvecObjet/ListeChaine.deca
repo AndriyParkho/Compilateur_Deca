@@ -14,9 +14,35 @@ class ListChaine{
 		this.valeur = val;
 		this.suivant = suiv; 
 	}
+	
+	ListChaine insertPrevious(int valeur){
+	ListChaine nouvelElement = new ListChaine();
+	nouvelElement.setCellule(valeur, this);
+	return nouvelElement;
+	}
+	
+	void printListe(){
+	ListChaine current = this;
+	while(current.suivant != null){
+		print(current.val, ", ");
+		current.suivant = current.suivant;
+	}
+	println(current.val);
+	}
 }
 
 {
-    
+	int i = 10;
+	ListChaine nouvelElement;
+	LIstChaine premierElement;
+	ListChaine dernierElement = new ListChaine();
+	dernierElement.setCellule(i, null);
+	premierElement = dernierElement;
+	while(i != 0){
+	i = i-1;
+	nouvelElement = premierElement.insertPrevious(i);
+	premierElement = nouvelElement;
+	}
+	
 
 }
