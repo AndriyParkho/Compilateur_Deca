@@ -21,16 +21,13 @@ public class ListDeclMethod extends TreeList<AbstractDeclMethod> {
 	public  void verifyMethodMembers(DecacCompiler compiler , ClassDefinition currentClass)
             throws ContextualError{
 		//FAIT
-		int index=currentClass.incNumberOfMethods();
+		int index;
 		compiler.setEnvExp(currentClass.getMembers());
 		for(AbstractDeclMethod method : this.getList())
 		{
+			index = currentClass.incNumberOfMethods()+1;
 			method.verifyMethodMembers(compiler, currentClass, index);
-			if (((DeclMethod)method).getName().getMethodDefinition().getIndex() == index) {
-				index++;
-			}
 		}
-		currentClass.setNumberOfMethods(index-1);
 	}
 	
 	
