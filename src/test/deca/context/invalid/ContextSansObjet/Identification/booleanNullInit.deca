@@ -1,0 +1,10 @@
+//Description
+//  Initialisation d'une variable boolean avec null
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  type incompatible
+
+{
+    boolean x = null;
+}

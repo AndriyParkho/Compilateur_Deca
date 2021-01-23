@@ -1,0 +1,10 @@
+//Description
+//  Initialisation d'une variable int avec null
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  type incompatible
+
+{
+    int x = null;
+}
