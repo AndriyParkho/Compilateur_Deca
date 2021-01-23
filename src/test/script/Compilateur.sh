@@ -14,10 +14,18 @@ find ./src/test/deca/codegen/valid/ -name "*.ass" -type f -delete
 list_tests=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.deca | sort))
 list_answers=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.ans | sort))
 
+for ((i=0 ; i<${#list_tests[@]} ; i++)); do
+    fichier="${list_tests[i]%.deca}.ans"
+    if [ ! -f "$fichier" ]; then
+	echo "Le fichier ${fichier} n'existe pas"
+    fi
+done
+
 if [ ${#list_tests[@]} != ${#list_answers[@]} ]; then
 	echo "Il manque $((${#list_tests[@]}-${#list_answers[@]})) fichier(s) .ans"
 	exit 1
 fi
+
 
 
 for ((i=0 ; i<${#list_tests[@]} ; i++)); do
