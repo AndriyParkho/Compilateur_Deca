@@ -41,8 +41,8 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		typeDroite=this.getRightOperand().verifyExpr(compiler, currentClass);
     	} catch (ContextualError ce) {throw ce;}
     	//il faut ensuite s'assurer que les deux opérateurs sont comparables!!
-    	//si les deux deux opérateurs ont deux types différents, la seule comparaison
-    	//possible est int/float
+    	//si les deux deux opérateurs ont deux types différents, les seules comparaisons
+    	//possible sont int/float et class/null pour l'égalité (cf Equals.java)
     	if(!typeGauche.sameType(typeDroite))
     	{
     		if((typeGauche.isInt()&&typeDroite.isFloat()))
@@ -61,10 +61,9 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			this.setRightOperand(droiteConv);
     			
     		}
-    		else
-    		{
-    			throw new ContextualError("types incompatibles pour faire la comparaison",this.getLocation());
-    		}
+			else if (!(typeGauche.isClass() && typeDroite.isNull()) && !((typeGauche.isNull() && typeDroite.isClass()))){
+				throw new ContextualError("types incompatibles pour faire la comparaison",this.getLocation());
+			}
     	}
     	else   //les deux types sont identiques
     	{
