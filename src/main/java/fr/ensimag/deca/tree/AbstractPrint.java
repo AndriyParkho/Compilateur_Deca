@@ -45,7 +45,7 @@ public abstract class AbstractPrint extends AbstractInst {
     		//les types qu'on peut afficher sont int,float et string
     		if(!(typeExpr.isFloat()||typeExpr.isInt()||typeExpr.isString()))
     		{
-    			throw new ContextualError("type non affichable(les types qu'on peut afficher sont int,float et string)",this.getLocation());
+    			throw new ContextualError(String.format("Le type %s n'est pas affichable (les types affichables sont int,float et string)", typeExpr),this.getLocation());
     		}
     		absExpr.setType(typeExpr);
     	}

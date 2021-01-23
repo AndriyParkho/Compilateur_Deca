@@ -27,7 +27,7 @@ public class MethodAsmBody extends AbstractMethodBody {
 	@Override
 	public void verifyMethodBody(DecacCompiler compiler, ClassDefinition currentClass, Type returnType)
 		    throws ContextualError{
-		//A FAIRE
+		//Aucune vérification contextuelle à faire
 	}
 	
 	@Override
@@ -37,9 +37,7 @@ public class MethodAsmBody extends AbstractMethodBody {
 	
 	@Override
 	protected void prettyPrintChildren(PrintStream s, String prefix) {
-		s.print(prefix);
-        s.print(string.getValue());
-        s.println();
+		this.string.prettyPrint(s, prefix, true);
 	    }
 
 	@Override

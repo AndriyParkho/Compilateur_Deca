@@ -66,7 +66,7 @@ public class DeclVar extends AbstractDeclVar {
     	}catch(ContextualError ce)
     	{throw ce;}
     	 catch(EnvironmentExp.DoubleDefException doubleDefinition)
-    	{throw new ContextualError("double définition d'une variable",this.getLocation());}
+    	{throw new ContextualError(String.format("double définition de la variable %s", this.varName.getName().getName()),this.getLocation());}
 
     }
 
