@@ -7,6 +7,7 @@ import fr.ensimag.deca.context.ClassDefinition;
 import fr.ensimag.deca.context.ContextualError;
 import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.InlinePortion;
 
 /**
  *
@@ -48,8 +49,7 @@ public class MethodAsmBody extends AbstractMethodBody {
 
 	@Override
 	public void codeGenMethodBody(DecacCompiler compiler) {
-		// TODO Auto-generated method stub
-		
+		compiler.add(new InlinePortion(string.getValue()));
 	}
 
 
