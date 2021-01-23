@@ -85,19 +85,4 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                     variable.getLocation());
         }
     }
-
-    @Override
-    protected void codeGenInst(DecacCompiler compiler) throws JumpException{
-        //A FAIRE
-    }
-
-    @Override
-	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-        //A FAIRE
-    }
-
-    @Override
-	public boolean isDot() {
-		return false;
-	}
 }

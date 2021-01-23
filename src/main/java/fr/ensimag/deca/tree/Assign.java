@@ -67,7 +67,6 @@ public class Assign extends AbstractBinaryExpr {
 
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		//A FAIRE
 		getRightOperand().codeGenExpr(compiler, op);
 		if(getLeftOperand().isDot()) {
 			GPRegister r = compiler.getRegisterStart();

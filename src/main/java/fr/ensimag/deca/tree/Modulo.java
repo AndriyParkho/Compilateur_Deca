@@ -48,7 +48,6 @@ public class Modulo extends AbstractOpArith {
 
 	@Override
 	protected Instruction getMnemo(DVal op1, GPRegister op2) {
-		// A FAIRE : vérifier que c'est des entiers
 		return new REM(op1, op2);
 	}
 

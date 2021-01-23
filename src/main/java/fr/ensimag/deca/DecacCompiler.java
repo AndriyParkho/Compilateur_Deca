@@ -448,7 +448,6 @@ public class DecacCompiler {
         }
         assert(prog.checkAllLocations());
         if(getCompilerOptions().isParse()) {
-        	//A FAIRE : decompilation de l'arbre et affichage de cette décompilation
         	System.out.println(prog.decompile());
         	System.exit(0);
         }

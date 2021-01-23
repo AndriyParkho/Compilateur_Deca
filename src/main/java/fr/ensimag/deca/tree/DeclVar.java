@@ -97,7 +97,6 @@ public class DeclVar extends AbstractDeclVar {
     
     @Override
     protected void codeGenDeclVar(DecacCompiler compiler) {
-    	// A FAIRE : Fonction non fini pour l'instant
     	DAddr varOperand;
     	if(!compiler.isInMethod()) {
 	    	compiler.incrCountGB();

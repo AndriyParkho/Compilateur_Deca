@@ -24,7 +24,6 @@ import fr.ensimag.ima.pseudocode.instructions.LOAD;
 public class DValGetter {
 	
 	public static DVal getDVal(AbstractExpr e, DecacCompiler compiler) {
-		// A Faire : C'est fait pour les opérations avec des entiers seulement
 		if(e.isIntLiteral()) {
 			IntLiteral intExpr = (IntLiteral) e;
 			return new ImmediateInteger(intExpr.getValue());

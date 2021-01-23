@@ -47,8 +47,6 @@ public class CompilerOptions {
 
     
     public void parseArgs(String[] args) throws CLIException {
-        // A FAIRE :-n
-    	//FAIT : -b, -d, -p, -v, -r
     	
     	if(args.length != 0 && args[0].equals("-b")) {
     		printBanner = true;

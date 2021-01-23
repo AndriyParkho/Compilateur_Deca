@@ -77,7 +77,6 @@ public class InstanceOf extends AbstractExpr{
 
 	@Override
 	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
-		// A FAIRE
 		DVal objetDVal = DValGetter.getDVal(objet, compiler);
 		if(objetDVal == null) {
 			objet.codeGenExpr(compiler, op);

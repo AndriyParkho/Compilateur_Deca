@@ -53,7 +53,6 @@ public class Program extends AbstractProgram {
         compiler.addComment("Main program");
         main.codeGenMain(compiler);
         compiler.addInstruction(new HALT());
-        //A FAIRE : piles + avancées
         compiler.addComment("end main program");
         classes.codeGenListClassBody(compiler);
         CompilerInstruction.gestionPileVariablesGlobales(compiler);
