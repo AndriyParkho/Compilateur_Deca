@@ -3,7 +3,7 @@
 //
 // Resultats:
 //    Erreur contextuelle ligne 12
-//    type non affichable(les types qu'on peut afficher sont int,float et string)
+//    Le type boolean n'est pas affichable (les types affichables sont int,float et string)
 class A{
     int x = 0;
 }
