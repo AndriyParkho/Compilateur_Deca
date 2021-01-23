@@ -18,5 +18,7 @@ class A{
 
 {
 	A a = new A();
+	a.setX(2);
+	println(a.x);
 }
 

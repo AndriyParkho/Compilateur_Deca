@@ -25,6 +25,7 @@ class B{
 
 {
 	B b = new B();
+	b.setAX();
 	println(b.a.x);
 }
 
