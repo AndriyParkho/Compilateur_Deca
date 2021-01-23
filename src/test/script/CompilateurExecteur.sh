@@ -9,19 +9,10 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/main/bin:../global/bin:"$PATH"
 
-find ./src/test/deca/codegen/valid/ -name "*.ass" -type f -delete
-
-src/main/bin/decac $1
-fichier_ass=$(find ./src/test/deca/codegen/valid/ -type f | grep \\.ass)
-if [ -z "$fichier_ass"]; then
-    echo -e "fichier .ass non généré"
-    exit 1
-fi
+src/main/bin/decac -d $1
+fichier=$1
+fichier="${fichier%.deca}.ass"
 echo "--------- Resultat : ---------"
-ima -s $fichier_ass
-rm $fichier_ass
-exit 1
-
-
+ima -s $fichier
 exit 1
 
