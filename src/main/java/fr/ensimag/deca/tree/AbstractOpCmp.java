@@ -63,7 +63,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		}
     		else
     		{
-    			throw new ContextualError("types non compatibles pour faire la comparaison",this.getLocation());
+    			throw new ContextualError("types incompatibles pour faire la comparaison",this.getLocation());
     		}
     	}
     	else   //les deux types sont identiques
@@ -73,7 +73,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		{
     			if(!((Objects.equals(this.getOperatorName(),"==")||(Objects.equals(this.getOperatorName(),"!=")))))
     			{
-    				throw new ContextualError("types non compatibles pour faire la comparaison",this.getLocation());
+    				throw new ContextualError("types incompatibles pour faire la comparaison",this.getLocation());
     			}
     		}
     		

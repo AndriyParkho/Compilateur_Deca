@@ -102,7 +102,7 @@ public abstract class AbstractExpr extends AbstractInst {
         		ClassType classReelle= (ClassType) typeReel;
         		ClassType classAttendue= (ClassType) expectedType;
         		if(!classReelle.isSubClassOf(classAttendue))
-        			throw new ContextualError(String.format("%s ne peut etre cast en %s", classReelle, classAttendue),this.getLocation());
+        			throw new ContextualError(String.format("%s ne peut être cast en %s", classReelle, classAttendue),this.getLocation());
         	}
     		else
     		{
@@ -159,7 +159,7 @@ public abstract class AbstractExpr extends AbstractInst {
     	//il faut juste alors vérifier si type est bien un booléen
     	if(!type.isBoolean())
     	{
-    		throw new ContextualError("la condition doit étre de type boolean",this.getLocation());
+    		throw new ContextualError("la condition doit être de type boolean",this.getLocation());
     	}
     }
 

@@ -74,7 +74,7 @@ public class DeclField extends AbstractDeclField {
 		}
 		else if(typeDefField.getType().isVoid())
 		{
-			throw new ContextualError("un champs ne peut pas etre de type void",this.getLocation());
+			throw new ContextualError("un champs ne peut pas être de type void",this.getLocation());
 		}
 		//on peut alors faire la déclaration et les set
 		FieldDefinition fieldDef;

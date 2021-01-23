@@ -34,7 +34,7 @@ public abstract class AbstractOpBool extends AbstractBinaryExpr {
     	//il faut ensuite s'assurer que les deux opérateurs sont des booléens
     	if((!typeGauche.isBoolean())||(!typeDroite.isBoolean()))
     	{
-    		throw new ContextualError("les deux opérateurs doivent étre de type boolean",this.getLocation());
+    		throw new ContextualError("les deux opérateurs doivent être de type boolean",this.getLocation());
     	}
     	this.setType(typeDroite);
     	return typeDroite;
