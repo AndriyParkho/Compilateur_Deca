@@ -15,6 +15,7 @@ import fr.ensimag.deca.context.Type;
 import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
+import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.RegisterOffset;
@@ -45,6 +46,14 @@ public class Dot extends AbstractLValue {
     }
     
     @Override
+	protected void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
+    	this.codeGenExpr(compiler, op);
+        int saut = eval ? 1 : 0;
+    	compiler.addInstruction(new CMP(saut ,op));
+    	compiler.addInstruction(new BEQ(etiquette));
+	}
+
+	@Override
     public DVal codeGenAssignDot(DecacCompiler compiler, GPRegister op) {
     	DVal valueDVal = DValGetter.getDVal(objet, compiler);
         if(valueDVal == null) {

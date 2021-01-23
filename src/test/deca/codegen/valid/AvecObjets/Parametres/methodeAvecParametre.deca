@@ -6,19 +6,16 @@
 
 
 class A{
-	int x;
-
-	
-	void setX(int nouveauX){
-	
-		x = nouveauX;
+	int x = 0;
+	void setX(int b){
+		x = b;
 	}
 }
 
 
 {
-	A a = new A();
-	a.setX(2);
-	println(a.x);
+A a = new A();
+a.setX(2);
+println(a.x);
 }
 

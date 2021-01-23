@@ -17,6 +17,7 @@ import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.instructions.LOAD;
 import fr.ensimag.ima.pseudocode.instructions.WFLOAT;
 import fr.ensimag.ima.pseudocode.instructions.WFLOATX;
 import fr.ensimag.ima.pseudocode.instructions.WINT;
@@ -101,14 +102,14 @@ public abstract class AbstractExpr extends AbstractInst {
         		ClassType classReelle= (ClassType) typeReel;
         		ClassType classAttendue= (ClassType) expectedType;
         		if(!classReelle.isSubClassOf(classAttendue))
-        			throw new ContextualError(String.format("%s ne peut etre cast en %s", classReelle, classAttendue),this.getLocation());
+        			throw new ContextualError(String.format("%s ne peut être cast en %s", classReelle, classAttendue),this.getLocation());
         	}
     		else
     		{
     			throw new ContextualError("un type class était attendu!",this.getLocation());
     		}
     	}
-    	//sinon, pour deux types différents , une seul possibilité: float=int
+    	//sinon, pour deux types différents , deux  possibilité: float=int ou null in object
 		else if(!typeReel.sameType(expectedType))
     	{
     		if(typeReel.isInt() && expectedType.isFloat())
@@ -118,7 +119,7 @@ public abstract class AbstractExpr extends AbstractInst {
     			entierEnReel.setType(typeReel);
     			return entierEnReel;
     		}
-    		else
+    		else if (!(typeReel.isNull() && expectedType.isClass()))
     		{
     			throw new ContextualError("type incompatible",this.getLocation());
     		}
@@ -158,7 +159,7 @@ public abstract class AbstractExpr extends AbstractInst {
     	//il faut juste alors vérifier si type est bien un booléen
     	if(!type.isBoolean())
     	{
-    		throw new ContextualError("la condition doit étre de type boolean",this.getLocation());
+    		throw new ContextualError("la condition doit être de type boolean",this.getLocation());
     	}
     }
 
@@ -175,13 +176,19 @@ public abstract class AbstractExpr extends AbstractInst {
     		compiler.addInstruction(new WSTR(newThis.getValue()));
     	}
     	else if(type.isFloat()) {
-    		this.codeGenExpr(compiler, Register.R1);
+    		GPRegister r = compiler.getRegisterStart();
+    		this.codeGenExpr(compiler, r);
+    		compiler.addInstruction(new LOAD(r, Register.R1));
+    		compiler.freeRegister(r);
     		Instruction printInst = printHex ? new WFLOATX() : new WFLOAT();
     		compiler.addInstruction(printInst);
     	}
     	
     	else if(type.isInt()) {
-    		this.codeGenExpr(compiler, Register.R1);
+    		GPRegister r = compiler.getRegisterStart();
+    		this.codeGenExpr(compiler, r);
+    		compiler.addInstruction(new LOAD(r, Register.R1));
+    		compiler.freeRegister(r);
     		compiler.addInstruction(new WINT());
     	}
     	

@@ -2,19 +2,14 @@
 //    tests de la déclaration d'une seule class
 //
 // Resultats:
-//    ok
+//    Rien
 
 
-class A { }
-class B extends A { }
-class C extends B { }
+class A{}
 
-{	
-	A a;
-	B b;
-	a = new C();
-	if (a instanceof B) {
-		b = (B)(a);
+{
+	A a = null;
+	if(a == null){
 		println("ok");
 	} else{
 		println("pas ok");

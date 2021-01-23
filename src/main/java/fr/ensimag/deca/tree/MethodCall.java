@@ -3,8 +3,9 @@ import java.io.PrintStream;
 
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
-import fr.ensimag.deca.context.VariableDefinition;
+import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.tools.IndentPrintStream;
+import fr.ensimag.ima.pseudocode.DVal;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
@@ -53,8 +54,15 @@ public class MethodCall extends AbstractMethodCall{
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
     	int nombreParametres = getArguments().size();
     	compiler.addInstruction(new ADDSP(nombreParametres + 1));
-
-    	compiler.addInstruction(new LOAD(((Identifier)getVariable()).getVariableDefinition().getOperand(), op));
+    	
+    	DVal objetDVal = DValGetter.getDVal(getVariable(), compiler);
+		if(objetDVal == null) {
+			getVariable().codeGenExpr(compiler, op);
+		} else {
+			compiler.addInstruction(new LOAD(objetDVal, op));
+		}
+    	compiler.addInstruction(new LOAD((DValGetter.getDVal(getVariable(), compiler)), op));
+    	
     	compiler.addInstruction(new STORE(op, new RegisterOffset(0, GPRegister.SP)));
     	int spOffset =0;
     	for(AbstractExpr argument : getArguments().getList()) {
@@ -73,7 +81,44 @@ public class MethodCall extends AbstractMethodCall{
     	}
     	compiler.addInstruction(new SUBSP(nombreParametres + 1));
     }
-
+    
+    @Override
+    public void codeGenSaut(DecacCompiler compiler, boolean eval, Label etiquette, GPRegister op) {
+    	int valeurEval = 0;
+    	if(eval) {
+    		valeurEval = 1;
+    	}
+     	int nombreParametres = getArguments().size();
+    	compiler.addInstruction(new ADDSP(nombreParametres + 1));
+    	DVal objetDVal = DValGetter.getDVal(getVariable(), compiler);
+		if(objetDVal == null) {
+			getVariable().codeGenExpr(compiler, op);
+		} else {
+			compiler.addInstruction(new LOAD(objetDVal, op));
+		}
+    	compiler.addInstruction(new LOAD((DValGetter.getDVal(getVariable(), compiler)), op));
+    	
+    	compiler.addInstruction(new STORE(op, new RegisterOffset(0, GPRegister.SP)));
+    	int spOffset =0;
+    	for(AbstractExpr argument : getArguments().getList()) {
+    		++spOffset;
+    		argument.codeGenExpr(compiler, op);
+    		compiler.addInstruction(new STORE(op, new RegisterOffset(- spOffset, GPRegister.SP)));
+    		
+    	}
+    	compiler.addInstruction(new LOAD(new RegisterOffset(0, GPRegister.SP), op));
+    	compiler.addInstruction(new CMP(new NullOperand(), op));
+    	CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+    	compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
+    	compiler.addInstruction(new BSR(new RegisterOffset(getMethod().getMethodDefinition().getIndex(), op)));
+    	if(getMethod().getDefinition().getType().isBoolean()) {
+    		compiler.addInstruction(new CMP(valeurEval, GPRegister.R1));
+    		compiler.addInstruction(new BEQ(etiquette));
+    	}
+    	compiler.addInstruction(new SUBSP(nombreParametres + 1));
+    }
+    
+    
     @Override
     public boolean isMethod() {
     	return true;

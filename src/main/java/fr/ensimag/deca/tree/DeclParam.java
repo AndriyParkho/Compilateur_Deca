@@ -52,7 +52,7 @@ public class DeclParam extends AbstractDeclParam {
 		//le type doit exister dans dans l'environnement des types 
 		if(typeDefParam == null)
 		{
-			throw new ContextualError("type introuvable dans envTypes", this.getLocation());
+			throw new ContextualError("Type inxistant", this.getLocation());
 		}
 		//le type existe mais il faut qu'il soit différent de void
 		else if(typeDefParam.getType().isVoid())
