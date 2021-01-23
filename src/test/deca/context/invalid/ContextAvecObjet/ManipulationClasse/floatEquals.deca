@@ -1,0 +1,13 @@
+//Description
+//  test equals avec un argument de type float
+//
+//Résultat
+//  Erreur contextuelle ligne 12
+//  Argument 1 de type float ne correspond au type du 1e argument de la méthode equals
+
+class A{}
+{
+    A a = new A();
+    float x = 0;
+    a.equals(x);
+}
