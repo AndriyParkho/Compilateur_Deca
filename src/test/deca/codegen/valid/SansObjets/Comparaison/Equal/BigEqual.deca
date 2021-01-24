@@ -1,0 +1,17 @@
+// Description:
+//    tests de déclaration de booléen
+//
+// Resultats:
+//    false
+
+
+{
+	int x = 5;
+	int y = 5;
+	if(((((x == y) == (x == y)) == ((x == y) == (x == y))) == (((x == y) == (x == y)) == ((x == y) == (x == y)))) == ((((x == y) == (x == y)) == ((x == y) == (x == y))) == (((x == y) == (x == y)) == ((x == y) == (x == y))))){
+   		println("true");
+   	}else{
+   		println("false");
+   	}
+}
+
