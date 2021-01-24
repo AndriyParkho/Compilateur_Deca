@@ -1,0 +1,16 @@
+// Description:
+//    test de l'extension cosinus
+//
+// Resultats:
+// les bonnes valeurs
+#include "Math.decah" 
+
+
+{
+    Math math = new Math();
+    println(math.cos(0.1));
+    println(math.cos(0.5));
+    println(math.cos(1.6));
+    println(math.cos(-0.3));
+    println(math.cos(-1));
+}

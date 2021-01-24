@@ -1,0 +1,16 @@
+// Description:
+//    test de l'extension ulp
+//
+// Resultats:
+// les bonnes valeurs
+#include "Math.decah" 
+
+
+{
+    Math math = new Math();
+    println(math.ulp(0.1));
+    println(math.ulp(0.5));
+    println(math.ulp(1.6));
+    println(math.ulp(-0.3));
+    println(math.ulp(-1));
+}
