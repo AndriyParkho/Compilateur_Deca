@@ -1,0 +1,22 @@
+//Description
+//  Mettre un int en argument à la place d'un Object
+//
+//Résultat
+//  Erreur contextuelle ligne 21
+//  B ne peut pas être cast en A
+
+class A{
+    A a;
+
+    void setA(A a){
+        this.a = a;
+    }
+}
+
+class B{}
+
+{
+    A a = new A();
+    B b = new B();
+    a.setA(b);
+}

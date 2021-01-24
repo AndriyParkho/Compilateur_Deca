@@ -1,0 +1,9 @@
+//Description
+//  Test unary minus pour un null
+//
+//Réponse
+//  Erreur contextuelle ligne 8
+//  type incompatible
+{
+    -null;
+}

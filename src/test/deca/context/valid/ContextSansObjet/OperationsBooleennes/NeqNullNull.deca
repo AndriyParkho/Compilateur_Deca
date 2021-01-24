@@ -1,0 +1,8 @@
+//Description
+//  Test d'inégalité entre deux null
+//
+//Réponse
+//  ok
+{
+    null != null;
+}

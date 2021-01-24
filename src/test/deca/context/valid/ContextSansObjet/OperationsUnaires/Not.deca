@@ -1,0 +1,18 @@
+//Description
+//  Test de Not
+//
+//Résultat
+//  ok
+
+{
+    boolean x = true&&true;
+    boolean y = false;
+    boolean z = false;
+    float a = 1;
+    float b = 3;
+    if (!x){}
+    else if(!true){}
+    else if (!y&&z){}
+    else if (!(x||y&&!z)){}
+    else if(!z&&!(true||false&&!(x&&!y||!(a<b && a==b || !(a>b+9*a))))){}
+}
