@@ -68,7 +68,7 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                             ConvFloat nouvelArgument = new ConvFloat(expr);
                             expr = nouvelArgument;
                         }
-                        else if (!expr.getType().isClass()){
+                        else if (!expr.getType().isClass() && !expr.isNull()){
                             throw new ContextualError(String.format("Argument %d de type %s ne correspond au type du %de argument de la méthode %s",
                                     index + 1, expr.getType().getName().getName(), index + 1, method.getName().getName()),
                                     expr.getLocation());

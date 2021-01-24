@@ -2,39 +2,39 @@
 //  Réalisation d'un liste chaînée d'entier en deca
 //
 // Resultats:
-// 
+//
 // Historique:
 //    cree le 23/01/2021
 
 class ListChaine{
 	int valeur;
 	ListChaine suivant;
-	
+
 	void setCellule(int val, ListChaine suiv){
 		this.valeur = val;
-		this.suivant = suiv; 
+		this.suivant = suiv;
 	}
-	
+
 	ListChaine insertPrevious(int valeur){
 	ListChaine nouvelElement = new ListChaine();
 	nouvelElement.setCellule(valeur, this);
 	return nouvelElement;
 	}
-	
+
 	void printListe(){
 	ListChaine current = this;
 	while(current.suivant != null){
-		print(current.val, ", ");
+		print(current.valeur, ", ");
 		current.suivant = current.suivant;
 	}
-	println(current.val);
+	println(current.valeur);
 	}
 }
 
 {
 	int i = 10;
 	ListChaine nouvelElement;
-	LIstChaine premierElement;
+	ListChaine premierElement;
 	ListChaine dernierElement = new ListChaine();
 	dernierElement.setCellule(i, null);
 	premierElement = dernierElement;
@@ -43,6 +43,6 @@ class ListChaine{
 	nouvelElement = premierElement.insertPrevious(i);
 	premierElement = nouvelElement;
 	}
-	
+
 
 }
