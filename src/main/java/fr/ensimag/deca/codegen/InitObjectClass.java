@@ -45,7 +45,7 @@ public class InitObjectClass {
 	public static void codeGenInitObject(DecacCompiler compiler) {
 		CompilerInstruction.decorationAssembleur(compiler, "Classe Object");
 		CompilerInstruction.decorationLigne(compiler, "Initialisation des champs de Object");
-		compiler.addLabel(compiler.createLabel("init.object"));
+		compiler.addLabel(compiler.createLabel("init.Object"));
 		compiler.addInstruction(new RTS());
 		
 	}
