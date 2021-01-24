@@ -28,15 +28,16 @@ public class EnvironmentExp {
     // d'empilement).
 
     EnvironmentExp parentEnvironment;
-    Hashtable<Symbol,ExpDefinition> donnees = new Hashtable<Symbol,ExpDefinition>();
+    Hashtable<Symbol, ExpDefinition> donnees = new Hashtable<Symbol, ExpDefinition>();
 
-    public EnvironmentExp getParentEnvironment() { return parentEnvironment; }
-
-    public Hashtable<Symbol,ExpDefinition> getDonnees()
-    {
-    	return this.donnees;
+    public EnvironmentExp getParentEnvironment() {
+        return parentEnvironment;
     }
-    
+
+    public Hashtable<Symbol, ExpDefinition> getDonnees() {
+        return this.donnees;
+    }
+
     public EnvironmentExp(EnvironmentExp parentEnvironment) {
         this.parentEnvironment = parentEnvironment;
     }
@@ -51,11 +52,10 @@ public class EnvironmentExp {
      */
     public ExpDefinition get(Symbol key) {
         EnvironmentExp env_courant = this;
-        while (env_courant != null){
-            if (env_courant.donnees.get(key) != null){
+        while (env_courant != null) {
+            if (env_courant.donnees.get(key) != null) {
                 return env_courant.donnees.get(key);
-            }
-            else{
+            } else {
                 env_courant = env_courant.parentEnvironment;
             }
         }
@@ -64,54 +64,20 @@ public class EnvironmentExp {
 
     /**
      * Add the definition def associated to the symbol name in the environment.
-     * 
+     * <p>
      * Adding a symbol which is already defined in the environment,
-     * - throws DoubleDefException if the symbol is in the "current" dictionary 
+     * - throws DoubleDefException if the symbol is in the "current" dictionary
      * - or, hides the previous declaration otherwise.
-     * 
-     * @param name
-     *            Name of the symbol to define
-     * @param def
-     *            Definition of the symbol
-     * @throws DoubleDefException
-     *             if the symbol is already defined at the "current" dictionary
      *
+     * @param name Name of the symbol to define
+     * @param def  Definition of the symbol
+     * @throws DoubleDefException if the symbol is already defined at the "current" dictionary
      */
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
-    	if (!this.donnees.containsKey(name)) {
-    		this.donnees.put(name, def);
-    	}
-    	else {
-    		throw new DoubleDefException();
-    	}
+        if (!this.donnees.containsKey(name)) {
+            this.donnees.put(name, def);
+        } else {
+            throw new DoubleDefException();
+        }
     }
-
-
-    public EnvironmentExp union(EnvironmentExp env) throws DoubleDefException{
-        //Calcul de l'union de deux environnements. Renvoie une erreur contextuelle si indéfinie
-        for (Symbol symbol_this : this.donnees.keySet()){
-            for (Symbol symbol_env : env.donnees.keySet()){
-                if (symbol_this.getName().equals(symbol_env.getName())){
-                    throw new DoubleDefException();
-                }
-            }
-        }
-        EnvironmentExp Union;
-        if (this.parentEnvironment== null && env.parentEnvironment == null) {
-            Union = new EnvironmentExp(null);
-        }
-        else if (this.parentEnvironment == null){
-            Union = new EnvironmentExp(env.parentEnvironment);
-        }
-        else if (env.parentEnvironment == null){
-            Union = new EnvironmentExp(this.parentEnvironment);
-        }
-        else {
-            Union = new EnvironmentExp(this.parentEnvironment.union(env.parentEnvironment));
-        }
-        Union.donnees.putAll(this.donnees);
-        Union.donnees.putAll(env.donnees);
-        return Union;
-    }
-
 }

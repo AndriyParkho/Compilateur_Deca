@@ -67,7 +67,9 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                     if (expr.getType().getName() != method.getMethodDefinition().getSignature().paramNumber(index).getName()) {
                         if (expr.getType().isInt() && method.getMethodDefinition().getSignature().paramNumber(index).isFloat()){
                             ConvFloat nouvelArgument = new ConvFloat(expr);
+                            nouvelArgument.setType(compiler.getEnvTypes().get(compiler.getSymbolTable().create("float")).getType());
                             expr = nouvelArgument;
+                            arguments.set(index,expr);
                         }
                         else if (method.getMethodDefinition().getSignature().paramNumber(index).isClass()){
                            try{

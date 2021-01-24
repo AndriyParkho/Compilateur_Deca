@@ -47,10 +47,6 @@ public class Return extends AbstractInst{
 				reel.setType(returnType);
 				this.returnExpr=reel;
 			}
-			else if(!type.sameType(returnType))
-			{
-				throw new ContextualError("type incompatible avec le returnType",this.getLocation());
-			}
 		}
 		this.returnExpr.setType(returnType);
 	}

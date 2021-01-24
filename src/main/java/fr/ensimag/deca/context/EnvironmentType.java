@@ -77,30 +77,4 @@ public class EnvironmentType {
     		throw new DoubleDefException();
     	}
     }
-    public EnvironmentType union(EnvironmentType env) throws EnvironmentType.DoubleDefException {
-        //Calcul de l'union de deux environnements. Renvoie une erreur contextuelle si indéfinie
-        for (Symbol symbol_this : this.donnees.keySet()){
-            for (Symbol symbol_env : env.donnees.keySet()){
-                if (symbol_this.getName().equals(symbol_env.getName())){
-                    throw new EnvironmentType.DoubleDefException();
-                }
-            }
-        }
-        EnvironmentType Union;
-        if (this.parentEnvironment== null && env.parentEnvironment == null) {
-            Union = new EnvironmentType(null);
-        }
-        else if (this.parentEnvironment == null){
-            Union = new EnvironmentType(env.parentEnvironment);
-        }
-        else if (env.parentEnvironment == null){
-            Union = new EnvironmentType(this.parentEnvironment);
-        }
-        else {
-            Union = new EnvironmentType(this.parentEnvironment.union(env.parentEnvironment));
-        }
-        Union.donnees.putAll(this.donnees);
-        Union.donnees.putAll(env.donnees);
-        return Union;
-    }
 }
