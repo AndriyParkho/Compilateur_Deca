@@ -1,0 +1,17 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    OK
+
+
+class A{
+}
+
+{
+	Object obj = new Object();
+	if(obj instanceof Object){
+		println("OK");
+	}
+}
+
