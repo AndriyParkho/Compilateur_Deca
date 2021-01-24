@@ -7,40 +7,38 @@ class Math {
     Cellule sigmaListe = test.sigmaInitie();
     float pi =  3.14159265359;
     
-    float sin(float f) {
-        float cos = 0.607252959138945;
-        float sin = 0;
-        float angleActuel = 0;
-        float save;
-        Cellule suiv = this.sigmaListe;
-        float exp2 = 1;
-        int nbPi = this.rapprochePi(angle);
-        int i= 0;
-        f = f - nbPi * this.pi;    
-        while (i < 51) {
-            save = cos;
-            if(angleActuel - f >= 0) {
-                cos = (save + sin * (1/exp2));
-                sin = (-save * (1/exp2) + sin);
-                angleActuel = angleActuel - suiv.getVal();
-            }
-            else if(angleActuel - f < 0) {
-                cos = (save - sin * 1/exp2);
-                sin = (save * 1/exp2 + sin);
-                angleActuel = angleActuel + suiv.getVal();
-            }
-            suiv= suiv.getNext();
-            exp2 = exp2 *2;
-            i = i + 1;
-        }
-        if (nbPi%2 ==1) {
-            return (-sin);
-        }
-        else {
-            return (sin);
-        }
-
-    }
+    //float sin(float f) {
+    //    float cos = 0.607252959138945;
+    //    float sin = 0;
+    //    float angleActuel = 0;
+    //    float save;
+    //    Cellule suiv = this.sigmaListe;
+    //    float exp2 = 1;
+    //    int nbPi = this.rapprochePi(f);
+    //    int i= 0;
+    //    f = f - nbPi * this.pi;    
+    //    while (i < 51) {
+    //        save = cos;
+    //        if(angleActuel - f >= 0) {
+    //            cos = (save + sin * (1/exp2));
+    //            sin = (-save * (1/exp2) + sin);
+    //            angleActuel = angleActuel - suiv.getVal();
+    //        }
+    //        else if(angleActuel - f < 0) {
+    //            cos = (save - sin * (1/exp2));
+    //            sin = (save * (1/exp2) + sin);
+    //            angleActuel = angleActuel + suiv.getVal();
+    //        }
+    //        suiv= suiv.getNext();
+    //        exp2 = exp2 *2;
+    //        i = i + 1;
+    //    }
+    //    if (nbPi%2 ==1) {
+    //        return (-sin);
+    //    }
+    //    else {
+    //        return (sin);      }}
+    //}
     float cos(float f) {
         float cos = 0.607252959138945;
         float sin = 0;
@@ -113,6 +111,7 @@ class Math {
         }
         return zn;
     }
+
     float atan(float f) {
         float xn = 1;
         float yn = -f;
@@ -139,6 +138,7 @@ class Math {
         }
         return zn;
     }
+
     float ulp(float f) {
         float borneInf = 8388608;
         float borneSup = 16777216;
