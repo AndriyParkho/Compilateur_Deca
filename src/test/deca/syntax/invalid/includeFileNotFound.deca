@@ -1,0 +1,8 @@
+//Description
+//  test d'un include d'un fichier non existant
+//
+//Réponse
+//  Erreur syntaxique ligne 8
+//  Ma.decah: include file not found
+
+#include "Ma.decah"

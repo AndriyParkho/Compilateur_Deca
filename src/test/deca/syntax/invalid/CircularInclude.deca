@@ -1,0 +1,9 @@
+//Description
+//  test d'un circularInclude
+//
+//Réponse
+//  Erreur syntaxique ligne 8
+//  Circular include for file CircularInclude1.decah
+
+#include "CircularInclude1.decah"
+{}

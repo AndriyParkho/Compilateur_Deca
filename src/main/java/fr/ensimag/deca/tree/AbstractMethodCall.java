@@ -37,22 +37,21 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                 throws ContextualError {
         EnvironmentExp envLocal = compiler.getEnvExp();
         try {
+            if (variable == null && currentClass == null){
+                throw new ContextualError("identificateur non défini", this.getLocation());
+            }
+            else if (variable == null && currentClass!=null) {
+                variable = new This();
+            }
             variable.verifyExpr(compiler, currentClass);
-            if (!variable.getType().isClass()){
+            if (!variable.getType().isClass()) {
                 throw new ContextualError("l'appel de méthode est utilisable uniquement pour les instances de classe", this.getLocation());
             }
-            compiler.setEnvExp(((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName()))).getMembers());
+            compiler.setEnvExp(((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName()))).getMembers());
             method.verifyExpr(compiler, currentClass);
             compiler.setEnvExp(envLocal);
         }catch (ContextualError ce){throw ce;}
-        if (variable.getType().isClass()){
-            if (((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName())))
-                    .getMembers().get(compiler.getSymbolTable().create(method.getName().getName())) == null &&
-                    ((ClassDefinition) compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName())))
-                            .getMembers().get(method.getName()) == null) {
-                throw new ContextualError(String.format("La méthode %s n'existe pas pour la classe %s",
-                        method.getName().getName(), variable.getType().getName().getName()), variable.getLocation());
-            }
+        if (variable == null || variable.getType().isClass()){
             if (arguments.getList().size() != method.getMethodDefinition().getSignature().size()){
                 throw new ContextualError(String.format("Le nombre d'arguments entrés dans %s ne correspond pas à sa signature",
                         method.getName().getName()),method.getLocation());

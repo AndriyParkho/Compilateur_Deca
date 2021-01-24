@@ -12,7 +12,7 @@ PATH=./src/main/bin:../global/bin:"$PATH"
 find ./src/test/deca/codegen/valid/ -name "*.ass" -type f -delete
 find ./src/test/deca/codegen/valid/ -name "*Dec.deca" -type f -delete
 
-list_tests=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.deca | sort))
+list_tests=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.deca$ | sort))
 list_answers=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.ans | sort))
 
 for ((i=0 ; i<${#list_tests[@]} ; i++)); do

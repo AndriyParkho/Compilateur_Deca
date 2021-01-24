@@ -267,6 +267,16 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>Syntax</id>
+                        <configuration>
+                            <executable>./src/test/script/Syntax.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>Contexte</id>
                         <configuration>
                             <executable>./src/test/script/Context.sh</executable>
