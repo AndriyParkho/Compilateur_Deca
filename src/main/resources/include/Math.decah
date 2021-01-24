@@ -14,7 +14,7 @@ class Math {
         float save;
         Cellule suiv = this.sigmaListe;
         float exp2 = 1;
-        int nbPi = this.rapprochePi(angle);
+        int nbPi = this.rapprochePi(f);
         int i= 0;
         f = f - nbPi * this.pi;    
         while (i < 51) {
@@ -25,8 +25,8 @@ class Math {
                 angleActuel = angleActuel - suiv.getVal();
             }
             else if(angleActuel - f < 0) {
-                cos = (save - sin * 1/exp2);
-                sin = (save * 1/exp2 + sin);
+                cos = (save - sin * (1/exp2));
+                sin = (save * (1/exp2) + sin);
                 angleActuel = angleActuel + suiv.getVal();
             }
             suiv= suiv.getNext();
@@ -37,10 +37,10 @@ class Math {
             return (-sin);
         }
         else {
-            return (sin);
+            return (sin);      
+            }
         }
 
-    }
     float cos(float f) {
         float cos = 0.607252959138945;
         float sin = 0;
@@ -113,6 +113,7 @@ class Math {
         }
         return zn;
     }
+
     float atan(float f) {
         float xn = 1;
         float yn = -f;
@@ -135,13 +136,18 @@ class Math {
             zn = zn + sign * suiv.getVal();
             suiv = suiv.getNext();
             exp2 = exp2/2;
+            i = i + 1;
         }
         return zn;
     }
+
     float ulp(float f) {
         float borneInf = 8388608;
         float borneSup = 16777216;
         float ulp = 1;
+        if (f < 0) {
+            f = -f;
+        }
         if (f == 0) {
             return (float) (1.4E-45);
         }
@@ -168,6 +174,21 @@ class Math {
     float pi() {
         return pi;
     }
+
+    int rapprochePi(float angle) {
+        int i = 0;
+        while ((angle <= -pi/2) || (angle>= pi/2)) {
+            if (angle < 0) {
+                angle = angle + pi;
+            }
+            else {
+                angle = angle - pi;
+            }
+            i = i +1;
+        }
+        return i;
+    }
+
 }
 
 class Cellule {
@@ -192,7 +213,7 @@ class Cellule {
     
     Cellule sigmaInitie() {
         Cellule actuelle = new Cellule();
-            Cellule suiv;
+        Cellule suiv;
         suiv = actuelle;
         actuelle = new Cellule();
         actuelle.setVal(2.7755576E-17);

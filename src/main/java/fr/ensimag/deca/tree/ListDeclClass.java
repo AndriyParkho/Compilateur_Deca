@@ -73,6 +73,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     	CompilerInstruction.decorationAssembleur(compiler, "Construction des tables des méthodes");
     	InitObjectClass.initObjectMethodsTbl(compiler);
     	
+    	
     	for(AbstractDeclClass classe : this.getList()) {
     		classe.codeGenClassMethodTable(compiler);
     	}
@@ -80,7 +81,7 @@ public class ListDeclClass extends TreeList<AbstractDeclClass> {
     
     public void codeGenListClassBody(DecacCompiler compiler) {
     	
-
+    	InitObjectClass.codeGenInitObject(compiler);
     	InitObjectClass.codeGenEqualsMethod(compiler);
     	for(AbstractDeclClass classe : getList()) {
     		classe.codeGenClassBody(compiler);
