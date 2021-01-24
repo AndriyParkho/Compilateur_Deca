@@ -146,15 +146,17 @@ public class DeclField extends AbstractDeclField {
 	@Override
 	public void codeGenInitField(DecacCompiler compiler) {
 		compiler.addComment("Initialisation de "+name.getName().getName());
+		GPRegister r = compiler.getRegisterStart();
 		if(initialization.isInitialization()) {
 			Initialization init = (Initialization)initialization;
-			init.getExpression().codeGenExpr(compiler, GPRegister.R0);
+			init.getExpression().codeGenExpr(compiler, r);
 			}
 		else {
-			CompilerInstruction.initVarToZero(compiler, type, GPRegister.R0);
+			CompilerInstruction.initVarToZero(compiler, type, r);
 		}
 		compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), GPRegister.R1));
-		compiler.addInstruction(new STORE(GPRegister.R0, new RegisterOffset(name.getFieldDefinition().getIndex(), GPRegister.R1)));
+		compiler.addInstruction(new STORE(r, new RegisterOffset(name.getFieldDefinition().getIndex(), GPRegister.R1)));
+		compiler.freeRegister(r);
 		
 	}
 	

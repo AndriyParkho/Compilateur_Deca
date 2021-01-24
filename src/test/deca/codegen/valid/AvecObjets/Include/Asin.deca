@@ -14,4 +14,5 @@
     println(math.asin(-0.3));
     println(math.asin(-1));
     println(math.asin(0));
+    println(math.asin(200));
 }

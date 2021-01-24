@@ -1,6 +1,5 @@
 // Description:
 //    test de l'extension sinus
-//
 // Resultats:
 // les bonnes valeurs
 #include "Math.decah" 

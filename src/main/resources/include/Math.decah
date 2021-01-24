@@ -85,6 +85,10 @@ class Math {
         float exp2 = 1;
         int i = 0;
         Cellule suiv = this.sigmaListe;
+        if (f > 1 || f < -1) {
+            println("Veuillez entrez une valeur coprise entre -1 et 1.");
+            return -2;
+        }
         while (i < 51) {
             if (xn < 0) {
                 signx =-1;

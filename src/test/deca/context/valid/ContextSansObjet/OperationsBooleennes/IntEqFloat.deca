@@ -1,0 +1,8 @@
+//Description
+// test de comparaison entre en int et un float
+//
+//Réponse
+// ok
+{
+    1 == 1.0;
+}
