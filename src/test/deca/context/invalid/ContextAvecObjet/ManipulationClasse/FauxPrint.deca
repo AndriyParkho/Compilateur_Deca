@@ -1,0 +1,9 @@
+//Description
+//  Faute d'ortho dans un println
+//
+//Résulat
+//  Erreur contextuelle ligne 8
+//  identificateur non défini
+{
+    printn("Je suis print mal écrit");
+}

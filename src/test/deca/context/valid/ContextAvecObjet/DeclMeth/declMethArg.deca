@@ -11,4 +11,8 @@ class A{
     void setX(int y){
         x = y;
     }
+    void test(int y){
+        setX(y);
+    }
 }
+
