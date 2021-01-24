@@ -7,38 +7,40 @@ class Math {
     Cellule sigmaListe = test.sigmaInitie();
     float pi =  3.14159265359;
     
-    //float sin(float f) {
-    //    float cos = 0.607252959138945;
-    //    float sin = 0;
-    //    float angleActuel = 0;
-    //    float save;
-    //    Cellule suiv = this.sigmaListe;
-    //    float exp2 = 1;
-    //    int nbPi = this.rapprochePi(f);
-    //    int i= 0;
-    //    f = f - nbPi * this.pi;    
-    //    while (i < 51) {
-    //        save = cos;
-    //        if(angleActuel - f >= 0) {
-    //            cos = (save + sin * (1/exp2));
-    //            sin = (-save * (1/exp2) + sin);
-    //            angleActuel = angleActuel - suiv.getVal();
-    //        }
-    //        else if(angleActuel - f < 0) {
-    //            cos = (save - sin * (1/exp2));
-    //            sin = (save * (1/exp2) + sin);
-    //            angleActuel = angleActuel + suiv.getVal();
-    //        }
-    //        suiv= suiv.getNext();
-    //        exp2 = exp2 *2;
-    //        i = i + 1;
-    //    }
-    //    if (nbPi%2 ==1) {
-    //        return (-sin);
-    //    }
-    //    else {
-    //        return (sin);      }}
-    //}
+    float sin(float f) {
+        float cos = 0.607252959138945;
+        float sin = 0;
+        float angleActuel = 0;
+        float save;
+        Cellule suiv = this.sigmaListe;
+        float exp2 = 1;
+        int nbPi = this.rapprochePi(f);
+        int i= 0;
+        f = f - nbPi * this.pi;    
+        while (i < 51) {
+            save = cos;
+            if(angleActuel - f >= 0) {
+                cos = (save + sin * (1/exp2));
+                sin = (-save * (1/exp2) + sin);
+                angleActuel = angleActuel - suiv.getVal();
+            }
+            else if(angleActuel - f < 0) {
+                cos = (save - sin * (1/exp2));
+                sin = (save * (1/exp2) + sin);
+                angleActuel = angleActuel + suiv.getVal();
+            }
+            suiv= suiv.getNext();
+            exp2 = exp2 *2;
+            i = i + 1;
+        }
+        if (nbPi%2 ==1) {
+            return (-sin);
+        }
+        else {
+            return (sin);      
+            }
+        }
+
     float cos(float f) {
         float cos = 0.607252959138945;
         float sin = 0;
@@ -172,6 +174,21 @@ class Math {
     float pi() {
         return pi;
     }
+
+    int rapprochePi(float angle) {
+        int i = 0;
+        while ((angle <= -pi/2) || (angle>= pi/2)) {
+            if (angle < 0) {
+                angle = angle + pi;
+            }
+            else {
+                angle = angle - pi;
+            }
+            i = i +1;
+        }
+        return i;
+    }
+
 }
 
 class Cellule {
