@@ -1,14 +1,15 @@
 // Description:
-//    tests de déclaration de booléen
+//    tests de déclaration d'un booléen qui utilise tout les registres possible
 //
 // Resultats:
-//    false
+//    true
 
 
 {
 	int x = 5;
 	int y = 5;
-	if(((((x == y) == (x == y)) == ((x == y) == (x == y))) == (((x == y) == (x == y)) == ((x == y) == (x == y)))) == ((((x == y) == (x == y)) == ((x == y) == (x == y))) == (((x == y) == (x == y)) == ((x == y) == (x == y))))){
+	boolean bool = ((((((((((((((((x == y) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)) == (x == y)); 
+	if(bool){
    		println("true");
    	}else{
    		println("false");
