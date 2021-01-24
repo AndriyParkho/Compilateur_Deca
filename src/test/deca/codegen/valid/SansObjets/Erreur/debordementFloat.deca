@@ -3,7 +3,7 @@
 //    Skipped decompile
 //
 // Resultats:
-//  Erreur: Division par 0.0 non autorisée ligne 8 position 15
+//  Erreur: Division par 0.0 non autorisée ligne 10 position 14
 
 {
    float x = 5.7896045e+30;
