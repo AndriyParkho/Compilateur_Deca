@@ -30,8 +30,10 @@ public class MethodCall extends AbstractMethodCall{
 
     @Override
     public void decompile(IndentPrintStream s) {
-		this.getVariable().decompile(s);
-		s.print(".");
+		if (this.getVariable() != null) {
+			this.getVariable().decompile(s);
+			s.print(".");
+		}
 		this.getMethod().decompile(s);
 		s.print("(");
 		this.getArguments().decompile(s);
@@ -44,7 +46,9 @@ public class MethodCall extends AbstractMethodCall{
 
     @Override
     protected void prettyPrintChildren(PrintStream s, String prefix) {
-        this.getVariable().prettyPrint(s, prefix, true);
+        if (this.getVariable() != null) {
+			this.getVariable().prettyPrint(s, prefix, true);
+		}
         this.getMethod().prettyPrint(s, prefix, true);
         this.getArguments().prettyPrint(s, prefix, true);
     }

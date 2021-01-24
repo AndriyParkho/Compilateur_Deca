@@ -22,7 +22,6 @@ public abstract class AbstractMethodCall extends AbstractExpr{
     private ListExpr arguments;
 
     public AbstractMethodCall(AbstractExpr variable, AbstractIdentifier method, ListExpr arguments){
-        Validate.notNull(variable);
         Validate.notNull(method);
         this.variable = variable;
         this.method = method;
