@@ -1,0 +1,17 @@
+// Description:
+//    test de l'extension asinus
+//
+// Resultats:
+// les bonnes valeurs
+#include "Math.decah" 
+
+
+{
+    Math math = new Math();
+    println(math.asin(0.1));
+    println(math.asin(0.5));
+    println(math.asin(1));
+    println(math.asin(-0.3));
+    println(math.asin(-1));
+    println(math.asin(0));
+}

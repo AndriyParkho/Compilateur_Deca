@@ -39,6 +39,9 @@ public abstract class AbstractMethodCall extends AbstractExpr{
         EnvironmentExp envLocal = compiler.getEnvExp();
         try {
             variable.verifyExpr(compiler, currentClass);
+            if (!variable.getType().isClass()){
+                throw new ContextualError("l'appel de méthode est utilisable uniquement pour les instances de classe", this.getLocation());
+            }
             compiler.setEnvExp(((ClassDefinition)compiler.getEnvTypes().get(compiler.getSymbolTable().create(variable.getType().getName().getName()))).getMembers());
             method.verifyExpr(compiler, currentClass);
             compiler.setEnvExp(envLocal);

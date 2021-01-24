@@ -1,0 +1,16 @@
+// Description:
+//    test de l'extension sinus
+//
+// Resultats:
+// les bonnes valeurs
+#include "Math.decah" 
+
+
+{
+    Math math = new Math();
+    println(math.sin(0.1));
+    println(math.sin(0.5));
+    println(math.sin(1.6));
+    println(math.sin(-0.3));
+    println(math.sin(-1));
+}

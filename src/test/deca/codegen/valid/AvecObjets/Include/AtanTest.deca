@@ -1,0 +1,17 @@
+// Description:
+//    test de l'extension atan
+//
+// Resultats:
+// les bonnes valeurs
+#include "Math.decah" 
+
+
+{
+    Math math = new Math();
+    println(math.atan(0.1));
+    println(math.atan(0.5));
+    println(math.atan(1.6));
+    println(math.atan(-0.3));
+    println(math.atan(-1));
+    println(math.atan(200));
+}
