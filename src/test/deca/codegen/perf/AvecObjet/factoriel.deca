@@ -1,0 +1,20 @@
+//Description
+//  Calcul récursif de la factorielle d'un entier entré par l'utilisateur
+//
+//Réponse
+//  n!
+class Factoriel{
+    int fact(int n){
+        if (n==0){
+            return 1;
+        }
+        else{
+            return this.fact(n-1)*n;
+        }
+    }
+}
+{
+    Factoriel calcul = new Factoriel();
+    int n = readInt();
+    println(calcul.fact(n));
+}

@@ -2,22 +2,426 @@
 // Library for class Math of Deca, coded in Deca
 
 class Math {
+    
+    Cellule test;
+    Cellule sigmaListe = test.sigmaInitie();
+    float pi =  3.14159265359;
+    
     float sin(float f) {
-        println("sin(f) not yet implemented");
+        float cos = 0.607252959138945;
+        float sin = 0;
+        float angleActuel = 0;
+        float save;
+        Cellule suiv = this.sigmaListe;
+        float exp2 = 1;
+        int nbPi = this.rapprochePi(angle);
+        int i= 0;
+        f = f - nbPi * this.pi;    
+        while (i < 51) {
+            save = cos;
+            if(angleActuel - f >= 0) {
+                cos = (save + sin * (1/exp2));
+                sin = (-save * (1/exp2) + sin);
+                angleActuel = angleActuel - suiv.getVal();
+            }
+            else if(angleActuel - f < 0) {
+                cos = (save - sin * 1/exp2);
+                sin = (save * 1/exp2 + sin);
+                angleActuel = angleActuel + suiv.getVal();
+            }
+            suiv= suiv.getNext();
+            exp2 = exp2 *2;
+            i = i + 1;
+        }
+        if (nbPi%2 ==1) {
+            return (-sin);
+        }
+        else {
+            return (sin);
+        }
+
     }
     float cos(float f) {
-        println("cos(f) not yet implemented");
+        float cos = 0.607252959138945;
+        float sin = 0;
+        float angleActuel = 0;
+        float save;
+        Cellule suiv = this.sigmaListe;
+        float exp2 = 1;
+        int nbPi = this.rapprochePi(f);
+        int i = 0;
+        f = f - nbPi * this.pi;    
+        while (i < 51) {
+            save = cos;
+            if(angleActuel - f >= 0) {
+                cos = (save + sin * (1/exp2));
+                sin = (-save * (1/exp2) + sin);
+                angleActuel = angleActuel - suiv.getVal();
+            }
+            else if(angleActuel - f < 0) {
+                cos = (save - sin * 1/exp2);
+                sin = (save * 1/exp2 + sin);
+                angleActuel = angleActuel + suiv.getVal();
+            }
+            suiv= suiv.getNext();
+            exp2 = exp2 *2;
+            i = i + 1;
+        }
+        if (nbPi%2 == 1) {
+            return -cos;
+        }
+        else {
+            return cos;
+        }
     }
     float asin(float f) {
-        println("asin(f) not yet implemented");
+        float xn = 1;
+        float yn = 0;
+        float zn = 0;
+        float wn = f;
+        float save;
+        float sign;
+        float signx;
+        float exp2 = 1;
+        int i = 0;
+        Cellule suiv = this.sigmaListe;
+        while (i < 51) {
+            if (xn < 0) {
+                signx =-1;
+            }
+            else {
+                signx = 1;
+            }
+            if (yn <= wn) {
+                sign = signx;
+            }
+            else {
+                sign = -signx;
+            }
+            save = xn;
+            xn = save - sign*yn*exp2;
+            yn = yn + sign*save*exp2;
+            zn = zn + sign * suiv.getVal();
+            save = xn;
+            xn = save - sign*yn*exp2;
+            yn = yn + sign*save*exp2;
+            zn = zn + sign * suiv.getVal();
+            wn = wn + wn * exp2 * exp2;
+            exp2 = exp2/2;
+            suiv = suiv.getNext();
+            i = i + 1;
+        }
+        return zn;
     }
     float atan(float f) {
-        println("atan(f) not yet implemented");
+        float xn = 1;
+        float yn = -f;
+        float zn = 0;
+        float save;
+        float sign;
+        float exp2 = 1;
+        int i = 0;
+        Cellule suiv = this.sigmaListe;
+        while (i < 51) {
+            if (yn <= 0) {
+                sign = 1;
+            }
+            else {
+                sign = -1;
+            }
+            save = xn;
+            xn = save - sign*yn*exp2;
+            yn = yn + sign*save*exp2;
+            zn = zn + sign * suiv.getVal();
+            suiv = suiv.getNext();
+            exp2 = exp2/2;
+            i = i + 1;
+        }
+        return zn;
     }
     float ulp(float f) {
-        println("ulp(f) not yet implemented");
+        float borneInf = 8388608;
+        float borneSup = 16777216;
+        float ulp = 1;
+        if (f < 0) {
+            f = -f;
+        }
+        if (f == 0) {
+            return (float) (1.4E-45);
+        }
+        else if (f >= borneSup) {
+            while (f >= borneSup) {
+                borneInf = borneInf * 2;
+                borneSup = borneSup * 2;
+                ulp = ulp * 2;
+            }
+            return ulp;
+        }
+        else if (f < borneInf) {
+            while (f < borneInf) {
+                borneInf = borneInf / 2;
+                ulp = ulp / 2;
+            }
+            return ulp;
+        }
+        else {
+            return ulp;
+        }
+    }
+
+    float pi() {
+        return pi;
     }
 }
 
+class Cellule {
+    float a;
+    Cellule next;
 
+    Cellule getNext() {
+        return this.next;
+    }
+
+    float getVal() {
+        return this.a;
+    }
+
+    void setNext(Cellule cell) {
+        this.next = cell;
+    }
+
+    void setVal(float val) {
+        this.a = val;
+    }
+    
+    Cellule sigmaInitie() {
+        Cellule actuelle = new Cellule();
+        Cellule suiv;
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.7755576E-17);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(5.551115E-17);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.110223E-16);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.220446E-16);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(4.440892E-16);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(8.881784E-16);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.7763568E-15);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(3.5527137E-15);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(7.1054274E-15);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.4210855E-14);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.842171E-14);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(5.684342E-14);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.1368684E-13);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.2737368E-13);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(4.5474735E-13);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(9.094947E-13);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.8189894E-12);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(3.6379788E-12);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(7.2759576E-12);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.4551915E-11);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.910383E-11);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(5.820766E-11);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.1641532E-10);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.3283064E-10);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(4.656613E-10);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(9.313226E-10);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.8626451E-9);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(3.7252903E-9);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(7.4505806E-9);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.4901161E-8);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.9802322E-8);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(5.9604645E-8);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.1920929E-7);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.3841858E-7);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(4.7683716E-7);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(9.536743E-7);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.9073486E-6);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(3.8146973E-6);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(7.6293945E-6);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.5258789E-5);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(3.0517578E-5);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(6.1035156E-5);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(1.2207031E-4);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(2.4414062E-4);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(4.8828122E-4);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(9.765622E-4);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.0019531226);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.0039062302);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.007812341);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.015623729);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.031239834);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.06241881);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.124354996);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.24497867);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.4636476);
+        actuelle.setNext(suiv);
+        suiv = actuelle;
+        actuelle = new Cellule();
+        actuelle.setVal(0.7853982);
+        actuelle.setNext(suiv);
+        return actuelle;
+        }
+    }
 // End of Deca Math library

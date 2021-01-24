@@ -9,10 +9,22 @@ cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/main/bin:../global/bin:"$PATH"
 
-src/main/bin/decac -d $1
 fichier=$1
+rm "${fichier%.deca}.ass" >/dev/null
+if [ -z $2 ]
+then
+  src/main/bin/decac -d $1
+elif [ $2 = "-q" ]
+then
+  src/main/bin/decac $1
+else
+  echo "Commande $2 non définie"
+  exit 1
+fi
 fichier="${fichier%.deca}.ass"
 echo "--------- Resultat : ---------"
 ima -s $fichier
-exit 1
-
+if [ ! -z $2 ] && [ $2 = "-q" ]
+then
+  rm $fichier
+fi
