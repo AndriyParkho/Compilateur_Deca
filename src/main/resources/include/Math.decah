@@ -135,6 +135,7 @@ class Math {
             zn = zn + sign * suiv.getVal();
             suiv = suiv.getNext();
             exp2 = exp2/2;
+            i = i + 1;
         }
         return zn;
     }
@@ -142,6 +143,9 @@ class Math {
         float borneInf = 8388608;
         float borneSup = 16777216;
         float ulp = 1;
+        if (f < 0) {
+            f = -f;
+        }
         if (f == 0) {
             return (float) (1.4E-45);
         }
@@ -192,7 +196,7 @@ class Cellule {
     
     Cellule sigmaInitie() {
         Cellule actuelle = new Cellule();
-            Cellule suiv;
+        Cellule suiv;
         suiv = actuelle;
         actuelle = new Cellule();
         actuelle.setVal(2.7755576E-17);
