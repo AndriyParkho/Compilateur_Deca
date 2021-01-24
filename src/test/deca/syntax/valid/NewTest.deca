@@ -1,0 +1,12 @@
+//Description
+//  Déclaration de classe avec test de new
+//
+//Résultat
+//  ok
+
+class A {
+    int x = 1;
+}
+{
+    A a = new A();
+}

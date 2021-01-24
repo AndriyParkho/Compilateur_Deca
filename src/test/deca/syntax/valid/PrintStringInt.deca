@@ -1,3 +1,9 @@
+//Description
+//  Déclaration de print avec pluieurs arguments
+//
+//Résultat
+//  ok
+
 {
     int a ;
     println("a vaut ",a);

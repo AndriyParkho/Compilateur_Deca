@@ -1,3 +1,9 @@
+//Description
+//  Déclaration de float en hexadécimal
+//
+//Résultat
+//  ok
+
 {
     float x = 0x53.FP0;
 }

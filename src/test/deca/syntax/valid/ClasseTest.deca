@@ -1,5 +1,8 @@
-class Test {
-}
+//Description
+//  Déclaration de classe vide
+//
+//Résultat
+//  ok
 
-class B{
+class Test{
 }
