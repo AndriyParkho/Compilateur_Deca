@@ -66,15 +66,13 @@ OR: '||';
 
 // Littéraux entiers
 fragment POSITIVE_DIGIT : '1' .. '9';
-INT : '0' | (POSITIVE_DIGIT DIGIT*);
-
-/* 
-A FAIRE :
-Une erreur de compilation est levée si un littéral entier 
-n’est pas codable comme un entier signé positifsur 32 bits.
-Mais je sais pas comment le mettre ici : 
-(idéé : {if(getText() > 2147483647) throw new InvalidLValue(this,null);})
-*/
+INT : '0' | (POSITIVE_DIGIT DIGIT*) 
+		{try {
+    		Integer.parseInt(getText());
+    	} catch(IllegalArgumentException e) {
+    		throw new IllegalArgumentException("L'entier entré n'est pas codable sur 32 bits");
+    	}
+		};
 
 // Littéraux flottants
 fragment NUM : DIGIT+;
@@ -87,12 +85,6 @@ fragment NUMHEX : DIGITHEX+;
 fragment FLOATHEX : ('0x' | '0X') NUMHEX '.' NUMHEX ('P' | 'p') SIGN NUM ('F' | 'f' | );
 FLOAT : FLOATDEC | FLOATHEX;
 
-/* 
-A FAIRE :
-Convertir les flottants ??
-Erreur de compilation si un littéral est trop grand et que l’arrondi se faitvers l’infini, 
-ou bien qu’un littéral non nul est trop petit et que l’arrondi se fait vers zéro.
-*/
 
 // Chaînes de caractères
 fragment STRING_CAR : ~('"' | '\\' | '\n');

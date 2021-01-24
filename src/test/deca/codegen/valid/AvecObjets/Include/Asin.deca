@@ -1,5 +1,5 @@
 // Description:
-//    test de l'extension asinus. Skipped test
+//    test de l'extension asinus
 //
 // Resultats:
 // les bonnes valeurs
@@ -14,4 +14,5 @@
     println(math.asin(-0.3));
     println(math.asin(-1));
     println(math.asin(0));
+    println(math.asin(200));
 }

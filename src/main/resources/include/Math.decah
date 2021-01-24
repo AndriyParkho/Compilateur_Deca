@@ -77,7 +77,7 @@ class Math {
     float asin(float f) {
         float xn = 1;
         float yn = 0;
-        float zn = 0;sin
+        float zn = 0;
         float wn = f;
         float save;
         float sign;
@@ -87,7 +87,7 @@ class Math {
         Cellule suiv = this.sigmaListe;
         if (f > 1 || f < -1) {
             println("Veuillez entrez une valeur coprise entre -1 et 1.");
-            return null;
+            return -2;
         }
         while (i < 51) {
             if (xn < 0) {

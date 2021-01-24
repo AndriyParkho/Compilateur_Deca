@@ -16,8 +16,15 @@ public class ListExpr extends TreeList<AbstractExpr> {
     @Override
     public void decompile(IndentPrintStream s) {
         Iterator<AbstractExpr> iterateur = this.iterator();
-        while(iterateur.hasNext()) {
-            iterateur.next().decompile(s);  
+        if (getList().size() > 0) {
+            for (int i = 0; i < getList().size() - 1; i++) {
+                this.getList().get(i).decompile(s);
+                s.print(", ");
+            }
+            this.getList().get(this.getList().size() - 1).decompile(s);
         }
+        //while(iterateur.hasNext()) {
+        //    iterateur.next().decompile(s);  
+       // }
     }
 }

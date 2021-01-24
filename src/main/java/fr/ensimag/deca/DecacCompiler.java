@@ -441,7 +441,6 @@ public class DecacCompiler {
             throws DecacFatalError, LocationException {
     	LOG.info("Nombre de registres : " + nombreRegistres);
         AbstractProgram prog = doLexingAndParsing(sourceName, err); //etape A
-
         if (prog == null) {
             LOG.info("Parsing failed");
             return true;
@@ -462,7 +461,6 @@ public class DecacCompiler {
         addComment("end main program");
         LOG.debug("Generated assembly code:" + nl + program.display());
         LOG.info("Output file assembly file is: " + destName);
-
         FileOutputStream fstream = null;
         try {
             fstream = new FileOutputStream(destName);
@@ -474,6 +472,7 @@ public class DecacCompiler {
 
         program.display(new PrintStream(fstream));
         LOG.info("Compilation of " + sourceName + " successful.");
+        
         return false;
     }
 

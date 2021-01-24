@@ -13,7 +13,8 @@ class A extends B {
 	int a = 1234;
 	float b = 12.02;
 	protected float c = 0x53.FP0;
-	
+    boolean test = false;
+
 	String testMethod(){
 		if(a >= 1000){
 			println("Yes");
@@ -22,14 +23,13 @@ class A extends B {
 		} else{
 			print("No");
 		}
-		
-		boolean test = false;
+
 		while(a < 20000 && test){
 			a = a*2;
 			test = !test || b != c;
 		}
 		
-		b = this.c - b + ((float) a);
+		b = this.c - b + ((float)(a));
 		
 		return "Test passe";
 	}

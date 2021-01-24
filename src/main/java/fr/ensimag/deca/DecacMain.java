@@ -1,11 +1,16 @@
 	package fr.ensimag.deca;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-
-import fr.ensimag.deca.context.EnvironmentExp;
-import fr.ensimag.deca.context.EnvironmentType;
 import org.apache.log4j.Logger;
+
+import jdk.nashorn.internal.codegen.Compiler;
 
 /**
  * Main class for the command-line Deca compiler.
@@ -59,12 +64,37 @@ public class DecacMain {
             // compiler, et lancer l'exécution des méthodes compile() de chaque
             // instance en parallèle. Il est conseillé d'utiliser
             // java.util.concurrent de la bibliothèque standard Java.
+
+    		int nbProcs = Runtime.getRuntime().availableProcessors();
+    		ExecutorService executorService = Executors.newFixedThreadPool(nbProcs);
+    		List<Future> futures = new ArrayList<Future>(options.getSourceFiles().size());
+    		
+        	
+    		
         	for(File source : options.getSourceFiles()) {
+        		
         		DecacCompiler compiler = new DecacCompiler(options, source);
-        		Runnable myRunnable = () -> {compiler.compile();};
-        		(new Thread(myRunnable)).start();
+        		//Runnable myRunnable = () -> {compiler.compile();};
+        		futures.add(executorService.submit(new Runnable() {
+					
+					@Override
+					public void run() {
+						LOG.info("debut tache " + Thread.currentThread().getName());
+						compiler.compile();
+					}
+				}));
         		
         	}
+        	for(Future future : futures) {
+        		try {
+        			future.get();
+        		}catch (Exception e) {
+					e.printStackTrace();
+				}
+        	}
+        	executorService.shutdown();
+        	
+        	
         } else {
             for (File source : options.getSourceFiles()) {
                 DecacCompiler compiler = new DecacCompiler(options, source);
