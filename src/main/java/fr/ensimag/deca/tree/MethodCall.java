@@ -29,7 +29,14 @@ public class MethodCall extends AbstractMethodCall{
     }
 
     @Override
-    public void decompile(IndentPrintStream s) {}
+    public void decompile(IndentPrintStream s) {
+		this.getVariable().decompile(s);
+		s.print(".");
+		this.getMethod().decompile(s);
+		s.print("(");
+		this.getArguments().decompile(s);
+		s.print(")");
+	}
 
     @Override
     protected void iterChildren(TreeFunction f) {this.getArguments().iter(f);

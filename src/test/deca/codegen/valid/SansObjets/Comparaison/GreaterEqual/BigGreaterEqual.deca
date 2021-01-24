@@ -1,0 +1,17 @@
+// Description:
+//    tests de > sur des floats littéraux
+//
+// Resultats:
+//    false
+
+
+{
+   	float x = 0.4, y = 4.2;
+   	int a = 5;
+   	int b = 4;
+   	if( ((((((((((((x <= y) && b <= a) && (x + a <= y + b)) && x<=y) && b <= a) && (x + a <= y + b)) && x <= y) && b <= a) && (x + a <= y + b)) && x<=y) && b <= a) && (x + a <= y + b)) ){
+   		println("true");
+   	}else{
+   		println("false");
+   	}
+}
