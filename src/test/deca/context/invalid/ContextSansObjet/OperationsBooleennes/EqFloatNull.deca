@@ -1,0 +1,10 @@
+//Description
+//  Test d'égalité entre un float et un null
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  types incompatibles pour faire la comparaison
+{
+    float x;
+    x == null;
+}

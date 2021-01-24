@@ -58,7 +58,7 @@ public class DeclVar extends AbstractDeclVar {
     		VariableDefinition defVar= new VariableDefinition(typeVar,this.varName.getLocation());
     		this.varName.setDefinition(defVar);
             this.initialization.verifyInitialization(compiler, typeVar, currentClass);
-            if (this.initialization.getClass()==Initialization.class) {
+            if (this.initialization.getClass()==Initialization.class && !((Initialization) this.initialization).getExpression().getType().isNull()) {
                 defVar.setType(((Initialization) this.initialization).getExpression().getType());
             }
             compiler.getEnvExp().declare(this.varName.getName(), defVar);
@@ -97,7 +97,6 @@ public class DeclVar extends AbstractDeclVar {
     
     @Override
     protected void codeGenDeclVar(DecacCompiler compiler) {
-    	// A FAIRE : Fonction non fini pour l'instant
     	DAddr varOperand;
     	if(!compiler.isInMethod()) {
 	    	compiler.incrCountGB();

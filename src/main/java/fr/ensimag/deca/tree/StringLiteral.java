@@ -69,9 +69,7 @@ public class StringLiteral extends AbstractStringLiteral {
 
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		// A FAIRE
-		throw new UnsupportedOperationException("not yet implemented");
-		
+		// FAIT : Rien à faire
 	}
 	
 }

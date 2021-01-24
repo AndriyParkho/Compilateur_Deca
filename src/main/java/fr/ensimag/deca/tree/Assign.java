@@ -39,16 +39,21 @@ public class Assign extends AbstractBinaryExpr {
     		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
     		if (compiler.getEnvTypes().get(compiler.getSymbolTable().create(typeGauche.getName().getName())) != null) {
     		    if (compiler.getEnvTypes().get(compiler.getSymbolTable().create(typeGauche.getName().getName())).getType().isClass()) {
-                    ClassType left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
-                    ClassType right;
-                    if (this.getRightOperand().getClass()==New.class) {
-                        right = (ClassType) ((New) this.getRightOperand()).getType();
+                    ClassType left;
+                    ClassType right = (ClassType)  this.getRightOperand().getType();
+                    if (this.getLeftOperand().isIdentifier()) {
+                        left = (ClassType) compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).getType();
                     }
-                    else {
-                        right = (ClassType) ((CastExpr) this.getRightOperand()).getType();
+                    else{
+                        left = (ClassType) compiler.getEnvExp().get(compiler.getSymbolTable().create(((Dot) this.getLeftOperand()).getAppel().getName().getName())).getType();
                     }
                     if (left == right || right.isSubClassOf(left) && !left.isSubClassOf(right)) {
-                        compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                        if (this.getLeftOperand().isIdentifier()) {
+                            compiler.getEnvExp().get(((Identifier) this.getLeftOperand()).getName()).setType(this.getRightOperand().getType());
+                        }
+                        else{
+                            compiler.getEnvExp().get(compiler.getSymbolTable().create(((Dot) this.getLeftOperand()).getAppel().getName().getName())).setType(this.getRightOperand().getType());
+                        }
                     }else {
                         throw new ContextualError(String.format("%s ne peut être cast en %s", right, left), this.getLocation());
                     }
@@ -67,7 +72,6 @@ public class Assign extends AbstractBinaryExpr {
 
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		//A FAIRE
 		getRightOperand().codeGenExpr(compiler, op);
 		if(getLeftOperand().isDot()) {
 			GPRegister r = compiler.getRegisterStart();

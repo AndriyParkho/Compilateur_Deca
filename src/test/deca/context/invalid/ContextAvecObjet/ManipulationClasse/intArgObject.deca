@@ -1,0 +1,18 @@
+//Description
+//  Mettre un int en argument à la place d'un Object
+//
+//Résultat
+//  Erreur contextuelle ligne 17
+//  Argument 1 de type int ne correspond pas au 1e type de la méthode setO
+
+class A{
+    Object o;
+
+    void setO(Object o){
+        this.o = o;
+    }
+}
+{
+    A a = new A();
+    a.setO(1);
+}

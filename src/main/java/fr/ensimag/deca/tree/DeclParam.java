@@ -117,10 +117,6 @@ public class DeclParam extends AbstractDeclParam {
 		name.iter(f);
 	}
 
-	@Override
-	public void codeGenParam(DecacCompiler compiler) {
-		// A FAIRE : ou peut-être pas	
-	}
 
 	public void setParamOperand() {
 		ParamDefinition paramDef = name.getParamDefinition();

@@ -1,0 +1,10 @@
+//Description
+//  Test => entre un null et un boolean
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  types incompatibles pour faire la comparaison
+{
+    boolean x;
+    null => x;
+}

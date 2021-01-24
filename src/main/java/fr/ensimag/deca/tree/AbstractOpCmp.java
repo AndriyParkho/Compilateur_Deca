@@ -41,8 +41,8 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     		typeDroite=this.getRightOperand().verifyExpr(compiler, currentClass);
     	} catch (ContextualError ce) {throw ce;}
     	//il faut ensuite s'assurer que les deux opérateurs sont comparables!!
-    	//si les deux deux opérateurs ont deux types différents, la seule comparaison
-    	//possible est int/float
+    	//si les deux deux opérateurs ont deux types différents, les seules comparaisons
+    	//possible sont int/float et class/null pour l'égalité (cf Equals.java)
     	if(!typeGauche.sameType(typeDroite))
     	{
     		if((typeGauche.isInt()&&typeDroite.isFloat()))
@@ -61,10 +61,9 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			this.setRightOperand(droiteConv);
     			
     		}
-    		else
-    		{
-    			throw new ContextualError("types incompatibles pour faire la comparaison",this.getLocation());
-    		}
+			else if (!(typeGauche.isClass() && typeDroite.isNull()) && !((typeGauche.isNull() && typeDroite.isClass()))){
+				throw new ContextualError("types incompatibles pour faire la comparaison",this.getLocation());
+			}
     	}
     	else   //les deux types sont identiques
     	{
@@ -91,7 +90,7 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     	int numeroRegistre = op.getNumber();
     	if(rightDval != null) {
     		getLeftOperand().codeGenExpr(compiler, op);
-    		compiler.addInstruction(new CMP(rightDval, op), "Afin de tester "+getOperatorName()); //il faut ajouter l'outil de comparaison, quoi qu'on fasse de l'opération booléenne
+    		compiler.addInstruction(new CMP(rightDval, op));
     		compiler.addInstruction(this.getMnemo(op));
     	}else {
     		if(numeroRegistre == compiler.getNombreRegistres() - 1) {
@@ -102,16 +101,28 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(new LOAD(op, Register.R0));
     			compiler.addInstruction(new POP(op));
     			compiler.decrementTempPile();
-    			compiler.addInstruction(new CMP(Register.R0, op), "Afin de tester "+getOperatorName());
+    			compiler.addInstruction(new CMP(Register.R0, op));
     			compiler.addInstruction(this.getMnemo(op));
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
-    			GPRegister nextOp = compiler.getRegisterStart();
-    			getLeftOperand().codeGenExpr(compiler, op);
-        		getRightOperand().codeGenExpr(compiler, nextOp);
-        		compiler.addInstruction(new CMP(nextOp, op), "Afin de tester "+getOperatorName());
-        		compiler.freeRegister(nextOp);
-        		compiler.addInstruction(this.getMnemo(op));
+    			try {
+    				GPRegister nextOp = compiler.getRegisterStart();
+        			getLeftOperand().codeGenExpr(compiler, op);
+            		getRightOperand().codeGenExpr(compiler, nextOp);
+            		compiler.addInstruction(new CMP(nextOp, op));
+            		compiler.freeRegister(nextOp);
+            		compiler.addInstruction(this.getMnemo(op));
+    			} catch (RegisterException e) {
+    				getLeftOperand().codeGenExpr(compiler, op);
+        			compiler.addInstruction(new PUSH(op));
+        			compiler.incrementTempPile();
+        			getRightOperand().codeGenExpr(compiler, op);
+        			compiler.addInstruction(new LOAD(op, Register.R0));
+        			compiler.addInstruction(new POP(op));
+        			compiler.decrementTempPile();
+        			compiler.addInstruction(new CMP(Register.R0, op));
+        			compiler.addInstruction(this.getMnemo(op));
+    			}
     		}
     	}
     }
@@ -138,12 +149,24 @@ public abstract class AbstractOpCmp extends AbstractBinaryExpr {
     			compiler.addInstruction(sautInstr);
     			
     		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
-    			GPRegister nextOp = compiler.getRegisterStart();
-    			getLeftOperand().codeGenExpr(compiler, op);
-        		getRightOperand().codeGenExpr(compiler, nextOp);
-        		compiler.addInstruction(new CMP(nextOp, op));
-        		compiler.freeRegister(nextOp);
-        		compiler.addInstruction(sautInstr);
+    			try {
+    				GPRegister nextOp = compiler.getRegisterStart();
+        			getLeftOperand().codeGenExpr(compiler, op);
+            		getRightOperand().codeGenExpr(compiler, nextOp);
+            		compiler.addInstruction(new CMP(nextOp, op));
+            		compiler.freeRegister(nextOp);
+            		compiler.addInstruction(sautInstr);
+    			}catch(RegisterException e) {
+    				getLeftOperand().codeGenExpr(compiler, op);
+        			compiler.addInstruction(new PUSH(op));
+        			compiler.incrementTempPile();
+        			getRightOperand().codeGenExpr(compiler, op);
+        			compiler.addInstruction(new LOAD(op, Register.R0));
+        			compiler.addInstruction(new POP(op));
+        			compiler.decrementTempPile();
+        			compiler.addInstruction(new CMP(Register.R0, op));
+        			compiler.addInstruction(sautInstr);
+    			}
     		}
     	}
 	}

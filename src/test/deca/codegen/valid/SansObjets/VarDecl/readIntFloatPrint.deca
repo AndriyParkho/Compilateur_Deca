@@ -1,0 +1,12 @@
+// Description:
+//    test de lecture d'un entier et un floatant
+//
+// Resultats:
+//    entier_saisi
+//    floatant_saisi
+
+{
+   println(readInt());
+   println(readFloat());
+}
+

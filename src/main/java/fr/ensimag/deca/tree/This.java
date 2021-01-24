@@ -31,7 +31,6 @@ public class This extends AbstractExpr{
 
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		///A FAIRE : mettre dans R2 l'adresse de l'objet
 		compiler.addInstruction(new LOAD(new RegisterOffset(2, GPRegister.LB), op));
 		
 	}

@@ -1,0 +1,22 @@
+// Description:
+//    tests de la déclaration d'une seule class
+//
+// Resultats:
+//    Rien
+
+
+class A{
+
+	void printRandom() asm("
+		; Corps de la méthode
+			LOAD #5, R1
+			WINT
+			WNL
+	");
+}
+
+{
+	 A a = new A();	
+	 
+	 a.printRandom();
+}
