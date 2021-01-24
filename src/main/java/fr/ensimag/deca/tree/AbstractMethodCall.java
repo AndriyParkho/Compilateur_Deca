@@ -59,16 +59,27 @@ public abstract class AbstractMethodCall extends AbstractExpr{
                 int index = 0;
                 for (AbstractExpr expr : arguments.getList()) {
                     try {
-                        //compiler.setEnvExp(method.getMethodDefinition().getLocalEnv());
                         expr.verifyExpr(compiler, currentClass);
-                        //compiler.setEnvExp(currentClass.getMembers());
                     } catch (ContextualError ce) { throw ce; }
                     if (expr.getType().getName() != method.getMethodDefinition().getSignature().paramNumber(index).getName()) {
-                        if (expr.getType().getName().getName().equals("int") && method.getMethodDefinition().getSignature().paramNumber(index).getName().getName().equals("float")){
+                        if (expr.getType().isInt() && method.getMethodDefinition().getSignature().paramNumber(index).isFloat()){
                             ConvFloat nouvelArgument = new ConvFloat(expr);
                             expr = nouvelArgument;
                         }
-                        else if (!expr.getType().isClass() && !expr.isNull()){
+                        else if (method.getMethodDefinition().getSignature().paramNumber(index).isClass()){
+                           try{
+                               if (expr.getType().isNull()){}
+                               else if (!expr.getType().isClass()){
+                                   throw new ContextualError(String.format("Argument %d de type %s ne correspond au type du %de argument de la méthode %s",
+                                           index + 1, expr.getType().getName().getName(), index + 1, method.getName().getName()),
+                                           expr.getLocation());
+                               }
+                               else if (!((ClassType)expr.getType()).isSubClassOf((ClassType) method.getMethodDefinition().getSignature().paramNumber(index))){
+                                   throw new ContextualError(String.format("%s ne peut pas être cast en %s", expr.getType(), method.getMethodDefinition().getSignature().paramNumber(index).getName()), this.getLocation());
+                               }
+                           }catch (ContextualError ce){throw ce;}
+                        }
+                        else {
                             throw new ContextualError(String.format("Argument %d de type %s ne correspond au type du %de argument de la méthode %s",
                                     index + 1, expr.getType().getName().getName(), index + 1, method.getName().getName()),
                                     expr.getLocation());

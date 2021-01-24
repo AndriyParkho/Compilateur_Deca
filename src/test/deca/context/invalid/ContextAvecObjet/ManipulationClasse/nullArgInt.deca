@@ -1,0 +1,18 @@
+//Description
+//  Mettre un null en argument à la place d'un int
+//
+//Résultat
+//  Erreur contextuelle ligne 17
+//  Argument 1 de type null ne correspond pas au 1e type de la méthode setX
+
+class A{
+    int x;
+
+    void setX(int x){
+        this.x = x;
+    }
+}
+{
+    A a = new A();
+    a.setX(null);
+}
