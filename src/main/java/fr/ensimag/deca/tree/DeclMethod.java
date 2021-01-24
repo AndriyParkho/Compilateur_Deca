@@ -144,9 +144,9 @@ public class DeclMethod extends AbstractDeclMethod {
 		this.name.decompile(s);
 		s.print("(");
 		this.paramList.decompile(s);
-		s.print(") {");
+		s.println(") {");
 		this.methodBody.decompile(s);
-		s.print(")");
+		s.println("}");
     }
 	
 	@Override

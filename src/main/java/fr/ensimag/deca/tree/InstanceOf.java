@@ -119,22 +119,40 @@ public class InstanceOf extends AbstractExpr{
 			}
 			
 		} else if(numeroRegistre < compiler.getNombreRegistres() - 1) {
-			GPRegister nextOp = compiler.getRegisterStart();
-			compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
-			compiler.addInstruction(new CMP(new NullOperand(), op));
-			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
-			
-			compiler.addInstruction(new CMP(nextOp, op));
-			compiler.addInstruction(sautInstr);
-			currentObjetClass = currentObjetClass.getSuperClass();
-			
-			while(currentObjetClass != null) {
-				compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
+			try {
+				GPRegister nextOp = compiler.getRegisterStart();
+				compiler.addInstruction(new LEA(typeClass.getOperand(), nextOp));
+				compiler.addInstruction(new CMP(new NullOperand(), op));
+				CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+				
 				compiler.addInstruction(new CMP(nextOp, op));
 				compiler.addInstruction(sautInstr);
 				currentObjetClass = currentObjetClass.getSuperClass();
+				
+				while(currentObjetClass != null) {
+					compiler.addInstruction(new LEA(currentObjetClass.getOperand(), op));
+					compiler.addInstruction(new CMP(nextOp, op));
+					compiler.addInstruction(sautInstr);
+					currentObjetClass = currentObjetClass.getSuperClass();
+				}
+				compiler.freeRegister(nextOp);
+			} catch(RegisterException e) {
+				compiler.addInstruction(new CMP(new NullOperand(), op));
+				CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
+				
+				
+				while(currentObjetClass != null) {
+					compiler.addInstruction(new LEA(typeClass.getOperand(), op));
+					compiler.addInstruction(new PUSH(op));
+					compiler.incrementTempPile();
+					compiler.addInstruction(new LEA(currentObjetClass.getOperand(), Register.R0));
+					compiler.addInstruction(new POP(op));
+					compiler.decrementTempPile();
+					compiler.addInstruction(new CMP(Register.R0, op));
+					compiler.addInstruction(sautInstr);
+					currentObjetClass = currentObjetClass.getSuperClass();
+				}
 			}
-			compiler.freeRegister(nextOp);
 		}
 		if(!eval) {
 			compiler.addInstruction(new BRA(etiquette));
