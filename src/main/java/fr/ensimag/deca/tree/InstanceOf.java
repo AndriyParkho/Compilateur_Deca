@@ -16,6 +16,7 @@ import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
@@ -82,6 +83,7 @@ public class InstanceOf extends AbstractExpr{
 			objet.codeGenExpr(compiler, op);
 		} else {
 			compiler.addInstruction(new LOAD(objetDVal, op));
+			compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
 		}
 		Label finInstanceOf = compiler.createLabel("finInstanceOf." + getLocation().getLine() + "."+getLocation().getPositionInLine());
     	int numeroRegistre = op.getNumber();
