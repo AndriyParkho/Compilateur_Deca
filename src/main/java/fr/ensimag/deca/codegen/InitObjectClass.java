@@ -42,6 +42,13 @@ public class InitObjectClass {
 		objectDefinition.codeGenMethodTable(compiler);
 	}
 	
+	public static void codeGenInitObject(DecacCompiler compiler) {
+		CompilerInstruction.decorationAssembleur(compiler, "Initialisation des champs de Object");
+		compiler.addLabel(compiler.createLabel("init.object"));
+		compiler.addInstruction(new RTS());
+		
+	}
+	
 	public static void codeGenEqualsMethod(DecacCompiler compiler) {
 		CompilerInstruction.decorationAssembleur(compiler, "Classe Object");
 		CompilerInstruction.decorationLigne(compiler, "equals");

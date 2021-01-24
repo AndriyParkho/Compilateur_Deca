@@ -66,5 +66,4 @@ for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 	rm $fichier_ass
 done
 echo -e "\e[1mDone"
-exit 1
 

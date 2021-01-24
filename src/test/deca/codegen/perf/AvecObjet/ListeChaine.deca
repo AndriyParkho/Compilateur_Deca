@@ -12,8 +12,8 @@ class ListChaine{
 
 	void setCellule(int val, ListChaine suiv){
 
-		valeur = val;
-		suivant = suiv; 
+		this.valeur = val;
+		this.suivant = suiv;
 	}
 
 	ListChaine insertPrevious(int valeur){
@@ -22,19 +22,14 @@ class ListChaine{
 	return nouvelElement;
 	}
 
-	
-	void setSuivant(ListChaine suiv){
-	suivant = suiv;
-	}
-
 
 	void printListe(){
 	ListChaine current;
 	current = this;
 	while(current.suivant != null){
-		print(current.val, ", ");
-		current.setSuivant(current.suivant);
+
 		print(current.valeur, ", ");
+		current.suivant = current.suivant;
 	}
 	println(current.valeur);
 	}
