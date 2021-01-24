@@ -1,0 +1,11 @@
+//Description
+//  test d'un int appelant equals
+//
+//Réponse
+// Erreur contextuelle ligne 10
+//  l'appel d'attribut est utilisable uniquement pour les instances de classe
+{
+    int x = 0;
+    Object o = new Object();
+    x.equals(o);
+}

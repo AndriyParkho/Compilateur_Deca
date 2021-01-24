@@ -1,0 +1,9 @@
+//Description
+//  paramètre de type void dans une méthode
+//
+//Réponse
+// Erreur contextuelle ligne 8
+//  un paramètre ne peut pas ètre de type void
+class A{
+    void test(void v){}
+}

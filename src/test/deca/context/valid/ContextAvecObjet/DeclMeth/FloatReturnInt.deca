@@ -1,0 +1,12 @@
+//Description
+//  Method type = float mais return int
+//
+//Réponse
+//  ok
+
+class A{
+    int x;
+    float test(){
+        return this.x;
+    }
+}

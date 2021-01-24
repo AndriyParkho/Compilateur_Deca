@@ -3,7 +3,7 @@
 //
 // Resultats:
 // Erreur contextuelle ligne 14
-// 
+// appel impossible de x : champs protégé
 class A{
 	protected float x;
 }

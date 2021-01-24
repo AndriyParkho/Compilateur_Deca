@@ -1,0 +1,12 @@
+//Description
+// Appel à une méthode inexistante
+//
+//Réponse
+//  Erreur contextuelle ligne
+//  identificateur non défini
+
+class A{}
+{
+    A a = new A();
+    a.equal(a);
+}
