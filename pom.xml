@@ -256,6 +256,46 @@
                             <goal>exec</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>Lexical</id>
+                        <configuration>
+                            <executable>./src/test/script/Lexical.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>Contexte</id>
+                        <configuration>
+                            <executable>./src/test/script/Context.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>Compilateur</id>
+                        <configuration>
+                            <executable>./src/test/script/Compilateur.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>Decompilateur</id>
+                        <configuration>
+                            <executable>./src/test/script/CompilateurDecompile.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
 
