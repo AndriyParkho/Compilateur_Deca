@@ -83,7 +83,6 @@ public class InstanceOf extends AbstractExpr{
 			objet.codeGenExpr(compiler, op);
 		} else {
 			compiler.addInstruction(new LOAD(objetDVal, op));
-			compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
 		}
 		Label finInstanceOf = compiler.createLabel("finInstanceOf." + getLocation().getLine() + "."+getLocation().getPositionInLine());
     	int numeroRegistre = op.getNumber();
@@ -107,6 +106,7 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addInstruction(new CMP(new NullOperand(), op));
 			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
+			if(objetDVal != null) compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
 			
 			while(currentObjetClass != null) {
 				compiler.addInstruction(new LEA(typeClass.getOperand(), op));
@@ -127,6 +127,8 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(new CMP(new NullOperand(), op));
 				CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 				
+				if(objetDVal != null) compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
+				
 				compiler.addInstruction(new CMP(nextOp, op));
 				compiler.addInstruction(sautInstr);
 				currentObjetClass = currentObjetClass.getSuperClass();
@@ -142,6 +144,7 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(new CMP(new NullOperand(), op));
 				CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 				
+				if(objetDVal != null) compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
 				
 				while(currentObjetClass != null) {
 					compiler.addInstruction(new LEA(typeClass.getOperand(), op));
