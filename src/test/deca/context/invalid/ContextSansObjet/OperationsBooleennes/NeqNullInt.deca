@@ -1,0 +1,10 @@
+//Description
+//  Test d'inégalité entre un null et un int
+//
+//Réponse
+//  Erreur contextuelle ligne 9
+//  types incompatibles pour faire la comparaison
+{
+    int x;
+    null != x;
+}
