@@ -63,6 +63,10 @@ public class StringLiteral extends AbstractStringLiteral {
         return "StringLiteral (" + value + ")";
     }
 
+    String prettyPrintASM() {
+        return "StringLiteral (" + value + ")";
+    }
+
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
 		// A FAIRE
