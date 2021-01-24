@@ -192,12 +192,12 @@ public class DeclMethod extends AbstractDeclMethod {
 		saveRegisters(compiler);
 		compiler.addComment("Corps de la méthode");
 		methodBody.codeGenMethodBody(compiler);
-		compiler.addLabel(compiler.createLabel("fin."+ nomDeLaClasse+"."+name.getName().getName()));
 		if(!type.getType().isVoid()) {
 			compiler.addInstruction(new WSTR("Sortie de la méthode " + CompilerInstruction.currentClassMethodString(compiler) + " sans passer par un return"));
 			compiler.addInstruction(new WNL());
 			compiler.addInstruction(new ERROR());
 		}
+		compiler.addLabel(compiler.createLabel("fin."+ nomDeLaClasse+"."+name.getName().getName()));
 		compiler.addComment("Restauration des registres");
 		restoreRegisters(compiler);
 		compiler.addInstruction(new RTS());
