@@ -21,10 +21,13 @@ import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.Register;
 import fr.ensimag.ima.pseudocode.instructions.ADDSP;
 import fr.ensimag.ima.pseudocode.instructions.BOV;
+import fr.ensimag.ima.pseudocode.instructions.ERROR;
 import fr.ensimag.ima.pseudocode.instructions.POP;
 import fr.ensimag.ima.pseudocode.instructions.PUSH;
 import fr.ensimag.ima.pseudocode.instructions.RTS;
 import fr.ensimag.ima.pseudocode.instructions.TSTO;
+import fr.ensimag.ima.pseudocode.instructions.WNL;
+import fr.ensimag.ima.pseudocode.instructions.WSTR;
 
 /**
  * Declaration of a method
@@ -189,6 +192,11 @@ public class DeclMethod extends AbstractDeclMethod {
 		saveRegisters(compiler);
 		compiler.addComment("Corps de la méthode");
 		methodBody.codeGenMethodBody(compiler);
+		if(!type.getType().isVoid()) {
+			compiler.addInstruction(new WSTR("Sortie de la méthode " + CompilerInstruction.currentClassMethodString(compiler) + " sans passer par un return"));
+			compiler.addInstruction(new WNL());
+			compiler.addInstruction(new ERROR());
+		}
 		compiler.addLabel(compiler.createLabel("fin."+ nomDeLaClasse+"."+name.getName().getName()));
 		compiler.addComment("Restauration des registres");
 		restoreRegisters(compiler);
