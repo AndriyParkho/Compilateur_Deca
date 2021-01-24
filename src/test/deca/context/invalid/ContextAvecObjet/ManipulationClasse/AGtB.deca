@@ -1,0 +1,13 @@
+//Description
+// test de comparaison (différent de ==  et! =) entre deux objets
+//
+//Réponse
+// Erreur Contextuelle ligne 12
+//  type incompatibles pour faire la comparaison
+class A{}
+class B{}
+{
+    A a = new A();
+    B b = new B();
+    a>b;
+}

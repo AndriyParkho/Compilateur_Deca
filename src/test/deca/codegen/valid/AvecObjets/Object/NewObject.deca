@@ -12,6 +12,8 @@ class A{
 	Object obj = new Object();
 	if(obj instanceof Object){
 		println("OK");
+	} else{
+		println("WOW");
 	}
 }
 

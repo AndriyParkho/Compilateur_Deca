@@ -1,0 +1,15 @@
+// Description:
+//    Appel à un champ inextistant
+//
+// Resultats:
+//    Erreur contextuelle ligne 14
+//    identificateur non défini
+
+class A {
+    protected int x;
+}
+
+{
+    A a = new A();
+    a.y;
+}

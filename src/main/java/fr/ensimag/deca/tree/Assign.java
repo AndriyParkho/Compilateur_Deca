@@ -36,7 +36,7 @@ public class Assign extends AbstractBinaryExpr {
     	try {
     		typeGauche=this.getLeftOperand().verifyExpr(compiler, currentClass);
     		this.getRightOperand().setType(typeGauche);
-    		this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche);
+    		this.setRightOperand(this.getRightOperand().verifyRValue(compiler, currentClass, typeGauche));
     		if (compiler.getEnvTypes().get(compiler.getSymbolTable().create(typeGauche.getName().getName())) != null) {
     		    if (compiler.getEnvTypes().get(compiler.getSymbolTable().create(typeGauche.getName().getName())).getType().isClass()) {
                     ClassType left;

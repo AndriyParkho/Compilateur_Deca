@@ -1,0 +1,17 @@
+//Description
+//  double définition d'un paramètre
+//
+//Réponse
+// Erreur contextuelle ligne 10
+//  nom du paramètre déja utilisé
+class A{
+    float x = 1;
+
+    float test(int v, int v){
+        return x*v;
+    }
+}
+{
+    A a = new A();
+    println(a.test(5, 5));
+}

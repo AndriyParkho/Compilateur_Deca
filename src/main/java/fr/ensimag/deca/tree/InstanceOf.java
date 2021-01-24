@@ -16,6 +16,7 @@ import fr.ensimag.ima.pseudocode.Instruction;
 import fr.ensimag.ima.pseudocode.Label;
 import fr.ensimag.ima.pseudocode.NullOperand;
 import fr.ensimag.ima.pseudocode.Register;
+import fr.ensimag.ima.pseudocode.RegisterOffset;
 import fr.ensimag.ima.pseudocode.instructions.BEQ;
 import fr.ensimag.ima.pseudocode.instructions.BNE;
 import fr.ensimag.ima.pseudocode.instructions.BRA;
@@ -105,6 +106,7 @@ public class InstanceOf extends AbstractExpr{
 			compiler.addInstruction(new CMP(new NullOperand(), op));
 			CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 			
+			if(objetDVal != null) compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
 			
 			while(currentObjetClass != null) {
 				compiler.addInstruction(new LEA(typeClass.getOperand(), op));
@@ -125,6 +127,8 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(new CMP(new NullOperand(), op));
 				CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 				
+				if(objetDVal != null) compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
+				
 				compiler.addInstruction(new CMP(nextOp, op));
 				compiler.addInstruction(sautInstr);
 				currentObjetClass = currentObjetClass.getSuperClass();
@@ -140,6 +144,7 @@ public class InstanceOf extends AbstractExpr{
 				compiler.addInstruction(new CMP(new NullOperand(), op));
 				CompilerInstruction.codeGenErreur(compiler, new BEQ(CompilerInstruction.createErreurLabel(compiler, "deferencement.null", "Erreur : deferencement de null")));
 				
+				if(objetDVal != null) compiler.addInstruction(new LOAD(new RegisterOffset(0, op), op));
 				
 				while(currentObjetClass != null) {
 					compiler.addInstruction(new LEA(typeClass.getOperand(), op));
