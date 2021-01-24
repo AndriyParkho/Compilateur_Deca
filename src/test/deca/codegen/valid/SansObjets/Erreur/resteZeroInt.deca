@@ -1,6 +1,6 @@
 // Description:
 //    test de déclaration de variable en additionant 2 float, 1 float et 1 Var, et 2 Var
-//
+//Skipped decompile
 // Resultats:
 //  Erreur: Modulo par 0 non autorisé ligne 9 position 14
 

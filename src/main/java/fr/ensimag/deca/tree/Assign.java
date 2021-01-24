@@ -4,6 +4,7 @@ import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.codegen.CompilerInstruction;
 import fr.ensimag.deca.codegen.DValGetter;
 import fr.ensimag.deca.context.*;
+import fr.ensimag.deca.tools.IndentPrintStream;
 import fr.ensimag.ima.pseudocode.DAddr;
 import fr.ensimag.ima.pseudocode.GPRegister;
 import fr.ensimag.ima.pseudocode.instructions.STORE;
@@ -81,4 +82,11 @@ public class Assign extends AbstractBinaryExpr {
 			compiler.addInstruction(new STORE(op, (DAddr) DValGetter.getDVal(getLeftOperand(), compiler)));
 		}
 	}
+	
+    @Override
+    public void decompile(IndentPrintStream s) {
+        getLeftOperand().decompile(s);
+        s.print(" " + getOperatorName() + " ");
+        getRightOperand().decompile(s);
+    }
 }

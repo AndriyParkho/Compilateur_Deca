@@ -1,6 +1,6 @@
 // Description:
 //    tests de déclaration de variable par des divisions entière ou flotante
-//
+//Skipped decompile
 // Resultats:
 //    Erreur: Division par 0.0 non autorisée ligne 10 position 15
 
