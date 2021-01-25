@@ -13,4 +13,7 @@
     println(math.ulp(1.6));
     println(math.ulp(-0.3));
     println(math.ulp(-1));
+    println(math.ulp(7.0));
+    println(math.ulp(4));
+    println(math.ulp(8));
 }

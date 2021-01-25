@@ -31,7 +31,7 @@ public class This extends AbstractExpr{
 
 	@Override
 	public void codeGenExpr(DecacCompiler compiler, GPRegister op) {
-		compiler.addInstruction(new LOAD(new RegisterOffset(2, GPRegister.LB), op));
+		compiler.addInstruction(new LOAD(new RegisterOffset(-2, GPRegister.LB), op));
 		
 	}
 

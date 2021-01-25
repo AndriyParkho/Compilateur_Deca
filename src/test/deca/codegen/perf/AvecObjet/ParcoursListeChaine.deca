@@ -1,0 +1,23 @@
+// Description:
+//  Réalisation d'un liste chaînée d'entier en deca
+//
+// Resultats:
+//
+// Historique:
+//    cree le 23/01/2021
+
+#include "ListeChaine.decah"
+
+{
+	int tailleList = 10;
+	ListChaine tete = new ListChaine();
+	ListChaine currentCell = tete;
+	int i = 0;
+	tete.setVal(0);
+	tete.createList(tailleList);
+	while(i < tailleList){
+		println(currentCell.getVal());
+		currentCell = currentCell.getNext();
+		i = i + 1;
+	}
+}
