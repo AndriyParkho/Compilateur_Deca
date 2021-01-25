@@ -19,11 +19,11 @@ then
 	for test_courant in $(find ./src/test/deca/context/valid/ -type f |grep \\.deca$); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
 			test_context $test_courant 2>&1
 			exit 1
 		else
-			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant\e[37m"
+			echo -e "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant\e[37m"
 		fi
 		index_file=$((index_file+1))
 	done
@@ -33,26 +33,26 @@ then
 	for test_courant in $(find ./src/test/deca/context/invalid/ -type f |grep \\.deca$); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant\e[37m"
+			echo -e "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant\e[37m"
 			test_context $test_courant 2>&1
 		else
-			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
 			exit 1
 		fi
 		index_file=$((index_file+1))
 	done
 elif [ $mode = "2" ]
 then
-	echo "\e[37mvalid"
+	echo -e "\e[37mvalid"
 	number_of_files=$(ls -Rl ./src/test/deca/context/valid/ | grep .\\.deca$ | wc -l)
 	for test_courant in $(find ./src/test/deca/context/valid/ -type f |grep \\.deca$); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
 			test_context $test_courant 2>&1
 			exit 1
 		else
-			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
+			echo -e "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
 		fi
 		index_file=$((index_file+1))
 	done
@@ -62,9 +62,9 @@ then
 	for test_courant in $(find ./src/test/deca/context/invalid/ -type f |grep \\.deca$); do
 		if test_context $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
+			echo -e "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
 		else
-			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
 			test_context $test_courant
 			exit 1
 		fi
@@ -75,4 +75,4 @@ else
 	exit 1
 fi
 
-echo "\e[37mDone"
+echo -e "\e[37mDone"
