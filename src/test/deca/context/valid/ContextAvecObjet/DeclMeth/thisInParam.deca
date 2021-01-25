@@ -1,0 +1,26 @@
+//Description
+//  This dans un paramètre de méthode
+//
+//Réponse
+//  ok
+
+class A{
+    int getB(B b){
+        return b.x;
+    }
+}
+
+class B{
+    int x = 5;
+    int test(A a){
+        return a.getB(this);
+    }
+}
+
+{
+    A a = new A();
+    B b = new B();
+
+    println(b.test(a));
+
+}

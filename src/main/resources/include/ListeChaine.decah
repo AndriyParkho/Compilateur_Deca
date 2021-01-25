@@ -1,0 +1,67 @@
+// Description:
+//  Réalisation d'une liste chaînée d'entier en deca
+//
+// Resultats:
+//
+// Historique:
+//    cree le 23/01/2021
+
+class ListChaine{
+	int valeur;
+	ListChaine suivant;
+
+	void setVal(int val){
+		this.valeur = val;
+	}
+	
+	void setNext(ListChaine next){
+		this.suivant = next;
+	}
+	
+	int getVal(){
+		return valeur; 
+	}
+	
+	ListChaine getNext(){
+		return suivant;
+	}
+
+	// Lancer la fonction sur la tête de liste
+	void insertQueue(int newVal){
+		ListChaine currentCell;
+		ListChaine newQueue = new ListChaine();
+		newQueue.setVal(newVal);
+		currentCell = this;
+		while(currentCell.suivant != null){
+			currentCell = currentCell.suivant;
+		}
+		currentCell.setNext(newQueue);
+	}
+	
+	// Lancer la fonction sur la tête de liste
+	void createListOpti(int tailleList){
+		int i;
+		ListChaine currentCell = this;
+		ListChaine newCell;
+		i = 1;
+		while(i < tailleList){
+			newCell = new ListChaine();
+			newCell.setVal(i);
+			currentCell.setNext(newCell);
+			currentCell = newCell;
+			i = i + 1;
+		}
+	}
+	
+	// Lancer la fonction sur la tête de liste
+	void createList(int tailleList){
+		int i;
+		ListChaine newCell;
+		i = 1;
+		while(i < tailleList){
+			this.insertQueue(i);
+			i = i + 1;
+		}
+	}
+
+}
