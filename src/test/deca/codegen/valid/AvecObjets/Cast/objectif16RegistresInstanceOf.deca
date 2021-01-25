@@ -1,0 +1,19 @@
+// Description:
+//   Test pour atteindre les 16 registres avec des égalités booléennes d'instanceof
+//
+// Resultats:
+//    true
+
+
+class A { }
+
+{
+	A a = new A();
+	if((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (((a instanceof A) == (a instanceof A)) == (a instanceof A))) == (a instanceof A))) == (a instanceof A))) == (a instanceof A))) == (a instanceof A))) == (a instanceof A))) == (a instanceof A))) == ((a instanceof A) == (a instanceof A)))){
+	    println("true");
+	}
+	else{
+	    println("false");
+	}
+}
+
