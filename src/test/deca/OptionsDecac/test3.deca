@@ -7,5 +7,5 @@
 {
     int x = 1;
     int y = 1;
-    println("Waw super comme programme. Test numéro "; x+y+1);
+    println("Waw super comme programme. Test numéro ", x+y+1);
 }
