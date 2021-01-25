@@ -8,7 +8,7 @@ En ligne de commande : <br/>
 decac [[-p | -v] [-n] [-r X] [-d]* [-P] [-W] <fichier.deca>] | [-b] <br/>
 La commande sans argument affiche la description des options <br/>
 
-# Document complémentaire
+# Documents complémentaires
 docs/Manuel-Utilisateur.pdf : Documentation pour l’utilisateur décrivant ce qu’implémente le compilateur. <br/>
 docs/Document_de_validation.pdf : Documentation sur les tests. <br/>
 docs/Bilan_Equipe.pdf : Bilan de gestion d'équipe et de Projet <br/>
