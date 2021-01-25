@@ -22,9 +22,7 @@ import java.util.Hashtable;
  * @date 01/01/2021
  */
 public class EnvironmentType {
-    // A FAIRE : implémenter la structure de donnée représentant un
-    // environnement (association Type -> TypeDefinition, avec possibilité
-    // d'empilement).
+    
 
     EnvironmentType parentEnvironment;
     Hashtable<Symbol,TypeDefinition> donnees = new Hashtable<Symbol,TypeDefinition>();
