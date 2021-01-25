@@ -1,0 +1,17 @@
+//Description
+//  Test sur des égalités booléennes imbriquées pour atteindre les 16 registres
+//
+//Résultat
+//  false
+{
+    boolean x = true;
+    boolean y = false;
+
+    boolean z = ((x==((x==((x==((x==((x==((x==((x==y)==((x==((x==((x==((x==((x==((x==((x==((x==((x==((x==((x==((x==((x==(x==y))==y))==y))==y))==y))==y))==y))==y))==y))==y))==y))==y))==y))==y)))==y))==y))==y))==y))==y))==y);
+    if (z){
+        println("true");
+    }
+    else{
+        println("false");
+    }
+}
