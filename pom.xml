@@ -297,6 +297,16 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>Options decac</id>
+                        <configuration>
+                            <executable>./src/test/script/testOption.sh</executable>
+                        </configuration>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                    </execution>
+                    <execution>
                         <id>Decompilateur</id>
                         <configuration>
                             <executable>./src/test/script/CompilateurDecompile.sh</executable>
