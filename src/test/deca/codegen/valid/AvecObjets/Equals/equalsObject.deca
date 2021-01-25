@@ -5,20 +5,11 @@
 //    Rien
 
 
-class A{
-	
-}
-
-class B{
-}
-
-
-
 {
-	B b = new B();
-	A a = new A();
+	Object obj = new Object();
+	Object obj2 = new Object();
 	
-	if(a.equals(a) && !a.equals(b)){
+	if(obj.equals(obj) && !obj.equals(obj2)){
 		println("true");
 	}else{
 		println("Erreur");

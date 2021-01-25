@@ -15,5 +15,5 @@
 	int i = 0;
 	tete.setVal(0);
 	tete.createListOpti(tailleList);
-	tete.parcoursList(tailleList);
+	tete.doubleParcoursList(tailleList);
 }
