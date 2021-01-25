@@ -1,0 +1,21 @@
+//Description
+//  test de plusieurs Cast entre classes
+//
+//Réponse
+// ok
+
+class A {
+    int x;
+}
+
+class B {
+    int y;
+}
+
+{
+    A a = new A();
+    B b = new B();
+
+    a = (A) (b);
+    b = (B) (a);
+}

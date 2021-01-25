@@ -1,0 +1,15 @@
+//Description
+//  test de faute dans else
+//
+//Réponse
+//  Erreur syntaxique ligne 8
+//  no viable alternative at input '{'
+
+{
+    if(true) {
+        println(5);
+    }
+    ele {
+        println(6);
+    }
+}

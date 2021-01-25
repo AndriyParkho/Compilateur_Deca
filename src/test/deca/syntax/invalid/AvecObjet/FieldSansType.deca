@@ -1,0 +1,11 @@
+//Description
+//  test de field sans type
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+//  no viable alternative at input 'x'
+
+class TestInvalide {
+    x;
+
+}

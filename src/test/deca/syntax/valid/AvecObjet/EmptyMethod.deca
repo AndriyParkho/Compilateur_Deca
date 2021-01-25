@@ -1,0 +1,10 @@
+//Description
+//  test d'une méthode vide
+//Résultat
+//  ok
+class A {
+    int x;
+    void getX() {
+        
+    }
+}

@@ -1,0 +1,10 @@
+//Description
+//  new comme nom de variable
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+//  no viable alternative at input 'new'
+
+{
+    int new = 0;
+}

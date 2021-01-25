@@ -23,9 +23,7 @@ import java.util.Hashtable;
  * @date 01/01/2021
  */
 public class EnvironmentExp {
-    // A FAIRE : implémenter la structure de donnée représentant un
-    // environnement (association nom -> définition, avec possibilité
-    // d'empilement).
+    
 
     EnvironmentExp parentEnvironment;
     Hashtable<Symbol, ExpDefinition> donnees = new Hashtable<Symbol, ExpDefinition>();

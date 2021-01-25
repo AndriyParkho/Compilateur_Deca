@@ -6,7 +6,12 @@
 {
     int x = 1;
     int y = 0;
+    float a;
 
     int z = ((x+((x+((x+((x+((x+((x+((x+y)+((x+((x+((x+((x+((x+((x+((x+((x+((x+((x+((x+((x+((x+(x+y))+y))+y))+y))+y))+y))+y))+y))+y))+y))+y))+y))+y))+y)))+y))+y))+y))+y))+y))+y);
     println(z);
+    a = z;
+    println();
+    printx(a);
+    println();
 }

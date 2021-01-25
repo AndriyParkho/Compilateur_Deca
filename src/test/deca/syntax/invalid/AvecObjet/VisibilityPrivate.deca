@@ -1,0 +1,11 @@
+//Description
+//  test de visibilité inexistante
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+//   no viable alternative at input 'privateintx'
+
+class TestInvalide {
+    private int x;
+
+}

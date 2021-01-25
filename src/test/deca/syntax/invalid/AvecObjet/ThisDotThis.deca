@@ -1,0 +1,13 @@
+//Description
+//  test d'un this.this
+//
+//Réponse
+//  Erreur syntaxique ligne 11
+//  mismatched input 'this' expecting IDENT
+
+class A {
+    A a;
+    int getx() {
+        this.this = new A();
+    }
+}

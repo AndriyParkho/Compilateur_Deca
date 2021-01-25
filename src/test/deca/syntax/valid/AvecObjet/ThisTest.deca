@@ -1,0 +1,12 @@
+//Description
+//  test de this
+//
+//Résultat
+//  ok
+
+class A {
+    int x;
+    void setX(int a) {
+        this.x = a;
+    }
+}

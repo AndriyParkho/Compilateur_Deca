@@ -1,0 +1,17 @@
+//Description
+//  Declaration de plusieurs classes
+//
+//Résultat
+//  ok
+
+class A {
+    int x;
+}
+
+class B {
+    float b;
+}
+
+class C {
+    boolean jean;
+}

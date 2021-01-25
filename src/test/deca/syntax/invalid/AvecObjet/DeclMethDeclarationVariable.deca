@@ -1,0 +1,18 @@
+//Description
+//  test de melange field et expr dans methode
+//
+//Réponse
+//  Erreur syntaxique ligne 14
+//  no viable alternative at input 'y'
+
+class TestInvalide {
+    int x;
+
+    int returnFive(){
+        int x = 2;
+        x = x + x;
+        int y = 1;
+        x = x + y;
+        return x;
+    }
+}

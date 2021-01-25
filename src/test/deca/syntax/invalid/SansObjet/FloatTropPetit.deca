@@ -1,0 +1,9 @@
+//Description
+//  test d'un flottant trop petit
+//
+//Réponse
+// Exception in thread "main" java.lang.IllegalArgumentException: Flottant trop petit
+
+{
+    float y = 0.4E-4000;
+}

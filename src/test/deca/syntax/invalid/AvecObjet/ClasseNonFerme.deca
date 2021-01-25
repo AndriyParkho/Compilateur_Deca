@@ -1,0 +1,11 @@
+//Description
+//  test de declaration de classe non ferme
+//
+//Résultat
+//  Erreur syntaxique à ligne 12
+// missing '}'
+
+class A {
+    int setX(int a) {
+        return a;
+    }

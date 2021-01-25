@@ -76,6 +76,7 @@ public class CompilerOptions {
 	    					
 	    		case "-v" : verification = true;
 	    					break;
+	    					
 	    		case "-p" : parse = true;
 	    					break;
 	    		
@@ -88,13 +89,14 @@ public class CompilerOptions {
 	    		default : sourceFiles.add(new File(param));
 	    				  break;
 	    		}
-	    		
+	    	
 	    	}
 	    	
-	    	if(verification && parse) {
+	    	if(isVerification() && isParse()) {
 	    		throw new CLIException("Les options -p et -v ne peuvent être utilisées que séparément");
 
 	    	}
+	    	
 	    	if(nombreRegistreMax > 16 || nombreRegistreMax < 4) {
 	    		throw new CLIException("Les nomnbre de registres disponibles doit être compris entre 4 et 16");
 	    	}

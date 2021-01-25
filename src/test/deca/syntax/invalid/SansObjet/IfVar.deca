@@ -1,0 +1,10 @@
+//Description
+//  if comme nom de variable
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+//  no viable alternative at input 'if'
+
+{
+    int if = 0;
+}

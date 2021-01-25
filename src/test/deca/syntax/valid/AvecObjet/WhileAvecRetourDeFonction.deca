@@ -1,0 +1,13 @@
+class A {
+    int x;
+    boolean method() {
+        return x == 5;
+    } 
+}
+
+{
+    A objet = new A();
+    while(objet.method) {
+        objet.x = objet.x +1;
+    }
+}

@@ -1,0 +1,10 @@
+//Description
+//  test de visibilité protected
+//
+//Réponse
+//  ok
+
+class TestInvalide {
+    protected int x;
+
+}

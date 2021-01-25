@@ -1,0 +1,19 @@
+//Description :
+//	test de plusieurs dots à la suite.
+//Résultats :
+//	ok 
+class A {
+    int x;
+    void setX(int a) {
+        this.x = a;
+    }
+
+    A getNewA() {
+        return new A();
+    }
+}
+
+{
+    A b = new A();
+    A c = b.getNewA().setx(2);
+}

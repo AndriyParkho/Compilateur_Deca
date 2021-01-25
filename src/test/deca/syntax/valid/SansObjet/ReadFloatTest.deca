@@ -1,0 +1,9 @@
+//Description
+//  test de readfloat
+//
+//Résultat
+//  ok
+
+{
+    float x = readFloat();
+}

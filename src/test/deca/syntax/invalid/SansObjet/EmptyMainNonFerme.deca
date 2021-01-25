@@ -1,0 +1,8 @@
+//Description
+//  test de emptuMain pas ferme
+//
+//Réponse
+//  Erreur syntaxique ligne 8
+//  missing '}' at '<EOF>'
+
+{
