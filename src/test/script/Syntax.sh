@@ -20,11 +20,11 @@ then
 	for test_courant in $(find ./src/test/deca/syntax/valid/ -type f |grep \\.deca$); do
 		if test_synt $test_courant 2>&1 | grep -q -e $test_courant -e Circular\ include\ for\ file -e IllegalArgumentException
 		then
-			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
 			test_synt $test_courant 2>&1
 			exit 1
 		else
-			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
+			echo -e "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
 		fi
 		index_file=$((index_file+1))
 	done
@@ -34,9 +34,9 @@ then
 	for test_courant in $(find ./src/test/deca/syntax/invalid/ -type f |grep \\.deca$); do
 		if test_synt $test_courant 2>&1 | grep -q -e $test_courant -e Circular\ include\ for\ file -e IllegalArgumentException
 		then
-			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
+			echo -e "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
 		else
-			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
 			test_synt $test_courant
 			exit 1
 		fi
@@ -44,28 +44,28 @@ then
 	done
 elif [ $mode = "2" ]
 then
-	echo "\e[37mvalid"
+	echo -e "\e[37mvalid"
 	number_of_files=$(ls -Rl ./src/test/deca/syntax/valid/ | grep .\\.deca$ | wc -l)
 	for test_courant in $(find ./src/test/deca/syntax/valid/ -type f |grep \\.deca$); do
 		if test_synt $test_courant 2>&1 | grep -q -e $test_courant
 		then
-			echo "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Echec inattendu de $test_courant\e[37m"
 			test_synt $test_courant 2>&1
 			exit 1
 		else
-			echo "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
+			echo -e "\e[32m$index_file/$number_of_files	Succes attendu de $test_courant"
 		fi
 		index_file=$((index_file+1))
 	done
-	echo "\e[37minvalid"
+	echo -e "\e[37minvalid"
 	index_file=1
 	number_of_files=$(ls -Rl ./src/test/deca/syntax/invalid/ | grep .\\.deca$ | wc -l)
 	for test_courant in $(find ./src/test/deca/syntax/invalid/ -type f |grep \\.deca$); do
 		if test_synt $test_courant 2>&1 | grep -q -e $test_courant -e Circular\ include\ for\ file -e IllegalArgumentException
 		then
-			echo "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
+			echo -e "\e[32m$index_file/$number_of_files	Echec attendu de $test_courant"
 		else
-			echo "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
+			echo -e "\e[31m$index_file/$number_of_files	Succes inattendu de $test_courant\e[37m"
 			test_synt $test_courant
 			exit 1
 		fi
