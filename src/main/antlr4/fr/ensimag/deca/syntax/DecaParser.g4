@@ -131,6 +131,8 @@ inst returns[AbstractInst tree]
             $tree=$e1.tree;
         }
     | SEMI {
+        $tree = new NoOperation();
+        setLocation($tree, $SEMI);
         }
     | PRINT OPARENT list_expr CPARENT SEMI {
             assert($list_expr.tree != null);
@@ -470,7 +472,6 @@ literal returns[AbstractExpr tree]
             else {
                 s= s.substring(1, s.length());
                 while (s.length() > 1 && !(s.substring(0, 1).equals("E")) && !(s.substring(0, 1).equals("x"))&& !(s.substring(0, 1).equals("X"))) {
-                    System.out.println("je suis la");
                     if (!(s.substring(0, 1).equals(".") || s.substring(0, 1).equals("0"))){
                         throw new IllegalArgumentException("Flottant trop petit");
                     }
