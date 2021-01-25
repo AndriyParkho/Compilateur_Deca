@@ -1,0 +1,13 @@
+//Description
+//  Déclaration de classe avec fields et méthodes
+//
+//Résultat
+//  ok
+
+class Mix {
+    int x;
+    int y;
+    int getX() {
+        return x;
+    }
+}

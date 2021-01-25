@@ -1,0 +1,21 @@
+//Description
+//  Déclaration de classe avec test de new
+//
+//Résultat
+//  ok
+
+class Tests {
+    protected int x;
+
+    public setX(int y) {
+        x = y;
+    }
+
+    int getX() {
+        return x;
+    }
+}
+
+{
+    Test t = new Tests();
+}

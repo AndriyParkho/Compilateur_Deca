@@ -15,6 +15,11 @@ class Factoriel{
 }
 {
     Factoriel calcul = new Factoriel();
-    int n = readInt();
+    float z;
+    int n;
+    println("Entrer la valeur flottante de z (inutile) :");
+    z = readFloat();
+    println("Entrer la valeur entière de n pour calculer sa factorielle :");
+    n = readInt();
     println(calcul.fact(n));
 }

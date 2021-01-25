@@ -1,0 +1,22 @@
+//Description
+//  Déclaration de classe avec fields et méthodes et main
+//
+//Résultat
+//  ok
+
+class A {
+    int a;
+    int getA() {
+        return a == 2;
+    }
+}
+
+{
+    A objet = new A();
+    if(objet.getA() || !objet.getA()) {
+       println("jean");
+    }
+    else if (objet.getA() && !objet.getA()) {
+        printlnx("jean");
+    }
+}

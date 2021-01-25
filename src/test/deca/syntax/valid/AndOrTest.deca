@@ -1,0 +1,12 @@
+//Description
+//  test de and et or pour la construction d'un arbre
+//
+//Résultat
+//  ok
+
+{
+    boolean x = true;
+    boolean y = false;
+    x = x && y;
+    y = y || y;
+}

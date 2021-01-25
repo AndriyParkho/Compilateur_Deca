@@ -37,6 +37,7 @@ options {
     }
 
     SymbolTable tableSymboles = new SymbolTable();
+    
 }
 
 prog returns[AbstractProgram tree]
@@ -124,7 +125,8 @@ list_inst returns[ListInst tree]
     ;
 
 inst returns[AbstractInst tree]
-    : e1=expr SEMI {
+    : 
+    e1=expr SEMI {
             assert($e1.tree != null);
             $tree=$e1.tree;
         }
@@ -206,7 +208,8 @@ list_expr returns[ListExpr tree]
     ;
 
 expr returns[AbstractExpr tree]
-    : assign_expr {
+    :
+    assign_expr {
             assert($assign_expr.tree != null);
             $tree = $assign_expr.tree; 
         }
@@ -409,6 +412,8 @@ primary_expr returns[AbstractExpr tree]
     | m=ident OPARENT args=list_expr CPARENT {
         assert($args.tree != null);
         assert($m.tree != null);
+        $tree = new MethodCall(null, $m.tree, $args.tree);
+        setLocation($tree, $m.start);
         }
     | OPARENT expr CPARENT {
         assert($expr.tree != null);
@@ -447,12 +452,33 @@ type returns[AbstractIdentifier tree]
     ;
 
 literal returns[AbstractExpr tree]
+    @init{
+        float a;
+        String s;
+    }
     : INT {
         $tree=new IntLiteral( Integer.parseInt($INT.text) );
         setLocation($tree,$INT);
         }
     | fd=FLOAT {
-        $tree=new FloatLiteral( Float.parseFloat($fd.text) );
+        a = Float.parseFloat($fd.text);
+        s = $fd.text;
+        if (a == 0) {
+            if (!s.substring(0, 1).equals("0")) {
+            throw new IllegalArgumentException("Flottant trop petit");
+            }
+            else {
+                s= s.substring(1, s.length());
+                while (s.length() > 1 && !(s.substring(0, 1).equals("E")) && !(s.substring(0, 1).equals("x"))&& !(s.substring(0, 1).equals("X"))) {
+                    if (!(s.substring(0, 1).equals(".") || s.substring(0, 1).equals("0"))){
+                        throw new IllegalArgumentException("Flottant trop petit");
+                    }
+                    s= s.substring(1, s.length());
+                }
+            }
+        }
+
+        $tree=new FloatLiteral(a);
         setLocation($tree,$fd);
         }
     | STRING {
@@ -633,3 +659,4 @@ param returns [AbstractDeclParam tree]
         setLocation($tree,$type.start);
         }
     ;
+    

@@ -1,7 +1,11 @@
+//Description
+//  Test de l'ASMBody
+//
+//Résultat
+//  ok
+
 class Jean {
     int x = 3;
 
-    void printHello() {
-        println("Hello");
-    }
+    void testAsm() asm("Du code assembleur");
 }

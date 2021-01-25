@@ -35,7 +35,7 @@ public class MethodAsmBody extends AbstractMethodBody {
     public void decompile(IndentPrintStream s) {
 		s.print("asm(");
 		this.string.decompile(s);
-		s.print(")");
+		s.print(");");
     }
 	
 	@Override

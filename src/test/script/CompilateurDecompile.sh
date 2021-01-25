@@ -3,16 +3,17 @@
 # Auteur : gl10
 # Version initiale : 16/01/2021
 
-#Programme bash qui lance decac et ima sur des tests .deca et vérifie que la sortie est identique à celle attendue dans le fichier .ans équvalent
+#Programme bash qui compare la sortie après compilation et exécution des programmes .deca et des programmes décompilés associés
 
 cd "$(dirname "$0")"/../../.. || exit 1
 
 PATH=./src/main/bin:../global/bin:"$PATH"
 
 find ./src/test/deca/codegen/valid/ -name "*.ass" -type f -delete
+find ./src/test/deca/codegen/valid/ -name "*Dec.deca" -type f -delete
 
-list_tests=($(find ./src/test/deca/codegen/valid/SansObjets -type f | grep \\.deca | sort))
-list_answers=($(find ./src/test/deca/codegen/valid/SansObjets -type f | grep \\.ans | sort))
+list_tests=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.deca$ | sort))
+list_answers=($(find ./src/test/deca/codegen/valid/ -type f | grep \\.ans | sort))
 
 for ((i=0 ; i<${#list_tests[@]} ; i++)); do
     fichier="${list_tests[i]%.deca}.ans"
@@ -43,7 +44,7 @@ for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 	fichier_decompile="${list_tests[i]%.deca}Dec.deca"
 	decac -p "${list_tests[i]}" > $fichier_decompile || exit 1
 	decac $fichier_decompile
-	fichier_ass=$(find ./src/test/deca/codegen/valid/SansObjets -type f | grep \\.ass)
+	fichier_ass=$(find ./src/test/deca/codegen/valid/ -type f | grep \\.ass)
 	
 	if [ -z "$fichier_ass" ]; then
 	    echo -e "\e[31m$(($i+1))/${#list_tests[@]}	Fichier .ass non généré pour le test ${list_tests[i]}."
@@ -69,5 +70,5 @@ for ((i=0 ; i<${#list_tests[@]} ; i++)); do
 	rm $fichier_ass
 	rm $fichier_decompile
 done
-echo -e "\e[1mDone"
+echo -e "\e[37mDone"
 

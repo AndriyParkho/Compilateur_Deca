@@ -1,0 +1,19 @@
+//Description
+//  Test des méthodes de classe
+//
+//Résultat
+//  ok
+
+class A {
+    int a;
+    int b;
+
+    void setA( int x) {
+        this.a = x;
+    }
+}
+
+{
+    A var = new A();
+    var.setA(y);
+}

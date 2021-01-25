@@ -10,7 +10,7 @@ cd "$(dirname "$0")"/../../.. || exit 1
 PATH=./src/main/bin:../global/bin:"$PATH"
 
 fichier=$1
-rm "${fichier%.deca}.ass" >/dev/null
+rm "${fichier%.deca}.ass" 2>/dev/null
 if [ -z $2 ]
 then
   src/main/bin/decac -d $1

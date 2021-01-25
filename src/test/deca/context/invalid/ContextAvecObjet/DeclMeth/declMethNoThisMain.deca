@@ -1,0 +1,24 @@
+// Description:
+//    Appel à une méthode Object. dans un main
+//
+// Resultats:
+//    Erreur contextuelle ligne 20
+//    identificateur non défini
+class A{
+
+    int x;
+
+    void setX(int y){
+        x = y;
+    }
+    void test(int y){
+        setX(y);
+        equals(this);
+    }
+}
+{
+    A a = new A();
+    setX(5);
+}
+
+
