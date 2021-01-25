@@ -63,5 +63,31 @@ class ListChaine{
 			i = i + 1;
 		}
 	}
+	
+	void parcoursList(int tailleList){
+		int i = 0;
+		ListChaine currentCell = this;
+		while(i < tailleList){
+			// println(currentCell.getVal());
+			currentCell = currentCell.getNext();
+			i = i + 1;
+		}
+	}
+	
+	void doubleParcoursList(int tailleList){
+		int i = 0;
+		int j;
+		ListChaine currentCell;
+		while(i < tailleList){
+			j = 0;
+			currentCell = this;
+			while(j < tailleList){
+				// println(currentCell.getVal());
+				currentCell = currentCell.getNext();
+				j = j + 1;
+			}
+			i = i + 1;
+		}
+	}
 
 }
