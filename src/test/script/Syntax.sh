@@ -76,5 +76,5 @@ else
 	exit 1
 fi
 
-echo "\e[37mDone"
+echo -e "\e[37mDone"
 
