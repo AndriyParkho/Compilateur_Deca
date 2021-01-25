@@ -1,0 +1,11 @@
+//Description
+//  Test sans interet en soit mais utilisé pour tester les options de decac
+//
+//Résultat
+//  ok
+
+{
+    int x = 1;
+    int y = 1;
+    println("Waw super comme programme. Test numéro "; x+y+1);
+}
