@@ -1,0 +1,10 @@
+//Description
+//  Cast sans parenthèses autour de l'identifiant
+//
+//Réponse
+//  Erreur syntaxique ligne 8
+//  no viable alternative at input '4'
+
+{
+    int x = (int) 4;
+}

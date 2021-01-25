@@ -1,0 +1,12 @@
+//Description
+//  test de declaration de methode sans type
+//
+//Résultat
+//  Erreur syntaxique à ligne 8
+// no viable alternative at input 'setX('
+
+class A {
+    setX(int a) {
+        return a;
+    }
+}

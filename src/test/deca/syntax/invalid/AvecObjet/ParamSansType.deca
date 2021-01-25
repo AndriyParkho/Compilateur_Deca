@@ -1,0 +1,12 @@
+//Description
+//  test de parametre sans type
+//
+//Résultat
+//  Erreur syntaxique à ligne 9
+// missing IDENT at ')'
+
+class A {
+    int setX(a) {
+        return a;
+    }
+}

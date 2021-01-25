@@ -1,0 +1,9 @@
+//Description
+//  test de readint
+//
+//Résultat
+//  ok
+
+{
+    int x = readInt();
+}

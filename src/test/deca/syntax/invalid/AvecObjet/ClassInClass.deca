@@ -1,0 +1,12 @@
+//Description
+//  declaration de classe dans une classe
+//
+//Résultat
+//  Erreur syntaxique à ligne 9
+// missing '}' at 'class'
+
+class A {
+    class B {
+
+    }
+}

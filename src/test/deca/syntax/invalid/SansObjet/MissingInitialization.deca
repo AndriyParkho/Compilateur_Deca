@@ -1,0 +1,10 @@
+//Description
+//  initialisation manquante
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+//  mismatched input
+
+{
+    int x =;
+}

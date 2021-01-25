@@ -1,0 +1,10 @@
+//Description
+//  test de ; apres }
+//
+//Réponse
+//  Erreur de syntaxe en ligne 9
+//  extraneous input ';' expecting <EOF>
+
+
+{
+};

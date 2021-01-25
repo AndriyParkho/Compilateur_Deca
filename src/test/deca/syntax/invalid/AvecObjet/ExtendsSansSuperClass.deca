@@ -1,0 +1,9 @@
+//Description
+//  class extends sans superclasse
+//
+//Réponse
+//  Erreur syntaxique ligne 8
+//  missing IDENT at '{'
+
+class TestInvalide extends {
+}

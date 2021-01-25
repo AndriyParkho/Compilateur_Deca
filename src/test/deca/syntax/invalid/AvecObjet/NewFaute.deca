@@ -1,0 +1,14 @@
+//Description
+//  test de faute dans new
+//
+//Réponse
+//  Erreur syntaxique ligne 13
+//  no viable alternative at input 'A'
+
+class A {
+    int x;
+}
+
+{
+    A b = nex A();
+}

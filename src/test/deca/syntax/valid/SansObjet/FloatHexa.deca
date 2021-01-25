@@ -6,4 +6,5 @@
 
 {
     float x = 0x53.FP0;
+    float x = 0X0.0p0;
 }

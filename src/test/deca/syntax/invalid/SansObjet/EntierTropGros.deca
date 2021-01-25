@@ -1,0 +1,9 @@
+//Description
+//  test d'un entier trop grand
+//
+//Réponse
+// Exception in thread "main" java.lang.IllegalArgumentException:L'entier entré n'est pas codable sur 32 bits
+
+{
+    float y = 111111111111111111111111111111;
+}

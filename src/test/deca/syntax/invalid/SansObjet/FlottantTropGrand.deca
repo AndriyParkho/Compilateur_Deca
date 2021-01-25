@@ -1,0 +1,9 @@
+//Description
+//  test d'un flottant trop grand
+//
+//Réponse
+// Exception in thread "main" java.lang.IllegalArgumentException: literal values cannot be infinite
+
+{
+    float y = 0.4E4000;
+}

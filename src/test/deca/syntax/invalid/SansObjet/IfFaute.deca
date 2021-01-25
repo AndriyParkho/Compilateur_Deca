@@ -1,0 +1,12 @@
+//Description
+//  test de melange field et expr dans methode
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+//  no viable alternative at input '{'
+
+{
+    If(true) {
+        println("faute");
+    }
+}

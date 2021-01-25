@@ -1,0 +1,10 @@
+//Description
+//  test de string non ferme
+//
+//Réponse
+//  Erreur syntaxique ligne 9
+// token recognition error at: '"gl)\n}'
+
+{
+    println("gl)
+}

@@ -1,0 +1,12 @@
+//Description
+//  test de extends
+//Résultat
+//  ok
+
+class A{
+
+}
+
+class B extends A {
+    
+}

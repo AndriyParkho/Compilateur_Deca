@@ -1,0 +1,12 @@
+//Description
+//  test de faute dans return
+//
+//Réponse
+//  Erreur syntaxique ligne 10
+//  no viable alternative at input '5'
+
+class A {
+    int getx() {
+        retun 5;
+    }
+}

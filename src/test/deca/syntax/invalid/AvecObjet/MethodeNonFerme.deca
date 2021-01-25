@@ -1,0 +1,12 @@
+//Description
+//  test de declaration de methode non ferme
+//
+//Résultat
+//  Erreur syntaxique à ligne 12
+// missing '}' at '<EOF>'
+
+class A {
+    int setX(int a) {
+        return a;
+    
+}

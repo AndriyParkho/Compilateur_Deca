@@ -61,9 +61,11 @@ public class DeclClass extends AbstractDeclClass {
         this.name.decompile(s);
 		s.print(" extends ");
         this.superClass.decompile(s);
-        s.println(" {");
+		s.println(" {");
+		s.indent();
         this.fieldList.decompile(s);
-        this.methodList.decompile(s);
+		this.methodList.decompile(s);
+		s.unindent();
         s.println(" }");
     }
     /**

@@ -1,0 +1,10 @@
+//Description
+//  ; manquant
+//
+//Réponse
+//  Erreur syntaxique ligne 10
+//  no viable alternative at input '}'
+
+{
+    int x = 6
+}
