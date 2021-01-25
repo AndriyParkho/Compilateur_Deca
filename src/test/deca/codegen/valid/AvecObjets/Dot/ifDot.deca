@@ -1,0 +1,21 @@
+//Description
+//  test de condition via un dot champ
+//
+//Résultat
+//  true
+
+class A{
+    boolean x = true;
+}
+{
+    A a = new A();
+    if(a.x){
+        println("true");
+    }
+    else if (a.x || false){
+        println("bizarre");
+    }
+    else{
+        println("false");
+    }
+}
