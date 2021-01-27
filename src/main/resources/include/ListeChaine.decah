@@ -37,6 +37,32 @@ class ListChaine{
 		}
 		currentCell.setNext(newQueue);
 	}
+
+	// Lancer la fonction sur la tête de liste
+    ListChaine goTo(int index){
+        int i = 1;
+        ListChaine currentCell = this;
+        while (currentCell.suivant != null && i < index){
+            currentCell = currentCell.suivant;
+            i = i + 1;
+        }
+        if (i != index){
+            println("Indice trop grand");
+            return this;
+        }
+        return currentCell;
+    }
+
+    // Lancer la fonction sur la tête de liste
+    int getTaille(){
+        ListChaine currentCell = this;
+        int taille = 1;
+        while (currentCell.suivant != null){
+            taille = taille + 1;
+            currentCell = currentCell.suivant;
+        }
+        return taille;
+    }
 	
 	// Lancer la fonction sur la tête de liste
 	void createListOpti(int tailleList){
@@ -68,7 +94,6 @@ class ListChaine{
 		int i = 0;
 		ListChaine currentCell = this;
 		while(i < tailleList){
-			// println(currentCell.getVal());
 			currentCell = currentCell.getNext();
 			i = i + 1;
 		}
@@ -82,12 +107,51 @@ class ListChaine{
 			j = 0;
 			currentCell = this;
 			while(j < tailleList){
-				// println(currentCell.getVal());
 				currentCell = currentCell.getNext();
 				j = j + 1;
 			}
 			i = i + 1;
 		}
+	}
+	// Lancer la fonction sur la tête de liste
+	void tri(){
+	    int min;
+	    int index1 = 1;
+	    int index2;
+	    int taille = this.getTaille();
+	    int buffer;
+	    ListChaine Cell1;
+	    ListChaine Cell2;
+	    while (index1 <= taille){
+	        min = index1;
+	        index2 = index1;
+	        while (index2 <= taille){
+	            if (this.goTo(index2).valeur < this.goTo(min).valeur){
+	                min = index2;
+	            }
+	            index2 = index2 + 1;
+	        }
+            if (min != index1){
+                Cell1 = this.goTo(index1);
+                Cell2 = this.goTo(min);
+                buffer = Cell1.valeur;
+                Cell1.valeur = Cell2.valeur;
+                Cell2.valeur = buffer;
+            }
+            index1 = index1 + 1;
+	    }
+	}
+
+	// Lancer la fonction sur la tête de liste
+	void affiche(){
+	    ListChaine currentCell = this;
+	    print("[", currentCell.getVal(), "]");
+	    while (currentCell.getNext() != null){
+	        print(" -> ");
+	        currentCell = currentCell.getNext();
+	        print("[", currentCell.getVal(), "]");
+	    }
+	    println();
 	}
 
 }
