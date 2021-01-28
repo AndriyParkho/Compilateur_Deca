@@ -1,0 +1,12 @@
+class A{
+	int c;
+
+	void erreur(int pileRemplie){
+		this.erreur(pileRemplie);
+	}
+}
+
+{
+	A a = new A();
+	a.erreur(0);
+}

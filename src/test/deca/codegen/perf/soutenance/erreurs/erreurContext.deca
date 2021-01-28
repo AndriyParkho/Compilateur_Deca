@@ -1,0 +1,5 @@
+{
+	
+	boolean bool = 4;
+	println("Erreur de contexte");
+}
