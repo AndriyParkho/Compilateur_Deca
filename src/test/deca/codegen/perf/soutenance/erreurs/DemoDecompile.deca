@@ -1,0 +1,42 @@
+class Demo {
+    boolean decompile = true;
+    int x;
+    protected float flottant;
+
+    boolean doDecompile() {
+        return this.decompile;
+    }
+
+    float sommeExpression() {
+        float somme;
+        somme = (float) (x) + flottant;
+        return somme;
+    }
+
+    void printFlottant(boolean hexa) {
+        if (hexa) {
+            printlnx(flottant);
+        }
+        else {
+            println(flottant);
+        }
+    }
+
+    int getX() {
+        return this.x;
+    }
+}
+
+{
+    boolean enHexa = (d instanceof Demo);
+    Demo d = new Demo();
+    float a = 1;
+    float b = 2;
+    d.printFlottant(enHexa);
+    while (d.getX() < 1000) {
+        d.x = d.x + 1;
+    }
+    a = (a + b) * ((a - b) /-a);
+    print("a vaut");
+    print(a);
+}

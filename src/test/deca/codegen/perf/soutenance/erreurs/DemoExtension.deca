@@ -1,0 +1,93 @@
+#include "Math.decah"
+
+class Fourier {
+    float squareX(float f) {
+        Math math = new Math();
+        int i = 1;
+        float somme = (3.14159265359 * 3.14159265359)/3;
+        int signe = -1;
+        while (i < 40) {
+            somme = somme + 4* signe * math.cos(x * i) / (i * i);
+            i = i + 1;
+            signe = -signe;
+        }
+        return somme;
+    }
+    
+}
+
+{
+    Math m = new Math();
+    Fourier f = new Fourier();
+    print("cos(0.2) = ");
+    println(m.cos(0.2));
+    print("cos(-0.5) = ");
+    println(m.cos(-0.5));
+    print("cos(1) = ");
+    println(m.cos(1));
+    println("");
+    print("sin(0.2) = ");
+    println(m.sin(0.2));
+    print("sin(0.2) = ");
+    println(m.sin(-0.5));
+    print("sin(1) = ");
+    println(m.sin(1));
+    println("");
+    print("asin(0.2) = ");
+    println(m.asin(0.2));
+    print("asin(-0.5) = ");
+    println(m.asin(-0.5));
+    print("asin(1) = ");
+    println(m.asin(1));
+    println("");
+    print("atan(0.1) = ");
+    println(m.atan(0.1));
+    print("atan(1) = ");
+    println(m.atan(1));
+    print("atan(10) = ");
+    println(m.atan(10));
+    println("");
+    print("ulp(0) = ");
+    println(m.ulp(0));
+    print("ulp(1) = ");
+    println(m.ulp(1));
+    print("ulp(10) = ");
+    println(m.ulp(10));
+    println();
+    print("pi = ");
+    println(m.pi());
+    println("");
+
+    println("Approchons x au carré avec sa Série de Fourier :");
+    print("Pour 2, on obtient: ");
+    println(f.squareX(2));
+    print("Pour 0.5, on obtient: ");
+    println(f.squareX(0.5));
+    print("Pour 3, on obtient: ");
+    println(f.squareX(3));
+    println("");
+
+    println("Arctan(sinus(x)/cos(x)) :");
+    print("Pour 2, on obtient :");
+    println(m.atan(m.sin(2)/m.cos(2)));
+    print("Pour 0.5, on obtient :");
+    println(m.atan(m.sin(0.5)/m.cos(0.5)));
+    println("");
+
+    println("Arcsin(sinus(x)) :");
+    print("Pour 1, on obtient :");
+    println(m.asin(m.sin(1)));
+    print("Pour 0.5, on obtient :");
+    println(m.asin(m.sin(0.5)));
+    println("");
+
+    println("On peut vérifier que cos^2 + sin^2 = 1 :");
+    print("Pour 1, on obtient :");
+    println(m.sin(1)*m.sin(1) + m.cos(1)*m.cos(1));
+    print("Pour 0.1, on obtient :");
+    println(m.sin(0.1)*m.sin(0.1) + m.cos(0.1)*m.cos(0.1));
+    println("");
+
+
+
+}
