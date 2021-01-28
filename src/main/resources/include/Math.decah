@@ -175,7 +175,7 @@ class Math {
         }
     }
 
-    float pi() {
+    float getPi() {
         return pi;
     }
 
