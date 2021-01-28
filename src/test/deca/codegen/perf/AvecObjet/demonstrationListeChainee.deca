@@ -1,0 +1,28 @@
+// Description:
+//  Tri sur une liste chaînée
+//
+// Resultats:
+//  liste triée dans le sens croissant
+//
+// Historique:
+//    cree le 27/01/2021
+
+#include "ListeChaine.decah"
+
+{
+    int taille = 10;
+    int index = 1;
+	ListChaine tete = new ListChaine();
+	ListChaine currentCell = tete;
+	tete.setVal(readInt());
+	while (index<taille){
+	    currentCell.insertQueue(readInt());
+	    currentCell=currentCell.getNext();
+	    index = index + 1;
+	}
+	println("Liste initiale");
+	tete.affiche();
+	println("Liste triée");
+	tete.tri();
+	tete.affiche();
+}
